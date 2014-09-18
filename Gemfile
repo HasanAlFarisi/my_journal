@@ -6,6 +6,7 @@ gem 'rails', '4.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'devise'
 gem 'mysql2'
+gem 'pg'
 gem 'will_paginate', '~> 3.0'
 gem 'paperclip', '~> 3.0'
 gem 'ckeditor_rails'
