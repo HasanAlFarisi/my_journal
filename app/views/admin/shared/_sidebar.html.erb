@@ -1,0 +1,70 @@
+<div class="box">  
+  <div class="box-head">
+    <h2>Management</h2>
+  </div>
+  <!-- End Box Head-->
+
+  <div class="box-content">
+    <%= link_to "Add new Article", new_admin_article_path, class:"tab-right-button add-button" %>
+    <br class="cl"><br>
+    <%= link_to "Add new Category", new_admin_category_path, class:"tab-right-button add-button" %>
+    <br class="cl"><br>
+    <%= link_to "Add new Advertise", new_admin_article_path, class:"tab-right-button add-button" %>
+    <br class="cl"><br>
+    <p class="select-all"><input type="checkbox" class="check-all" name="check-all" />
+    <%= submit_tag "Delete all", class:"tab-right-button button" %></p>
+    
+    <!-- Sort -->
+    <div class="sort">
+      <label>Sort by</label>
+      <select class="field">
+        <option value="">Title</option>
+      </select>
+      <select class="field">
+        <option value="">Date</option>
+      </select>
+      <select class="field">
+        <option value="">Author</option>
+      </select>
+    </div>
+    <!-- End Sort -->  
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-head">
+    <h2>Categories</h2>
+  </div>
+  <!-- End Box Head-->
+  <div class="box-content">
+    <ul class="list">
+      <% @categories_list.each do |category| %>
+        <li>
+          <%= link_to "#{category.name}", admin_category_path(category) %>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-head">
+    <h2>Advertise</h2>
+  </div>
+  <!-- End Box Head-->
+  <div class="box-content">
+    <ul class="list">
+      <%# @categories_list.each do |category| %>
+        <li>
+          <%#= link_to "#{category.name}", admin_category_path(category) %>
+          AMD
+        </li>
+        <li>Melia Propolis</li>
+        <li>Madu sehat Al-azwa</li>
+      <%#end%>
+    </ul>
+    <br>
+    <%#= link_to "Add new Advertise", new_admin_product_path, class:"tab-right-button add-button" %>
+    <br><br>
+  </div>
+</div>

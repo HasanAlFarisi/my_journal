@@ -1,0 +1,40 @@
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  <div id="content">
+    <!-- Box -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2><%= @admin_category.name %></h2>
+      </div>
+      <!-- End Box Head -->
+        <!-- Form -->
+        <div class="form">
+          <p>
+            <%= label_tag :name, "Category name" %>
+            <%= @admin_category.name %>
+          </p>  
+          <p>
+            <%= label_tag :sub_name, "Category Sub Name" %>
+            <%= @admin_category.sub_name %>
+          </p> 
+        </div>
+        <!-- End Form -->
+        
+        <!-- Form Buttons -->
+        <div class="buttons">
+          <%= link_to "Back", admin_categories_path, class:"button-back" %>
+          <%= link_to "Edit Category", edit_admin_category_path(@admin_category), class:"button" %>
+        </div>
+        <!-- End Form Buttons -->
+    </div>
+    <!-- End Box -->
+  </div>
+  <div class="cl">&nbsp;</div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->

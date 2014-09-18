@@ -1,0 +1,1 @@
+Admin.create( email: 'admin@hasanexample.com', password: 'password', password_confirmation: 'password')

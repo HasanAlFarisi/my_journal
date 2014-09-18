@@ -1,0 +1,51 @@
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  <div id="content">
+    <!-- Box -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2>Add New Article</h2>
+      </div>
+      <!-- End Box Head -->
+        <%= form_for(@admin_category) do |f| %>
+
+        <% if @admin_category.errors.any? %>
+          <%= render partial: "shared/validate_error", locals: { object: @admin_category}%>
+        <% end %>
+
+        <!-- Form -->
+        <div class="form">
+          <p>
+            <span class="req">max 100 symbols</span>
+            <%= f.label :name, "Category Name" %><span>(Required Field)</span>
+            <%= f.text_field :name, class:"field size1" %>
+          </p> 
+          <p>
+            <%= f.label :sub_name, "Category Sub Name" %>
+            <%= f.text_field :sub_name, class:"field size1" %>
+          </p> 
+        </div>
+        <!-- End Form -->
+        
+        <!-- Form Buttons -->
+        <div class="buttons">
+          <%= link_to "Back", admin_categories_path, class:"button-back" %>
+          <%= f.submit "Save Category", class:"button" %>
+        </div>
+        <!-- End Form Buttons -->
+      <%end%>
+    </div>
+    <!-- End Box -->
+  </div>
+  <div class="cl">&nbsp;</div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<script>
+
+</script>
