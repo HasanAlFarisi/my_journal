@@ -9,14 +9,22 @@
 # # And be sure to use new-style password hashing:
 # #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: journal_development
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  username: root
-  password: '12345678'
-  socket: /var/run/mysqld/mysqld.sock
+  host: ec2-54-83-199-115.compute-1.amazonaws.com
+  username: graxtfrvdoceav
+  database: d2hs643dmr8s0o
+  password: ZC4fgbopl-XAzQ5dLUMXpxdtmx
+  port: 5432
+  # adapter: mysql2
+  # encoding: utf8
+  # reconnect: false
+  # database: journal_development
+  # pool: 5
+  # username: root
+  # password: '12345678'
+  # socket: /var/run/mysqld/mysqld.sock
 
 # # Warning: The database defined as "test" will be erased and
 # # re-generated from your development database when you run "rake".
@@ -43,7 +51,10 @@ development:
 
 production:
   adapter: postgresql
+  encoding: unicode
+  pool: 5
   host: ec2-54-83-199-115.compute-1.amazonaws.com
   username: graxtfrvdoceav
   database: d2hs643dmr8s0o
   password: ZC4fgbopl-XAzQ5dLUMXpxdtmx
+  port: 5432
