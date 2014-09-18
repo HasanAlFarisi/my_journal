@@ -5,11 +5,14 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version is 2.0.0
 
 * System dependencies
 
 * Configuration
+1. Please clone the project into your local Repository
+2. Bundle install
+3. Run the Application into your local Repository
 
 * Database creation
 
