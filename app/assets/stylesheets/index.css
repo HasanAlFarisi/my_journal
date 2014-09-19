@@ -200,7 +200,6 @@ h4 {
 #templatemo_main_coontent {
 	clear: both;
 	width: 980px;
-	background-image: url('<%= "file://#{Rails.root.join('app','assets','images','templatemo_content_box_middle.png')}" %>') center repeat-y;
 	background: url(/assets//templatemo_content_box_middle.png) center repeat-y;
 }
 
