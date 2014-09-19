@@ -1,5 +1,13 @@
 $( document ).ready(function() {
-  var len = 100;
+  $('.ellipsis').truncate({
+    width: 'auto',
+    token: '&hellip;',
+    side: 'right',
+    addclass: false,
+    addtitle: true,
+  });
+
+  /*var len = 100;
   var p = document.getElementById('truncateMe');
   if (p) {
 
@@ -14,9 +22,9 @@ $( document ).ready(function() {
         '...<\/a>';
       p.innerHTML = trunc;
     }
-  }
+  }*/
 
-  var pTwo = document.getElementById('truncateMeTwo');
+  /*var pTwo = document.getElementById('truncateMeTwo');
   if (pTwo) {
 
     var trunc = pTwo.innerHTML;
@@ -30,5 +38,5 @@ $( document ).ready(function() {
         '...<\/a>';
       pTwo.innerHTML = trunc;
     }
-  }
+  }*/
 })

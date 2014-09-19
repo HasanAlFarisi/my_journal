@@ -15,7 +15,7 @@
           <a href="#">
           <%= image_tag article.photo.url(:original), width:"410px" %>
           </a>
-          <div id="truncateMe"><%=raw article.body %></div>
+          <div class="ellipsis"><%=raw article.body %></div>
             
           <div class="link_button">
             <a href="#">Continue reading...</a><a href="#">Comments (360)</a>

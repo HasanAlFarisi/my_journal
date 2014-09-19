@@ -18,7 +18,7 @@
       <% @articles.each do |article| %>
         <div class="recent_post">
             <h4><%= link_to article.title, '#' %></h4>
-            <div id="truncateMeTwo"><%=raw article.body %></div>
+            <div class="ellipsis"><%=raw article.body %></div>
         </div>
       <% end %>
     </div>   
