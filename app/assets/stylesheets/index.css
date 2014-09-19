@@ -432,7 +432,7 @@ h4 {
 }
 
 .rss a {
-	background: url(/assets//rss_icon.png) right bottom no-repeat;
+	/*background: url(/assets//rss_icon.png) right bottom no-repeat;*/
 }
 
 .twitter a {
