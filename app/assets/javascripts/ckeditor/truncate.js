@@ -6,6 +6,13 @@ $( document ).ready(function() {
     addclass: false,
     addtitle: true,
   });
+  $('.ellipsisTwo').truncate({
+    width: 'auto',
+    token: '&hellip;',
+    side: 'right',
+    addclass: false,
+    addtitle: true,
+  });
 
   /*var len = 100;
   var p = document.getElementById('truncateMe');

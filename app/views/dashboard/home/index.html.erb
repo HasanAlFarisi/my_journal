@@ -18,7 +18,8 @@
           <div class="ellipsis"><%=raw article.body %></div>
             
           <div class="link_button">
-            <a href="#">Continue reading...</a><a href="#">Comments (360)</a>
+            <%= link_to "Continue reading ...", dashboard_home_path(article) %>
+            <a href="#">Comments (360)</a>
           </div>
         </div> 
       </div>

@@ -4,6 +4,10 @@ MyJournal::Application.routes.draw do
     :controllers => { :sessions => "admin/sessions" }
   
   root 'dashboard/home#index'
+  
+  namespace :dashboard do
+  	resources :home
+  end
 
   namespace :admin do
     root to: "dashboard#index"

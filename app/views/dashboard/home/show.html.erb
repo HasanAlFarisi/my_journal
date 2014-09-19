@@ -1,0 +1,32 @@
+<div id="main_column">
+    <div class="post_box">
+      <div class="date_box">
+       	<p><%= "#{@article.updated_at.strftime('%d %b %Y')}" %></p>
+      </div>
+          
+      <div class="post_body">
+          <h2><a href="#"><%= @article.title %></a></h2>
+        <div class="post_info">
+  			  by <a href="#">Hasan Al Farisi</a>
+        </div>
+                    
+        <div class="post_content">
+          <a href="#">
+          <%= image_tag @article.photo.url(:original), width:"410px" %>
+          </a>
+          <%=raw @article.body %>
+          
+          <!-- <div id="comment-field">
+            <p>Comment</p>
+            <%#= form_for ([:dashboard,:home]) do |f| %>
+            <%#= label_tag "Nama" %>:<%= %>
+            <%# end %>
+          </div>  -->
+
+          <div class="link_button">
+            <%= link_to "Back ...", root_path %>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
