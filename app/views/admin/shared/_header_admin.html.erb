@@ -6,13 +6,19 @@
   <div class="shell">
     <!-- Logo + Top Nav -->
     <div id="top">
-      <h1><a href="#">SpringTime</a></h1>
+      <h1><a href="#">My-Journal</a></h1>
       <div id="top-navigation">
-        Welcome <a href="#"><strong>Administrator</strong></a>
+        Welcome <%= link_to "Administrator", admin_root_path %></a>
         <span>|</span>
         <a href="#">Help</a>
         <span>|</span>
-        <a href="#">Profile Settings</a>
+
+        <% if Admin::Profile.last != nil %>
+          <%= link_to "Profile Setting", edit_admin_profile_path(Admin::Profile.last.id) %>
+        <% else %>
+          <%= link_to "Profile Setting", new_admin_profile_path %>
+        <% end %>
+        
         <span>|</span>
         <%= link_to "Logout", destroy_admin_session_path, :method => :delete%>
       </div>
@@ -42,12 +48,11 @@
     </div>
     <!-- End Main Nav -->
     <!-- Small Nav -->
-    <br>
-    <div class="small-nav">
+    <!-- <div class="small-nav">
       <a href="#">Dashboard</a>
       <span>&gt;</span>
       <%#= link_to "#{admin_root_path}", url_request, class:"#{url_request}" %>
-    </div>
+    </div> -->
   </div>
 </div>
 <!-- End Header -->

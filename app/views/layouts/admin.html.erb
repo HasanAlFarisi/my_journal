@@ -3,6 +3,7 @@
 <head>
   <title>My-journal Administrator</title>
   <%= stylesheet_link_tag "style-admin", :media => "all" %>
+  <%= stylesheet_link_tag "modal", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%#= javascript_include_tag "numeric" %>
   <%= csrf_meta_tags %>
@@ -10,12 +11,13 @@
 
 <body>
   <%= render :partial => "admin/shared/header_admin" %>
-  <%#= render :partial => "shared/notice" %>
   <div id="container">
     <div class="shell">
+      <%= render :partial => "admin/shared/notice" %>
       <%= yield %>
     </div>
   </div>
 </body>
 </html>
 <%= javascript_include_tag "ckeditor/config" %>
+<%= javascript_include_tag "ckeditor/selected_all" %>

@@ -1,0 +1,17 @@
+<% dashboard_comments.each do |dashboard_comment| %>
+  <div id="comment-list">
+      <div id="photo"><%=  image_tag  "#{dashboard_comment.profile}" %></div>
+      <p>
+        <label>Name :</label> 
+        <span><%= dashboard_comment.name %></span>
+      </p>
+      
+      <p>
+        <label>Comment :</label> 
+      </p>
+      <span><%= dashboard_comment.body %></span>
+      <br><br>
+      <span class="time"><%= "#{dashboard_comment.created_at.strftime('%d %b %Y')}"  %></span>
+  </div>
+  <span class="clear"></span>
+<%end%>

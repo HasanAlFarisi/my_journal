@@ -7,5 +7,7 @@ class Article < ActiveRecord::Base
   :default_url => "/assets/:style/missing.jpg"
   validates_attachment_content_type :photo, :content_type => /image/
 
+  has_many :dasboard_comments
+  
   belongs_to :category
 end

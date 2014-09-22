@@ -11,13 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918073210) do
+ActiveRecord::Schema.define(version: 20140921054918) do
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sub_name"
+  end
+
+  create_table "admin_profiles", force: true do |t|
+    t.string   "name"
+    t.string   "last_name"
+    t.string   "facebook"
+    t.string   "e_mail"
+    t.integer  "admin_skill_id"
+    t.integer  "admin_hobby_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
+  create_table "admin_sub_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "admins", force: true do |t|
@@ -41,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140918073210) do
   create_table "articles", force: true do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo_file_name"
@@ -49,6 +69,16 @@ ActiveRecord::Schema.define(version: 20140918073210) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "category_id"
+  end
+
+  create_table "dashboard_comments", force: true do |t|
+    t.integer  "article_id"
+    t.string   "name"
+    t.string   "email"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "profile"
   end
 
 end

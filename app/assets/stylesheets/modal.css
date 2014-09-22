@@ -1,0 +1,91 @@
+#modal-comment {
+  display: none;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  box-sizing: border-box;
+  z-index: 10;
+}
+#modal-comment h2{
+    color: #fff !important;
+    font-size: 12px !important;
+}
+#modal-comment h2 a{
+    color: #333 !important;
+    font-weight: bold !important;
+    font-size: 17px !important;
+}
+#modal_background{
+  display: none;
+  position: fixed;
+  background: #000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Modal styles */
+#modal-comment.styled {
+  width: 500px;
+  margin-left: -250px;
+  min-width: 100px;
+  overflow: auto;
+  padding: 12px 14px;
+  border: 1px solid;
+  border-color: #aaa #999 #888;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  /*box-shadow: 0 3px 14px -4px #000;
+  -ms-box-shadow: 0 3px 14px -4px #000;
+  -moz-box-shadow: 0 3px 14px -4px #000;
+  -webkit-box-shadow: 0 3px 14px -4px #000;
+  box-shadow: 0 3px 14px -4px #000;*/
+  /*background:#01ACE4;*/
+  background: #ba4c32 !important;
+}
+
+.modalTitle{
+  width:100%;
+  clear:both;
+  float: left;
+  color:white;
+  background:#01ACE4;
+}
+.modalTitle h2{
+  font-family: 'klavikalight';
+  float:left;
+  padding: 0;
+  margin: 0px 0px 15px;
+}
+.modalTitle a{
+  float:right;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+.modal  .simpleTabs{
+  background:white;
+}
+ul.simpleTabsNavigation {
+  margin: 0px 0px;
+  padding: 0;
+}
+div.simpleTabsContent.currentTab {
+  background:white;
+}
+ul.simpleTabsNavigation li a.current { color:gray;  font-family: 'klavikalight'; font-size: 18px; padding-top: 2px;
+}
+
+ul.simpleTabsNavigation li a{ color:#01ACE4;  font-family: 'klavikalight'; font-size: 18px; padding-top: 2px;
+}
+
+.formModal{background:white; text-align:center;border-radius: 5px;-webkit-border-radius: 5px;margin-top: 10px;}
+.formModal label{color:#ba4c32;  float: left;min-width: 100px;text-align: left; font-weight: normal !important;}
+.formModal span{}
+.formModal input{width: 20px;padding: 10px; font-family: 'klavikalight'; font-size: 16px; color:black;}
+.formModal p{ text-align:left;}
+.formModal #error_explanation{ text-align:left;}
+

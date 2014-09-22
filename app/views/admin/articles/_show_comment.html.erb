@@ -1,0 +1,30 @@
+<div id="modal-comment" class="styled">
+	<h2>
+	    <a href='javascript:void(0)' class='close-modal-comment close'>X</a>
+	    Comment from <b><%= comment.name %></b>
+	  </h2>
+	<div class="formModal" id="formas2" style="padding:20px;">
+		<div class="form up">
+	          <p>
+	            <%= label_tag :name, "Name" %>:
+	            <span><%= comment.name %></span>
+	          </p> 
+	          <p>
+	            <%= label_tag :email, "E-mail" %>:
+	            <span><%= comment.email %></span>
+	          </p>
+	          <p>
+	            <%= label_tag :body, "Content" %>:
+	            <span><%= comment.body %></span>
+	          </p>
+	          <%= link_to '', dashboard_comment_path(comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "ico del", id:"modal-del" %>
+          	</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$("#modal-comment").fadeIn();
+		$( '.close-modal-comment' ).click(function( ev ) {  $( '#modal-comment, #modal_background' ).fadeOut();  ev.preventDefault();} );
+	})
+</script>

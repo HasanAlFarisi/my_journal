@@ -1,0 +1,16 @@
+<% if flash[:notice] %>
+	<span class="close-notice msg msg-ok" id="notice"><p><%= flash[:notice] %></p><a href="#" class="close"></a><br></span>
+<% end %>
+
+<% if flash[:alert] %>
+	<span class="close-error msg msg-error" id="alert"><p><%= flash[:alert] %></p><a href="#" class="close"></a><br></span>
+<% end %>
+
+<script>
+	$(".close-notice").click(function(){
+		$("#notice").remove()
+	})
+	$(".close-alert").click(function(){
+		$("#alert").remove()
+	})
+</script>

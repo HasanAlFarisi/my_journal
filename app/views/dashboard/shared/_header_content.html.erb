@@ -4,8 +4,7 @@
       <div id="templatemo_menu">
         <div id="myjquerymenu" class="jquerycssmenu">
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Templates</a></li>
+            <li><%= link_to "Home", root_path %></li>
             <li><a href="#">Gallery</a>
               <ul>
               <li><a href="#">Sub Item 1.1</a></li>
@@ -14,7 +13,7 @@
               <li><a href="#">Sub Item 1.4</a></li>
               </ul>
             </li>
-            <li><a href="#" class="margin_l10">About Us</a></li>
+            <li><%= link_to "About Me", "#", class:"margin_l10" %></li>
             <li><a href="#">Support</a>
               <ul>
               <li><a href="#">Sub Item 2.1</a></li>

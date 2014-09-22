@@ -1,0 +1,68 @@
+<%= form_for(@admin_profile) do |f| %>
+  <div id="main">
+      <div class="cl">&nbsp;</div>
+      <div id="content">
+        <!-- Box -->
+        <div class="box">
+          <!-- Box Head -->
+          <div class="box-head">
+            <h2>Edit Profile</h2>
+          </div>
+          <!-- End Box Head -->
+            <!-- Form -->
+            <div class="form">
+              <div class="left-photo">
+                <div class="foto_prev_profile">
+                  <%= image_tag @admin_profile.avatar.url(:original),class:"img_profile floating img_prev" %> 
+                </div>
+                <%= f.file_field :avatar, class:"field size5 input-file", id: "fileField", :onchange => "readURL(this);" %>
+              </div>
+              
+              <p>
+                <%= f.label :name %>
+                <%= f.text_field :name, class:"field size4"  %>
+              </p>  
+              <p>
+                <%= f.label :last_name %>
+                <%= f.text_field :last_name, class:"field size4"  %>
+              </p> 
+              <p>
+                <%= f.label :facebook %>
+                <%= f.text_field :facebook, class:"field size4"  %>
+              </p>
+              <p>
+                <%= f.label :e_mail %>
+                <%= f.text_field :e_mail, class:"field size4"  %>
+              </p>
+              <p>
+                <%= label_tag :skill, "Skill" %>
+                <%= @admin_profile.e_mail %>
+              </p>
+              <p>
+                <%= label_tag :hobby, "Hobby" %>
+                <%= @admin_profile.e_mail %>
+              </p>
+              <p>
+                <%= label_tag :motto, "Motto" %>
+                <%= @admin_profile.e_mail %>
+              </p>
+            </div>
+            <!-- End Form -->
+            
+            <!-- Form Buttons -->
+            <div class="buttons">
+              <%= link_to "Back", admin_profiles_path, class:"button-back" %>
+              <%= f.submit "Save Profile", class:"button" %>
+            </div>
+            <!-- End Form Buttons -->
+        </div>
+        <!-- End Box -->
+      </div>
+      <div class="cl">&nbsp;</div>
+  </div>
+<% end %>
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->

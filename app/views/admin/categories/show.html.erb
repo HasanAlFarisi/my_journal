@@ -15,8 +15,13 @@
             <%= @admin_category.name %>
           </p>  
           <p>
+          
             <%= label_tag :sub_name, "Category Sub Name" %>
-            <%= @admin_category.sub_name %>
+            <ol>
+              <% @admin_category.sub_categories.each do |sub_category| %>
+                <li><%= sub_category.name %></li>
+              <% end %>
+            </ol>
           </p> 
         </div>
         <!-- End Form -->

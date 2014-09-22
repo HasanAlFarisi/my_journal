@@ -16,12 +16,12 @@
           </a>
           <%=raw @article.body %>
           
-          <!-- <div id="comment-field">
+          <div id="comment-field">
             <p>Comment</p>
-            <%#= form_for ([:dashboard,:home]) do |f| %>
-            <%#= label_tag "Nama" %>:<%= %>
-            <%# end %>
-          </div>  -->
+            <%= render :partial => "dashboard/comments/index", locals: {dashboard_comments: @article_comments} %>
+            <div id="comment-place"><!-- Comment place from render partial --></div>
+            <%= render partial: 'dashboard/comments/form' %>
+          </div>
 
           <div class="link_button">
             <%= link_to "Back ...", root_path %>

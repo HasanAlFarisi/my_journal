@@ -33,13 +33,14 @@
               </td>
             </tr>
           <%end%>
-<%#= form_tag destroy_all_admin_dashboard_index_path do %>          
+
+      <%= form_tag destroy_all_admin_articles_path do %>          
           <% @articles.each do |article| %>
           <tr>
             <td><input type="checkbox" class="check-self" name="selected[]" id="<%= "selected-#{article.id}" %>" value="<%= article.id %>" /></td>
             <td><%= link_to "#{article.title}", admin_article_path(article) %></td>
             <td><%= truncate(strip_tags(article.body), :length => 30) %></td>
-            <td><%= article.comment_id %></td>
+            <td><center><%= counting_comment(article) %></center></td>
             <td  width="5px"><%= link_to 'Edit', edit_admin_article_path(article), class:"ico edit" %></td>
             <td  width="5px"><%= link_to 'Destroy', admin_article_path(article), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %></td>
           </tr>
@@ -49,6 +50,9 @@
         
         <!-- Pagging -->
         <div class="pagging">
+          <%= submit_tag "Delete Selected", class:"tab-right-button button floating" %></p>
+      <% end %>
+
           <div class="left">Articles Total: <b><%= @articles.count %></b> Articles</div>
           <div class="right">
             <%= will_paginate @articles %>
@@ -71,4 +75,7 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
-<%#end%>
+
+<script>
+
+</script>

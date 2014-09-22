@@ -130,6 +130,7 @@ a.edit { background-image:url(/assets///edit.gif); margin-left:14px;}
 .form .inline-field .field { display:inline;}
 .form .req { font-size:13px; float:right; white-space:nowrap; color:#999;  }
 .form p{ padding-bottom:15px; }
+.form ol{margin-left: 20px; margin-top: -10px;}
 
 .size1 { width:716px; }
 .size2 { width:80px; }
@@ -167,7 +168,7 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 
 .msg { position:relative; padding-right:35px; margin-bottom:10px; }
 .msg p{ padding:9px 10px 9px 40px; font-size:12px; background-repeat:no-repeat; background-position:10px 5px;}
-.msg a.close{ font-size:0; line-height:0; position:absolute; top:0; right:0; width:34px; height:34px; background:url(/assets///close.gif); text-indent: -4000px;}
+.msg a.close{ font-size:0; line-height:0; position:absolute; top:0; right:0; width:34px; height:34px; background:url(/assets///close.gif); text-indent: -4000px; margin-top: 11px;}
 
 .msg-ok p{ background-color:#fffac2; border:solid 1px #dbd6a2; color:#5e5c40; background-image:url(/assets///msg-ok.gif); }
 .msg-error p{ background-color:#f3c598; border:solid 1px #e8b084; color:#ba4c32; background-image:url(/assets///msg-error.gif);  }
@@ -193,3 +194,10 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .up{margin-top: -12px}
 .down{margin-top: 190px; margin-bottom: -200px;}
 .all-foto{}
+.add{display: inline-block; padding: 2px 5px; color: #999; font-size: 12px; font-weight: normal; text-align: center; text-decoration: none; background: #fffac2; width: 100px !important; margin-top:-5px; margin-bottom: 15px; }
+.floating{float: left;margin-right: 5px;}
+.img_profile{width:250px; height:260px; margin-bottom: 5px;}
+.left-photo{height:340px; width: 260px; float: left;}
+.notice{margin-bottom: 10px !important;}
+.comment {}
+.comment th{background:#ba4c32; color: #fff}

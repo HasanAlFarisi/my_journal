@@ -62,6 +62,20 @@ class Admin::ArticlesController < Admin::BaseController
     end
   end
 
+  def destroy_all
+    unless params[:selected].blank?
+      id_params = params[:selected]      
+      id = convert_to_arr_for_query(id_params)
+      Article.delete_all "id in #{id}"
+      Dashboard::Comment.delete_all "article_id in #{id}"
+      
+      respond_to do |format|
+        format.html { redirect_to admin_articles_url }
+        format.json { head :no_content }
+      end
+     end
+  end
+
   def prepare_select
     @category = Admin::Category.all.map{|x| [x.name, x.id]}.unshift(['Select',nil])
   end
@@ -74,6 +88,6 @@ class Admin::ArticlesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :body, :comment_id, :photo, :category_id)
+      params.require(:article).permit(:title, :body, :photo, :category_id)
     end
 end

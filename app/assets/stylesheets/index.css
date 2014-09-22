@@ -501,9 +501,105 @@ h4 {
   background: transparent url(/assets//slider_right_control.png) no-repeat 0 0;
 }
 /*costume by me*/
+#comment-field .field{
+	margin:10px 10px 10px 0px;	
+}
 #comment-field p{
 	font-size: 15px;
 	color: #333;
 	font-weight: bold;
 	border-bottom: 1px dashed #333;
 }
+#comment-field .field label{
+	font-size: 13px;
+	color: #333;
+	font-weight: bold;
+	margin-right: 30px;
+}
+#comment-field .field input[type='text']{
+	font-size: 13px;
+	color: #fff;
+	padding: 5px;
+	background: rgb(103, 93, 82);
+	border: none;
+}
+#comment-field .field textarea{
+	border: none;
+	font-size: 13px;
+	color: #fff;
+	padding: 5px;
+	width: 418px;
+	height: 100px;
+	background: rgb(103, 93, 82);
+}
+#comment-field .field select{
+	font-size: 13px;
+	color: #fff;
+	padding: 5px;
+	background: rgb(103, 93, 82);
+	border: none;
+	margin-left: -5px;
+}
+#comment-field .actions input[type='submit']{
+	border: none;
+    display: inline-block;
+    padding: 1px 5px 3px 1px;
+    margin-right: 50px;
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    background: none repeat scroll 0% 0% rgb(103, 93, 82);
+    text-decoration: none;
+    float: right;
+    font-family: sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+#comment-field .actions input[type='submit'] a:hover{
+	background: #94591a;
+}
+#textarea-label{
+	margin-right: 40px !important;
+}
+.size-1{
+	width: 350px;
+}
+.error p{
+	margin-left: 70px;
+	font-size: 12px;
+	border-bottom: none !important;
+}
+#comment-list{
+  margin-top: 20px;
+  border-bottom: 1px dashed #333;
+}
+#comment-list p{
+    border: none !important;
+    margin: 0px;
+  }
+#comment-list p:last-child{
+    border: 1px solid #000;
+  }
+  #comment-list label{
+    color: #333;
+  }
+  #comment-list span{
+    color: #fff;
+    font-weight: normal !important;
+    font-size: 12px;
+  }
+  #photo img{
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: #333 solid 1px;
+    margin-right: 10px;
+    background-color: #fff !important;
+  }
+  .clear{
+    clear: both;
+  }
+  .time{
+    float: right;
+    color: yellow !important;
+    margin-top: -20px;
+  }

@@ -9,6 +9,16 @@ class ApplicationController < ActionController::Base
   end
 
   def recent_post
-  	@articles = Article.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+    #@articles = Dashboard::Article.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+    @articles = Article.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+  end
+
+  def convert_to_arr_for_query(ids_param)
+    key_string = "("
+    ids_param.each do |x|
+      key_string << "#{x},"
+    end
+    key_string[key_string.length-1] = ")"
+    key_string
   end
 end
