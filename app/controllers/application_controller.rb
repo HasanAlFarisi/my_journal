@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def recent_post
-    #@articles = Dashboard::Article.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
     @articles = Article.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
   end
 
@@ -21,4 +20,5 @@ class ApplicationController < ActionController::Base
     key_string[key_string.length-1] = ")"
     key_string
   end
+
 end

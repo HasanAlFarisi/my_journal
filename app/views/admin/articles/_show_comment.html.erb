@@ -5,6 +5,10 @@
 	  </h2>
 	<div class="formModal" id="formas2" style="padding:20px;">
 		<div class="form up">
+		    <p id="comment-action">
+	          	<%= link_to 'Reply', "#" , class:"ico edit", id:"show_comment_reply", dataId:"#{comment.id}" %> | 
+	          	<%= link_to 'Delete', dashboard_comment_path(comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "ico del", id:"modal-del" %>
+	          </p>
 	          <p>
 	            <%= label_tag :name, "Name" %>:
 	            <span><%= comment.name %></span>
@@ -17,8 +21,8 @@
 	            <%= label_tag :body, "Content" %>:
 	            <span><%= comment.body %></span>
 	          </p>
-	          <%= link_to '', dashboard_comment_path(comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "ico del", id:"modal-del" %>
-          	</div>
+	          <div class="reply-form"></div>
+	      </div>
 	</div>
 </div>
 
@@ -27,4 +31,10 @@
 		$("#modal-comment").fadeIn();
 		$( '.close-modal-comment' ).click(function( ev ) {  $( '#modal-comment, #modal_background' ).fadeOut();  ev.preventDefault();} );
 	})
+
+	$("#show_comment_reply").click(function(){
+		var id = $("#show_comment_reply").attr("dataId")
+		$(".reply-form").html("<p><input type='text' name='id' value='"+id+"'><textarea name='body_reply' colspan='5' rowspan='5'></textarea><input type='submit'></p>");
+		return false;
+	})	
 </script>

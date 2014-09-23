@@ -1,9 +1,9 @@
 <% if flash[:notice] %>
-	<span class="close-notice msg msg-ok" id="notice"><p><%= flash[:notice] %></p><a href="#" class="close"></a><br></span>
+	<span class="close-notice msg msg-ok" id="notice"><p><%= flash[:notice] %><a href="#" class="close"></a></p><br></span>
 <% end %>
 
 <% if flash[:alert] %>
-	<span class="close-error msg msg-error" id="alert"><p><%= flash[:alert] %></p><a href="#" class="close"></a><br></span>
+	<span class="close-error msg msg-error" id="alert"><p><%= flash[:alert] %><a href="#" class="close"></a></p><br></span>
 <% end %>
 
 <script>

@@ -4,7 +4,24 @@
       <div id="templatemo_menu">
         <div id="myjquerymenu" class="jquerycssmenu">
           <ul>
-            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Home", root_path, remote: true %></li>
+            <li><%= link_to "Category", root_path, remote: true %>
+              <ul>
+              <% @categories_list.each do |category| %>
+                <% unless category.sub_categories.present? %>
+                  <li><%= link_to category.name, dashboard_home_show_categories_path(category), remote: true %></li>
+                <% else %>
+                  <li><%= link_to category.name, dashboard_home_show_categories_path(category), remote: true %>
+                    <ul>
+                      <% category.sub_categories.each do |sub_category| %>
+                        <li><%= link_to sub_category.name, dashboard_home_show_sub_categories_path(sub_category), remote: true %></li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
+              <% end %>
+              </ul>
+            </li>
             <li><a href="#">Gallery</a>
               <ul>
               <li><a href="#">Sub Item 1.1</a></li>

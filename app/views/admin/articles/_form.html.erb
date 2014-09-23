@@ -16,6 +16,7 @@
 
         <!-- Form -->
         <div class="form">
+        <%= f.hidden_field :id, value: @article.id %>
           <p>
             <span class="req">max 100 symbols</span>
             <%= f.label :title, "Article Title" %><span>(Required Field)</span>
@@ -31,8 +32,17 @@
           <p>
             <%= f.label :category_id, "Category" %>
             <span>(Required Field)</span><br>
-            <%= f.select :category_id, options_for_select(@category), class:"field size3" %>
-          </p> 
+            <%= f.select :category_id, options_for_select(@category,@selected), class:"field size3" %>
+          </p>
+
+          <span id="sub_category">
+            <p>
+                <%= label_tag :sub_category, "Sub Category" %>
+                <span>(Required Field)</span><br>
+                <%= select_tag :sub_category, options_for_select(@sub_category_select), class:"field size3" %>
+            </p>
+          </span> 
+
           <p>
             <%= f.label :body, "Content" %>
             <%= f.text_area :body, class:"field size1", cols: 10, rows: 30, :class => 'ckeditor' %>
@@ -58,3 +68,29 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    category_selected();
+
+    $("#article_category_id").change(function(){   
+      category_selected();
+    })
+  })
+
+  function category_selected(){
+    var base_address = $("#sub_category");
+      var controller = "<%= auto_search_admin_articles_path %>";
+      $.ajax({
+          type: "POST",
+          url: escape(controller),
+          data: {"category" : $('#article_category_id').val(),
+                      "id": $("#article_id").val()
+        },
+          dataType:"html",
+          success:function(data){
+            jQuery("#sub_category").html(data);
+          }
+      })
+  }
+</script>

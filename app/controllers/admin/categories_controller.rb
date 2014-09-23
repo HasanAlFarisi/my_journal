@@ -28,9 +28,11 @@ class Admin::CategoriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_category.save
-        params[:admin_category][:sub_categories_attributes].each do |sub_category|
-          admin_sub_category = Admin::SubCategory.create({category_id: @admin_category.id, name: sub_category[1][:name]})
-          admin_sub_category.save
+        unless  params[:admin_category][:sub_categories_attributes].blank?
+          params[:admin_category][:sub_categories_attributes].each do |sub_category|
+            admin_sub_category = Admin::SubCategory.create({category_id: @admin_category.id, name: sub_category[1][:name]})
+            admin_sub_category.save
+          end
         end
 
         format.html { redirect_to @admin_category, notice: 'Category was successfully created.' }
@@ -47,9 +49,14 @@ class Admin::CategoriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_category.update(admin_category_params)
-
-        params[:admin_category][:sub_categories_attributes].each do |sub_category|
-          Admin::SubCategory.find(sub_category[1][:id]).update_attributes({name: sub_category[1][:name]})
+        unless  params[:admin_category][:sub_categories_attributes].blank?
+          params[:admin_category][:sub_categories_attributes].each do |sub_category|
+            unless sub_category[1][:id].blank?
+              Admin::SubCategory.find(sub_category[1][:id]).update_attributes({name: sub_category[1][:name]})
+            else
+              Admin::SubCategory.create({name: sub_category[1][:name], category_id: @admin_category.id})
+            end
+          end
         end
 
         format.html { redirect_to @admin_category, notice: 'Category was successfully updated.' }
@@ -64,7 +71,18 @@ class Admin::CategoriesController < Admin::BaseController
   # DELETE /admin/categories/1
   # DELETE /admin/categories/1.json
   def destroy
+    category = Article.find_by_category_id(@admin_category)
+    unless category == nil
+      category.update_attributes(category_id: 0)
+    end
+
+    sub_category = Article.find_by_sub_category_id(@admin_category)
+    unless sub_category == nil
+      sub_category.update_attributes(sub_category_id: 0)
+    end
+
     @admin_category.destroy
+    
     respond_to do |format|
       format.html { redirect_to admin_categories_url }
       format.json { head :no_content }
@@ -77,6 +95,14 @@ class Admin::CategoriesController < Admin::BaseController
       id = convert_to_arr_for_query(id_params)
       Admin::Category.delete_all "id in #{id}"
       Admin::SubCategory.delete_all "category_id in #{id}"
+      
+      Article.where("category_id IN #{id}").each do |article|
+        article.update_attributes(category_id: 0)
+      end
+
+      Article.where("sub_category_id IN #{id}").each do |article|
+        article.update_attributes(sub_category_id: 0)
+      end
       
       respond_to do |format|
         format.html { redirect_to admin_categories_url }
@@ -92,7 +118,7 @@ class Admin::CategoriesController < Admin::BaseController
     end
 
     def set_admin_sub_category
-      #@admin_sub_category = Admin::SubCategory.find(params[:id])
+      @category_count = Admin::SubCategory.all.count
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

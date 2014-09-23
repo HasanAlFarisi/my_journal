@@ -7,8 +7,11 @@ MyJournal::Application.routes.draw do
   root 'dashboard/home#index'
   
   namespace :dashboard do
-  	resources :home
-    resources :comments
+  	resources :home do
+        get :show_categories
+        get :show_sub_categories
+      end
+      resources :comments
   end
 
   namespace :admin do
@@ -18,6 +21,7 @@ MyJournal::Application.routes.draw do
     resources :articles do
       collection do
         post :destroy_all
+        post :auto_search
       end
     end
 

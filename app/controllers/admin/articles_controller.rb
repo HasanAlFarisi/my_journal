@@ -20,6 +20,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   # GET /articles/1/edit
   def edit
+    
   end
 
   # POST /articles
@@ -29,6 +30,10 @@ class Admin::ArticlesController < Admin::BaseController
 
     respond_to do |format|
       if @article.save
+        
+        sub_category = Article.find(@article.id)
+        sub_category.update_attributes(sub_category_id: params[:sub_category])
+
         format.html { redirect_to admin_articles_url, notice: 'Article was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @article }
       else
@@ -43,6 +48,9 @@ class Admin::ArticlesController < Admin::BaseController
   def update
     respond_to do |format|
       if @article.update(article_params)
+        
+        @article.update_attributes(sub_category_id: params[:sub_category])
+
         format.html { redirect_to admin_articles_url, notice: 'Article was successfully updated.' }
         format.json { head :no_content }
       else
@@ -55,7 +63,9 @@ class Admin::ArticlesController < Admin::BaseController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    Dashboard::Comment.delete_all "article_id = #{@article.id}"
     @article.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_articles_url }
       format.json { head :no_content }
@@ -76,14 +86,29 @@ class Admin::ArticlesController < Admin::BaseController
      end
   end
 
+  def auto_search
+    unless params[:category].blank?
+      sub_category = Admin::SubCategory.where("category_id = ?", params[:category])
+      @sub_category_select = sub_category.map{|x|[x.name, x.id]}.unshift(['Select',nil])
+      unless params[:id].blank?
+        @sub_category_selected = Article.find(params[:id]).sub_category_id
+      end
+    else
+      @sub_category_select = [['Select', nil]]
+    end
+    render layout: false
+  end
+
   def prepare_select
     @category = Admin::Category.all.map{|x| [x.name, x.id]}.unshift(['Select',nil])
+    @sub_category_select = [['Select', nil]]
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+      @selected = @article.category_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

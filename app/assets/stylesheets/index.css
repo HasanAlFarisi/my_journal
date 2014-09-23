@@ -11,7 +11,7 @@ body {
 	padding: 0;
 	line-height: 1.7em;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-size: 14px;
 	color: #ffffff;
     background: #1f1d1b;
 }
@@ -218,6 +218,7 @@ h4 {
 }
 
 #templatemo_main_coontent #main_column {
+	margin-top: 0px;
 	float: left;
 	width: 650px;
 	padding: 20px 0;
@@ -244,7 +245,7 @@ h4 {
 	background: url(/assets//templatemo_date_bg.png) top left no-repeat;
 }
 .post_box .date_box p {
-	padding: 13px 0 0 20px;
+	padding: 10px 0 0 20px;
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -344,7 +345,7 @@ h4 {
 .recent_post h4 a {
 	margin: 0 0 0 0;
 	padding: 2px 0;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	color: #000000;
 }
@@ -603,3 +604,56 @@ h4 {
     color: yellow !important;
     margin-top: -20px;
   }
+ .pagging { 
+ 	height:20px; 
+ 	padding:8px 10px; 
+ 	line-height:19px; 
+ 	color:#949494; 
+ }
+.pagging a{ 
+	background:url(/assets///pagging.gif) repeat-x 0 0; 
+	height:20px; 
+	float:left; 
+	padding:0 8px; 
+	border:solid 1px #d5d5d5; 
+	text-decoration: none; 
+	color:#949494; 
+	margin-left:5px; 
+	}
+
+.pagging em {
+	background:url(/assets///pagging.gif) repeat-x 0 0; 
+	height:20px; 
+	float:left;
+	padding:0 8px; 
+	border:solid 1px #d5d5d5; 
+	text-decoration: none; 
+	color:#949494; 
+	margin-left:5px; 
+	border-color:#8c3521; 
+	background:#ba4c32; 
+	color:#fff;-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+
+.pagging a:hover { 
+	border-color:#8c3521; 
+	background:#ba4c32; 
+	color:#fff; 
+}
+.pagging span{ 
+	float:left; 
+	margin-left:5px; 
+	padding-top:2px; 
+}
+#pagging-left{
+	margin-left: 510px !important;
+}	
+#box_no_post{
+	text-align: center;
+	padding: 10px;
+	border: 2px dashed #333;
+	background: #ba4c32;
+	width: 501px;
+	margin-left: 130px;
+}

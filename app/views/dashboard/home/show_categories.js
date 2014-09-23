@@ -1,0 +1,1 @@
+$("#index-place").html("<%= j(render partial: "dashboard/home/index", locals: {articles: @articles}) %>")

@@ -28,7 +28,7 @@
                <% end %> 
           </span> 
 
-          <p class="sub-category"><!--Sub Category content--></p> 
+          <p class="sub-category" dataId="<%= @category_count %>"><!--Sub Category content--></p> 
 
       <div class="add button" type="submit">+| Sub category</div>
         </div>
@@ -54,8 +54,7 @@
 <!-- Sidebar -->
 <script>
 $(document).ready(function(){
-  var id = 0;
-
+  var id = $(".sub-category").attr("dataId");
   $(".add").click(function(){
     id = id +1;
     $(".sub-category").append("<span class='sub'><label id='sub_category'>Sub Category </label><input type='text' class='field size4 floating' id='sub_category_"+id+"' name='admin_category[sub_categories_attributes]["+id+"][name]'></input><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br></span>")

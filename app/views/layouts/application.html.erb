@@ -17,10 +17,19 @@
 
     <div id="templatemo_main_coontent">
       <%= render 'dashboard/shared/sidebar' %>
-			<%= yield %>
+		<%= yield %>
         <div class="cleaner"></div> 
       </div> <!-- end of main content in Sidebar -->
       <div id="templatemo_main_content_bottom"></div>  
+      
+      <div class="post_content">
+        <div class="link_button">
+          <div id="pagging-left">
+              <%= will_paginate @articles %> 
+          </div>
+        </div>
+      </div>
+      
     </div>  
   </div> 
 </div>
