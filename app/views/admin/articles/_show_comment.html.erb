@@ -34,7 +34,7 @@
 
 	$("#show_comment_reply").click(function(){
 		var id = $("#show_comment_reply").attr("dataId")
-		$(".reply-form").html("<p><input type='text' name='id' value='"+id+"'><textarea name='body_reply' colspan='5' rowspan='5'></textarea><input type='submit'></p>");
+		$(".reply-form").html("<p><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><input type='submit' class='button button-replay' value='Replay'></p>");
 		return false;
 	})	
 </script>
