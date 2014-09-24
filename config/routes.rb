@@ -11,7 +11,10 @@ MyJournal::Application.routes.draw do
         get :show_categories
         get :show_sub_categories
       end
-      resources :comments
+      resources :comments do
+        post :create_reply_comment
+        delete :destroy_reply
+      end
   end
 
   namespace :admin do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922140836) do
+ActiveRecord::Schema.define(version: 20140924044227) do
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(version: 20140922140836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "profile"
+  end
+
+  create_table "dashboard_reply_comments", force: true do |t|
+    t.string   "body"
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

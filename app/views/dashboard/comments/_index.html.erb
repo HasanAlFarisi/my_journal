@@ -1,6 +1,7 @@
 <% dashboard_comments.each do |dashboard_comment| %>
   <div id="comment-list">
       <div id="photo"><%=  image_tag  "#{dashboard_comment.profile}" %></div>
+            <span class="time"><%= "#{dashboard_comment.created_at.strftime('%d %b %Y')}"  %></span>
       <p>
         <label>Name :</label> 
         <span><%= dashboard_comment.name %></span>
@@ -11,7 +12,14 @@
       </p>
       <span><%= dashboard_comment.body %></span>
       <br><br>
-      <span class="time"><%= "#{dashboard_comment.created_at.strftime('%d %b %Y')}"  %></span>
   </div>
   <span class="clear"></span>
+  <% dashboard_comment.reply_comments.each do |reply| %>
+      <div id="reply-view">
+          <span style="font-size:9px">Reply from</span> 
+          <b>Admin</b>:<br>
+          <%= reply.body %>
+      </div>
+      <div class="clear border-bottom"></div>
+  <% end %>
 <%end%>

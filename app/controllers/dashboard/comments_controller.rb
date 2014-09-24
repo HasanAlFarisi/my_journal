@@ -42,6 +42,15 @@ class Dashboard::CommentsController < ApplicationController
     end
   end
 
+  def create_reply_comment
+    reply_comment = Dashboard::ReplyComment.create(body: params[:body_reply], comment_id: params[:comment_id])
+    reply_comment.save
+
+    respond_to do |format|
+      format.js { @reply_comments =  Dashboard::ReplyComment.where("comment_id = ?", reply_comment.comment_id).last }
+    end
+  end
+
   # PATCH/PUT /dashboard/comments/1
   # PATCH/PUT /dashboard/comments/1.json
   def update
@@ -60,11 +69,20 @@ class Dashboard::CommentsController < ApplicationController
   # DELETE /dashboard/comments/1.json
   def destroy
     @dashboard_comment.destroy
+
     respond_to do |format|
       format.html { redirect_to dashboard_comments_url }
       format.json { head :no_content }
       format.js
       flash[:notice] = 'Comment was successfully deleted.'
+    end
+  end
+
+  def destroy_reply
+    reply_comment = Dashboard::ReplyComment.find(params[:comment_id])
+    reply_comment.destroy
+    respond_to do |format|
+      format.js
     end
   end
 

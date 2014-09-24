@@ -19,7 +19,7 @@
       <% @articles.each do |article| %>
         <div class="recent_post">
             <h4><%= link_to article.title, dashboard_home_path(article) %></h4>
-            <div class="ellipsisTwo"><%=raw article.body %></div>
+            <div class="ellipsisTwo article_sidebar"><%=raw article.body %></div>
         </div>
       <% end %>
     </div>   
