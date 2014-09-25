@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def recent_post
-    @articles = Article.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+    @recent_posts = Article.order('created_at DESC LIMIT 4')
   end
 
   def convert_to_arr_for_query(ids_param)

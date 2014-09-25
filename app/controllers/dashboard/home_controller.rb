@@ -6,7 +6,6 @@ class Dashboard::HomeController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.js {@articles}
       end
   end
 
@@ -27,7 +26,7 @@ class Dashboard::HomeController < ApplicationController
     end
 
     respond_to do |format|
-      format.js {@articles}
+      format.html
     end
   end
 
@@ -39,7 +38,7 @@ class Dashboard::HomeController < ApplicationController
     end
 
     respond_to do |format|
-      format.js {@articles}
+      format.html
     end
   end
 

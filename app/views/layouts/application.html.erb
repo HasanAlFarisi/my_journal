@@ -21,15 +21,15 @@
         <div class="cleaner"></div> 
       </div> <!-- end of main content in Sidebar -->
       <div id="templatemo_main_content_bottom"></div>  
-      
       <div class="post_content">
         <div class="link_button">
           <div id="pagging-left">
-              <%= will_paginate @articles %> 
+              <% unless @articles.blank? %>
+                <%= will_paginate @articles %> 
+              <% end %>
           </div>
         </div>
       </div>
-      
     </div>  
   </div> 
 </div>
