@@ -10,3 +10,14 @@ function readURL(input) {
     reader.readAsDataURL(input.files[0]);
   }
 }
+
+function readIconURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('.icon_prev').remove();
+      $('.icon_img_prev').append('<img class="floating img-icon icon_prev" src="'+e.target.result+'" />');
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}

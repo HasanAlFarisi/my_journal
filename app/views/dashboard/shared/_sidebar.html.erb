@@ -8,7 +8,12 @@
       <h3>Categories</h3>
       <ul class="side_menu">
       <% @categories_list.each do |category| %>
-        <li><%= link_to "#{category.name}", admin_category_path(category) %></li>
+        <li><%= link_to "#{category.name}", dashboard_home_show_categories_path(category) %></li>
+        <ul class="sub_side_menu">
+          <% category.sub_categories.each do |sub_category| %>
+            <li><%= link_to sub_category.name, dashboard_home_show_sub_categories_path(sub_category) %></li>
+          <% end %>
+        </ul>
       <% end %>
       </ul>
     

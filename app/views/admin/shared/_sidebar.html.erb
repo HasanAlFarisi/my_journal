@@ -14,16 +14,14 @@
     
     <!-- Sort -->
     <div class="sort">
-      <label>Sort by</label>
-      <select class="field">
-        <option value="">Title</option>
-      </select>
-      <select class="field">
-        <option value="">Date</option>
-      </select>
-      <select class="field">
-        <option value="">Author</option>
-      </select>
+      <label>Articles Sort by</label>
+      <%= form_tag article_search_admin_articles_path do %>
+        <%= text_field_tag :title, "",placeholder:"Title", class:"field size6" %>
+        <%= text_field_tag :date, "",placeholder:"Date", class:"field size6" %>
+        <%= select_tag :category, options_for_select(@categories_select), class:"field size6" %>
+        <br>
+        <%= submit_tag "Search", class:"button" %>
+      <% end %>
     </div>
     <!-- End Sort -->  
   </div>

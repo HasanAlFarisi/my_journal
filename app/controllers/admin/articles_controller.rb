@@ -43,6 +43,14 @@ class Admin::ArticlesController < Admin::BaseController
     end
   end
 
+  def article_search
+    @result = Article.search_by_params(params).paginate(:page => params[:page], :per_page => 15)
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update

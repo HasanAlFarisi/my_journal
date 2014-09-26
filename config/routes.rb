@@ -23,6 +23,7 @@ MyJournal::Application.routes.draw do
 
     resources :articles do
       collection do
+        post :article_search
         post :destroy_all
         post :auto_search
       end

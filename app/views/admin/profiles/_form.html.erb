@@ -15,36 +15,57 @@
                 <div class="foto_prev_profile">
                   <%= image_tag @admin_profile.avatar.url(:original),class:"img_profile floating img_prev" %> 
                 </div>
-                <%= f.file_field :avatar, class:"field size5 input-file", id: "fileField", :onchange => "readURL(this);" %>
+                <%= f.file_field :avatar, class:"field size5 input-file file", id: "fileField", :onchange => "readURL(this);" %>
               </div>
               
+              <div id="right_content">
+                  <p>
+                    <%= f.label :name %>
+                    <%= f.text_field :name, class:"field size4"  %>
+                  </p>  
+                  <p>
+                    <%= f.label :last_name %>
+                    <%= f.text_field :last_name, class:"field size4"  %>
+                  </p> 
+                  <p>
+                    <%= f.label :facebook %>
+                    <%= f.text_field :facebook, class:"field size4"  %>
+                  </p>
+                  <p>
+                    <%= f.label :e_mail %>
+                    <%= f.text_field :e_mail, class:"field size4"  %>
+                  </p>
+                  <p>
+                    <%= f.label :skill, "Skill" %>
+                    <% @admin_profile.profile_skills.each do |skill| %>
+                      <span class="icon_img_prev">
+                          <%= image_tag skill.icon.url(:original), class:"floating img-icon icon_prev" %>
+                      </span>
+                    <% end %>
+                    <%= f.fields_for :profile_skills do |ps| %>
+                        <%= render "admin/profiles/profile_skill", :f => ps %>
+                    <% end %>
+                  </p>
+                  <div class="sub-skill" dataId="1"><!-- add skill place --></div>
+
+                  <div class="add add-skill button" type="submit">+| Skills</div>
+                  <p>
+                    <%= f.label :hobby, "Hobby" %>
+                    <%= f.fields_for :profile_hobbies do |ph| %>
+                        <%= render "admin/profiles/profile_hobby", :f => ph %>
+                    <% end %>
+                  </p>
+                  <div class="sub-hobby"><!-- add skill place --></div>
+
+                  <div class="add add-hobby button" type="submit">+| Hobbies</div>
+              </div>
               <p>
-                <%= f.label :name %>
-                <%= f.text_field :name, class:"field size4"  %>
-              </p>  
-              <p>
-                <%= f.label :last_name %>
-                <%= f.text_field :last_name, class:"field size4"  %>
-              </p> 
-              <p>
-                <%= f.label :facebook %>
-                <%= f.text_field :facebook, class:"field size4"  %>
-              </p>
-              <p>
-                <%= f.label :e_mail %>
-                <%= f.text_field :e_mail, class:"field size4"  %>
-              </p>
-              <p>
-                <%= label_tag :skill, "Skill" %>
-                <%= @admin_profile.e_mail %>
-              </p>
-              <p>
-                <%= label_tag :hobby, "Hobby" %>
-                <%= @admin_profile.e_mail %>
+                <%= label_tag :describe_me, "Describe Me!" %>
+                <%= f.text_area :describe_me, class:"textarea size4 field mini_ckeditor" %>
               </p>
               <p>
                 <%= label_tag :motto, "Motto" %>
-                <%= @admin_profile.e_mail %>
+                <%= f.text_area :motto, class:"textarea size4 field mini_ckeditor" %>
               </p>
             </div>
             <!-- End Form -->
@@ -66,3 +87,28 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
+<script>
+$(document).ready(function(){
+  var id = $(".sub-skill").attr("dataId");
+  $(".add-skill").click(function(){
+    id = id +1;
+          $(".sub-skill").append("<span class='parent'><p><span class='icon_img_prev_"+id+"'><img alt='Missing' class='floating img-icon icon_prev_"+id+"' src='/assets/original/missing.jpg'></span><input class='field size6 floating' id='admin_profile_profile_skills_attributes_"+id+"_name' name='admin_profile[profile_skills_attributes]["+id+"][name]' type='text'><input class='field size2 floating' id='admin_profile_profile_skills_attributes_"+id+"_skill' name='admin_profile[profile_skills_attributes]["+id+"][skill]' type='text'></p><div style='margin-top:-7px' class='floating'>%</div><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><input class='field size6 input-file file' id='fileField' name='admin_profile[profile_skills_attributes]["+id+"][icon]' onchange='readIconAddURL(this,"+id+");' style='margin-left:75px' type='file'><p></p></span>");
+      })
+
+  $(".add-hobby").click(function(){
+    id = id +1;
+          $(".sub-hobby").append("<span class='parent'><input class='field size4 floating' id='admin_profile_profile_hobbies_attributes_"+id+"_name' name='admin_profile[profile_hobbies_attributes]["+id+"][name]' type='text'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br></span>");
+      })
+});
+
+function readIconAddURL(input,id) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('.icon_prev_'+id).remove();
+      $('.icon_img_prev_'+id).append("<img class='floating img-icon icon_prev_"+id+"' src='"+e.target.result+"' />");
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   def prepare_category
     @categories_list = Admin::Category.all
+    @categories_select = Admin::Category.all.map{|x| [x.name , x.id]}.unshift(['Category',nil])
   end
 
   def recent_post

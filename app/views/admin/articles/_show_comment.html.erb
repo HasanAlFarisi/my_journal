@@ -48,32 +48,31 @@
 	      </div>
 	</div>
 </div>
-
 <script>
-	$(document).ready(function() {
-		$("#modal-comment").fadeIn();
-		$( '.close-modal-comment' ).click(function( ev ) {  $( '#modal-comment, #modal_background' ).fadeOut();  ev.preventDefault();} );
+$(document).ready(function() {
+	$("#modal-comment").fadeIn();
+	$( '.close-modal-comment' ).click(function( ev ) {  $( '#modal-comment, #modal_background' ).fadeOut();  ev.preventDefault();} );
 
-		<% if params[:reply].present? || params[:reply] == 'true' %>
-			var id = <%= comment.id.to_i %>
-			$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><input type='submit' class='button button-replay' value='Replay'></p>");
-		<% end %>
-
-		<% if comment.reply_comments != [] %>
-			$(".reply-table").show();
-		<% else %>
-			$(".reply-table").hide();
-		<% end %>
-	})
-
-	function hidden_delete(id){
-		var ids = id;
-		$(".hidden_"+ids).remove();
-	}
-
-	$("#show_comment_reply").click(function(){
-		var id = $("#show_comment_reply").attr("dataId")
+	<% if params[:reply].present? || params[:reply] == 'true' %>
+		var id = <%= comment.id.to_i %>
 		$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><input type='submit' class='button button-replay' value='Replay'></p>");
-		return false;
-	})
+	<% end %>
+
+	<% if comment.reply_comments != [] %>
+		$(".reply-table").show();
+	<% else %>
+		$(".reply-table").hide();
+	<% end %>
+})
+
+function hidden_delete(id){
+	var ids = id;
+	$(".hidden_"+ids).remove();
+}
+
+$("#show_comment_reply").click(function(){
+	var id = $("#show_comment_reply").attr("dataId")
+	$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><input type='submit' class='button button-replay' value='Replay'></p>");
+	return false;
+})
 </script>

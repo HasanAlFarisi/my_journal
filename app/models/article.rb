@@ -10,4 +10,20 @@ validates_attachment_content_type :photo, :content_type => /image/
 has_many :dasboard_comments
 belongs_to :category
 
+	def self.search_by_params(params)
+		ar = Article.all
+		unless params[:title].blank?
+			ar = ar.where("title LIKE '%#{params[:title]}%'")
+		end
+
+		unless params[:date].blank?
+			ar = ar.where("created_at = #{params[:date]}")
+		end
+
+		unless params[:category].blank?
+			ar = ar.where("category_id = #{params[:category]}")
+		end
+
+		return ar
+	end
 end

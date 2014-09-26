@@ -11,12 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140924044227) do
+ActiveRecord::Schema.define(version: 20140925063007) do
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "admin_profile_hobbies", force: true do |t|
+    t.string   "name"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "admin_profile_skills", force: true do |t|
+    t.string   "name"
+    t.integer  "skill"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "admin_profiles", force: true do |t|
@@ -32,6 +51,8 @@ ActiveRecord::Schema.define(version: 20140924044227) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.text     "motto"
+    t.text     "describe_me"
   end
 
   create_table "admin_sub_categories", force: true do |t|

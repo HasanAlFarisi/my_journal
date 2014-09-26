@@ -325,13 +325,21 @@ h4 {
 	margin: 0px;
 	padding: 2px 0;
 	border-bottom: 1px dashed #666;
+
 }
 
 .side_menu li a {
 	color: #000000;
+	font-weight: bold !important;
+	font-size: 13px;
+}
+.sub_side_menu li a {
+	color: #fff;
+	font-weight: normal !important;
+	font-size: 12px;
 }
 
-.side_menu li a:hover {
+.side_menu li a:hover, .sub_side_menu li a:hover {
 	color: #fad40d;
 	text-decoration: none;
 }

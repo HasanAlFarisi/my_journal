@@ -4,7 +4,7 @@ class Admin::Category < ActiveRecord::Base
 
 	validates :name,
 		      :presence =>true, 
-		      #:uniqueness=>true,
+		      :uniqueness=>true,
 		      :allow_nil=>false,
           		:allow_blank=>false 
 

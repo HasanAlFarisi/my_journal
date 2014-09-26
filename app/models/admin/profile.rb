@@ -6,4 +6,10 @@ class Admin::Profile < ActiveRecord::Base
   	:path => ":rails_root/public/system/:attachment/:id/:style/:basename.:extension",
   	:default_url => "/assets/:style/missing.jpg"
   	validates_attachment_content_type :avatar, :content_type => /image/
+
+  	has_many :profile_skills, dependent: :destroy
+  	has_many :profile_hobbies, dependent: :destroy
+
+  	accepts_nested_attributes_for :profile_skills
+  	accepts_nested_attributes_for :profile_hobbies
 end

@@ -7,7 +7,8 @@ body {
 	color:#5e5e5e;
 }
 input, textarea, select { font-family: Verdana, sans-serif; font-size:13px; }
-textarea { overflow:hidden; }
+textarea { overflow:hidden;}
+.file{ border:none; width:240px; color: transparent; }
 
 .field { border:solid 1px #d3cfc7; background:#fff; padding:5px; }
 .small-field { border:solid 1px #d3cfc7; background:#fff; padding:3px 1px; font-size:11px; }
@@ -136,6 +137,7 @@ a.edit { background-image:url(/assets///edit.gif); margin-left:14px;}
 .size2 { width:80px; }
 .size3 { width:120px; }
 .size4 { width:400px; }
+.size6 { width:190px; }
 
 textarea.size1 { height:180px; }
 select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; display:inline; border:solid 1px #d3cfc7; background:#fff; padding:5px;}
@@ -148,7 +150,7 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .sort { border-top:solid 1px #e0e0e0; padding-top:10px; margin-top:15px;   }
 .sort label{ display:block; font-weight: bold;}
 .sort .field{ display:block; margin-top:5px; }
-.sort select.field{ width:203px; }
+.sort select.field{ width:203px; color: #999}
 
 
 .box-content p { padding-top:10px; }
@@ -191,10 +193,11 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .img-data-back {width:60px; height:50px; float:right; margin: -40px 20px 0px 10px}
 .img-data-right {width:60px; height:50px; float:right; margin: -40px 10px 0px 10px}
 .img-data-left {width:60px; height:50px; float:right; margin: -40px 10px 0px 10px}
+.img-icon { width:70px; height:70px; }
 .up{margin-top: -12px}
 .down{margin-top: 190px; margin-bottom: -200px;}
 .all-foto{}
-.add{display: inline-block; padding: 2px 5px; color: #999; font-size: 12px; font-weight: normal; text-align: center; text-decoration: none; background: #fffac2; width: 100px !important; margin-top:-5px; margin-bottom: 15px; }
+.add{display: inline-block; padding: 2px 5px; color: #999; font-size: 12px; font-weight: normal; text-align: left; text-decoration: none; background: #fffac2; width: 100px !important; margin-top:-5px; margin-bottom: 15px; }
 .floating{float: left;margin-right: 5px;}
 .img_profile{width:250px; height:260px; margin-bottom: 5px;}
 .left-photo{height:340px; width: 260px; float: left;}
@@ -204,3 +207,6 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 #comment-action{float: right;}
 .text-replay{background-color: #E3E3E3;width: 410px;height: 100px;border: none;padding: 5px;color: #999;}
 .button-replay{width: 100px !important; height: 30px; padding: 0px !important;color: #333; font-size: arial !important;}
+#right_content{ margin-left: 260px; }
+/*#cke_1_contents{ height: 79px !important; }
+#cke_2_contents{ height: 79px !important; }*/

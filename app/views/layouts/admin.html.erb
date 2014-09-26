@@ -14,7 +14,9 @@
   <div id="container">
     <div class="shell">
       <%= render :partial => "admin/shared/notice" %>
-      <%= yield %>
+        <div id="short_article_place">
+          <%= yield %>
+        </div>
     </div>
   </div>
 </body>
