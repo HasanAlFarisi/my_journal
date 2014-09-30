@@ -6,12 +6,13 @@ class Admin::ArticlesController < Admin::BaseController
   # GET /articles.json
   def index
     @articles = Article.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
+
+    session[:urlBack] = request.original_url
   end
     
   # GET /articles/1
   # GET /articles/1.json
-  def show
-  end
+  def show;end
 
   # GET /articles/new
   def new
@@ -19,9 +20,7 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   # GET /articles/1/edit
-  def edit
-    
-  end
+  def edit;end
 
   # POST /articles
   # POST /articles.json
@@ -45,6 +44,8 @@ class Admin::ArticlesController < Admin::BaseController
 
   def article_search
     @result = Article.search_by_params(params).paginate(:page => params[:page], :per_page => 15)
+
+    session[:urlBack] = request.original_url
 
     respond_to do |format|
       format.html
@@ -71,7 +72,7 @@ class Admin::ArticlesController < Admin::BaseController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    Dashboard::Comment.delete_all "article_id = #{@article.id}"
+    comment = Dashboard::Comment.delete_all "article_id = #{@article.id}"
     @article.destroy
 
     respond_to do |format|
@@ -103,6 +104,16 @@ class Admin::ArticlesController < Admin::BaseController
       end
     else
       @sub_category_select = [['Select', nil]]
+    end
+    render layout: false
+  end
+
+  def auto_search_sidebar
+    unless params[:category].blank?
+      sub_category = Admin::SubCategory.where("category_id = ?", params[:category])
+      @sub_category_sidebar_select = sub_category.map{|x|[x.name, x.id]}.unshift(['Sub Category',nil])
+    else
+      @sub_category_sidebar_select = [['Sub Category', nil]]
     end
     render layout: false
   end

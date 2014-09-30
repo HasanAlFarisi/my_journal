@@ -15,10 +15,11 @@
     <!-- Sort -->
     <div class="sort">
       <label>Articles Sort by</label>
-      <%= form_tag article_search_admin_articles_path do %>
+      <%= form_tag article_search_admin_articles_path, :method => :get do %>
         <%= text_field_tag :title, "",placeholder:"Title", class:"field size6" %>
         <%= text_field_tag :date, "",placeholder:"Date", class:"field size6" %>
-        <%= select_tag :category, options_for_select(@categories_select), class:"field size6" %>
+        <%= select_tag :category, options_for_select(@categories_select), class:"field size6", style:"margin-bottom:-10px" %>
+        <span class="sub_category_sidebar"><!--Sub category place--></span>
         <br>
         <%= submit_tag "Search", class:"button" %>
       <% end %>
@@ -64,3 +65,28 @@
     <br><br>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    //category_selected();
+
+    $("#category").change(function(){   
+      category_selected_sidebar();
+    })
+  })
+
+  function category_selected_sidebar(){
+    var base_address = $(".sub_category_sidebar");
+      var controller = "<%= auto_search_sidebar_admin_articles_path %>";
+      $.ajax({
+          type: "POST",
+          url: escape(controller),
+          data: {"category" : $('#category').val()     
+        },
+          dataType:"html",
+          success:function(data){
+            jQuery(".sub_category_sidebar").html(data);
+          }
+      })
+  }
+</script>

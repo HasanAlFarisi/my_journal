@@ -22,7 +22,11 @@
     <div class="actions">
       <div class="post_content">
         <div class="link_button" style="float:right">
-              <%= link_to "Save ...", "javascript:void(0)", id:"submit-form" %>
+             <% if status == 'contact_for_admin' %>
+                <%= link_to "Save ...", "javascript:void(0)", id:"submit-form", dataId:"contact_for_admin" %>
+             <% else %>   
+                <%= link_to "Save ...", "javascript:void(0)", id:"submit-form", dataId:"contact_for_comment" %>
+             <% end %>
         </div>
       </div>
     </div>

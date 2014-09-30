@@ -44,3 +44,7 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
+
+<!-- Box Article from category -->
+  <%= render partial: 'admin/articles/index', locals:{articles: @articles_category, sidebar: 'true'} %>
+<!-- End Box Article from category -->

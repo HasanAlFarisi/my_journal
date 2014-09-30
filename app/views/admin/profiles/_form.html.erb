@@ -36,12 +36,20 @@
                     <%= f.text_field :e_mail, class:"field size4"  %>
                   </p>
                   <p>
+                    <%= f.label :skype %>
+                    <%= f.text_field :skype, class:"field size4"  %>
+                  </p>
+                  <p>
+                    <%= f.label :birthday %>
+                    <%= f.text_field :birthday, class:"field size4"  %>
+                  </p>
+                  <p>
+                    <%= f.label :e_mail %>
+                    <%= f.text_field :e_mail, class:"field size4"  %>
+                  </p>
+                  <p>
                     <%= f.label :skill, "Skill" %>
-                    <% @admin_profile.profile_skills.each do |skill| %>
-                      <span class="icon_img_prev">
-                          <%= image_tag skill.icon.url(:original), class:"floating img-icon icon_prev" %>
-                      </span>
-                    <% end %>
+
                     <%= f.fields_for :profile_skills do |ps| %>
                         <%= render "admin/profiles/profile_skill", :f => ps %>
                     <% end %>
@@ -49,6 +57,7 @@
                   <div class="sub-skill" dataId="1"><!-- add skill place --></div>
 
                   <div class="add add-skill button" type="submit">+| Skills</div>
+
                   <p>
                     <%= f.label :hobby, "Hobby" %>
                     <%= f.fields_for :profile_hobbies do |ph| %>

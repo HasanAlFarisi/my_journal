@@ -189,17 +189,17 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 /*** CSS Costume ***/
 .tab-right{	padding-right: 18px !important;	-webkit-border-top-right-radius: 5px !important; border-top-right-radius: 5px !important;}
 .tab-right-button{	padding-right: 10px !important;	-webkit-border-radius: 5px !important; border-radius: 5px !important; border-right: 1px solid #ccc;}
-.img-data {width:420px; height:200px;}
+.img-data {width:410px;}
 .img-data-back {width:60px; height:50px; float:right; margin: -40px 20px 0px 10px}
 .img-data-right {width:60px; height:50px; float:right; margin: -40px 10px 0px 10px}
 .img-data-left {width:60px; height:50px; float:right; margin: -40px 10px 0px 10px}
-.img-icon { width:70px; height:70px; }
+.img-icon { width:50px; height:50px; }
 .up{margin-top: -12px}
 .down{margin-top: 190px; margin-bottom: -200px;}
 .all-foto{}
 .add{display: inline-block; padding: 2px 5px; color: #999; font-size: 12px; font-weight: normal; text-align: left; text-decoration: none; background: #fffac2; width: 100px !important; margin-top:-5px; margin-bottom: 15px; }
 .floating{float: left;margin-right: 5px;}
-.img_profile{width:250px; height:260px; margin-bottom: 5px;}
+.img_profile{width:250px; height:300px; margin-bottom: 5px;}
 .left-photo{height:340px; width: 260px; float: left;}
 .notice{margin-bottom: 10px !important;}
 .comment {}
@@ -210,3 +210,5 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 #right_content{ margin-left: 260px; }
 /*#cke_1_contents{ height: 79px !important; }
 #cke_2_contents{ height: 79px !important; }*/
+#profile_skill_list{ margin-left: 0px; list-style: none; }
+#profile_hobby_list{ }

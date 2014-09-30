@@ -35,7 +35,7 @@
             <%= f.select :category_id, options_for_select(@category,@selected), class:"field size3" %>
           </p>
 
-          <span id="sub_category">
+          <span class="sub_category">
             <p>
                 <%= label_tag :sub_category, "Sub Category" %>
                 <span>(Required Field)</span><br>
@@ -52,7 +52,7 @@
         
         <!-- Form Buttons -->
         <div class="buttons">
-          <%= link_to "Back", admin_articles_path, class:"button-back" %>
+          <%= link_to "Back", session[:urlBack], class:"button-back" %>
           <%= f.submit "Save Article", class:"button" %>
         </div>
         <!-- End Form Buttons -->
@@ -79,7 +79,7 @@
   })
 
   function category_selected(){
-    var base_address = $("#sub_category");
+    var base_address = $(".sub_category");
       var controller = "<%= auto_search_admin_articles_path %>";
       $.ajax({
           type: "POST",
@@ -89,7 +89,7 @@
         },
           dataType:"html",
           success:function(data){
-            jQuery("#sub_category").html(data);
+            jQuery(".sub_category").html(data);
           }
       })
   }

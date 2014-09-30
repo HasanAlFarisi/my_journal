@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require index
+ *= require notice
  *= require jqueryindex
  */

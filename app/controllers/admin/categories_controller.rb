@@ -10,6 +10,7 @@ class Admin::CategoriesController < Admin::BaseController
   # GET /admin/categories/1
   # GET /admin/categories/1.json
   def show
+    @articles_category = Article.where("category_id = #{params[:id]}").paginate(:page => params[:page], :per_page => 15)
   end
 
   # GET /admin/categories/new
@@ -24,7 +25,7 @@ class Admin::CategoriesController < Admin::BaseController
   # POST /admin/categories
   # POST /admin/categories.json
   def create
-     @admin_category = Admin::Category.new(admin_category_params)
+    @admin_category = Admin::Category.new(admin_category_params)
 
     respond_to do |format|
       if @admin_category.save

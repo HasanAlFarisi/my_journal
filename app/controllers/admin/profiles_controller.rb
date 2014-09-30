@@ -19,6 +19,7 @@ class Admin::ProfilesController < Admin::BaseController
 
   # GET /admin/profiles/1/edit
   def edit
+    @admin_skills = Admin::ProfileSkill.find_all_by_profile_id(params[:id])
   end
 
   # POST /admin/profiles
@@ -28,6 +29,20 @@ class Admin::ProfilesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_profile.save
+        unless params[:admin_profile][:profile_skills_attributes].blank?
+            params[:admin_profile][:profile_skills_attributes].each do |skill|
+                admin_skill = Admin::ProfileSkill.create({profile_id: @admin_profile.id, name: skill[1][:name], skill: skill[1][:skill], icon: skill[1][:icon]})
+                admin_skill.save
+            end
+        end
+
+        unless params[:admin_profile][:profile_hobbies_attributes].blank?
+            params[:admin_profile][:profile_hobbies_attributes].each do |hobby|
+                admin_hobby = Admin::ProfileHobby.create({profile_id: @admin_profile.id, name: hobby[1][:name]})
+                admin_hobby.save
+            end
+        end
+
         format.html { redirect_to @admin_profile, notice: 'Profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_profile }
       else
@@ -42,7 +57,7 @@ class Admin::ProfilesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_profile.update(admin_profile_params)
-        format.html { redirect_to @admin_profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to admin_root_path, notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +84,6 @@ class Admin::ProfilesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_profile_params
-      params.require(:admin_profile).permit(:name, :last_name, :facebook, :e_mail, :admin_skill_id, :admin_hobby_id, :avatar)
+      params.require(:admin_profile).permit(:name, :last_name, :facebook, :e_mail, :motto, :describe_me, :avatar, :skype, :birthday)
     end
 end

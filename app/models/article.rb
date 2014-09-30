@@ -24,6 +24,10 @@ belongs_to :category
 			ar = ar.where("category_id = #{params[:category]}")
 		end
 
+		unless params[:sub_category].blank?
+			ar = ar.where("sub_category_id = #{params[:sub_category]}")
+		end
+
 		return ar
 	end
 end

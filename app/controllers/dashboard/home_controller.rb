@@ -4,6 +4,8 @@ class Dashboard::HomeController < ApplicationController
   def index
       @articles = @articles_default
 
+      session[:url_back_dashboard] = request.original_url
+
       respond_to do |format|
         format.html
       end
@@ -12,6 +14,12 @@ class Dashboard::HomeController < ApplicationController
   def show
   	@article = Article.find(params[:id])
   	@article_comments = Dashboard::Comment.where("article_id = ? ", params[:id])
+  end
+
+  def search_articles
+    @articles = Article.where("title like '%#{params[:name]}%'").paginate(:page => params[:page], :per_page => 5  )
+    
+    session[:url_back_dashboard] = request.original_url
   end
 
   def prepare_select
@@ -25,6 +33,8 @@ class Dashboard::HomeController < ApplicationController
       @articles = @articles_default
     end
 
+    session[:url_back_dashboard] = request.original_url
+
     respond_to do |format|
       format.html
     end
@@ -37,6 +47,8 @@ class Dashboard::HomeController < ApplicationController
       @articles = @articles_default
     end
 
+    session[:url_back_dashboard] = request.original_url
+    
     respond_to do |format|
       format.html
     end

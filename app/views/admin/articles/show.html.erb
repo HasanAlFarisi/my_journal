@@ -22,6 +22,11 @@
           </p>
 
           <p>
+            <%= label_tag :category, "Article Category" %>
+            <%= "#{find_category(@article.category_id)} , #{find_sub_category(@article.sub_category_id)}" %>
+          </p> 
+
+          <p>
             <%= label_tag :body, "Content" %>
             <%= raw @article.body %>
           </p>
@@ -55,7 +60,7 @@
         
         <!-- Form Buttons -->
         <div class="buttons">
-          <%= link_to "Back", admin_articles_path, class:"button-back" %>
+          <%= link_to "Back", session[:urlBack], class:"button-back" %>
           <%= link_to "Edit Article", edit_admin_article_path(@article), class:"button" %>
         </div>
         <!-- End Form Buttons -->

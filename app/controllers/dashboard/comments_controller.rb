@@ -69,6 +69,8 @@ class Dashboard::CommentsController < ApplicationController
   # DELETE /dashboard/comments/1.json
   def destroy
     @dashboard_comment.destroy
+    reply_comment = Dashboard::ReplyComment.find_by_comment_id(params[:id])
+    reply_comment.destroy
 
     respond_to do |format|
       format.html { redirect_to dashboard_comments_url }
