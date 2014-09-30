@@ -34,7 +34,7 @@ MyJournal::Application.configure do
       :port                 => 587,
       :domain               => "mail.google.com",
       :user_name            => "hasan.farisi47@gmail.com",
-      :password             => "hasanalfarisidanfannysalsabila",
+      :password             => "hasanalfarisidanfannysalsabila123hasan",
       :authentication       => "plain",
       :enable_starttls_auto => true
     }
