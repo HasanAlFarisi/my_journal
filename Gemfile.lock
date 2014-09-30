@@ -80,7 +80,7 @@ GEM
       mail
       sinatra
       skinny (>= 0.1.2)
-      sqlite3-ruby
+
       thin
     mime-types (1.25.1)
     mini_magick (3.8.1)
