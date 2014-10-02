@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928061629) do
+ActiveRecord::Schema.define(version: 20141002022240) do
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "admin_company_profiles", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "vission"
+    t.string   "mission"
+    t.string   "motto"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,6 +39,25 @@ ActiveRecord::Schema.define(version: 20140928061629) do
     t.string   "email"
     t.text     "body"
     t.string   "profile"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "admin_galleries", force: true do |t|
+    t.string   "title"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
+    t.integer  "gallery_group_id"
+  end
+
+  create_table "admin_gallery_groups", force: true do |t|
+    t.string   "name"
+    t.string   "sub_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

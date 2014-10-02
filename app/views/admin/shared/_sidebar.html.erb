@@ -17,7 +17,7 @@
       <label>Articles Sort by</label>
       <%= form_tag article_search_admin_articles_path, :method => :get do %>
         <%= text_field_tag :title, "",placeholder:"Title", class:"field size6" %>
-        <%= text_field_tag :date, "",placeholder:"Date", class:"field size6" %>
+        <%= text_field_tag :date, "",placeholder:"Date", class:"field size6 datepicker" %>
         <%= select_tag :category, options_for_select(@categories_select), class:"field size6", style:"margin-bottom:-10px" %>
         <span class="sub_category_sidebar"><!--Sub category place--></span>
         <br>
@@ -73,6 +73,12 @@
     $("#category").change(function(){   
       category_selected_sidebar();
     })
+
+    $('.datepicker').datepicker({
+            minDate: '-30', // The min date that can be selected, i.e. 30 days from the 'now'
+            maxDate: '+1m +1w +1d' // The max date that can be selected, i.e. + 1 month, 1 week, and 1 days from 'now'
+    });
+
   })
 
   function category_selected_sidebar(){

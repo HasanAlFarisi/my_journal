@@ -190,10 +190,8 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .tab-right{	padding-right: 18px !important;	-webkit-border-top-right-radius: 5px !important; border-top-right-radius: 5px !important;}
 .tab-right-button{	padding-right: 10px !important;	-webkit-border-radius: 5px !important; border-radius: 5px !important; border-right: 1px solid #ccc;}
 .img-data {width:410px;}
-.img-data-back {width:60px; height:50px; float:right; margin: -40px 20px 0px 10px}
-.img-data-right {width:60px; height:50px; float:right; margin: -40px 10px 0px 10px}
-.img-data-left {width:60px; height:50px; float:right; margin: -40px 10px 0px 10px}
 .img-icon { width:50px; height:50px; }
+.img-logo { width:150px; height:150px; }
 .up{margin-top: -12px}
 .down{margin-top: 190px; margin-bottom: -200px;}
 .all-foto{}

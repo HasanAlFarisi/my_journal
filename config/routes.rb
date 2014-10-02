@@ -1,5 +1,4 @@
 MyJournal::Application.routes.draw do
-
   devise_for :admins, :path => "admin",
     :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret' },
     :controllers => { :sessions => "admin/sessions" }
@@ -20,11 +19,17 @@ MyJournal::Application.routes.draw do
   end
 
   namespace :admin do
-    if Admin::Profile.last != nil
-      root to: "profiles#index"
+    if Admin::CompanyProfile.last != nil
+      root to: "company_profiles#index"
     else
-      root to: "profiles#new"
+      root to: "company_profiles#new"
     end
+
+    #if Admin::Profile.last != nil
+      #root to: "profiles#index"
+    #else
+      #root to: "profiles#new"
+    #end
     resources :profiles
 
     resources :articles do
@@ -42,6 +47,11 @@ MyJournal::Application.routes.draw do
       end
     end
 
+    resources :gallery_groups
+    resources :galleries
+
+    resources :company_profiles
+    
     resources :contacts, only: [:create]
   end
 end

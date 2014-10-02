@@ -1,0 +1,37 @@
+<h1>Listing admin_company_profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Vission</th>
+      <th>Mission</th>
+      <th>Motto</th>
+      <th>Photo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_company_profiles.each do |admin_company_profile| %>
+      <tr>
+        <td><%= admin_company_profile.name %></td>
+        <td><%= admin_company_profile.address %></td>
+        <td><%= admin_company_profile.vission %></td>
+        <td><%= admin_company_profile.mission %></td>
+        <td><%= admin_company_profile.motto %></td>
+        <td><%= admin_company_profile.photo %></td>
+        <td><%= link_to 'Show', admin_company_profile %></td>
+        <td><%= link_to 'Edit', edit_admin_company_profile_path(admin_company_profile) %></td>
+        <td><%= link_to 'Destroy', admin_company_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company profile', new_admin_company_profile_path %>
