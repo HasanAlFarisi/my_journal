@@ -4,7 +4,11 @@ class Admin::CompanyProfilesController < Admin::BaseController
   # GET /admin/company_profiles
   # GET /admin/company_profiles.json
   def index
-    @admin_company_profiles = Admin::CompanyProfile.all
+    @admins = Admin::Profile.where("id != ?", current_admin.id)
+    @current_admin = current_admin.profile
+    @admin_company_profiles = Admin::CompanyProfile.last
+
+    session[:urlBack] = request.original_url
   end
 
   # GET /admin/company_profiles/1
@@ -28,7 +32,7 @@ class Admin::CompanyProfilesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_company_profile.save
-        format.html { redirect_to @admin_company_profile, notice: 'Company profile was successfully created.' }
+        format.html { redirect_to admin_root_url, notice: 'Company profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_company_profile }
       else
         format.html { render action: 'new' }
@@ -42,7 +46,7 @@ class Admin::CompanyProfilesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_company_profile.update(admin_company_profile_params)
-        format.html { redirect_to @admin_company_profile, notice: 'Company profile was successfully updated.' }
+        format.html { redirect_to admin_root_url, notice: 'Company profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

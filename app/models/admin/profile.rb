@@ -9,6 +9,7 @@ class Admin::Profile < ActiveRecord::Base
 
   	has_many :profile_skills, dependent: :destroy
   	has_many :profile_hobbies, dependent: :destroy
+  	belongs_to :admin
 
   	accepts_nested_attributes_for :profile_skills
   	accepts_nested_attributes_for :profile_hobbies

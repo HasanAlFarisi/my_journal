@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002022240) do
+ActiveRecord::Schema.define(version: 20141002094242) do
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20141002022240) do
   end
 
   create_table "admin_profiles", force: true do |t|
+    t.integer  "admin_id"
     t.string   "name"
     t.string   "last_name"
     t.string   "facebook"

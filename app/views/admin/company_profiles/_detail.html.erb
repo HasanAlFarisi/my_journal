@@ -1,0 +1,62 @@
+<style type="text/css">
+  .company-logo{
+      width: 40% !important;
+      height: 40% !important;
+  }
+</style>
+
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  <div id="content">
+    <!-- Box -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2>Company Profile</h2>
+      </div>
+      <!-- End Box Head -->      
+
+        <!-- Form -->
+        <div class="foto_prev">
+              <%= image_tag admin_company_profile.photo.url(:original),class:"img-data company-logo",  id:"logo-align" %> 
+        </div>
+
+        <div class="form">
+          <p>
+             <%= label_tag :name, "Company Name" %>
+            <%= admin_company_profile.name%>
+          </p> 
+
+          <p>
+                <%= label_tag :motto %>
+                <%= admin_company_profile.motto %>
+          </p>
+
+          <p>
+                <%= label_tag :vission %>
+                <%=raw admin_company_profile.vission %>
+          </p>
+
+          <p>
+                <%= label_tag :mission %>
+                <%=raw admin_company_profile.mission %>
+          </p>
+
+          <p>
+            <%= label_tag :address, "Address" %>
+            <%=raw admin_company_profile.address %>
+          </p>  
+        </div>
+        <!-- End Form -->
+        
+        <!-- Form Buttons -->
+        <div class="buttons">
+          <%= link_to "Back", session[:urlBack], class:"button-back" %>
+          <%= link_to "Edit",edit_admin_company_profile_path(admin_company_profile), class:"button" %>
+        </div>
+        <!-- End Form Buttons -->
+    </div>
+    <!-- End Box -->
+  </div>
+  <div class="cl">&nbsp;</div>
+</div>

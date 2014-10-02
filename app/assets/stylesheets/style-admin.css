@@ -210,3 +210,9 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 #cke_2_contents{ height: 79px !important; }*/
 #profile_skill_list{ margin-left: 0px; list-style: none; }
 #profile_hobby_list{ }
+#logo-align{ float: right !important; margin-top:10px;  margin-right: 10px; }
+.admin-avatar{margin: 10px; width: 120px; height: 120px; border: 2px solid #ba4c32}
+#avatar {font-weight: bold; margin-top: -27px !important; width: 124px; height:5px;text-align: center; background: #ba4c32; color: #fff; padding-top: 5px; -webkit-border-bottom-right-radius: 7px; -webkit-border-bottom-left-radius: 7px; -moz-border-bottom-right-radius: 7px; -moz-border-bottom-left-radius: 7px;}
+#thumb{ margin-top: 63px;}
+.thumb{width: 60px; height: 60px;}
+.name-thumb{width: 64px !important; height:2px !important; font-size: 10px; font-weight: normal !important;}
