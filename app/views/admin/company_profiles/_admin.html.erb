@@ -12,7 +12,11 @@
       <!-- Current Admin -->      
         <span class="floating">
             <div class="foto_prev">
+<<<<<<< HEAD
                   <%= link_to image_tag(current_admin.avatar.url(:original),class:"admin-avatar", not_current: 'no'), admin_profile_path(current_admin.id), remote: true %> 
+=======
+                  <%= image_tag current_admin.avatar.url(:original),class:"admin-avatar" %> 
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
             </div>
 
             <div class="form">
@@ -27,7 +31,11 @@
           <!-- Form -->
           <span class="floating" id="thumb">
           <div class="foto_prev">
+<<<<<<< HEAD
                 <%= link_to image_tag(admin.avatar.url(:original),class:"admin-avatar thumb"), admin_profile_path(admin, not_current: 'yes'), remote: true %> 
+=======
+                <%= image_tag admin.avatar.url(:original),class:"admin-avatar thumb" %> 
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
           </div>
 
           <div class="form">

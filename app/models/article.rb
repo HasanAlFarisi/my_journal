@@ -7,11 +7,14 @@ class Article < ActiveRecord::Base
     :default_url => "/assets/:style/missing.jpg"
   
 validates_attachment_content_type :photo, :content_type => /image/
+<<<<<<< HEAD
 
 validates :title, :presence => {:message => "can not be blank"}
 validates :body, :presence => {:message => "can not be blank"}
 validates :category_id, :presence => {:message => "can not be blank"}
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 has_many :dasboard_comments
 belongs_to :category
 

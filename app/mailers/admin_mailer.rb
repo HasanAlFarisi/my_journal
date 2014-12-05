@@ -1,4 +1,5 @@
 class AdminMailer < ActionMailer::Base
+<<<<<<< HEAD
   include MailHelper
   helper :mail
 
@@ -7,10 +8,16 @@ class AdminMailer < ActionMailer::Base
   def mail_notice(profile,name,email,body)
   	company = Admin::CompanyProfile.last.name
   	
+=======
+  default from: "admin@my-journal.heroku.com"
+
+  def mail_notice(name,email,body)
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   	@name = name
   	@email = email
   	@body = body
   	
+<<<<<<< HEAD
   	mail(to: profile, subject: "#{company} Notification")
   end
 
@@ -42,5 +49,8 @@ class AdminMailer < ActionMailer::Base
       @admin = find_profile(admin_id)
 
       mail(to: @admin.e_mail, subject: "#{@company} Notification")
+=======
+  	mail(to: "hasan.alfarisi@wgs.co.id", subject: "Notification Contact")
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   end
 end

@@ -5,6 +5,7 @@ function readURL(input) {
       $('.img_prev').remove();
       $('.img-data').hide();
       $('.foto_prev').append('<img class="img_prev img-data company-logo" src="'+e.target.result+'" style="width:420px; height:200px;"/>');
+<<<<<<< HEAD
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -16,6 +17,9 @@ function readURLProfile(input) {
     reader.onload = function (e) {
       $('.img_prev_profile').remove();
       $('.foto_prev_profile').append('<img class="img_profile floating img_prev_profile" src="'+e.target.result+'" />');
+=======
+      $('.foto_prev_profile').append('<img class="img_profile floating img_prev" src="'+e.target.result+'" />');
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -30,6 +34,7 @@ function readIconURL(input) {
     };
     reader.readAsDataURL(input.files[0]);
   }
+<<<<<<< HEAD
 }
 
 function readURLJournal (input) {
@@ -41,4 +46,6 @@ function readURLJournal (input) {
     };
     reader.readAsDataURL(input.files[0])
   }
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 }

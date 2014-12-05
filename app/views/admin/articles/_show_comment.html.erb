@@ -7,7 +7,11 @@
 		<div class="form up">
 		    <p id="comment-action">
 	          	<%= link_to 'Reply', "#" , class:"ico edit", id:"show_comment_reply", dataId:"#{comment.id}" %> | 
+<<<<<<< HEAD
 	          	<%= link_to 'Delete', reply_contact == 'yes' ? dashboard_comment_path(comment) : admin_message_path(comment), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del", id:"modal-del" %>
+=======
+	          	<%= link_to 'Delete', dashboard_comment_path(comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "ico del", id:"modal-del" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 	          </p>
 	          <p>
 	            <%= label_tag :name, "Name" %>:
@@ -27,17 +31,30 @@
 			        <th>Reply comment</th>
 			        <th width="30px">Action</th>
 			      </tr>
+<<<<<<< HEAD
 			      <% if reply_contact == 'yes' %>
 			      		<%= render partial: "admin/articles/reply_comments", locals:{reply_comments: comment.reply_comments} %>
 			      	<% else %>	
 			      		<%= render partial: "admin/articles/reply_contacts", locals:{reply_contacts: comment.reply_contacts} %>
 				<% end -%>
+=======
+		      		<% comment.reply_comments.each do |comment| %>
+		      		<tbody class='hidden_<%="#{comment.id}"%>'>
+					<tr>
+					  	<td style="text-align:left"><%= comment.body %></td>
+					  	<td  width="5px"><%= link_to 'Destroy', dashboard_comment_destroy_reply_path(comment), method: :delete, remote: true, :class => "ico del", onclick:"hidden_delete(#{comment.id})" %>
+					  	</td>
+					 </tr>
+				</tbody>
+				<% end %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 				<tbody class="reply-comment-place" style="text-align:left">
 					<!-- index of reply -->
 		          	</tbody>
 		          </table>
 		       </div>
 	          	<br>
+<<<<<<< HEAD
 	          <% if reply_contact == 'yes' %>
 		          	<%= form_tag dashboard_comment_create_reply_comment_path(comment_id: params[:id]), remote: true do %>
 		          		<div class="reply-form"></div>
@@ -47,6 +64,11 @@
 		          		<div class="reply-form"></div>
 		          	<% end %>
 		     <% end %>
+=======
+	          <%= form_tag dashboard_comment_create_reply_comment_path(comment_id: params[:id]), remote: true do %>
+	          	<div class="reply-form"></div>
+	          <% end %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 	      </div>
 	</div>
 </div>
@@ -57,6 +79,7 @@ $(document).ready(function() {
 
 	<% if params[:reply].present? || params[:reply] == 'true' %>
 		var id = <%= comment.id.to_i %>
+<<<<<<< HEAD
 		$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><br><br><input type='submit' class='button button-replay' value='Replay'></p>");
 	<% end %>
 
@@ -72,6 +95,15 @@ $(document).ready(function() {
 		<% else %>
 			$(".reply-table").hide();
 		<% end %>
+=======
+		$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><input type='submit' class='button button-replay' value='Replay'></p>");
+	<% end %>
+
+	<% if comment.reply_comments != [] %>
+		$(".reply-table").show();
+	<% else %>
+		$(".reply-table").hide();
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 	<% end %>
 })
 
@@ -82,7 +114,11 @@ function hidden_delete(id){
 
 $("#show_comment_reply").click(function(){
 	var id = $("#show_comment_reply").attr("dataId")
+<<<<<<< HEAD
 	$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><br><br><input type='submit' class='button button-replay' value='Replay'></p>");
+=======
+	$(".reply-form").html("<p id='text-reply'><input type='text' name='id' value='"+id+"' style='display:none'></input><textarea name='body_reply' colspan='5' rowspan='5' class='text-replay'></textarea><input type='submit' class='button button-replay' value='Replay'></p>");
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 	return false;
 })
 </script>

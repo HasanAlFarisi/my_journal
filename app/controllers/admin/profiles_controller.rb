@@ -1,8 +1,11 @@
 class Admin::ProfilesController < Admin::BaseController
   before_action :set_admin_profile, only: [:show, :edit, :update, :destroy]
+<<<<<<< HEAD
   skip_before_filter :check_complete_data
   skip_before_filter :verify_authenticity_token, :only => [:update]
   layout "complete", only: [:edit, :update]
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 
   # GET /admin/profiles
   # GET /admin/profiles.json
@@ -13,11 +16,14 @@ class Admin::ProfilesController < Admin::BaseController
   # GET /admin/profiles/1
   # GET /admin/profiles/1.json
   def show
+<<<<<<< HEAD
     @not_current = params[:not_current]
     respond_to do |format|
       format.html
       format.js 
     end
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   end
 
   # GET /admin/profiles/new
@@ -39,7 +45,11 @@ class Admin::ProfilesController < Admin::BaseController
       if @admin_profile.save
         unless params[:admin_profile][:profile_skills_attributes].blank?
             params[:admin_profile][:profile_skills_attributes].each do |skill|
+<<<<<<< HEAD
                 admin_skill = Admin::ProfileSkill.create({profile_id: @admin_profile.id, name: skill[1][:name], skill: skill[1][:skill]})
+=======
+                admin_skill = Admin::ProfileSkill.create({profile_id: @admin_profile.id, name: skill[1][:name], skill: skill[1][:skill], icon: skill[1][:icon]})
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
                 admin_skill.save
             end
         end
@@ -51,10 +61,17 @@ class Admin::ProfilesController < Admin::BaseController
             end
         end
 
+<<<<<<< HEAD
         format.html { redirect_to admin_root_path, notice: 'Profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_profile }
       else
         format.html { render action: 'new'}
+=======
+        format.html { redirect_to @admin_profile, notice: 'Profile was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @admin_profile }
+      else
+        format.html { render action: 'new' }
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
         format.json { render json: @admin_profile.errors, status: :unprocessable_entity }
       end
     end
@@ -63,6 +80,7 @@ class Admin::ProfilesController < Admin::BaseController
   # PATCH/PUT /admin/profiles/1
   # PATCH/PUT /admin/profiles/1.json
   def update
+<<<<<<< HEAD
     @not_current = 'no'
     respond_to do |format|
       if @admin_profile.update(admin_profile_params)
@@ -96,6 +114,15 @@ class Admin::ProfilesController < Admin::BaseController
         format.html { render action: 'edit' }
         format.json { render json: @admin_profile.errors, status: :unprocessable_entity }
         format.js { @admin_profile }
+=======
+    respond_to do |format|
+      if @admin_profile.update(admin_profile_params)
+        format.html { redirect_to admin_root_path, notice: 'Profile was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @admin_profile.errors, status: :unprocessable_entity }
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
       end
     end
   end
@@ -118,6 +145,10 @@ class Admin::ProfilesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_profile_params
+<<<<<<< HEAD
       params.require(:admin_profile).permit(:admin_id, :name, :last_name, :facebook, :e_mail, :motto, :describe_me, :avatar, :skype, :birthday)
+=======
+      params.require(:admin_profile).permit(:name, :last_name, :facebook, :e_mail, :motto, :describe_me, :avatar, :skype, :birthday)
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     end
 end

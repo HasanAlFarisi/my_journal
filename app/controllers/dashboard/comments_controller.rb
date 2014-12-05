@@ -83,9 +83,14 @@ class Dashboard::CommentsController < ApplicationController
   def destroy_reply
     reply_comment = Dashboard::ReplyComment.find(params[:comment_id])
     reply_comment.destroy
+<<<<<<< HEAD
 
     respond_to do |format|
       format.json { head :no_content }
+=======
+    respond_to do |format|
+      format.js
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     end
   end
 

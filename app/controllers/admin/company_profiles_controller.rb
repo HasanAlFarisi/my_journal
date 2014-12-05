@@ -1,5 +1,6 @@
 class Admin::CompanyProfilesController < Admin::BaseController
   before_action :set_admin_company_profile, only: [:show, :edit, :update, :destroy]
+<<<<<<< HEAD
   
   # GET /admin/company_profiles
   # GET /admin/company_profiles.json
@@ -8,6 +9,16 @@ class Admin::CompanyProfilesController < Admin::BaseController
     @current_admin = current_admin.profile
     @admin_company_profiles = Admin::CompanyProfile.last
     @admin_journals = Admin::Journal.order("created_at DESC")
+=======
+
+  # GET /admin/company_profiles
+  # GET /admin/company_profiles.json
+  def index
+    @admins = Admin::Profile.where("id != ?", current_admin.id)
+    @current_admin = current_admin.profile
+    @admin_company_profiles = Admin::CompanyProfile.last
+
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     session[:urlBack] = request.original_url
   end
 

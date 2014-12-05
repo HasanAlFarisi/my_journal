@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- <span class="icon_img_prev">
 	<%# for i = 0, i >2, i++ %>
 		<%#= image_tag @admin_skills[skill].icon.url(:original), class:"floating img-icon icon_prev" %>
@@ -9,3 +10,16 @@
 <!-- <br> -->
 <%#= f.file_field :icon, class:"field size6 input-file file", id: "fileField", :onchange => "readIconURL(this);", style:"margin-left:75px" %>
 <!-- <br> -->
+=======
+<span class="icon_img_prev">
+	<%# for i = 0, i >2, i++ %>
+		<%#= image_tag @admin_skills[skill].icon.url(:original), class:"floating img-icon icon_prev" %>
+	<%# end %>
+</span>
+<%= f.text_field :name, class:"field size6 floating"  %>
+<%= f.text_field :skill, class:"field size2 floating"  %>
+<div style='margin-top:-7px'>%</div>
+<br>
+<%= f.file_field :icon, class:"field size6 input-file file", id: "fileField", :onchange => "readIconURL(this);", style:"margin-left:75px" %>
+<br>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded

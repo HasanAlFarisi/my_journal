@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Project Sidebar -->
 <%= render "admin/shared/sidebar_project" %>
 <!-- End Project Sidebar -->
@@ -6,6 +7,8 @@
 <%= render "admin/shared/sidebar_status_journal" %>
 <!-- End Project Sidebar -->
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 <div class="box">  
   <div class="box-head">
     <h2>Management</h2>
@@ -15,9 +18,15 @@
   <div class="box-content">
     <%= link_to "Add new Article", new_admin_article_path, class:"tab-right-button add-button" %>
     <br class="cl"><br>
+<<<<<<< HEAD
     <%#= link_to "Add new Category", new_admin_category_path, class:"tab-right-button add-button" %>
     <!-- <br class="cl"><br> -->
     <%= link_to "Add new Project", new_admin_journal_path, remote: true, class:"tab-right-button add-button" %>
+=======
+    <%= link_to "Add new Category", new_admin_category_path, class:"tab-right-button add-button" %>
+    <br class="cl"><br>
+    <%= link_to "Add new Advertise", new_admin_article_path, class:"tab-right-button add-button" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     <br class="cl"><br>
     
     <!-- Sort -->
@@ -38,7 +47,11 @@
 
 <div class="box">
   <div class="box-head">
+<<<<<<< HEAD
     <h2>Article Categories</h2>
+=======
+    <h2>Categories</h2>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   </div>
   <!-- End Box Head-->
   <div class="box-content">
@@ -48,18 +61,26 @@
           <%= link_to "#{category.name}", admin_category_path(category) %>
         </li>
       <%end%>
+<<<<<<< HEAD
       <% unless  @categories_list.present? %>
           <li>No Categories yet</li>
       <% end %>
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     </ul>
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- <div class="box">
+=======
+<div class="box">
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   <div class="box-head">
     <h2>Advertise</h2>
   </div>
   <!-- End Box Head-->
+<<<<<<< HEAD
   <!-- <div class="box-content">
     <ul class="list"> -->
       <%# @categories_list.each do |category| %>
@@ -76,6 +97,24 @@
     <!-- <br><br>
   </div>
 </div> -->
+=======
+  <div class="box-content">
+    <ul class="list">
+      <%# @categories_list.each do |category| %>
+        <li>
+          <%#= link_to "#{category.name}", admin_category_path(category) %>
+          AMD
+        </li>
+        <li>Melia Propolis</li>
+        <li>Madu sehat Al-azwa</li>
+      <%#end%>
+    </ul>
+    <br>
+    <%#= link_to "Add new Advertise", new_admin_product_path, class:"tab-right-button add-button" %>
+    <br><br>
+  </div>
+</div>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 
 <script type="text/javascript">
   $(document).ready(function(){

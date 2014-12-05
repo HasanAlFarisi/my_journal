@@ -11,7 +11,11 @@
         <%= form_for(@admin_category) do |f| %>
 
         <% if @admin_category.errors.any? %>
+<<<<<<< HEAD
             <%= render partial: "shared/validate_error", locals: { object: @admin_category}%>
+=======
+          <%#= render partial: "admin/shared/validate_error", locals: { object: @admin_category}%>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
         <% end %>
 
         <!-- Form -->
@@ -52,7 +56,10 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
+<<<<<<< HEAD
 <div id="modal_background"></div>
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 <script>
 $(document).ready(function(){
   var id = $(".sub-category").attr("dataId");

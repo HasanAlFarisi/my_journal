@@ -2,14 +2,19 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+<<<<<<< HEAD
   
   before_filter :prepare_category, :recent_post, :prepare_project
+=======
+  before_filter :prepare_category, :recent_post
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 
   def prepare_category
     @categories_list = Admin::Category.all
     @categories_select = Admin::Category.all.map{|x| [x.name , x.id]}.unshift(['Category',nil])
   end
 
+<<<<<<< HEAD
   def prepare_project
     unless current_admin.blank?
       begin
@@ -23,6 +28,8 @@ class ApplicationController < ActionController::Base
     @journal_statuses = Admin::StatusJournal.all
   end
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   def recent_post
     @recent_posts = Article.order('created_at DESC LIMIT 4')
   end

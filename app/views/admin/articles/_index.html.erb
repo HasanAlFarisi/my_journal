@@ -11,7 +11,11 @@
       <div class="box-head">
         <h2 class="left">Search Result</h2>
 
+<<<<<<< HEAD
         <%= render partial:'admin/shared/search', locals:{status: nil} %>
+=======
+        <%= render 'admin/shared/search' %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 
       </div>                               
       <!-- End Box Head --> 
@@ -41,7 +45,11 @@
             <td><input type="checkbox" class="check-self" name="selected[]" id="<%= "selected-#{article.id}" %>" value="<%= article.id %>" /></td>
             <td><%= link_to "#{article.title}", admin_article_path(article) %></td>
             <td><%= truncate(strip_tags(article.body), :length => 30) %></td>
+<<<<<<< HEAD
             <td><%= "#{find_category(article.category_id)}, #{find_sub_category(article.sub_category_id)}" %></td>
+=======
+            <td><%= "#{find_category(article.category_id)} , #{find_sub_category(article.sub_category_id)}" %></td>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
             <td><center><%= counting_comment(article) %></center></td>
             <td  width="5px"><%= link_to 'Edit', edit_admin_article_path(article), class:"ico edit" %></td>
             <td  width="5px"><%= link_to 'Destroy', admin_article_path(article), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %></td>

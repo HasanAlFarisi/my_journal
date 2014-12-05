@@ -10,10 +10,13 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+<<<<<<< HEAD
 //= require jquery-1.9.1.min
 //= require jquery-ui-1.10.3.custom.min
 //= require bootstrap.min
 //= require miniscroll
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks

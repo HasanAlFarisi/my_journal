@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141125132610) do
+=======
+ActiveRecord::Schema.define(version: 20141002094242) do
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
@@ -31,6 +35,7 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.datetime "photo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
     t.string   "phone"
   end
 
@@ -42,6 +47,8 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.string   "profile"
     t.datetime "created_at"
     t.datetime "updated_at"
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   end
 
   create_table "admin_contacts", force: true do |t|
@@ -52,7 +59,10 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.string   "profile"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
     t.boolean  "read_status", default: false
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   end
 
   create_table "admin_galleries", force: true do |t|
@@ -74,6 +84,7 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "admin_jornal_team_designers", force: true do |t|
     t.integer  "journal_id"
     t.integer  "admin_id"
@@ -167,6 +178,8 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.integer  "admin_id"
   end
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   create_table "admin_profile_hobbies", force: true do |t|
     t.string   "name"
     t.integer  "profile_id"
@@ -204,6 +217,7 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.date     "birthday"
   end
 
+<<<<<<< HEAD
   create_table "admin_reply_contact_companies", force: true do |t|
     t.string   "body"
     t.integer  "contact_company_id"
@@ -224,6 +238,8 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.datetime "updated_at"
   end
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   create_table "admin_sub_categories", force: true do |t|
     t.string   "name"
     t.integer  "category_id"
@@ -231,12 +247,15 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "admin_type_journals", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -285,10 +304,13 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "temps", force: true do |t|
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 end

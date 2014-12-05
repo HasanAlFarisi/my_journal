@@ -11,6 +11,7 @@ class Admin::Profile < ActiveRecord::Base
   	has_many :profile_hobbies, dependent: :destroy
   	belongs_to :admin
 
+<<<<<<< HEAD
       validates :name, :presence => {:message => "can not be blank"}
       validates :e_mail, :presence => {:message => "can not be blank"}
       validates :last_name, :presence => {:message => "can not be blank"}
@@ -35,4 +36,8 @@ class Admin::Profile < ActiveRecord::Base
 
             rv
       end
+=======
+  	accepts_nested_attributes_for :profile_skills
+  	accepts_nested_attributes_for :profile_hobbies
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 end

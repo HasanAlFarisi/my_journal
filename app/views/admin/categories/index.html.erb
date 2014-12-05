@@ -11,7 +11,11 @@
       <div class="box-head">
         <h2 class="left">Current Category</h2>
 
+<<<<<<< HEAD
         <%= render partial:'admin/shared/search', locals:{status: nil} %>
+=======
+        <%= render 'admin/shared/search' %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 
       </div>                               
       <!-- End Box Head --> 
@@ -39,11 +43,15 @@
           <input type="checkbox" class="check-self" name="selected[]" id="<%= "selected-#{admin_category.id}" %>" value="<%= admin_category.id %>" />
         </td>
         <td><%= link_to admin_category.name, admin_category %></td>
+<<<<<<< HEAD
         <td>
           <% admin_category.sub_categories.each do |category| %>
               <%= "#{category.name}," %>
           <%end%>
         </td>
+=======
+        <td><%#= admin_category.sub_name %></td>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
         <td  width="5px"><%= link_to 'Edit', edit_admin_category_path(admin_category), class:"ico edit" %></td>
         <td  width="5px"><%= link_to 'Destroy', admin_category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %></td>
       </tr>
@@ -52,7 +60,10 @@
  <!-- Pagging -->
         <div class="pagging">
     <%= submit_tag "Delete Selected", class:"tab-right-button button floating" %></p>
+<<<<<<< HEAD
     <%= link_to 'New Category', new_admin_category_path, class:"tab-right-button button journal" %> 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   <% end %>
   
           <div class="left">Category Total: <b><%= @admin_categories.count %></b> category</div>

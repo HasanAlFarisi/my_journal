@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Admin::CompanyProfile.create( name: 'Sampulkreativ', address: "not yet", vission: "not yet", mission: "not yet")
 
 #Status Journal
@@ -12,3 +13,6 @@ Admin::StatusJournal.create( name: 'In Progress')
 Admin::TypeJournal.create( name: 'Sprint' )
 Admin::TypeJournal.create( name: 'Change Request' )
 Admin::TypeJournal.create( name: 'Bug' )
+=======
+Admin.create( email: 'admin@hasanexample.com', password: 'password', password_confirmation: 'password')
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded

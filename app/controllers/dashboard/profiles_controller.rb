@@ -1,5 +1,6 @@
 class Dashboard::ProfilesController < ApplicationController
 	before_filter :prepare_select
+<<<<<<< HEAD
 	before_action :admin, only: [:show_admin]
 	
 	def show
@@ -26,4 +27,15 @@ class Dashboard::ProfilesController < ApplicationController
 	def admin
 		@admin = Admin::Profile.find(params[:profile_id])
 	end
+=======
+	
+	def show
+		@admin_profile = Admin::Profile.find(params[:id])
+		@article = @admin_profile
+	end
+
+	def prepare_select
+	    @profile = [["Annonymous","1.gif"], ["General","2.gif"],["Private","3.gif"],["Geust","4.gif"]].unshift(["Select",nil])
+	  end
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 end

@@ -1,11 +1,33 @@
+<<<<<<< HEAD
+=======
+<style type="text/css">
+  
+</style>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 <!-- Header -->
 <div id="header">
   <div class="shell">
     <!-- Logo + Top Nav -->
     <div id="top">
+<<<<<<< HEAD
       <h1><a href="#">Journal</a></h1>
       <div id="top-navigation">
         <a href="#">Help</a>        
+=======
+      <h1><a href="#">My-Journal</a></h1>
+      <div id="top-navigation">
+        Welcome <%= link_to "Administrator", admin_root_path %></a>
+        <span>|</span>
+        <a href="#">Help</a>
+        <span>|</span>
+
+        <% if Admin::Profile.last != nil %>
+          <%= link_to "Profile Setting", edit_admin_profile_path(Admin::Profile.last.id) %>
+        <% else %>
+          <%= link_to "Profile Setting", new_admin_profile_path %>
+        <% end %>
+        
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
         <span>|</span>
         <%= link_to "Logout", destroy_admin_session_path, :method => :delete%>
       </div>
@@ -20,6 +42,7 @@
           <%= link_to "Dashboard", admin_root_path, class:"tab-right" %>
           </li>
           <li>
+<<<<<<< HEAD
             <%= link_to "Journals", admin_journals_path, class:"tab-right" %>
             <span class='notif'>
                   <%= Admin::JournalIssue.assign_notice(current_admin.id).count %>
@@ -36,6 +59,15 @@
           </li>
           <li>
             <%= link_to "Categories", admin_categories_path, class:"tab-right" %>
+=======
+            <%= link_to "Article", admin_articles_path, class:"tab-right" %>
+          </li>
+          <li>
+            <%= link_to "Category", admin_categories_path, class:"tab-right" %>
+          </li>
+          <li>
+            <%= link_to "Galleries", admin_gallery_groups_path, class:"tab-right" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
           </li>
           <li>
             <%#= link_to "Company", admin_companies_path, class:"tab-right" %>
@@ -51,4 +83,9 @@
     </div> -->
   </div>
 </div>
+<<<<<<< HEAD
 <!-- End Header -->
+=======
+<!-- End Header -->
+<br><br>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded

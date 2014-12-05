@@ -1,4 +1,5 @@
 MyJournal::Application.routes.draw do
+<<<<<<< HEAD
  devise_for :admins, :path => "admin",
     :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret' },
     :controllers => { :sessions => "admin/sessions",
@@ -6,6 +7,12 @@ MyJournal::Application.routes.draw do
                                  #:omniauth_callbacks => "admin/omniauth_callbacks"
                               }
 
+=======
+  devise_for :admins, :path => "admin",
+    :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret' },
+    :controllers => { :sessions => "admin/sessions" }
+  
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   root 'dashboard/home#index'
   
   namespace :dashboard do
@@ -18,6 +25,7 @@ MyJournal::Application.routes.draw do
         post :create_reply_comment
         delete :destroy_reply
       end
+<<<<<<< HEAD
       resources :profiles, only: [:show] do
          get :show_admin
       end
@@ -27,6 +35,23 @@ MyJournal::Application.routes.draw do
     
     root to: "company_profiles#index"
     resources :complete_profiles
+=======
+      resources :profiles, only: [:show]
+  end
+
+  namespace :admin do
+    if Admin::CompanyProfile.last != nil
+      root to: "company_profiles#index"
+    else
+      root to: "company_profiles#new"
+    end
+
+    #if Admin::Profile.last != nil
+      #root to: "profiles#index"
+    #else
+      #root to: "profiles#new"
+    #end
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
     resources :profiles
 
     resources :articles do
@@ -46,6 +71,7 @@ MyJournal::Application.routes.draw do
 
     resources :gallery_groups
     resources :galleries
+<<<<<<< HEAD
     resources :journals do
         collection do
             post :selected_members
@@ -83,5 +109,11 @@ MyJournal::Application.routes.draw do
       end
       delete :destroy_reply
     end
+=======
+
+    resources :company_profiles
+    
+    resources :contacts, only: [:create]
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   end
 end

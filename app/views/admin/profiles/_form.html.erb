@@ -1,8 +1,11 @@
 <%= form_for(@admin_profile) do |f| %>
+<<<<<<< HEAD
     <% if @admin_profile.errors.any? %>
             <%= render partial: "shared/validate_error", locals: { object: @admin_profile}%>
     <% end %>
 
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
   <div id="main">
       <div class="cl">&nbsp;</div>
       <div id="content">
@@ -10,21 +13,34 @@
         <div class="box">
           <!-- Box Head -->
           <div class="box-head">
+<<<<<<< HEAD
             <h2>Profile</h2>
+=======
+            <h2>Edit Profile</h2>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
           </div>
           <!-- End Box Head -->
             <!-- Form -->
             <div class="form">
               <div class="left-photo">
                 <div class="foto_prev_profile">
+<<<<<<< HEAD
                   <%= image_tag @admin_profile.avatar.url(:original),class:"img_profile floating img_prev_profile" %> 
                 </div>
                 <%= f.file_field :avatar, class:"field size5 input-file file", id: "fileField", :onchange => "readURLProfile(this);" %>
+=======
+                  <%= image_tag @admin_profile.avatar.url(:original),class:"img_profile floating img_prev" %> 
+                </div>
+                <%= f.file_field :avatar, class:"field size5 input-file file", id: "fileField", :onchange => "readURL(this);" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
               </div>
               
               <div id="right_content">
                   <p>
+<<<<<<< HEAD
                     <%= f.hidden_field :admin_id, value: current_admin.id, class:"field size4"  %>
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
                     <%= f.label :name %>
                     <%= f.text_field :name, class:"field size4"  %>
                   </p>  
@@ -49,6 +65,13 @@
                     <%= f.text_field :birthday, class:"field size4"  %>
                   </p>
                   <p>
+<<<<<<< HEAD
+=======
+                    <%= f.label :e_mail %>
+                    <%= f.text_field :e_mail, class:"field size4"  %>
+                  </p>
+                  <p>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
                     <%= f.label :skill, "Skill" %>
 
                     <%= f.fields_for :profile_skills do |ps| %>
@@ -71,18 +94,30 @@
               </div>
               <p>
                 <%= label_tag :describe_me, "Describe Me!" %>
+<<<<<<< HEAD
                 <%= f.text_area :describe_me, class:"textarea size1 field" %>
               </p>
               <p>
                 <%= label_tag :motto, "Motto" %>
                 <%= f.text_area :motto, class:"textarea size1 field" %>
+=======
+                <%= f.text_area :describe_me, class:"textarea size4 field mini_ckeditor" %>
+              </p>
+              <p>
+                <%= label_tag :motto, "Motto" %>
+                <%= f.text_area :motto, class:"textarea size4 field mini_ckeditor" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
               </p>
             </div>
             <!-- End Form -->
             
             <!-- Form Buttons -->
             <div class="buttons">
+<<<<<<< HEAD
               <%#= link_to "Back", admin_profiles_path, class:"button-back" %>
+=======
+              <%= link_to "Back", admin_profiles_path, class:"button-back" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
               <%= f.submit "Save Profile", class:"button" %>
             </div>
             <!-- End Form Buttons -->
@@ -97,13 +132,20 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
+<<<<<<< HEAD
 <div id="modal_background"></div>
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 <script>
 $(document).ready(function(){
   var id = $(".sub-skill").attr("dataId");
   $(".add-skill").click(function(){
     id = id +1;
+<<<<<<< HEAD
           $(".sub-skill").append("<span class='parent'><p><input class='field size6 floating' id='admin_profile_profile_skills_attributes_"+id+"_name' name='admin_profile[profile_skills_attributes]["+id+"][name]' type='text'><input class='field size2 floating' id='admin_profile_profile_skills_attributes_"+id+"_skill' name='admin_profile[profile_skills_attributes]["+id+"][skill]' type='text'></p><div style='margin-top:-7px' class='floating'>%</div><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='margin-top:-10px'/></a><p></p></span>");
+=======
+          $(".sub-skill").append("<span class='parent'><p><span class='icon_img_prev_"+id+"'><img alt='Missing' class='floating img-icon icon_prev_"+id+"' src='/assets/original/missing.jpg'></span><input class='field size6 floating' id='admin_profile_profile_skills_attributes_"+id+"_name' name='admin_profile[profile_skills_attributes]["+id+"][name]' type='text'><input class='field size2 floating' id='admin_profile_profile_skills_attributes_"+id+"_skill' name='admin_profile[profile_skills_attributes]["+id+"][skill]' type='text'></p><div style='margin-top:-7px' class='floating'>%</div><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><input class='field size6 input-file file' id='fileField' name='admin_profile[profile_skills_attributes]["+id+"][icon]' onchange='readIconAddURL(this,"+id+");' style='margin-left:75px' type='file'><p></p></span>");
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
       })
 
   $(".add-hobby").click(function(){

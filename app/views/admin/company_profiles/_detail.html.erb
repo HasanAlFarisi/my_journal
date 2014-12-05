@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+<style type="text/css">
+  .company-logo{
+      width: 40% !important;
+      height: 40% !important;
+  }
+</style>
+
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 <div id="main">
   <div class="cl">&nbsp;</div>
   <div id="content">
@@ -12,6 +22,7 @@
         <!-- Form -->
         <div class="foto_prev">
               <%= image_tag admin_company_profile.photo.url(:original),class:"img-data company-logo",  id:"logo-align" %> 
+<<<<<<< HEAD
               <br>
         </div>
 
@@ -82,6 +93,41 @@
         <!-- Form Buttons -->
         <div class="buttons">
           <%#= link_to "Back", session[:urlBack], class:"button-back" %>
+=======
+        </div>
+
+        <div class="form">
+          <p>
+             <%= label_tag :name, "Company Name" %>
+            <%= admin_company_profile.name%>
+          </p> 
+
+          <p>
+                <%= label_tag :motto %>
+                <%= admin_company_profile.motto %>
+          </p>
+
+          <p>
+                <%= label_tag :vission %>
+                <%=raw admin_company_profile.vission %>
+          </p>
+
+          <p>
+                <%= label_tag :mission %>
+                <%=raw admin_company_profile.mission %>
+          </p>
+
+          <p>
+            <%= label_tag :address, "Address" %>
+            <%=raw admin_company_profile.address %>
+          </p>  
+        </div>
+        <!-- End Form -->
+        
+        <!-- Form Buttons -->
+        <div class="buttons">
+          <%= link_to "Back", session[:urlBack], class:"button-back" %>
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
           <%= link_to "Edit",edit_admin_company_profile_path(admin_company_profile), class:"button" %>
         </div>
         <!-- End Form Buttons -->

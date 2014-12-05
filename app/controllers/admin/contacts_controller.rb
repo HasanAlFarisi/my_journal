@@ -1,11 +1,15 @@
 class Admin::ContactsController < ApplicationController
+<<<<<<< HEAD
 	before_action :set_company_comment, only: [:show, :destroy]
 
 	#this method for create comment to admin member, or in other word is contact to admin member
+=======
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 	def create
 		@admin_contact = Admin::Contact.new(admin_contact_params)
 
 		if @admin_contact.save
+<<<<<<< HEAD
 			AdminMailer.mail_notice(params[:profile_email],params[:dashboard_comment][:name],params[:dashboard_comment][:email],params[:dashboard_comment][:body]).deliver
 			respond_to do |format|
 				@comment = Admin::Contact.last
@@ -62,10 +66,16 @@ class Admin::ContactsController < ApplicationController
 
 		respond_to do |format|
 			format.json {head :no_content}
+=======
+			AdminMailer.mail_notice(params[:dashboard_comment][:name],params[:dashboard_comment][:email],params[:dashboard_comment][:body]).	deliver
+
+			flash[:warning] = 'Your Message has successfully sent.'
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 		end
 	end
 
 	private
+<<<<<<< HEAD
 	def set_company_comment
 		@company_comment = Admin::ContactCompany.find(params[:id])
 	end
@@ -77,4 +87,9 @@ class Admin::ContactsController < ApplicationController
 	def admin_company_contact_params
 		params.require(:dashboard_comment).permit(:admin_id, :name, :email, :body, :profile)
 	end
+=======
+	def admin_contact_params
+		params.require(:dashboard_comment).permit(:admin_id, :name, :email, :body, :profile)
+	end
+>>>>>>> 6ae2c9af0e53d1bd0f7f6f3786317fc15b991ded
 end
