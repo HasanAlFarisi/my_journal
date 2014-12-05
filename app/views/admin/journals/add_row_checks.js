@@ -1,1 +1,0 @@
-$(".sub-checks").append("<%= j(render partial: "admin/journals/selected/checks") %>")

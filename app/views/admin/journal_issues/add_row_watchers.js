@@ -1,1 +1,0 @@
-$(".sub-watch").append("<%= j(render partial: "admin/journal_issues/selected/watchers") %>")

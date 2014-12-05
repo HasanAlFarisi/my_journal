@@ -1,1 +1,0 @@
-$(".sub-developers").append("<%= j(render partial: "admin/journals/selected/developers") %>")

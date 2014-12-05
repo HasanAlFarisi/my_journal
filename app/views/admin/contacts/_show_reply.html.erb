@@ -1,6 +1,0 @@
-<tr class="hidden_<%="#{comment.id}"%>">	
-	<td><%= comment.body %></td>
-	<td  width="5px"><%= link_to 'Destroy', reply_contact == 'yes' ? admin_contact_destroy_reply_path(comment) : admin_message_destroy_reply_path(comment), method: :delete, remote: true, :class => "ico del", onclick:"hidden_delete(#{comment.id})" %>
-	</td>
-</tr>
-
