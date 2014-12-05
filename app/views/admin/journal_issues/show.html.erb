@@ -1,0 +1,138 @@
+<div id="main" style="show_task">
+      <div class="cl">&nbsp;</div>
+      <div id="content">
+            <!-- Box -->
+            <div class="box">
+            <!-- Box Head -->
+                    <div class="box-head">
+                          <h2>
+                                  <b><%= @admin_journal.title %></b> Issue
+                                  <div class="right-down">
+                                      <% if truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i == 0 %>
+                                              <b>Now is Deadline</b>
+                                      <% elsif truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i < 0 %>
+                                              <b>Out of Deadline</b>
+                                      <% else %>
+                                              <b><%= truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i %>
+                                              Day left</b>
+                                      <% end %>
+                                  </div>
+                          </h2>
+                    </div>
+            <!-- End Box Head -->
+                    <!-- Form -->
+                    <div class="form">
+                          <div class="right">
+                                <span class="up">
+                                      <%= link_to 'Edit Status Task', "#edit", class:"ico edit edit-status" %>
+                                </span>
+                          </div>
+                          <p class="show">
+                                <%= label_tag :no, "##{@number}", class:"floating form_right" %>
+                                <span class='right-data'>
+                                      <%= label_tag :no, "#{@admin_journal_issue.title}", class:"floating form_right padding-title" %>
+                                </span>
+                          </p>
+                          <div class="down-subtitle">&nbsp;</div>  
+                          Task Starting at <b><%= link_to @admin_journal_issue.start.strftime('%d-%b-%Y'), "javascript:void(0)" %></b> and will be Ending at <b><%= link_to @admin_journal_issue.end.strftime('%d-%b-%Y'), "javascript:void(0)" %></b>
+                          <div class="cl">&nbsp;</div>
+                          <div class="down-subtitle">&nbsp;</div>  
+                          <%= image_tag find_profile(@admin_journal.admin_id).avatar.url(:original),class:"img-icon floating" %> 
+                          <p>
+                                <%= label_tag :no, "Project Assign to", class:" form_right floating" %>
+                                <b><%= link_to "#{find_profile(@admin_journal_issue.asignee).name} #{find_profile(@admin_journal_issue.asignee).last_name}", "javascript:void(0)" %></b>
+                          </p>
+                          <p class="up-less">
+                                <%= label_tag :no, "Project Manajer", class:" form_right floating" %> : <%= @admin_journal.project_manajer %>
+                          </p>
+                          <p class="up-less">
+                              <%= label_tag :no, "Project Quality Checks", class:" form_right floating" %> : 
+                              <% @admin_journal_issue.journal_issue_asignees.each do |journal_team| %>
+                                      <%= "#{journal_team.admin_id.blank? ? "" : find_name(journal_team.admin_id)} " %>
+                              <% end %> 
+                          </p>
+                          <div class="cl">&nbsp;</div>
+                          <p style="text-align:center">
+                                <b>
+                                      <%= link_to find_status(@admin_journal_issue.status_id).html_safe, admin_journal_issue_list_data_by_status_path(@admin_journal_issue.status_id) %>
+                                      <% if @admin_journal_issue.status_id == 6 %>
+                                            <%=  @admin_journal_issue.progress %>%
+                                      <% end %>
+                                </b>
+                                <% Admin::StatusJournal.where('id != ?',@admin_journal_issue.status_id).each do |status| %>
+                                      <span class="add-padding-right">[ <%= link_to status.name, admin_journal_issue_list_data_by_status_path(status.id) %> ]</span>
+                                <% end %>
+                          </p>
+                          <div class="cl">&nbsp;</div>
+                          <div class="contents">
+                                <%= raw @admin_journal_issue.content %>
+                          </div>
+                          <div class="cl">&nbsp;</div>
+                          <br>
+                          <div class="buttons" style="text-align:left">
+                                <%= label_tag :image, "Attach Images" %>
+                                <% unless @admin_journal_issue.journal_issue_images.blank? %>
+                                      <% @admin_journal_issue.journal_issue_images.each do |image| %>
+                                             <%= link_to image_tag(image.image.url(:original), class:"img_profile_issue", style:"position: relative;width:25%;height:25%"), show_task_image_admin_journal_issues_path(id: image.id), remote: true %> 
+                                      <% end %>
+                                <% else %>
+                                        <p>No Attach Images Yet</p>
+                                <% end %>
+                          </div>
+                          <div class="cl">&nbsp;</div>
+                          <br>
+                          <div class="buttons" style="text-align:left">
+                                <%= label_tag :image, "Attach Files" %>
+                                <% unless @admin_journal_issue.journal_issue_files.blank? %>
+                                      <% @admin_journal_issue.journal_issue_files.each do |file| %>
+                                             <%= link_to generated_file_type(file).html_safe, file.document.url, :target => "_blank" %>
+                                      <% end %>
+                                <% else %>
+                                        <p>No Attach FIles Yet</p>
+                                <% end %>
+                          </div>
+                          <br>
+                          <div class="contents">
+                                <%= render "admin/journal_issue_comment/all_comment" %>
+                                <%= render 'dashboard/shared/ajax_loader' %>
+                                <div class="temp-comment">
+                                      <!-- Place for Comment with render as JS -->       
+                                </div>
+                          </div>
+                          <br>
+                          <div class="buttons">
+                                 <%= link_to "Back", admin_journals_path, class:"button floating" %>
+                                 <% if @admin_journal.admin_id == current_admin.id %>
+                                        <%= link_to "Edit", edit_admin_journal_issue_path(@admin_journal_issue, id_journal: @admin_journal_issue.journal_id),class:"button", id:"button-create" %>
+                                 <% end %>
+                                 <div class="cl">&nbsp;</div>
+                           </div>
+                    </div>
+                    <!-- End Form -->
+            </div>
+      </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+
+<!-- Edit Status Task -->
+<div class="section">
+      <a name="edit">
+            <%= render "admin/journal_issues/edit_status_task" %>
+      </a>
+</div>
+<!-- End Edit Comment Form -->
+<!-- <div class="section"> -->
+      <!-- <a name="edit"> -->
+            <%= render "admin/journal_issues/comment_task" %>
+      <!-- </a> -->
+<!-- </div> -->
+<!-- End Edit Comment Form -->
+
+<%= javascript_include_tag "admin/journal" %>
+<div id="modal_background"></div>
+<div id="task-image-popups"></div>

@@ -1,0 +1,12 @@
+<%= render 'admin/journals/index' %>
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<%= render partial: 'admin/company_profiles/admin', locals:{admins: @admins, current_admin: @current_admin} %>
+<%= render partial: 'admin/company_profiles/detail', locals:{admin_company_profile: @admin_company_profiles} %>
+
+<div id="show_profile_place"><!--The place for show profile--></div>
+<div id="modal_background"><!--The place for show background black--></div>
+<div id="show_modal_comment"><!--The place for show comment--></div>

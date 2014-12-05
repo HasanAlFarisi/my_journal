@@ -1,0 +1,97 @@
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  <div id="content">
+    <!-- Box -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2>Add New Article</h2>
+      </div>
+      <!-- End Box Head -->
+        <%= form_for([:admin, @article]) do |f| %>        
+
+        <% if @article.errors.any? %>
+          <%= render partial: "shared/validate_error", locals: { object: @article}%>
+        <% end %>
+
+        <!-- Form -->
+        <div class="form">
+        <%= f.hidden_field :id, value: @article.id %>
+          <p>
+            <span class="req">max 100 symbols</span>
+            <%= f.label :title, "Article Title" %><span>(Required Field)</span>
+            <%= f.text_field :title, class:"field size1" %>
+          </p> 
+          <p>
+            <%= f.label :photo, "Article Photo" %>
+            <%= f.file_field :photo, class:"field size4 input-file", id: "fileField", :onchange => "readURL(this);" %>
+            <div class="foto_prev">
+              <%= image_tag @article.photo.url(:original),class:"img-data" %> 
+            </div>
+          </p>
+          <p>
+            <%= f.label :category_id, "Category" %>
+            <span>(Required Field)</span><br>
+            <%= f.select :category_id, options_for_select(@category,@selected), class:"field size3" %>
+          </p>
+
+          <span class="sub_category">
+            <p>
+                <%= label_tag :sub_category, "Sub Category" %>
+                <span>(Required Field)</span><br>
+                <%= select_tag :sub_category, options_for_select(@sub_category_select), class:"field size3" %>
+            </p>
+          </span> 
+
+          <p>
+            <%= f.label :body, "Content" %>
+            <%= f.text_area :body, class:"field size1", cols: 10, rows: 30, :class => 'ckeditor' %>
+          </p>  
+        </div>
+        <!-- End Form -->
+        
+        <!-- Form Buttons -->
+        <div class="buttons">
+          <%= link_to "Back", session[:urlBack], class:"button-back" %>
+          <%= f.submit "Save Article", class:"button" %>
+        </div>
+        <!-- End Form Buttons -->
+      <%end%>
+    </div>
+    <!-- End Box -->
+  </div>
+  <div class="cl">&nbsp;</div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<div id="modal_background"></div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    category_selected();
+
+    $("#article_category_id").change(function(){   
+      category_selected();
+    })
+  })
+
+  function category_selected(){
+    var base_address = $(".sub_category");
+      var controller = "<%= auto_search_admin_articles_path %>";
+      $.ajax({
+          type: "POST",
+          url: escape(controller),
+          data: {"category" : $('#article_category_id').val(),
+                      "id": $("#article_id").val()
+        },
+          dataType:"html",
+          success:function(data){
+            jQuery(".sub_category").html(data);
+          }
+      })
+  }
+</script>

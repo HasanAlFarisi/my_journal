@@ -1,0 +1,11 @@
+<div class="right">
+<% if status.present? %>
+	<%= label_tag :title, "Search Project" %>
+<% else %>
+  	<%= form_tag article_search_admin_articles_path, :method => :get do %>
+  	  	<%= label_tag :title, "Search Articles" %>
+	  	<%= text_field_tag :title, "",placeholder:"Title", class:"field small-field" %>
+	  	<%= submit_tag "Search", class:"button" %>
+	<% end %>
+<% end %>
+</div>

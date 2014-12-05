@@ -1,0 +1,109 @@
+<!-- Project Sidebar -->
+<%= render "admin/shared/sidebar_project" %>
+<!-- End Project Sidebar -->
+
+<!-- Project Sidebar -->
+<%= render "admin/shared/sidebar_status_journal" %>
+<!-- End Project Sidebar -->
+
+<div class="box">  
+  <div class="box-head">
+    <h2>Management</h2>
+  </div>
+  <!-- End Box Head-->
+
+  <div class="box-content">
+    <%= link_to "Add new Article", new_admin_article_path, class:"tab-right-button add-button" %>
+    <br class="cl"><br>
+    <%#= link_to "Add new Category", new_admin_category_path, class:"tab-right-button add-button" %>
+    <!-- <br class="cl"><br> -->
+    <%= link_to "Add new Project", new_admin_journal_path, remote: true, class:"tab-right-button add-button" %>
+    <br class="cl"><br>
+    
+    <!-- Sort -->
+    <div class="sort">
+      <label>Articles Sort by</label>
+      <%= form_tag article_search_admin_articles_path, :method => :get do %>
+        <%= text_field_tag :title, "",placeholder:"Title", class:"field size6" %>
+        <%= text_field_tag :date, "",placeholder:"Date", class:"field size6 datepicker" %>
+        <%= select_tag :category, options_for_select(@categories_select), class:"field size6", style:"margin-bottom:-10px" %>
+        <span class="sub_category_sidebar"><!--Sub category place--></span>
+        <br>
+        <%= submit_tag "Search", class:"button" %>
+      <% end %>
+    </div>
+    <!-- End Sort -->  
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-head">
+    <h2>Article Categories</h2>
+  </div>
+  <!-- End Box Head-->
+  <div class="box-content">
+    <ul class="list">
+      <% @categories_list.each do |category| %>
+        <li>
+          <%= link_to "#{category.name}", admin_category_path(category) %>
+        </li>
+      <%end%>
+      <% unless  @categories_list.present? %>
+          <li>No Categories yet</li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- <div class="box">
+  <div class="box-head">
+    <h2>Advertise</h2>
+  </div>
+  <!-- End Box Head-->
+  <!-- <div class="box-content">
+    <ul class="list"> -->
+      <%# @categories_list.each do |category| %>
+        <!-- <li> -->
+          <%#= link_to "#{category.name}", admin_category_path(category) %>
+          <!-- AMD
+        </li>
+        <li>Melia Propolis</li>
+        <li>Madu sehat Al-azwa</li> -->
+      <%#end%>
+    <!-- </ul>
+    <br> -->
+    <%#= link_to "Add new Advertise", new_admin_product_path, class:"tab-right-button add-button" %>
+    <!-- <br><br>
+  </div>
+</div> -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    //category_selected();
+
+    $("#category").change(function(){   
+      category_selected_sidebar();
+    })
+
+    //$('.datepicker').datepicker({
+      //      minDate: '-30', // The min date that can be selected, i.e. 30 days from the 'now'
+       //     maxDate: '+1m +1w +1d' // The max date that can be selected, i.e. + 1 month, 1 week, and 1 days from 'now'
+    //});
+
+  })
+
+  function category_selected_sidebar(){
+    var base_address = $(".sub_category_sidebar");
+      var controller = "<%= auto_search_sidebar_admin_articles_path %>";
+      $.ajax({
+          type: "POST",
+          url: escape(controller),
+          data: {"category" : $('#category').val()     
+        },
+          dataType:"html",
+          success:function(data){
+            jQuery(".sub_category_sidebar").html(data);
+          }
+      })
+  }
+</script>

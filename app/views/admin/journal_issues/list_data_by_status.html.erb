@@ -1,0 +1,77 @@
+<%= stylesheet_link_tag "progress", :media => "all" %>
+<!-- Main -->
+<% unless @admin_journals_status.blank? %>
+      <%= render partial: "admin/journal_issues/list_data_project" %>
+<% end %>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  
+  <!-- Content -->
+  <div id="content">
+    
+    <!-- Box Article -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2 class="left">Journals <%= generated_status(params[:journal_issue_id].to_i).html_safe %></h2>
+        <%= render partial:'admin/shared/search', locals:{status: "journal"} %>
+      </div>                               
+      <!-- End Box Head --> 
+
+       <!-- Table -->
+      <div class="table">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-striped">
+          <tr>
+            <th width="43">Number</th>
+            <th width="133">Project</th>
+            <th width="103">Status</th>
+            <th width="43">Priority</th>
+            <th width="43">Progress</th>
+            <th width="13">Title</th>
+          </tr>
+          <% if @admin_journal_issues.blank? %>
+            <tr>
+                <td colspan="6"><center>No Data Yet</center></td>
+            </tr>
+          <% end %>
+          <% @admin_journal_issues.each_with_index do |admin_journal_issue,n| %>
+              <tr class="<%= generated_priority(admin_journal_issue.priority) %>">
+                    <td width="43">
+                          <%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %>
+                    </td>
+                    <td>
+                          <%= link_to find_journal_in_issue(admin_journal_issue.journal_id).title, admin_journal_issues_path(journal_id: admin_journal_issue.journal_id) %>
+                    </td>
+                    <td width="53"><%= generated_status(admin_journal_issue.status_id).html_safe %></td>
+                    <td width="43"><%= find_priority(admin_journal_issue.priority).html_safe %></td>
+                    <td>
+                      <div id="progres_bar">
+                                <div class="progress" style="margin-bottom:0px; display:block !important">
+                                   <div class="progress-bar" style="width:<%= admin_journal_issue.progress %>%;">
+                                        <%= admin_journal_issue.progress %>%
+                                    </div>
+                             </div>
+                           </div>
+                    </td>
+                    <td width="353"><%= link_to truncate(strip_tags(admin_journal_issue.title), length: 35), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %></td> 
+              </tr>
+          <% end %>
+      </table>
+          <div class="pagging">
+            <%#= link_to 'New Project', new_admin_journal_path, remote: true, class:"tab-right-button button floating journal" %>
+            <div class="left">Journals Total: <b><%= @admin_journal_issues.count %></b> Journals</div>
+            <div class="right" style="margin-right:20px !important;">
+                <%= will_paginate @admin_journal_issues %>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+</div>

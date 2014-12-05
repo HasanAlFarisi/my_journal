@@ -1,0 +1,45 @@
+<div id="index-place">
+  <div id="main_column">
+      <div class="post_box">
+        <div class="date_box">
+         	<p><%= "#{@article.created_at.strftime('%d %b %Y')}" %></p>
+        </div>
+            
+        <div class="post_body">
+            <h2><a href="#"><%= @article.title %></a></h2>
+          <div class="post_info">
+    			  category
+                <% if @article.category_id.present? %>
+                  <%= link_to find_category(@article.category_id), dashboard_home_show_categories_path(@article.category_id) %>
+                <% else %>
+                    <%= link_to find_category(@article.category_id), "javascript:void(0)" %>
+                <% end %>
+
+                <% if @article.sub_category_id.present? %>
+                    <%= link_to find_sub_category(@article.sub_category_id), dashboard_home_show_sub_categories_path(@article.sub_category_id) %>
+                <% else %>
+                    <%= link_to find_sub_category(@article.sub_category_id), "javascript:void(0)" %>
+                <% end %>
+          </div>
+                      
+          <div class="post_content">
+            <a href="#">
+            <%= image_tag @article.photo.url(:original), width:"410px" %>
+            </a>
+            <%=raw @article.body %>
+            
+            <div id="comment-field">
+              <p>Comment</p>
+              <%= render :partial => "dashboard/comments/index", locals: {dashboard_comments: @article_comments} %>
+              <div id="comment-place"><!-- Comment place from render partial --></div>
+              <%= render 'dashboard/shared/ajax_loader' %>
+              <%= render partial: 'dashboard/comments/form', locals: {status: 'contact_for_comment'} %>
+            </div>
+            <div class="link_button">
+              <%= link_to "Back ...", session[:url_back_dashboard] %>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+</div>

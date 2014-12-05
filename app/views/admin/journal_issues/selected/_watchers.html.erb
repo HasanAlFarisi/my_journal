@@ -1,0 +1,5 @@
+<div id="add-watchers">
+	<br><br><br>
+	<%= select_tag :watchers, options_for_select(@assign), class:"floating", name:"admin_journal_issue[journal_issue_asignees_attributes][#{@index}][admin_id]" %>
+	<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='margin-top:0px; padding-right:20px !important;' class="floating" id="right_more" /></a>
+</div>

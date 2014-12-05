@@ -1,0 +1,54 @@
+<!-- Header -->
+<div id="header">
+  <div class="shell">
+    <!-- Logo + Top Nav -->
+    <div id="top">
+      <h1><a href="#">Journal</a></h1>
+      <div id="top-navigation">
+        <a href="#">Help</a>        
+        <span>|</span>
+        <%= link_to "Logout", destroy_admin_session_path, :method => :delete%>
+      </div>
+    </div>
+    <!-- End Logo + Top Nav -->
+    
+    <!-- Main Nav -->
+    <div id="navigation">
+      <ul>
+          <!-- <li><a href="#" class="active"><span>Dashboard</span></a></li> -->
+          <li>
+          <%= link_to "Dashboard", admin_root_path, class:"tab-right" %>
+          </li>
+          <li>
+            <%= link_to "Journals", admin_journals_path, class:"tab-right" %>
+            <span class='notif'>
+                  <%= Admin::JournalIssue.assign_notice(current_admin.id).count %>
+            </span>
+          </li>
+          <li>
+            <%= link_to "Messages", admin_messages_path, class:"tab-right" %>
+            <span class='notif'>
+                  <%= count_message(current_admin) %>
+            </span>
+          </li>
+          <li>
+            <%= link_to "Articles", admin_articles_path, class:"tab-right" %>
+          </li>
+          <li>
+            <%= link_to "Categories", admin_categories_path, class:"tab-right" %>
+          </li>
+          <li>
+            <%#= link_to "Company", admin_companies_path, class:"tab-right" %>
+          </li>
+      </ul>
+    </div>
+    <!-- End Main Nav -->
+    <!-- Small Nav -->
+    <!-- <div class="small-nav">
+      <a href="#">Dashboard</a>
+      <span>&gt;</span>
+      <%#= link_to "#{admin_root_path}", url_request, class:"#{url_request}" %>
+    </div> -->
+  </div>
+</div>
+<!-- End Header -->

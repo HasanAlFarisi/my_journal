@@ -1,0 +1,29 @@
+<h1>Listing admin_galleries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Photo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_galleries.each do |admin_gallery| %>
+      <tr>
+        <td><%= admin_gallery.title %></td>
+        <td><%= admin_gallery.photo %></td>
+        <td><%= link_to 'Show', admin_gallery %></td>
+        <td><%= link_to 'Edit', edit_admin_gallery_path(admin_gallery) %></td>
+        <td><%= link_to 'Destroy', admin_gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gallery', new_admin_gallery_path %>

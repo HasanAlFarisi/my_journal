@@ -1,0 +1,2 @@
+module Dashboard::GalleriesHelper
+end

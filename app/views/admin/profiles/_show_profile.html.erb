@@ -1,0 +1,34 @@
+  <div id="modal_profile" class="positions">
+            <div class="cl">&nbsp;</div>
+            <div id="content">
+              <!-- Box -->
+              <div class="box">
+                <!-- Box Head -->
+                <div class="box-head">
+                  <h2><%= "#{admin_profile.name} #{admin_profile.last_name}" %></h2>
+                </div>
+                <!-- End Box Head -->
+                  <!-- Form -->
+                  <div class="form">
+                      <div class="left-photo">
+                          <div class="foto_prev_profile">
+                            <%= image_tag admin_profile.avatar.url(:original),class:"img_profile floating img_prev_profile" %> 
+                          </div>
+                      </div>    
+
+                    <div id="form_edit">
+                        <%= render partial:"admin/profiles/detail", locals:{admin_profile: admin_profile, not_current: not_current} %>
+                    </div>
+                  <!-- End Form -->
+                </div>
+              <!-- End Box -->
+            </div>
+            <div class="cl">&nbsp;</div>
+  </div>
+
+<script>
+$(document).ready(function() {
+      $("#modal_profile").fadeIn();
+      $( '.close-modal-profile' ).click(function( ev ) {  $( '#modal_profile, #modal_background' ).fadeOut();  ev.preventDefault();} );
+})
+</script>

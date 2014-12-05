@@ -1,0 +1,1 @@
+$("#form_edit").html("<%= j(render partial:"admin/profiles/detail", locals:{admin_profile: @admin_profile, not_current: @not_current}) %>");	

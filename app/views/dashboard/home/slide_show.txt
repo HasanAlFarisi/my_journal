@@ -1,0 +1,32 @@
+<!-- <div id="templatemo_popular_posts"> -->
+        
+        <!-- <div id="slideshow">
+          <div id="slidesContainer">
+            <div class="slide"> <a href="#"> 
+            <%#= image_tag "templatemo_image_03.jpg",alt:"Hotel Template", width:"380", height:"190" %>
+            </a>
+              <h2>Hotel Template</h2>
+              <p>Vivamus vitae nibh eu sem malesuada rutrum et sit amet magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent aliquam velit a magna sodales quis elementum ipsum auctor. Ut at metus leo, et dictum sem.</p>
+            </a> </div>
+            <div class="slide"> <a href="#"> 
+              <%#= image_tag "templatemo_image_04.jpg",alt:"Hotel Template", width:"380", height:"190" %>
+              </a>
+              <h2>Block 3D Template</h2>
+              <p>Aenean fringilla vehicula felis, eu blandit tortor aliquam et. Nunc sed diam sed dui iaculis pharetra eu sed elit. Nunc arcu sapien, pellentesque at posuere nec, tincidunt dignissim enim. Ut sem mauris, aliquet ut sagittis vitae, condimentum eget augue. Donec sapien neque, egestas vitae auctor quis, pellentesque at augue.</p>
+            </a> </div>
+            <div class="slide"> <a href="#"> 
+              <%#= image_tag "templatemo_image_05.jpg",alt:"Hotel Template", width:"380", height:"190" %>
+              </a>
+              <h2>Art Gallery Template</h2>
+              <p>Praesent at dui augue. Proin consectetur elementum sem, in blandit urna porta sed. Sed tortor ipsum, scelerisque vel lobortis aliquam, bibendum sit amet neque. In id erat in quam bibendum lacinia. Curabitur imperdiet viverra scelerisque. Phasellus quis egestas risus.</p>
+            </a> </div>
+            <div class="slide"> <a href="#"> 
+              <%#= image_tag "templatemo_image_06.jpg",alt:"Hotel Template", width:"380", height:"190" %>
+              </a>
+              <h2>Bird Store Template</h2>
+              <p>Sed id tortor vitae nisi consectetur tempus. Pellentesque tellus est, adipiscing id porttitor vitae, vestibulum id neque. Aliquam tellus dui, vehicula sed placerat sed, scelerisque ultricies tortor. Donec ornare blandit erat pellentesque molestie. Suspendisse potenti. </p>
+            </a> </div>
+          </div>
+        </div> --> <!-- end of slide show -->
+    
+   	  <!-- </div> --> <!-- end of templatemo_popular_posts -->

@@ -1,0 +1,9 @@
+<%= select_tag :admin_journal_journal_team_developer_id, options_for_select(@admins_select),  name:"admin_journal[journal_team][developer_id]", class:"floating" %>
+
+<script>
+	$("#admin_journal_journal_team_developer_id").change(function(){
+	        if($(this).val() != ""){
+	            select_for_check($(this).val(),$("#admin_journal_journal_team_designer_id").val());
+	        }
+	    })
+</script>

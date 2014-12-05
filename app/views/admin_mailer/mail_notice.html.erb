@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi, Admin <i>My-Journal</i>, you have message from <%= @name %></p>
+    <p>
+      Below is message <br /><br />
+      <%= raw @body %><br>
+      you can reply this message to <%= @email %>
+    </p>
+    <br />
+    <p>
+      <a href="http://localhost:3000/admin/login">Or you can login to My-Journal Admin</a>
+    </p>
+    <p>Thank you,</p>
+    <p>My-Journal System</p>
+  </body>
+</html>

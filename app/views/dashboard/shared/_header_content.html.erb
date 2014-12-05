@@ -1,0 +1,102 @@
+<div id="templatemo_top_panel_wrapper_outter">
+  <div id="templatemo_top_panel_wrapper_inner">
+  	<div id="templatemo_top_panel">
+      <div id="templatemo_menu">
+        <div id="myjquerymenu" class="jquerycssmenu">
+          <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Category", root_path %>
+              <ul>
+              <% @categories_list.each do |category| %>
+                <% unless category.sub_categories.present? %>
+                  <li><%= link_to category.name, dashboard_home_show_categories_path(category), method: :get %></li>
+                <% else %>
+                  <li><%= link_to category.name, dashboard_home_show_categories_path(category), method: :get %>
+                    <ul>
+                      <% category.sub_categories.each do |sub_category| %>
+                        <li><%= link_to sub_category.name, dashboard_home_show_sub_categories_path(sub_category), method: :get %></li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
+              <% end %>
+              </ul>
+            </li>
+           <!--  <li><a href="#">Gallery</a>
+              <ul>
+              <li><a href="#">Sub Item 1.1</a></li>
+              <li><a href="#">Sub Item 1.2</a></li>
+              <li><a href="#">Sub Item 1.3</a></li>
+              <li><a href="#">Sub Item 1.4</a></li>
+              </ul>
+            </li> -->
+            <li><%= link_to "About Us", dashboard_profile_path(1), class:"margin_l10" %></li>
+            <!-- <li><a href="#">Support</a>
+              <ul>
+              <li><a href="#">Sub Item 2.1</a></li>
+              <li><a href="#">Folder 2.1</a>
+                <ul>
+                <li><a href="#">Sub Item 2.1.1</a></li>
+                <li><a href="#">Sub Item 2.1.2</a></li>
+                <li><a href="#">Folder 3.1.1</a>
+            		<ul>
+                		<li><a href="#">Sub Item 3.1.1.1</a></li>
+                		<li><a href="#">Sub Item 3.1.1.2</a></li>
+                		<li><a href="#">Sub Item 3.1.1.3</a></li>
+                		<li><a href="#">Sub Item 3.1.1.4</a></li>
+                		<li><a href="#">Sub Item 3.1.1.5</a></li>
+            		</ul>
+                </li>
+                <li><a href="#">Sub Item 2.1.4</a></li>
+                </ul>
+              </li>
+              </ul>
+            </li>
+            <li><a href="#" class="margin_l10">Contact</a></li> -->
+          </ul>
+            <div class="text-right">
+                <%= form_tag dashboard_home_search_articles_path(home_id: 1), :method => :get do %>
+                    <%= text_field_tag :name, "", placeholder:"Search Articles" %><%= image_tag("search_ico.gif") %>
+                <% end %>
+            </div>
+          <br style="clear: left" />
+        </div>
+      </div>
+      <div id="templatemo_banner">
+        <div id="site_title">
+          <h1>
+            <a href="#"><%#= image_tag "templatemo_logo.png",alt:"site logo" %>
+            <span>It's My-Journal <%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %></span>
+          </h1>
+        </div>      
+      </div> <!-- end of templatemo_banner -->    
+    </div> <!-- end of templatemo_top_panel -->
+  </div> <!-- end of templatemo_top_panel_wrapper_inner -->
+</div> <!-- end of  templatemo_top_panel_wrapper_outter -->
+<style>
+  .text-right{
+    margin-top: -5px;
+    float: right;
+    margin-right: 15px;
+  }
+  .text-right input[type='text']{
+  font-size: 13px;
+  color: #fff;
+  padding: 5px;
+  background: rgb(103, 93, 82);
+  border: none;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  -moz-border-bottom-left-radius: 5px;
+}
+  .text-right img{
+    width: 25px ;
+    height: 25px ;
+    margin: 6px 0px -8px -2px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+  }
+</style>

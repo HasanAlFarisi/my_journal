@@ -1,0 +1,41 @@
+<style type="text/css">
+  #error_explanation h2{
+      display: none;
+  }
+  #error_explanation ul{
+    list-style: none;
+    display: block;
+    margin-left: -40px;
+    font-size: 12px;
+    color: red;
+    margin-top: -20px;
+  }
+</style>
+<%#= render "devise/shared/links" %>
+<div class="login-card" >  
+  <h1>Sign Up</h1>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(@admin), class:"login active") do |f| %>
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+    <div>
+      <label name ="password">Password: </label>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <label name ="password">Reenter Password:</label>
+      <%= f.password_field :password_confirmation %>
+    </div>
+      <p class="error"><%= devise_error_messages! %></p>
+      <%= f.submit "Sign up", class:"login login-submit" %>
+      <div class="login-help">
+        <%= link_to "Sign in", new_admin_session_path, :class => 'navbar-link'  %> | <%= link_to "Back to Home", root_path %>
+      </div>
+      <div class="clear"></div>
+    </div>
+  <%end%>
+</div>
+
+<div id="complete_profile"><!--Modal for Complete Profile--></div>
+<div id="modal_background"></div>

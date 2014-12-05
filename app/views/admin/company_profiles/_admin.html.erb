@@ -1,0 +1,45 @@
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  <div id="content">
+    <!-- Box -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2>Current Admin</h2>
+      </div>
+      <!-- End Box Head -->     
+
+      <!-- Current Admin -->      
+        <span class="floating">
+            <div class="foto_prev">
+                  <%= link_to image_tag(current_admin.avatar.url(:original),class:"admin-avatar", not_current: 'no'), admin_profile_path(current_admin.id), remote: true %> 
+            </div>
+
+            <div class="form">
+              <p id="avatar">
+                  <span><%= current_admin.name%></span>
+              </p>
+            </div>
+        </span>
+        <!-- End Current Admin -->      
+
+      <% admins.each do |admin| %>
+          <!-- Form -->
+          <span class="floating" id="thumb">
+          <div class="foto_prev">
+                <%= link_to image_tag(admin.avatar.url(:original),class:"admin-avatar thumb"), admin_profile_path(admin, not_current: 'yes'), remote: true %> 
+          </div>
+
+          <div class="form">
+            <p id="avatar" class="name-thumb">
+                <span><%= admin.name%></span>
+            </p>
+          </div>
+          </span>
+      <% end %>
+      <p style="height:170px;"></p>
+        <!-- End Form -->
+    </div>
+    <!-- End Box -->
+  </div>
+</div>
