@@ -20,7 +20,7 @@
                     <th width="13">No</th>
                     <th>Title</th>
                     <th>Status</th>
-                    <th>Assignee</th>
+                    <th>Assign</th>
                     <th><center>Issue</center></th>
                     <th><center>Estimated Time</center></th>
                     <th colspan="2" class="ac">Content Control</th>
@@ -31,7 +31,7 @@
                   <td><%= link_to admin_journal.title, admin_journal_path(admin_journal) %></td>
                   <td><%= generated_status(admin_journal.status_id).html_safe %></td>
                   <td>
-                        <%= link_to "#{estimated_asignee(admin_journal.id)} people Assigneed", admin_journal_path(admin_journal), remote: true, title:"#{raw estimated_asignee_list(admin_journal.id)}", class:"masterTooltip" %>
+                        <%= link_to "#{estimated_asignee(admin_journal.id)} people Assign", admin_journal_path(admin_journal), remote: true, title:"#{raw estimated_asignee_list(admin_journal.id)}", class:"masterTooltip" %>
                   </td>
                   <td><center><b><%= admin_journal.journal_issues.data_existed_count(current_admin,"home").count %></b></center></td>
                   <td> <center><b>

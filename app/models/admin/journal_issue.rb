@@ -180,7 +180,17 @@ class Admin::JournalIssue < ActiveRecord::Base
 				end
 			end
 		end
+	end
 
-		
+	def self.find_index_count(ids,current_admin)
+		join_table = self.global_joins()
+		condition = []
+		condition << "admin_journal_issues.journal_id IN #{ids}"
+		condition << "admin_journal_issues.asignee = #{current_admin}"
+		conditions = condition.join(" AND ")
+
+		journal_issue = self.joins("{{join_table}}".gsub("{{join_table}}",join_table)).where("{{conditions}} OR admin_journal_issue_asignees.admin_id = #{current_admin}".gsub("{{conditions}}", conditions))
+
+		return journal_issue
 	end
 end

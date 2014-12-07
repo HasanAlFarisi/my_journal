@@ -8,6 +8,13 @@ class Admin::CompanyProfilesController < Admin::BaseController
     @current_admin = current_admin.profile
     @admin_company_profiles = Admin::CompanyProfile.last
     @admin_journals = Admin::Journal.order("created_at DESC")
+    ids = []
+    @admin_journals.each do |journal|
+            ids << journal.id
+    end
+    id = convert_to_arr_for_query(ids)
+    @admin_journals_status = Admin::JournalIssue.find_index_count(id,current_admin.id)
+    
     session[:urlBack] = request.original_url
   end
 

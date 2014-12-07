@@ -8,18 +8,24 @@ module Admin::JournalsHelper
 	end
 
 	def estimated_asignee(journal_id)
+		manager = Admin::Journal.where("id = ?", journal_id).count
 		designer = Admin::JornalTeamDesigner.where("journal_id = ?", journal_id).count
 		developer = Admin::JournalTeamDeveloper.where("journal_id = ?", journal_id).count
 		check = Admin::JournalTeamCheck.where("journal_id = ?", journal_id).count
-		counts = designer + developer + check
+		counts = manager + designer + developer + check
 		return counts
 	end
 
 	def estimated_asignee_list(journal_id)
+		manager = Admin::Journal.find(journal_id)
 		designers = Admin::JornalTeamDesigner.where("journal_id = ?", journal_id)
 		developers = Admin::JournalTeamDeveloper.where("journal_id = ?", journal_id)
 		checks = Admin::JournalTeamCheck.where("journal_id = ?", journal_id)
 		asignee = ""
+		asignee += "<b>As Project Manager</b>"
+		asignee += "</br>"
+		asignee += "#{manager.project_manajer}"
+		asignee += "</br></br>"
 		asignee += "<b>As Project Designer</b>"
 		asignee += "</br>"
 		designers.each do |designer|

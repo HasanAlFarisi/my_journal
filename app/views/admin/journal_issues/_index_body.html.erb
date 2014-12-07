@@ -1,8 +1,8 @@
 <tr class="<%= generated_priority(admin_journal_issue.priority) %>">
-	<td ><%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %></td>
+	<td ><%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %></td>
 	<td><%= generated_status(admin_journal_issue.status_id).html_safe %></td>
 	<td><%= generated_priority(admin_journal_issue.priority) %></td>
-	<td><%= link_to truncate(admin_journal_issue.title, length: 60), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %></td>
+	<td><%= link_to truncate(admin_journal_issue.title, length: 60), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %></td>
 	<td>
 		<div id="progres_bar">
 	            <div class="progress" style="margin-bottom:0px;">

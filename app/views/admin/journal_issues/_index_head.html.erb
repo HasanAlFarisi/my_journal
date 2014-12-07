@@ -10,7 +10,7 @@
     <div class="box">
       <!-- Box Head -->
       <div class="box-head">
-        <h2 class="left header_link"><b><%= link_to admin_journal.title, admin_journal_issues_path(journal_id: admin_journal.id) %></b> Task Journals</h2>
+        <h2 class="left header_link"><b><%= link_to admin_journal.title, admin_journal_issues_path(journal_id: admin_journal.id) %></b> Journals</h2>
         <%#= render 'admin/shared/search' %>
       </div>                               
       <!-- End Box Head --> 
@@ -50,7 +50,7 @@
        <% if admin_journal.admin_id == current_admin.id %>
           <%= link_to 'New Journal', new_admin_journal_issue_path(id_journal: admin_journal.id), class:"tab-right-button button floating journal" %>
        <% end %>
-          <div class="left">Journal Issues Total: <b><%= admin_journal.journal_issues.data_existed_count(current_admin,"home").count %></b> Tasks</div>
+          <div class="left">Journal Total: <b><%= admin_journal.journal_issues.data_existed_count(current_admin,"home").count %></b> Journals</div>
           <div class="right">
             <span id="multi_pagging">
               <% unless @pagging_status.blank? %>

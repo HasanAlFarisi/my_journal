@@ -8,12 +8,12 @@
                           <h2>
                                   <b><%= @admin_journal.title %></b> Issue
                                   <div class="right-down">
-                                      <% if truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i == 0 %>
+                                    <% if truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i == 0 %>
                                               <b>Now is Deadline</b>
                                       <% elsif truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i < 0 %>
                                               <b>Out of Deadline</b>
                                       <% else %>
-                                              <b><%= truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i %>
+                                              <b><%= truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i %>
                                               Day left</b>
                                       <% end %>
                                   </div>
