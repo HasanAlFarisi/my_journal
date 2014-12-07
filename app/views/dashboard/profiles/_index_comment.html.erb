@@ -1,0 +1,33 @@
+<style type="text/css">
+	.up{
+		margin-top: -3px !important;
+	}	
+	.left{
+		margin-left: 0px !important;
+	}
+</style>
+
+<% admin_comments.each do |admin_comment| %>
+	<div id="comment-list" class="mini-field">
+		<span class="time"><%= "#{admin_comment.created_at.strftime('%d %b %Y')}"  %></span>
+		<p>
+			<label><b>Name :</b></label> 
+			<%= admin_comment.name %>
+		</p>
+		    
+		<p>
+			<label><b>Comment :</b></label> 
+		</p>
+			<div class='mini-field'><%= admin_comment.body %></div>
+	</div>
+	<span class="clear"></span>
+	  	<% admin_comment.reply_contacts.each do |reply| %>
+	      		<div id="reply-view" class="left">
+	          		<span style="font-size:9px">Reply from</span> 
+	          		<%= "#{admin.name} #{admin.last_name}" %>:<br>
+	          		<div class='up'><%= reply.body %></div>
+	      		</div>
+	      		<div class="clear border-bottom"></div>
+	  	<% end %>
+	<br>
+<% end %>

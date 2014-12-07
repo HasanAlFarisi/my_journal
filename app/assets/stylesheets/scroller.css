@@ -1,0 +1,23 @@
+.scroller{
+	width: 440px !important;
+	height: 550px !important;
+	overflow: hidden;
+}
+.scroller_comment{
+	width: 290px !important;
+	margin-left: -10px !important;
+	height: 550px !important;
+	overflow: hidden;
+}
+.miniscroll-thumb{
+	background-color: #3D3B38 !important;
+}
+.miniscroll-tracker{
+	background-color: #736856 !important;
+}
+#miniscroll-target .miniscroll-thumb{
+	background-color: : #3D3B38 !important;
+}
+#miniscroll-target .miniscroll-tracker{
+	background-color: #736856 !important;
+}

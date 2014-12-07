@@ -1,0 +1,96 @@
+<style type="text/css">
+
+</style>
+
+<!-- Main -->
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  
+  <!-- Content -->
+  <div id="content">
+    
+    <!-- Box Article -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2 class="left">Messages</h2>
+        <%= render partial:'admin/shared/search', locals:{status: nil} %>
+      </div>                               
+      <!-- End Box Head --> 
+
+      <!-- Table -->
+      <div class="table">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-striped">
+          <tr>
+            <th width="13"><%= image_tag "unread.png", class:"ico_message" %></th>
+            <th>From</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th width="10px">Reply</th>
+            <th colspan="2" class="ac">Content Control</th>
+          </tr>
+          <% unless @messages.present? %>
+            <tr class="odd">
+              <td colspan="7">
+                <center>No data yet</center>
+              </td>
+            </tr>
+          <%end%>
+
+      <%#= form_tag destroy_all_admin_articles_path do %>          
+          <% @messages.each do |message| %>
+          <tr>
+            <td> 
+                    <div id="read_status_<%= message.id %>">
+                        <% if message.read_status == false %>
+                              <%= image_tag "unread.png", class:"ico_message" %>
+                        <% else %>
+                              <%= image_tag "read.png", class:"ico_message" %>
+                        <% end %>
+                    </div>
+            </td>
+            <td><%= link_to message.name, admin_message_path(message), remote: true %></td>
+            <td><%= message.email %></td>
+            <td><%= truncate(message.body, :length => 30) %></td>
+            <td>
+                    <div id="count_reply_<%= message.id %>">
+                          <center><%= message.reply_contacts.count %></center>
+                    </div>
+            </td>
+            <td  width="5px"><%= link_to 'Reply', admin_message_path(message,reply: "true"), class:"ico edit", remote: true %></td>
+            <td  width="5px"><%= link_to 'Destroy', admin_message_path(message), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %></td>
+          </tr>
+          <%end%>
+        </table>
+        
+        
+        <!-- Pagging -->
+        <div class="pagging">
+          <%#= submit_tag "Delete Selected", class:"tab-right-button button floating" %></p>
+      <%# end %>
+
+          <div class="left">Messages Total: <b><%= @messages.count %></b> Messages</div>
+          <div class="right">
+            <%= will_paginate @messages %>
+          </div>
+        </div>
+        <!-- End Pagging -->
+      </div>
+      <!-- Table -->
+    </div>
+    <!-- End Box Article -->
+  </div>
+  <!-- End Content -->
+  
+  <div class="cl">&nbsp;</div>      
+</div>
+<!-- Main -->
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+
+<div id="modal_background"><!-- Place for background --></div>
+<div id="show_modal_message"><!-- Place for modal message --></div>

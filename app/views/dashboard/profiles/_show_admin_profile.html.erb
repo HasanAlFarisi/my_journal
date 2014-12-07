@@ -1,0 +1,74 @@
+<div id="modal_profile" class="styled">
+	<div id="top_modal">
+		<a href="javascript:void(0)" class="close-modal-profile">X</a>
+	</div>
+	<!-- The class for main profile -->
+	<div class="scroller floating">
+		<div class="formProfile">
+		    <div id="content">
+		      <!-- Box -->
+		      <div class="box">
+		        <!-- Form -->
+		          <div class="form">
+		              <div class="left-photo">
+		                  <div class="foto_prev_profile">
+		                    <center>
+		                    	<%= image_tag admin.avatar.url(:original),class:"img_profile" %>
+		                    	<h4><%= "#{admin.name} #{admin.last_name}" %></h4>
+		                    </center>
+		                  </div>
+		              </div>    
+		             <br>
+		            <div id="form_edit">
+		                <%= render partial:"admin/profiles/detail", locals:{admin_profile: admin, not_current: 'yes'} %>
+		            </div>
+		          <!-- End Form -->
+		      </div>
+		      <!-- End Box -->
+		    </div>
+		    <div class="cl">&nbsp;</div>
+		</div>
+	</div>
+	<!-- The class for comment profile -->
+	<div class="scroller_comment">
+		<div class="formProfile">
+			<div class="message">
+				<%= render partial: "dashboard/profiles/index_comment", locals: {admin_comments: admin_comments, admin: admin} %>
+				<div id="comment-place-admin"><!-- Comment place from render partial admin --></div>
+				<%= render 'dashboard/shared/ajax_loader' %>
+				Send Message for <b><%= "#{admin.name} #{admin.last_name}" %></b>
+				<div id="comment-field" >
+					<%= form_for(:dashboard_comment, url: dashboard_comments_path, remote: true) do |f| %>
+						<%= f.hidden_field :admin_id, value: admin.id %>
+						<div class="field ">
+						      <%= f.text_field :name, placeholder:"Name", class:"size-1-mini" %>
+						      <div id="error_name" class="error"></div>
+						</div>
+						<div class="field mini-field">
+					      		<%= f.text_field :email, placeholder:"E-mail", class:"size-1-mini" %>
+					    	</div>
+					    	<div class="field mini-field">
+					    		<span class="mini">
+					      			<%= f.text_area :body, placeholder:"Comment",class:"size-1-mini",id:"textarea-label" %>
+					      		</span>
+					      		<div id="error_body" class="error"></div>
+					    	</div>
+					    		<div class="link_button mini-field up" style="float:right; margin:-28px 0px 0px 10px !important;">
+					        		<%= link_to "Send ...", "javascript:void(0)", id:"submit-form", dataId:"contact_for_admin", profileEmail:"#{admin.e_mail}" %>
+					        	</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= javascript_include_tag "scroller" %>
+<%= javascript_include_tag "dashboard/form_validates" %>
+
+<script>
+	$(document).ready(function(){
+		$("#modal_profile").fadeIn();
+		$( '.close-modal-profile' ).click(function( ev ) {  $( '#modal_profile, #modal_background' ).fadeOut();  ev.preventDefault();} );
+	})
+</script>

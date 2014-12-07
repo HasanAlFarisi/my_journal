@@ -1,0 +1,61 @@
+<style type="text/css">
+  .up{
+      margin-top: -18px !important;
+  }
+</style>
+
+<div id="index-place">
+  <div id="main_column">
+      <div class="post_box">
+        <div class="date_box">
+          <p>WE ARE</p>
+        </div>
+            
+        <div class="post_body">
+            <h2><a href="#"><%= @company_profile.name %></a></h2>
+          
+          <div class="post_content">
+            <a href="#">
+            <%= image_tag @company_profile.photo.url(:original), width:"210px", class:"floating" %>
+            </a>
+            <p><b>Company Name:</b> 
+                    <br><%= @company_profile.name %>
+            </p>
+            <p><b>Company Motto: </b>
+                    <br><%= @company_profile.motto %>
+            </p>
+            <p><b>Company Vision: </b>
+                    <div class="up">
+                        <%= raw @company_profile.vission %>
+                    </div>
+            </p>
+            <p><b>Company Mision: </b>
+                    <div class="up">
+                        <%= raw @company_profile.mission %>
+                    </div>
+            </p>
+            <p><b>Company Address: </b><br>
+                    <div class="up">
+                        <%= raw @company_profile.address %>
+                    </div>
+            </p>
+            
+            <%= render partial: "dashboard/profiles/admins", locals: {admins: @admins} %>
+            <div class="cl"><br><br><br></div>
+            <div id="comment-field">
+              <p>Contact Us!</p>
+              <div id="notice-place"></div>
+              <%= render :partial => "dashboard/company_comments/index", locals: {dashboard_comments: @company_comments} %>
+              <div id="comment-place"><!-- Comment place from render partial --></div>
+              <%= render 'dashboard/shared/ajax_loader' %>
+              
+              <%= render partial: 'dashboard/comments/form', locals: {status: 'contact_for_all_admins'} %>
+            </div>
+            <div class="link_button">
+              <%= link_to "Back ...", root_path %>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+</div>

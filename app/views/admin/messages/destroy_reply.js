@@ -1,0 +1,1 @@
+$("#count_reply_<%= @message_admin.id %>").html("<center><%= @reply_contacts.count %></center>")

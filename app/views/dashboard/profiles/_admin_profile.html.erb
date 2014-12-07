@@ -1,0 +1,61 @@
+<div id="index-place">
+  <div id="main_column">
+      <div class="post_box">
+        <div class="date_box">
+         	<p>Our Team</p>
+        </div>
+            
+        <div class="post_body">
+            <h2><a href="#"><%= "#{admin_profile.name} #{admin_profile.last_name}" %></a></h2>
+          
+          <div class="post_content">
+            <a href="#">
+            <%= image_tag admin_profile.avatar.url(:original), width:"210px", class:"floating" %>
+            </a>
+            <p>My Name: <b><%= admin_profile.name %></b></p>
+            <p>My Last Name: <b><%= admin_profile.last_name %></b></p>
+            <p>My Full Name is: <b><%= "#{admin_profile.name} #{admin_profile.last_name}" %></b></p>
+            <p>My Facebook: <b><%= admin_profile.facebook %></b></p>
+            <p>My Skype: <b><%= admin_profile.skype %></b></p>
+            <p>My Birthday: <b><%#= @admin_profile.birthday.strftime('%d %B %Y') %></b></p>
+            <p>My E-Mail: <b><%= admin_profile.e_mail %></b></p>
+            <p>Describe me: <div id="up1"><%=raw admin_profile.describe_me %></div></p>
+            <p>Life Motto: <div id="up1"><%=raw admin_profile.motto %></div></p>
+            <p>My Skill: 
+                    <ol id="up1" class="list_none min_marg_left">
+                          <% admin_profile.profile_skills.each do |skill| %>
+                          <li>
+                                <%= image_tag skill.icon.url(:original), class:"img-icon floating" %>
+                                <span><%= skill.name %></span>:
+                                <b><%= skill.skill %></b>%
+                                <article style="margin-bottom:30px">&nbsp;</article>
+                          </li>
+                          <% end %>
+                    </ol>
+            </p>
+            <p>My Hobby: 
+                    <ol id="up1" class="min_marg_left3">
+                          <% admin_profile.profile_hobbies.each do |hobby| %>
+                          <li>
+                                <span><%= hobby.name %></span></li>
+                                
+                          </li>
+                          <% end %>
+                    </ol>
+            </p>
+            
+            <div id="comment-field">
+              <p>Contact to Me!</p>
+              <div id="notice-place"></div>
+              <%#= render :partial => "dashboard/comments/index", locals: {dashboard_comments: @article_comments} %>
+              <div id="comment-place"><!-- Comment place from render partial --></div>
+              <%= render partial: 'dashboard/comments/form', locals: {status: 'contact_for_admin'} %>
+            </div>
+            <div class="link_button">
+              <%= link_to "Back ...", root_path %>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+</div>

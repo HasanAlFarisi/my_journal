@@ -1,0 +1,125 @@
+
+<%#= link_to 'Back', admin_journals_path %>
+
+<!-- Main -->
+<div id="main">
+  	<div class="cl">&nbsp;</div>
+  
+	<!-- Content -->
+	<div id="content">
+    
+    	<!-- Box Article -->
+    	<div class="box">
+	      <!-- Box Head -->
+	      <div class="box-head">
+	        	<h2 class="left"><b><%= @admin_journal.title %></b></h2>
+	        	<div class="right">
+	        		<% if @admin_journal.admin_id == current_admin.id %>
+	        			<%= link_to 'Edit', edit_admin_journal_path(@admin_journal), remote: true, class:"ico edit"%> | 
+					<%= link_to 'Destroy', admin_journal_path(@admin_journal), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
+	        		<% end %>
+	        	</div>
+	      </div>                 
+      		<div class="form">
+      			<b><%= @admin_journal.title %>	</b> Project is Starting at <b><%= @admin_journal.start.strftime('%d-%b-%Y') %></b> and will be Ending at <b><%= @admin_journal.end.strftime('%d-%b-%Y') %></b>
+      			<div class="right">
+      				<span class="calendar">
+      					<% if truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i == 0 %>
+	                                <%= link_to "Now is Deadline", "javascript:void(0)" %>
+	                          <% elsif truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i < 0 %>
+	                                <%= link_to "Out of Deadline", "javascript:void(0)" %>
+	                          <% else %>
+      						<%= link_to "#{truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i}", "javascript:void(0)" %>
+      						Day left
+      					<% end %>
+      				</span>
+      			</div>
+      			<div class="down-select-two">&nbsp;</div>  
+                   	<p class="project-team-details">
+                   		<%= label_tag :project_manajer, "Project Manajer", class:"floating form_right" %>
+                   		<span class='right-data'>
+                                <% if current_admin.id == @admin_journal.admin_id %>
+                                      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(@admin_journal.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                                <% else %>
+                   			      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(@admin_journal.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                                <% end %>
+                   		</span>
+                   		<br><br>
+                   		<%= label_tag :project_designers, "Project Designers", class:"floating form_right" %>
+           			<% @admin_journal.jornal_team_designers.each do |journal_team| %>
+                         		<span class='right-data'>
+                         			<% if current_admin.id == journal_team.admin_id %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         			<% else %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         			<% end %>
+                         		</span>
+                         		<br><br>
+                         	<% end %>
+                   		<%= label_tag :project_developers, "Project Developers", class:"floating form_right" %>
+           			<% @admin_journal.journal_team_developers.each do |journal_team| %>
+                         		<span class='right-data'>
+                                      <% if current_admin.id == journal_team.admin_id %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         			<% else %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         			<% end %>
+                         		</span>
+                         		<br><br>
+                         	<% end %>
+                         	<%= label_tag :project_checks, "Project Quality Checks", class:"floating form_right" %>
+           			<% @admin_journal.journal_team_checks.each do |journal_team| %>
+                         		<span class='right-data'>
+                         			<% if current_admin.id == journal_team.admin_id %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         			<% else %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         			<% end %>
+                         		</span>
+                         		<br><br>
+                         	<% end %>
+                   	</p>
+                    <div class="buttons">
+                          <%= link_to "Back", admin_journals_path, class:"button floating" %>
+                          <br>
+                   </div>
+             </div>
+      </div>
+   </div>
+ </div>
+</div>     
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+
+<%= render :partial => "admin/journal_issues/index_head", locals: {admin_journal: @admin_journal} %>
+
+<!-- Modal Place -->
+<div id="modal_background"></div>
+<div class="show_modal_add_journal"></div>
+<div id="show_profile_place"><!--The place for show profile--></div>
+<!-- End Modal Place -->
+
+<script>
+$(document).ready(function() {
+        $('.masterTooltip').hover(function(){
+                var title = $(this).attr('title');
+                $(this).data('tipText', title).removeAttr('title');
+                $('<p class="tooltip"></p>')
+                .html(title)
+                .appendTo('body')
+                .fadeIn('slow');
+        }, function() {
+                $(this).attr('title', $(this).data('tipText'));
+                $('.tooltip').remove();
+        }).mousemove(function(e) {
+                var mousex = e.pageX + 20; 
+                var mousey = e.pageY + 10; 
+                $('.tooltip')
+                .css({ top: mousey, left: mousex })
+        });
+});
+</script>

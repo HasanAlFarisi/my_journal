@@ -1,0 +1,71 @@
+  <%= stylesheet_link_tag "progress", :media => "all" %>
+  
+  <div id="right_content">
+    <p>
+      <%= label_tag :name, "Name" %>
+      <%= admin_profile.name %>
+    </p>  
+    <p>
+      <%= label_tag :name, "Last Name" %>
+      <%= admin_profile.last_name %>
+    </p> 
+    <p>
+      <%= label_tag :name, "Facebook" %>
+      <%= admin_profile.facebook %>
+    </p>
+    <p>
+      <%= label_tag :name, "E-mail" %>
+      <%= admin_profile.e_mail %>
+    </p>
+    <p>
+      <%= label_tag :skill, "Skill" %>
+      <ol id="profile_hobby_list">
+        <% admin_profile.profile_skills.each do |skill| %>
+          <li><span><%= skill.name %></span></li>
+          <div id="progres_bar">
+            <div class="progress">
+              <div class="progress-bar" style="width:<%= skill.skill %>%;">
+                <%= skill.skill %> %
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </ol>
+    </p>
+    <p class="up">
+      <%= label_tag :hobby, "Hobby" %>
+      <ol id="profile_hobby_list">
+        <% admin_profile.profile_hobbies.each do |hobby| %>
+          <li><%= hobby.name %></li>
+          <br>
+        <% end %>
+      </ol>
+    </p>
+  </div>
+<p>
+  <%= label_tag :describe_me, "Describe Me!" %>
+  <br>
+  <%=raw admin_profile.describe_me %>
+</p> 
+<p>
+  <%= label_tag :motto, "Motto" %>
+  <br>
+  <%=raw admin_profile.motto %>
+</p>
+<!-- Form Buttons -->
+  <div class="buttons">
+    <%= link_to "Back", "javascript:void(0)", class:"close-modal-profile close button floating" %>
+
+    <% unless not_current == 'yes' %>
+          <%= link_to "Edit", edit_admin_profile_path(admin_profile),remote: true, class:"button" %>
+    <% end %>
+    <br>
+ </div>
+  <!-- End Form Buttons -->
+</div>
+
+<script>
+$(document).ready(function() {
+      $( '.close-modal-profile' ).click(function( ev ) {  $( '#modal_profile, #modal_background' ).fadeOut();  ev.preventDefault();} );
+})
+</script>
