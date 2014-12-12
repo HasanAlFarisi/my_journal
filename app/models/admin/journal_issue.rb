@@ -59,11 +59,9 @@ class Admin::JournalIssue < ActiveRecord::Base
 	end
 
 	def self.status_count(current_admin,id)
-		join_table = "
-			JOIN admin_journal_issue_asignees ON admin_journal_issue_asignees.journal_issue_id = admin_journal_issues.id
-		"
+		join_table = self.global_joins()
 		condition = []
-		condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})	"
+		condition << self.conditions_where(current_admin,nil,id)
 		condition << "admin_journal_issues.status_id = #{id}"
 		conditions = condition.join(" AND ")
 		self.where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).joins("{{join_table}}".gsub("{{join_table}}", join_table)).count
@@ -71,7 +69,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 
 	def self.data_existed_index(current_admin,type)
 		join_table = self.global_joins()
-		conditions = self.conditions_where(current_admin,nil,"index")
+		conditions = self.conditions_where(current_admin,nil,type)
 		
 		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issue_asignees.journal_issue_id")
 	end
@@ -96,7 +94,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 			condition << "admin_journal_issues.status_id != 5"
 			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})"	
 		else
-			condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})"
+			condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id})"
 			condition << "admin_journal_issues.status_id = #{type}"
 		end
 		
@@ -182,14 +180,18 @@ class Admin::JournalIssue < ActiveRecord::Base
 		end
 	end
 
-	def self.find_index_count(ids,current_admin)
+	def self.find_index_count(ids,current_admin,type)
 		join_table = self.global_joins()
 		condition = []
 		condition << "admin_journal_issues.journal_id IN #{ids}"
-		condition << "admin_journal_issues.asignee = #{current_admin}"
+		if type == "search"
+			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journals.admin_id = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
+		else
+			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
+		end
 		conditions = condition.join(" AND ")
 
-		journal_issue = self.joins("{{join_table}}".gsub("{{join_table}}",join_table)).where("{{conditions}} OR admin_journal_issue_asignees.admin_id = #{current_admin}".gsub("{{conditions}}", conditions))
+		journal_issue = self.joins("{{join_table}}".gsub("{{join_table}}",join_table)).where("{{conditions}}".gsub("{{conditions}}", conditions))
 
 		return journal_issue
 	end

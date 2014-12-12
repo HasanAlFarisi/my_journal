@@ -31,7 +31,7 @@ a:hover { color:#8d341f; text-decoration: none;}
 
 .left, .alignleft { float:left; display:inline; }
 .right, .alignright { float:right; display:inline; }
-.right-down{color: #D4FF00 !important; padding-top: 0px !important; display:inline; float:right;}
+.right-down{color: #D4FF00 !important; padding-top: 0px !important; float:right;}
 #add-watchers{margin-left: 63px !important;}
 #right_more{margin-right: -15px !important;}
 .cl { font-size:0; line-height:0; clear:both; display:block; height:0; }
@@ -105,6 +105,7 @@ h3 a{ text-decoration: none; }
 .box-pie { width:365px !important; float: left !important; margin-right: 5px;}
 .odd{margin-left: 6px !important}
 .box-head { background:#ba4c32; height:32px; color:#fff; padding: 0 10px; line-height:32px; white-space:nowrap; border-bottom:solid 1px #fff; }
+.box-head h2{width: 90px !important; position: absolute;}
 .box-head .right{ padding-top:5px; line-height:13px;}
 .box-head .right label,
 .box-head .right input { float:left; }
@@ -245,7 +246,7 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
   font-size:12px Arial;}
 .calendar{font-size: 13px; font-weight: bold; background-color: #C4C4C4; padding: 10px;}
 .calendar a{font-size: 16px;}
-.project-team-details .right-data{float: right; width: 550px;}
+.project-team-details .right-data{float: right; width: 540px;}
 .project-issues .right-data select{margin-left: 6px;}
 .project-issues-assign .right-data select{margin-left:16px}
 .project-issues-watch .right-data select{margin-left:19px}
@@ -275,3 +276,5 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .header_link a{color: #fff !important;}
 .header_link a:hover{text-decoration: underline !important;}
 .padding_down{padding-top: 10px !important;}
+.journal_search{float: left !important;padding: 0px 0px 1px 0px !important;margin-left: 3px;color: #999 !important;}
+.disable{background-color: #cecece}

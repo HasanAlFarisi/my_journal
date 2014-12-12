@@ -25,6 +25,14 @@ class Admin::ProfilesController < Admin::BaseController
     @admin_profile = Admin::Profile.new
   end
 
+  def new_help
+    @help_me = Help.new
+  end
+
+  def create_help
+    
+  end
+
   # GET /admin/profiles/1/edit
   def edit
     @admin_skills = Admin::ProfileSkill.find_all_by_profile_id(params[:id])

@@ -37,7 +37,7 @@ function readURLJournal (input) {
     var reader = new FileReader();
     reader.onload = function(e){
       $('.img_prev').remove();
-      $('.foto_prev').append('<span><img class="img_profile img_prev" src="'+e.target.result+'" width="10%" height="10%"/><a href="javascript:void(0)" onclick="javascript:$(this).parent().remove()" class="close">Cencel</a></span>');
+      $('.foto_prev').append('<span><img class="img_profile img_prev" src="'+e.target.result+'" width="15%" height="15%"/><a href="javascript:void(0)" onclick="javascript:$(this).parent().remove()" class="close">Cencel</a></span>');
     };
     reader.readAsDataURL(input.files[0])
   }

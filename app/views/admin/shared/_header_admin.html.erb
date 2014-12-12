@@ -5,7 +5,7 @@
     <div id="top">
       <h1><a href="#">Journal</a></h1>
       <div id="top-navigation">
-        <a href="#">Help</a>        
+        <a href="#"><%= link_to "Help", new_admin_help_path %></a>        
         <span>|</span>
         <%= link_to "Logout", destroy_admin_session_path, :method => :delete%>
       </div>

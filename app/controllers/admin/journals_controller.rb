@@ -40,6 +40,20 @@ class Admin::JournalsController < Admin::BaseController
     end
   end
 
+  def project_search
+      @admin_journals = Admin::Journal.search_by_params(current_admin.id,params)
+      ids = []
+       @admin_journals.each do |journal|
+              ids << journal.id
+       end
+       id = convert_to_arr_for_query(ids)
+       @admin_journals_status = Admin::JournalIssue.find_index_count(id == ")" ? "(0)" : id,current_admin.id,'search')
+
+        respond_to do |format|
+            format.html
+        end
+  end
+
   def add_row_designers
     @index = Admin::Journal.generated_number(current_admin.id)
     respond_to do |format|

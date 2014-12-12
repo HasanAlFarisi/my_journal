@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125132610) do
+ActiveRecord::Schema.define(version: 20141212035732) do
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
@@ -70,6 +70,24 @@ ActiveRecord::Schema.define(version: 20141125132610) do
   create_table "admin_gallery_groups", force: true do |t|
     t.string   "name"
     t.string   "sub_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "admin_help_files", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "help_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+  end
+
+  create_table "admin_helps", force: true do |t|
+    t.string   "full_name"
+    t.string   "e_mail"
+    t.text     "help"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -249,7 +267,7 @@ ActiveRecord::Schema.define(version: 20141125132610) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
-    t.datetime "updated_at"
+    t.time     "updated_at"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
