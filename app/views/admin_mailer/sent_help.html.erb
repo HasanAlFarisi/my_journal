@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi, SuperAdmin, you have Question from <%= @help.full_name %></p>
+    <p>
+      Below is Question: <br />
+      <%= raw @help.help %><br>
+      <% unless @help.help_files.blank? %>
+            <b>Screen Shoot:</b><br>
+            <% @help.help_files.each do |help_file| %>
+                  <%= image_tag help_file.document.url(:original),class:"img-icon" %><br>
+            <% end %>      
+      <% end %>
+      <br>
+      You can Answer this Question to <%= @help.e_mail %>
+      <br>
+      Or you can login to <a href="http://localhost:3000/admin/login"> <%= @company %> Admin</a>
+    </p>
+    <p>Thank you,</p>
+    <p><%= @company %> System</p>
+  </body>
+</html>

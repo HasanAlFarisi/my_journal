@@ -69,7 +69,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 
 	def self.data_existed_index(current_admin,type)
 		join_table = self.global_joins()
-		conditions = self.conditions_where(current_admin,nil,type)
+		conditions = self.conditions_where(current_admin,"search",type)
 		
 		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issue_asignees.journal_issue_id")
 	end
@@ -89,7 +89,9 @@ class Admin::JournalIssue < ActiveRecord::Base
 		condition << "admin_journal_issues.title IS NOT NULL"
 		if type == "main"
 			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id})"
-			condition << "admin_journal_issues.status_id != 5"
+			unless journal_id == "search"
+				condition << "admin_journal_issues.status_id != 5"	
+			end
 		elsif type == "index"
 			condition << "admin_journal_issues.status_id != 5"
 			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})"	
@@ -98,7 +100,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 			condition << "admin_journal_issues.status_id = #{type}"
 		end
 		
-		unless journal_id.blank?
+		if journal_id.present? && journal_id != "search"
 			condition << "admin_journal_issues.journal_id = #{journal_id}"
 		end
 		conditions = condition.join(" AND ")
@@ -188,6 +190,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journals.admin_id = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
 		else
 			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
+			condition << "admin_journal_issues.status_id != 5"
 		end
 		conditions = condition.join(" AND ")
 

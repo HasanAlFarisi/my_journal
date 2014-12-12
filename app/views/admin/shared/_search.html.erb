@@ -1,7 +1,7 @@
 <div class="right">
 <% if status.present? %>
 	<%= form_tag project_search_admin_journals_path, method: :get do %>
-		<%= label_tag :title, "Search Project" %>
+		<%= label_tag :title, "Search Journal" %>
 		<%= text_field_tag :title, "",placeholder:"Project Name", class:"field small-field" %>
 		<%= submit_tag "Search", class:"button" %>
 	<% end %>

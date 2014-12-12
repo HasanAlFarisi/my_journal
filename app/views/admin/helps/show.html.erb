@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @admin_help.full_name %>
+</p>
+
+<p>
+  <strong>E mail:</strong>
+  <%= @admin_help.e_mail %>
+</p>
+
+<p>
+  <strong>Help:</strong>
+  <%= @admin_help.help %>
+</p>
+
+<%= link_to 'Edit', edit_admin_help_path(@admin_help) %> |
+<%= link_to 'Back', admin_helps_path %>

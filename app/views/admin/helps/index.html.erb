@@ -1,0 +1,31 @@
+<h1>Listing admin_helps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Full name</th>
+      <th>E mail</th>
+      <th>Help</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_helps.each do |admin_help| %>
+      <tr>
+        <td><%= admin_help.full_name %></td>
+        <td><%= admin_help.e_mail %></td>
+        <td><%= admin_help.help %></td>
+        <td><%= link_to 'Show', admin_help %></td>
+        <td><%= link_to 'Edit', edit_admin_help_path(admin_help) %></td>
+        <td><%= link_to 'Destroy', admin_help, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Help', new_admin_help_path %>
