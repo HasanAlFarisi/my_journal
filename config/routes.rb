@@ -1,5 +1,5 @@
 MyJournal::Application.routes.draw do
- devise_for :admins, :path => "admin",
+  devise_for :admins, :path => "admin",
     :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret' },
     :controllers => { :sessions => "admin/sessions",
                                  :registrations => "admin/registrations",
@@ -26,8 +26,6 @@ MyJournal::Application.routes.draw do
   namespace :admin do
     
     root to: "company_profiles#index"
-    resources :complete_profiles
-    resources :profiles
 
     resources :articles do
       collection do
@@ -44,12 +42,16 @@ MyJournal::Application.routes.draw do
       end
     end
 
+    resources :complete_profiles
+    resources :profiles
+    resources :helps
     resources :gallery_groups
     resources :galleries
     resources :journals do
         collection do
             post :selected_members
             post :selected_checks
+            get :project_search
             get :add_row_designers
             get :add_row_developers
             get :add_row_checks

@@ -32,7 +32,7 @@
                   <tr><td colspan="6"><center>No data yet</center></td></tr>
           <% end %>
           <% @admin_journals.each do |journal| %>
-              <% admin_journal = journal.journal_issues.order("admin_journal_issues.created_at DESC").data_existed_index(current_admin,"main") %>
+              <% admin_journal = journal.journal_issues.order("admin_journal_issues.created_at DESC").data_existed_index(current_admin,type) %>
               <% admin_journal.each_with_index do |admin_journal_issue,n| %>
                     <tr class="<%= generated_priority(admin_journal_issue.priority) %>">
                           <td width="43"><%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id), title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %></td>

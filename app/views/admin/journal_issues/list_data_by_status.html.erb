@@ -44,7 +44,7 @@
           <% @admin_journal_issues.each_with_index do |admin_journal_issue,n| %>
               <tr class="<%= generated_priority(admin_journal_issue.priority) %>">
                     <td width="43">
-                          <%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %>
+                          <%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %>
                     </td>
                     <td>
                           <%= link_to find_journal_in_issue(admin_journal_issue.journal_id).title, admin_journal_issues_path(journal_id: admin_journal_issue.journal_id) %>
@@ -60,7 +60,7 @@
                              </div>
                            </div>
                     </td>
-                    <td width="353"><%= link_to truncate(strip_tags(admin_journal_issue.title), length: 35), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %></td> 
+                    <td width="353"><%= link_to truncate(strip_tags(admin_journal_issue.title), length: 35), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %></td> 
               </tr>
           <% end %>
       </table>

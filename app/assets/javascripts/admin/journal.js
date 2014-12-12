@@ -78,6 +78,7 @@ function remove_style_error (classes) {
 }
 
 var id = $(".sub-images").attr("dataId");
+var id = $(".sub-screen-shoot").attr("dataId");
 $(".add_images").click(function(){
     id = id + 1;
     $(".sub-images").append("<span class='parent'><div class='foto_prev_"+id+"'></div><input class='field size4 input-file floating' id='fileField' name='admin_journal_issue[journal_issue_images_attributes]["+id+"][image]' onchange='readURLJournalAppend(this,"+id+");' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
@@ -87,6 +88,12 @@ $(".add_files").click(function(){
     id = id + 1;
     $(".sub-files").append("<span class='parent'><input class='field size4 input-file floating' id='fileField' name='admin_journal_issue[journal_issue_files_attributes]["+id+"][file]' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
 })
+
+$(".add_screen_shoot").click(function(){
+    id = id + 1;
+    $(".sub-screen-shoot").append("<span class='parent'><div class='foto_prev_"+id+"'></div><input class='field size4 input-file floating' id='fileFieldAppend' name='admin_help[help_files_attributes]["+id+"][document]' onchange='readURLJournalAppend(this,"+id+");' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
+})
+
 $("#admin_journal_issue_status_id").change(function(){
         if($(this).val() == "11" || $(this).val() == "6"){
                 $(".type").hide()
@@ -102,7 +109,7 @@ function readURLJournalAppend(input,id) {
     var reader = new FileReader();
     reader.onload = function(e){
       $(".img_prev_"+id).remove();
-      $(".foto_prev_"+id).append('<img class="img_prev_'+id+'" src="'+e.target.result+'" style:"width:25%; height:25%"/>');
+      $(".foto_prev_"+id).append('<img class="img_profile img_prev_'+id+'" src="'+e.target.result+'" width="15%" height="15%"/>');
     };
     reader.readAsDataURL(input.files[0])
   }

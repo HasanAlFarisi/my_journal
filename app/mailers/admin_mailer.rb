@@ -43,4 +43,11 @@ class AdminMailer < ActionMailer::Base
 
       mail(to: @admin.e_mail, subject: "#{@company} Notification")
   end
+
+  def sent_help(help)
+    @help = Admin::Help.find(help)
+    @company = Admin::CompanyProfile.last.name
+
+    mail(to: "hasan.farisi47@gmail.com", subject: "#{@company} Notification")
+  end
 end

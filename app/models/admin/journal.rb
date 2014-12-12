@@ -63,14 +63,18 @@ class Admin::Journal < ActiveRecord::Base
 		return number.to_s.rjust(1, '0')
   	end
 
-  	def self.is_allowed(id,status_id)
-  		join_table = "
+  	def self.global_join
+  		join = "
   			JOIN admin_jornal_team_designers on admin_jornal_team_designers.journal_id = admin_journals.id
   			JOIN admin_journal_team_developers on admin_journal_team_developers.journal_id = admin_journals.id
   			JOIN admin_journal_team_checks on admin_journal_team_checks.journal_id = admin_journals.id
   			LEFT JOIN admin_journal_issues on admin_journal_issues.journal_id = admin_journals.id
   			LEFT JOIN admin_journal_issue_asignees on admin_journal_issue_asignees.journal_issue_id = admin_journal_issues.id
   			"
+  		return join
+  	end
+
+  	def self.global_conditions(id)
   		condition = []
   		condition << "admin_journals.admin_id = #{id}"
   		condition << "admin_jornal_team_designers.admin_id = #{id}"
@@ -78,6 +82,13 @@ class Admin::Journal < ActiveRecord::Base
   		condition << "admin_journal_team_checks.admin_id = #{id}"
   		condition << "admin_journal_issue_asignees.admin_id = #{id}"
   		conditions = condition.join(" OR ")
+
+  		return conditions
+  	end
+
+  	def self.is_allowed(id,status_id)
+  		join_table = global_join
+  		conditions = global_conditions(id)
   		unless status_id == nil
   			status_condition = "admin_journals.status_id = #{status_id} AND"  			
   			select_all = self.joins("{{join_table}}".gsub("{{join_table}}", join_table)).where("#{status_condition} ({{conditions}})".gsub("{{conditions}}", conditions)).group("admin_journals.id")
@@ -86,6 +97,19 @@ class Admin::Journal < ActiveRecord::Base
   		end
   		
 
+  		return select_all
+  	end
+
+  	def self.search_by_params(id,params)
+  		join_table = global_join
+  		conditions = global_conditions(id)
+  		filter_condition = []
+  		if params[:title].present?
+  			filter_condition << "AND admin_journals.title LIKE '%#{params[:title]}%'"
+  		end
+  		filter_conditions = filter_condition.join(" AND ")
+
+  		select_all = self.joins("{{join_table}}".gsub("{{join_table}}", join_table)).where("({{conditions}}) {{filter}}".gsub("{{conditions}}", conditions).gsub("{{filter}}", filter_conditions)).group("admin_journals.id")
   		return select_all
   	end
 end

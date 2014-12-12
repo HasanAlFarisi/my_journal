@@ -13,6 +13,11 @@ class Admin::JournalIssuesController < Admin::BaseController
 
   def list_data_by_status
     @admin_journals_status = Admin::Journal.order("admin_journals.created_at DESC").is_allowed(current_admin.id, params[:journal_issue_id])
+    ids = []
+    @admin_journals_status.each do |journal|
+        ids << journal.id
+    end
+    @admin_journals_count = Admin::Journal.find(ids)
 
     @admin_journal_issues = Admin::JournalIssue.get_data_status(current_admin,params[:journal_issue_id]).paginate(:page => params[:page], :per_page => 20)
   end
