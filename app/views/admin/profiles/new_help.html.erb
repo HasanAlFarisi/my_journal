@@ -1,0 +1,90 @@
+<%# @admin_profiles.each do |admin_profile| %>
+  <div id="main">
+    <div class="cl">&nbsp;</div>
+    <div id="content">
+      <!-- Box -->
+      <div class="box">
+        <!-- Box Head -->
+        <div class="box-head">
+          <h2><%##= "#{admin_profile.name} #{admin_profile.last_name}" %></h2>
+        </div>
+        <!-- End Box Head -->
+          <!-- Form -->
+          <div class="form">
+            <div class="left-photo">
+              <%##= image_tag admin_profile.avatar.url(:original),class:"img_profile floating" %> 
+            </div>
+
+            <div id="right_content">
+                <p>
+                  <%##= label_tag :name, "Name" %>
+                  <%##= admin_profile.name %>
+                </p>  
+                <p>
+                  <%##= label_tag :name, "Last Name" %>
+                  <%##= admin_profile.last_name %>
+                </p> 
+                <p>
+                  <%##= label_tag :name, "Facebook" %>
+                  <%##= admin_profile.facebook %>
+                </p>
+                <p>
+                  <%##= label_tag :name, "E-mail" %>
+                  <%##= admin_profile.e_mail %>
+                </p>
+                <p>
+                    <%##= label_tag :skype, "Skype" %>
+                    <%##= admin_profile.skype  %>
+                  </p>
+                  <p>
+                    <%##= label_tag :birthday, "Birthday" %>
+                    <%##=admin_profile.birthday  %>
+                  </p>
+                <p>
+                  <%##= label_tag :skill, "Skill" %>
+                  <ol id="profile_skill_list">
+                    <%# admin_profile.profile_skills.each do |skill| %>
+                      <li><%##= image_tag skill.icon.url(:original), class:"img-icon floating" %><span><%##= skill.name %></span></li>
+                              <br><br><br><br>
+                    <%# end %>
+                  </ol>
+                </p>
+                <p>
+                  <%##= label_tag :hobby, "Hobby" %>
+                  <ol id="profile_hobby_list">
+                    <%# admin_profile.profile_hobbies.each do |hobby| %>
+                      <li><%##= hobby.name %></li>
+                      <br>
+                    <%# end %>
+                  </ol>
+                </p>
+              </div>
+              <p>
+                <%##= label_tag :describe_me, "Describe Me!" %>
+                <%##=raw admin_profile.describe_me %>
+              </p> 
+              <p>
+                <%##= label_tag :motto, "Motto" %>
+                <%##=raw admin_profile.motto %>
+              </p>
+          </div>
+          <!-- End Form -->
+          
+          <!-- Form Buttons -->
+          <div class="buttons">
+            <%##= link_to "Back", admin_profiles_path, class:"button-back" %>
+            <%##= link_to "Edit Profile", edit_admin_profile_path(admin_profile), class:"button" %>
+          </div>
+          <!-- End Form Buttons -->
+      </div>
+      <!-- End Box -->
+    </div>
+    <div class="cl">&nbsp;</div>
+  </div>
+<%# end %>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%##= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->

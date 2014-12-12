@@ -1,0 +1,6 @@
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<%= render partial: 'admin/journals/index', locals: {current_admin: find_profile(current_admin.id), type:"main"} %>

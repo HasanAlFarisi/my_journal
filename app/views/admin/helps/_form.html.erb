@@ -1,0 +1,50 @@
+<div id="main">
+      <div class="cl">&nbsp;</div>
+      <div id="content">
+            <!-- Box -->
+            <div class="box">
+            <!-- Box Head -->
+                    <div class="box-head">
+                          <h2><b>Help Admin!</h2>
+                    </div>
+            <!-- End Box Head -->
+                    <%= form_for(@admin_help, :html => {:multipart => true}) do |f| %>
+                          <div class="form">
+                                <p>
+                                      <%= f.label :full_name %>
+                                      <%= f.text_field :full_name,class:"field size4 disable", value: "#{find_profile(current_admin.id).name} #{find_profile(current_admin.id).last_name}", disabled: true %>
+                                      <%= f.hidden_field :full_name,  value: "#{find_profile(current_admin.id).name} #{find_profile(current_admin.id).last_name}" %>
+                                </p>
+                                <p>
+                                      <%= f.label :e_mail %>
+                                      <%= f.text_field :e_mail,class:"field size4 disable", value: "#{find_profile(current_admin.id).e_mail}", disabled: true %>
+                                      <%= f.hidden_field :e_mail,  value: "#{find_profile(current_admin.id).e_mail}" %>
+                                </p>
+                                <p>
+                                      <%= f.label :help %>
+                                      <%= f.text_area :help,class:"field mini_ckeditor" %>
+                                </p>
+                                <p>
+                                      <%= label_tag :document, "Screen Shoot" %>
+                                      <div class="foto_prev"></div>
+                                      <%= file_field_tag :document, class:"field size4 input-file", id: "fileField", :onchange => "readURLJournal(this);", name:"admin_help[help_files_attributes][0][document]"  %>
+                                      <br>
+                                      <div class="sub-screen-shoot" dataId="1"><!-- add images place --></div>
+                                      <div class="add add_screen_shoot button" type="submit">+| Screen Shoot</div>
+                                </p>
+                                <div class="buttons">
+                                       <%= link_to "Cancel", session[:urlBack], class:"button floating", style:"font-weight:normal !important" %>
+                                       <%= f.submit "Create", class:"button", id:"button-create" %>
+                                       <div class="cl">&nbsp;</div>
+                                </div>
+                          </div>
+                    <% end %>
+            </div>
+      </div>
+</div>
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<%= javascript_include_tag "admin/journal" %>
