@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".check-all").click(function(){$(this).is(":checked")?$(".check-self").attr("checked","checked"):$(".check-self").removeAttr("checked")})});
