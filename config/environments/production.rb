@@ -89,7 +89,7 @@ MyJournal::Application.configure do
       :address              => "smtp.gmail.com",
       :port                 => 587,
       :domain               => "mail.google.com",
-      :user_name            => "myjournal12345@gmail.com",
+      :user_name            => "noreply.sampulkreativ@gmail.com",
       :password             => "myjournalhasanalfarisi",
       :authentication       => "plain",
       :enable_starttls_auto => true
