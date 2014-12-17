@@ -12,6 +12,7 @@ class Dashboard::HomeController < ApplicationController
   end
 
   def show
+       @status = "Article"
   	@article = Article.find(params[:id])
   	@article_comments = Dashboard::Comment.where("article_id = ? ", params[:id])
   end

@@ -6,7 +6,9 @@
         </div>
             
         <div class="post_body">
-            <h2><a href="#"><%= @article.title %></a></h2>
+            <h2>
+                  <a href="#"><%= @article.title %></a>
+            </h2>
           <div class="post_info">
     			  category
                 <% if @article.category_id.present? %>
@@ -20,6 +22,7 @@
                 <% else %>
                     <%= link_to find_sub_category(@article.sub_category_id), "javascript:void(0)" %>
                 <% end %>
+                <div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com/dashboard/home/<%=@article.id%>" data-layout="button_count"></div>
           </div>
                       
           <div class="post_content">
@@ -28,10 +31,11 @@
             </a>
             <%=raw @article.body %>
             
-            <p>
-                  <%= link_to image_tag("facebook.png", width:"11%", class:"floating"),"javascript:void(0)", onClick:"window.open('http://www.facebook.com/sharer.php?s=100&p[url]=https://journalkreativ.herokuapp.com/dashboard/home/#{@article.id}','sharer','toolbar=0,status=0,width=548,height=325')" %>
-                  <a href="javascript:void(0)" onClick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=https://journalkreativ.herokuapp.com/dashboard/home/<%=@article.id%>','sharer','toolbar=0,status=0,width=548,height=325')">Share <br>this Article <br>for Your Friends </a>
-            </p>
+            <!--<p>
+                  <%#= link_to image_tag("facebook.png", width:"11%", class:"floating"),"javascript:void(0)", onClick:"window.open('http://www.facebook.com/sharer.php?s=100&p[url]=https://journalkreativ.herokuapp.com/dashboard/home/#{@article.id}','sharer','toolbar=0,status=0,width=548,height=325')" %>
+                  <!-- <a href="javascript:void(0)" onClick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=https://journalkreativ.herokuapp.com/dashboard/home/<%=@article.id%>','sharer','toolbar=0,status=0,width=548,height=325')">Share <br>this Article <br>for Your Friends </a> -->
+                  <!-- <div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com" data-layout="button_count"></div>
+            </p> -->
             
             <div id="comment-field">
               <p>Comment</p>
@@ -48,3 +52,11 @@
       </div>
     </div>
 </div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/id_ID/sdk.js#xfbml=1&appId=304923376368561&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

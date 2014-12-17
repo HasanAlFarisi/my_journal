@@ -24,6 +24,7 @@
           <% else %>
               <%= link_to find_sub_category(article.sub_category_id), "javascript:void(0)" %>
           <% end %>
+          <div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com/dashboard/home/<%=article.id%>" data-layout="button_count"></div>
         </div>
                     
         <div class="post_content">
@@ -43,3 +44,11 @@
   </div>
 <%end%>
 <%= javascript_include_tag "ckeditor/truncate", "data-turbolinks-track" => true %>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/id_ID/sdk.js#xfbml=1&appId=304923376368561&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

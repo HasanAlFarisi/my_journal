@@ -1,4 +1,5 @@
 module ApplicationHelper
+
 	def count_message(admin)
 		Admin::Contact.where("admin_id = ? AND read_status = false", admin.id).count
 	end
