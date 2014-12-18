@@ -1,0 +1,35 @@
+<div id="top-panel">
+          <div id="top-panel-top">
+            <div id="top-panel-bottom">
+              <div class="top-panel-box">
+                <h3>Featured Posts</h3>
+                <ul>
+                <% @recent_posts.each do |article| %>
+                      <li>
+                              <span>22-09-2008</span>
+                              <%= link_to truncate(strip_tags(article.title), :length => 50), dashboard_home_path(article), style:"margin-top:-10px" %>
+                      </li>
+                <% end %>
+                </ul>
+              </div>
+              <div class="top-panel-about">
+                <h3>About Our blog</h3>
+                <div class="textwidget">
+                      <%= image_tag Admin::CompanyProfile.last.photo.url(:original),width:"130", height:"115" %>
+                      <%= Admin::CompanyProfile.last.motto %>
+                </div>
+              </div>
+              <div class="top-panel-box">
+                <h3>Recent Comments</h3>
+                <ul>
+                  <% @recent_comments.each do |comment| %>
+                      <li>
+                              <span><%= comment.name %>:</span>
+                              <%= link_to truncate(strip_tags(comment.body), :length => 50), dashboard_home_path(comment.article_id), style:"margin-top:-10px" %>
+                      </li>
+                <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
