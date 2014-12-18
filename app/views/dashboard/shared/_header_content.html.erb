@@ -1,4 +1,4 @@
-<div id="templatemo_top_panel_wrapper_outter">
+<!-- <div id="templatemo_top_panel_wrapper_outter">
   <div id="templatemo_top_panel_wrapper_inner">
   	<div id="templatemo_top_panel">
       <div id="templatemo_menu">
@@ -21,7 +21,7 @@
                 <% end %>
               <% end %>
               </ul>
-            </li>
+            </li> -->
            <!--  <li><a href="#">Gallery</a>
               <ul>
               <li><a href="#">Sub Item 1.1</a></li>
@@ -30,7 +30,7 @@
               <li><a href="#">Sub Item 1.4</a></li>
               </ul>
             </li> -->
-            <li><%= link_to "About Us", dashboard_profile_path(1), class:"margin_l10" %></li>
+            <!-- <li><%= link_to "About Us", dashboard_profile_path(1), class:"margin_l10" %></li> -->
             <!-- <li><a href="#">Support</a>
               <ul>
               <li><a href="#">Sub Item 2.1</a></li>
@@ -53,7 +53,7 @@
               </ul>
             </li>
             <li><a href="#" class="margin_l10">Contact</a></li> -->
-          </ul>
+          <!-- </ul>
             <div class="text-right">
                 <%= form_tag dashboard_home_search_articles_path(home_id: 1), :method => :get do %>
                     <%= text_field_tag :name, "", placeholder:"Search Articles" %><%= image_tag("search_ico.gif") %>
@@ -67,14 +67,53 @@
           <h1>
             <a href="#"><%#= image_tag "templatemo_logo.png",alt:"site logo" %>
             <span>It's My-Journal <%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %></span>
-          </h1>
-        </div>      
-      </div> <!-- end of templatemo_banner -->    
-    </div> <!-- end of templatemo_top_panel -->
-  </div> <!-- end of templatemo_top_panel_wrapper_inner -->
-</div> <!-- end of  templatemo_top_panel_wrapper_outter -->
+          </h1> -->
+        <!-- </div>       -->
+      <!-- </div> --> <!-- end of templatemo_banner -->    
+    <!-- </div> --> <!-- end of templatemo_top_panel -->
+  <!-- </div> --> <!-- end of templatemo_top_panel_wrapper_inner -->
+<!-- </div> --> <!-- end of  templatemo_top_panel_wrapper_outter -->
+<div id="header">
+        <div id="header-info">
+          <h1><%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %></h1>
+          <div class="description"><%=  Admin::CompanyProfile.last.vission %></div>
+        </div>
+        <div id="header-menu">
+          <ul>
+            <li class="current_page_item"><%= link_to "Home", root_path %></li>
+            <li class="page_item"><%= link_to "Category", root_path %></li>
+            <li class="page_item"><%= link_to "About Us", dashboard_profile_path(1) %></li>
+          </ul>
+        </div>
+        <div id="header-search">
+          <form method="get" id="searchform" action="#">
+            <input type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" name="s" id="s" />
+            <input type="submit" id="searchsubmit" value="" />
+          </form>
+        </div>
+        <div id="header-date">Date: <%= Time.now.strftime('%d %B %Y') %></div>
+        <div id="header-rss"><a href="#">Subscribe to RSS</a></div>
+        <div id="header-comments"><a href="#">Subscribe to Comments</a></div>
+        <div id="header-cats">
+          <ul>
+            <li class="cat-item"><a href="#">Better Person</a> </li>
+            <li class="cat-item"><a href="#">Category</a> </li>
+            <li class="cat-item"><a href="#">Cove</a> </li>
+            <li class="cat-item"><a href="#">Dante</a> </li>
+            <li class="cat-item"><a href="#">Dolores</a> </li>
+            <li class="cat-item"><a href="#">Ipsum</a> </li>
+            <li class="cat-item"><a href="#">list Icons</a> </li>
+            <li class="cat-item"><a href="#">Lorem</a> </li>
+            <li class="cat-item"><a href="#">nintendo Wii</a> </li>
+            <li class="cat-item"><a href="#">Play Station 3</a> </li>
+            <li class="cat-item"><a href="#">Umbridge</a> </li>
+            <li class="cat-item"><a href="#">Uncategorized</a> </li>
+            <li class="cat-item"><a href="#">xbox 360</a> </li>
+          </ul>
+        </div>
+      </div>
 <style>
-  .text-right{
+  /*.text-right{
     margin-top: -5px;
     float: right;
     margin-right: 15px;
@@ -98,5 +137,5 @@
     -webkit-border-bottom-right-radius: 5px;
     -moz-border-top-right-radius: 5px;
     -moz-border-bottom-right-radius: 5px;
-  }
+  }*/
 </style>

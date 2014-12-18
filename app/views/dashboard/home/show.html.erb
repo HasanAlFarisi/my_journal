@@ -36,7 +36,7 @@
                   <!-- <a href="javascript:void(0)" onClick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=https://journalkreativ.herokuapp.com/dashboard/home/<%=@article.id%>','sharer','toolbar=0,status=0,width=548,height=325')">Share <br>this Article <br>for Your Friends </a> -->
                   <!-- <div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com" data-layout="button_count"></div>
             </p> -->
-            
+            <br>
             <div id="comment-field">
               <p>Comment</p>
               <%= render :partial => "dashboard/comments/index", locals: {dashboard_comments: @article_comments} %>

@@ -7,34 +7,46 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag    "modal", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag    "jqueryindex", media: "all", "data-turbolinks-track" => true %>
+  <!--[if IE]><%= stylesheet_link_tag    "style_ie", media: "all", "data-turbolinks-track" => true %><![endif]-->
+  <!--[if lt IE 7]><%= stylesheet_link_tag    "style_ie6", media: "all", "data-turbolinks-track" => true %><![endif]-->
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render 'dashboard/shared/header_content' %>
-<div id="templatemo_content_wrapper">
+<div id="page">
+      <div id="page-top">
+            <div id="page-bottom">
+                    <%= render 'dashboard/shared/header_content' %>
+<!-- <div id="templatemo_content_wrapper">
 	<div id="templatemo_content">
     <div id="templatemo_main_content_top"></div>
 
-    <div id="templatemo_main_coontent">
-      <%= render 'dashboard/shared/sidebar' %>
-		<%= yield %>
-        <div class="cleaner"></div> 
-      </div> <!-- end of main content in Sidebar -->
-      <div id="templatemo_main_content_bottom"></div>  
+    <div id="templatemo_main_coontent"> -->
+      <div id="main">
+            <%= yield %>
+            <%= render 'dashboard/shared/sidebar' %>
+		<%= render 'dashboard/shared/sidebar_menu' %>
+            <%= render 'dashboard/shared/pre_footer' %>
+      </div>
+        <!-- <div class="cleaner"></div>  -->
+      <!-- </div> --> <!-- end of main content in Sidebar -->
+      <!-- <div id="templatemo_main_content_bottom"></div>  
       <div class="post_content">
         <div class="link_button">
-          <div id="pagging-left">
-              <% unless @articles.blank? %>
-                <%= will_paginate @articles %> 
-              <% end %>
-          </div>
+          <div id="pagging-left"> -->
+              <%# unless @articles.blank? %>
+                <%#= will_paginate @articles %> 
+              <%# end %>
+          <!-- </div>
         </div>
       </div>
     </div>  
   </div> 
-</div>
+</div> -->
 <%= render 'dashboard/shared/footer' %>
+             </div>
+       </div>
+</div>
 </body>
 </html>
 <%= javascript_include_tag "ckeditor/truncate", "data-turbolinks-track" => true %>
