@@ -44,7 +44,52 @@ img {
 	background: url(/assets//page_bottom.png) no-repeat left bottom;
 }
 
+ .pagging { 
+ 	height:20px; 
+ 	padding:8px 10px; 
+ 	line-height:19px; 
+ 	color:#949494; 
+ }
+.pagging a{ 
+	background:url(/assets///pagging.gif) repeat-x 0 0; 
+	height:20px; 
+	float:left; 
+	padding:0 8px; 
+	border:solid 1px #d5d5d5; 
+	text-decoration: none; 
+	color:#949494; 
+	margin-left:5px; 
+	}
 
+.pagging em {
+	background:url(/assets///pagging.gif) repeat-x 0 0; 
+	height:20px; 
+	float:left;
+	padding:0 8px; 
+	border:solid 1px #d5d5d5; 
+	text-decoration: none; 
+	color:#949494; 
+	margin-left:5px; 
+	border-color:#8c3521; 
+	background:#173F63; 
+	color:#fff;-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+
+.pagging a:hover { 
+	border-color:#8c3521; 
+	background:#173F63; 
+	color:#fff; 
+}
+.pagging span{ 
+	float:left; 
+	margin-left:5px; 
+	padding-top:2px; 
+}
+#pagging-left{
+	/*margin-left: 300px !important;*/
+	float: right;
+}	
 /* Header */
 
 #header {
@@ -918,4 +963,153 @@ img {
 
 #footer a:hover {
 	text-decoration: underline;
+}
+
+#comment-field .field{
+	margin:10px 10px 10px 0px;	
+}
+#comment-field p{
+	font:normal 24px/30px Trebuchet MS, Arial, Verdana, Sans-Serif;
+	color: #2771a5;
+	border-bottom: 1px dashed #2771a5;
+	margin-top: -10px;
+	margin-bottom: 0px;
+}
+#comment-field .field label{
+	font:normal 15px/20px Trebuchet MS, Arial, Verdana, Sans-Serif;
+	color: #2771a5;
+	margin-right: 30px;
+}
+#comment-field .field input[type='text']{
+	font-size: 15px;
+	color: #000;
+	padding: 5px;
+	border: 1px solid #BFBFBF;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+}
+#comment-field .field textarea{
+	font-size: 13px;
+	color: #000;
+	padding: 5px;
+	width: 528px;
+	height: 100px;
+}
+#comment-field .field select{
+	font-size: 13px;
+	padding: 5px;
+	background: #fff;
+	margin-left: -5px;
+}
+#comment-field .actions input[type='submit']{
+    border: none;
+    display: inline-block;
+    padding: 1px 5px 3px 1px;
+    margin-right: 50px;
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    background: none repeat scroll 0% 0% rgb(103, 93, 82);
+    text-decoration: none;
+    float: right;
+    font-family: sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+#comment-field .actions input[type='submit'] a:hover{
+	background: #94591a;
+}
+.size-1{
+	width: 450px;
+}
+.size-1-mini{
+	width: 250px !important;
+	font-size: 10px !important;
+}
+.link_button a {
+	font:normal 15px/20px Trebuchet MS, Arial, Verdana, Sans-Serif;
+	display: inline-block;
+	padding: 3px 5px;
+	margin-right: 10px;
+	margin-top: 10px;
+	color: #ffffff !important;
+	background: #2771a5;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	text-decoration: none;
+}
+.link_button a:hover {
+	color: #000000;
+ 	background: #fad40d;
+}
+#comment-list{
+  margin-top: 10px;
+  border-bottom: 1px dashed #333;
+}
+#comment-list p{
+    border: none !important;
+    margin: 0px;
+    margin-top: -5px;
+  }
+#comment-list p:last-child{
+    border: 1px solid #000;
+  }
+  #comment-list label{
+  	font:normal 14px/17px Trebuchet MS, Arial, Verdana, Sans-Serif;
+    	color: #2771a5;
+  }
+  #comment-list span{
+    color: #639617;
+    font-weight: normal !important;
+    font-size: 12px;
+  }
+  #photo img{
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background-color: #fff !important;
+  }
+  #company_profile{
+  	font:normal 14px/18px Trebuchet MS, Arial, Verdana, Sans-Serif;
+  }
+  .post_content_admin img{
+  	margin-right: 20px;
+  	margin-bottom: 10px;
+  }
+  #content{
+  	width: 435px;
+  	background-color: #fff !important;
+  	padding: 5px;
+  	float: left;
+  }
+  .message{
+	padding: 10px;
+	font-size: 12px !important;
+	/*height: 530px;*/
+}
+#form_edit{
+	margin-top: -20px !important;
+}
+#form_edit label{ 
+	font-weight: bold;
+	font-size: 13px;
+	color: #275BA1;
+}
+#form_edit p{
+	margin-left: 10px; 
+}
+#progres_bar{
+	width: 360px !important;
+	color: #275BA1 !important;
+}
+#reply-view{
+	font:normal 12px/15px Trebuchet MS, Arial, Verdana, Sans-Serif;
+	margin-bottom: 0px !important;
+	padding: 0px 0px 0px 10px;
+	background: #D9D9D9;
+	margin-left:60px;
+	color: #2771a5;
+	border-bottom: 1px dashed #000;
 }

@@ -86,29 +86,22 @@
           </ul>
         </div>
         <div id="header-search">
-          <form method="get" id="searchform" action="#">
-            <input type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" name="s" id="s" />
+          
+          <%= form_tag dashboard_home_search_articles_path(home_id: 1), :method => :get, id: "searchform" do %>
+            <input type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" name="name" id="s" />
             <input type="submit" id="searchsubmit" value="" />
-          </form>
+          <%end%>
         </div>
         <div id="header-date">Date: <%= Time.now.strftime('%d %B %Y') %></div>
         <div id="header-rss"><a href="#">Subscribe to RSS</a></div>
         <div id="header-comments"><a href="#">Subscribe to Comments</a></div>
         <div id="header-cats">
           <ul>
-            <li class="cat-item"><a href="#">Better Person</a> </li>
-            <li class="cat-item"><a href="#">Category</a> </li>
-            <li class="cat-item"><a href="#">Cove</a> </li>
-            <li class="cat-item"><a href="#">Dante</a> </li>
-            <li class="cat-item"><a href="#">Dolores</a> </li>
-            <li class="cat-item"><a href="#">Ipsum</a> </li>
-            <li class="cat-item"><a href="#">list Icons</a> </li>
-            <li class="cat-item"><a href="#">Lorem</a> </li>
-            <li class="cat-item"><a href="#">nintendo Wii</a> </li>
-            <li class="cat-item"><a href="#">Play Station 3</a> </li>
-            <li class="cat-item"><a href="#">Umbridge</a> </li>
-            <li class="cat-item"><a href="#">Uncategorized</a> </li>
-            <li class="cat-item"><a href="#">xbox 360</a> </li>
+            <li class="cat-item"><%= link_to "Home", root_path %></li>
+            <% @categories_list.limit(15).each do |category| %>
+                  <li class="cat-item"><%= link_to category.name  , dashboard_home_show_categories_path(category) %></li>
+            <%end%>
+            <li class="cat-item"><%= link_to "About Us", dashboard_profile_path(1) %></li>
           </ul>
         </div>
       </div>

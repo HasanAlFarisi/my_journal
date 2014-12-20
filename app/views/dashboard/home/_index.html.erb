@@ -1,11 +1,8 @@
-
+ <% unless articles.present? %>
+  <h2 id="box_no_post">Sorry no post yet!</h2>
+<% end %>
 <% articles.each do |article| %>
-      <div class="featured-post">
-            <% unless articles.present? %>
-              <h2 id="box_no_post">Sorry no post yet!</h2>
-            <% end %>
-
-              <div class="post-title">
+            <div class="post-title">
                     <h2><%= link_to article.title, dashboard_home_path(article) %></h2>
                     <div class="post-title-info">
                           <div class="post-date">Dated: <%= "#{article.created_at.strftime('%d %B %Y')} " %>
@@ -36,9 +33,10 @@
                     </p>
                     <p> <%= link_to "Continue reading ...", dashboard_home_path(article),  class:"more-link" %></p>
               </div>
-      <br><br><br><br><br><br>
+      <div class="clear"></div>
+      <br>
       <div class="post-category">&nbsp;</div> 
-    </div>
+    
 <%end%>
 <%= javascript_include_tag "ckeditor/truncate", "data-turbolinks-track" => true %>
 <!-- <div id="fb-root"></div> -->

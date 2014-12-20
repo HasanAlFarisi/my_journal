@@ -89,7 +89,10 @@
   -webkit-border-radius: 3px;
   border-radius: 3px;
   margin: 0 auto 0 auto;
-  background: #3D3B38 !important;
+  background: #176396 !important;
+}
+#modal_profile img{
+  width: 220px !important;
 }
 
 .modalTitle{
@@ -134,12 +137,14 @@ ul.simpleTabsNavigation li a{ color:#01ACE4;  font-family: 'klavikalight'; font-
 .formModal p{ text-align:left;}
 .formModal #error_explanation{ text-align:left;}
 
-.formProfile{background-color: #8C8373;
+.formProfile{
+    background-color: #fff;
     webkit-border-top-right-radius:5px !important;
     -moz-border-top-right-radius:5px !important;
     border-top-right-radius:5px !important;
     webkit-border-bottom-right-radius:5px !important;
     -moz-border-bottom-right-radius:5px !important;
     border-bottom-right-radius:5px !important;
+    float: left;
 }
-.formProfile h4{color: #fad40d; margin-top: -10px;}
+.formProfile h4{color: #0A4873; margin-top: 10px; font:bold 14px/17px Trebuchet MS, Arial, Verdana, Sans-Serif;}

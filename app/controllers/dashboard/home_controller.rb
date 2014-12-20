@@ -18,7 +18,7 @@ class Dashboard::HomeController < ApplicationController
   end
 
   def search_articles
-    @articles = Article.where("title like '%#{params[:name]}%'").paginate(:page => params[:page], :per_page => 5  )
+    @articles = Article.where("title like '%#{params[:name]}%'").order("created_at DESC").paginate(:page => params[:page], :per_page => 5  )
     
     session[:url_back_dashboard] = request.original_url
   end

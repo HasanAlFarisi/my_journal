@@ -23,9 +23,17 @@
 
     <div id="templatemo_main_coontent"> -->
       <div id="main">
-            <%= yield %>
+            <div class="featured-post">
+              <%= yield %>
+              <% unless @articles.blank? %>
+                <div id="pagging-left" class="pagging">
+                    <%= will_paginate @articles %> 
+                </div>
+              <% end %>
+            </div>
             <%= render 'dashboard/shared/sidebar' %>
-		<%= render 'dashboard/shared/sidebar_menu' %>
+	      <%= render 'dashboard/shared/sidebar_menu' %>
+             <br>
             <%= render 'dashboard/shared/pre_footer' %>
       </div>
         <!-- <div class="cleaner"></div>  -->
@@ -34,9 +42,7 @@
       <div class="post_content">
         <div class="link_button">
           <div id="pagging-left"> -->
-              <%# unless @articles.blank? %>
-                <%#= will_paginate @articles %> 
-              <%# end %>
+              
           <!-- </div>
         </div>
       </div>
