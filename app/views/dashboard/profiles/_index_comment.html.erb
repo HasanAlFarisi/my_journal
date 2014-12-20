@@ -12,13 +12,13 @@
 		<span class="time"><%= "#{admin_comment.created_at.strftime('%d %b %Y')}"  %></span>
 		<p>
 			<label><b>Name :</b></label> 
-			<%= admin_comment.name %>
+			<span><%= admin_comment.name %></span>
 		</p>
 		    
 		<p>
 			<label><b>Comment :</b></label> 
+			<span><%= admin_comment.body %></span>
 		</p>
-			<div class='mini-field'><%= admin_comment.body %></div>
 	</div>
 	<span class="clear"></span>
 	  	<% admin_comment.reply_contacts.each do |reply| %>

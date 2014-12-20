@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
 
   def recent_post
     @recent_posts = Article.order('created_at DESC LIMIT 4')
+    @recent_comments =Dashboard::Comment.order('created_at DESC LIMIT 4')
   end
 
   def convert_to_arr_for_query(ids_param)

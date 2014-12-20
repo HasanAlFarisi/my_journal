@@ -4,44 +4,44 @@
   }
 </style>
 
-<div id="index-place">
+<!-- <div id="index-place">
   <div id="main_column">
       <div class="post_box">
         <div class="date_box">
-          <p>WE ARE</p>
-        </div>
-            
-        <div class="post_body">
+        </div> -->
+        <div class="post-title">
             <h2><a href="#"><%= @company_profile.name %></a></h2>
-          
-          <div class="post_content">
-            <a href="#">
-            <%= image_tag @company_profile.photo.url(:original), width:"210px", class:"floating" %>
-            </a>
-            <p><b>Company Name:</b> 
-                    <br><%= @company_profile.name %>
-            </p>
-            <p><b>Company Motto: </b>
-                    <br><%= @company_profile.motto %>
-            </p>
-            <p><b>Company Vision: </b>
-                    <div class="up">
-                        <%= raw @company_profile.vission %>
+        </div>
+        <div class="post-entry">
+            <p>
+                  <%= image_tag @company_profile.photo.url(:original), style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"272" %>
+                    <div id="company_profile">
+                          <p>
+                                  <b>Company Name:</b> 
+                                  <%= @company_profile.name %>
+                          </p>
+                          <p>
+                                  <b>Company Motto: </b>
+                                  <%= @company_profile.motto %>
+                          </p>
+                          <p>
+                                  <b>Company Vision: </b>
+                                  <%= raw @company_profile.vission %>
+                          </p>
+                          <p>        
+                                  <b>Company Mision: </b>
+                                  <%= raw @company_profile.mission %>
+                          </p>
+                          <p>
+                                  <b>Company Address: </b>
+                                  <%= raw @company_profile.address %>
+                          </p>
                     </div>
             </p>
-            <p><b>Company Mision: </b>
-                    <div class="up">
-                        <%= raw @company_profile.mission %>
-                    </div>
-            </p>
-            <p><b>Company Address: </b><br>
-                    <div class="up">
-                        <%= raw @company_profile.address %>
-                    </div>
-            </p>
-            
+            <div class="clear"></div>
+            <br>
             <%= render partial: "dashboard/profiles/admins", locals: {admins: @admins} %>
-            <div class="cl"><br><br><br></div>
+            <div class="cl"><br></div>
             <div id="comment-field">
               <p>Contact Us!</p>
               <div id="notice-place"></div>
@@ -55,7 +55,7 @@
               <%= link_to "Back ...", root_path %>
             </div>
           </div> 
-        </div>
+<!--         </div>
       </div>
     </div>
-</div>
+</div> -->
