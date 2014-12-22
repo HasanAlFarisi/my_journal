@@ -5,7 +5,9 @@
 </span> -->
 <%= f.text_field :name, class:"field size6 floating"  %>
 <%= f.text_field :skill, class:"field size2 floating"  %>
-<div style='margin-top:-7px'>%</div>
+<div style='margin-top:-7px' class="">%
+  <input type="checkbox" name="selected[]" id="<%= "selected-#{f.object.id}" %>" value="<%= f.object.id %>" class="check-self"><span style="color:red">Delete</span>
+  </div>
 <!-- <br> -->
 <%#= f.file_field :icon, class:"field size6 input-file file", id: "fileField", :onchange => "readIconURL(this);", style:"margin-left:75px" %>
 <!-- <br> -->

@@ -53,7 +53,13 @@ class Admin::CategoriesController < Admin::BaseController
         unless  params[:admin_category][:sub_categories_attributes].blank?
           params[:admin_category][:sub_categories_attributes].each do |sub_category|
             unless sub_category[1][:id].blank?
-              Admin::SubCategory.find(sub_category[1][:id]).update_attributes({name: sub_category[1][:name]})
+              unless params[:selected].blank?           
+                  ids_param = params[:selected]
+                  ids = convert_to_arr_for_query(ids_param)
+                  Admin::SubCategory.delete_all "id in #{ids}"
+              else
+                  Admin::SubCategory.find(sub_category[1][:id]).update_attributes({name: sub_category[1][:name]})
+              end
             else
               Admin::SubCategory.create({name: sub_category[1][:name], category_id: @admin_category.id})
             end

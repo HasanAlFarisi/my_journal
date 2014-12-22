@@ -81,7 +81,13 @@ class Admin::ProfilesController < Admin::BaseController
                   admin_skill = Admin::ProfileSkill.create({profile_id: @admin_profile.id, name: skill[1][:name], skill: skill[1][:skill]})
                   admin_skill.save
                 else
-                  admin_skill = Admin::ProfileSkill.find(skill[1][:id]).update({name: skill[1][:name], skill: skill[1][:skill]})
+                  unless params[:selected].blank?           
+                      ids_param = params[:selected]
+                      ids = convert_to_arr_for_query(ids_param)
+                      Admin::ProfileSkill.delete_all "id in #{ids}"
+                  else
+                      admin_skill = Admin::ProfileSkill.find(skill[1][:id]).update({name: skill[1][:name], skill: skill[1][:skill]})
+                  end
                 end
             end
         end

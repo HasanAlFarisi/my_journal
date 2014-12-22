@@ -25,7 +25,7 @@
           <div id="progres_bar">
             <div class="progress">
               <div class="progress-bar" style="width:<%= skill.skill %>%;">
-                <%= skill.skill %> %
+                <%= skill.skill.blank? ? 0 : skill.skill %> %
               </div>
             </div>
           </div>

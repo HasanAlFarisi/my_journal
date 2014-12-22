@@ -42,6 +42,7 @@ MyJournal::Application.routes.draw do
       end
     end
 
+    resources :advertises
     resources :complete_profiles
     resources :profiles
     resources :helps

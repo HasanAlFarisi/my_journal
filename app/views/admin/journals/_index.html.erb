@@ -43,7 +43,7 @@
                             <div id="progres_bar">
                                       <div class="progress" style="margin-bottom:0px; display:block !important">
                                          <div class="progress-bar" style="width:<%= admin_journal_issue.progress %>%;">
-                                              <%= admin_journal_issue.progress %>%
+                                              <%= admin_journal_issue.progress.blank? ? 0 : admin_journal_issue.progress %>%
                                           </div>
                                    </div>
                                  </div>

@@ -80,19 +80,16 @@
                                 <% end %>
                           </div>
                           <div class="cl">&nbsp;</div>
-                          <br>
-                          <div class="buttons" style="text-align:left">
+                          <div class="buttons" style="text-align:left; <%= 'display:none' if @admin_journal_issue.journal_issue_files.blank? %>">
                                 <%= label_tag :image, "Attach Files" %>
                                 <% unless @admin_journal_issue.journal_issue_files.blank? %>
                                       <% @admin_journal_issue.journal_issue_files.each do |file| %>
                                              <%= link_to generated_file_type(file).html_safe, file.document.url, :target => "_blank" %>
                                       <% end %>
-                                <% else %>
-                                        <p>No Attach FIles Yet</p>
                                 <% end %>
                           </div>
                           <br>
-                          <div class="contents">
+                          <div class="contents" style=" <%= 'display:none' if @admin_journal_issue.journal_issue_comments.blank? %>">
                                 <%= render "admin/journal_issue_comment/all_comment" %>
                                 <%= render 'dashboard/shared/ajax_loader' %>
                                 <div class="temp-comment">

@@ -24,7 +24,10 @@
           
           <span>
               <%= f.fields_for :sub_categories do |sc| %>
-                <%= render "admin/categories/sub_category", :f => sc %>
+                <p>
+                    <%= f.label :name, "Sub Category Name" %>
+                    <%= render "admin/categories/sub_category", :f => sc %>
+                </p>
                <% end %> 
           </span> 
 

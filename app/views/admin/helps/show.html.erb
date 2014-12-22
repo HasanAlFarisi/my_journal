@@ -15,5 +15,13 @@
   <%= @admin_help.help %>
 </p>
 
+<p>
+	<strong>Screeshoots:</strong>
+	<br>
+	<% @admin_help.help_files.each do |image| %>
+		<%= image_tag image.document.url(:original), width:"30%" %>
+	<% end %>
+</p>
+
 <%= link_to 'Edit', edit_admin_help_path(@admin_help) %> |
 <%= link_to 'Back', admin_helps_path %>

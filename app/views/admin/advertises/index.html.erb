@@ -1,0 +1,70 @@
+<!-- Main -->
+<div id="main">
+  <div class="cl">&nbsp;</div>
+  
+  <!-- Content -->
+  <div id="content">
+    
+    <!-- Box Article -->
+    <div class="box">
+      <!-- Box Head -->
+      <div class="box-head">
+        <h2 class="left">Current Advertise</h2>
+      </div>                          
+      <% unless @admin_advertise.blank? %>
+            <% if @admin_advertise.errors.any? %>
+                    <%= render partial: "shared/validate_error", locals: { object: @admin_advertise}%>
+            <% end %>     
+      <% end %>     
+      <!-- End Box Head --> 
+      <div class="table">
+             <% @admin_advertises.each do |admin_advertise| %>
+                <table style="padding:10px" class="floating">
+                    <tr>
+                          <td width="50px">
+                                <% if admin_advertise.status == true %>
+                                       <%= link_to "Show", edit_admin_advertise_path(admin_advertise, status: false), class:"ico floating", style:"margin: 3px 0px -15px 10px" %>
+                                       <%= link_to image_tag("open_eye.png", width:"35%", style:"margin-top:-3px"), edit_admin_advertise_path(admin_advertise, status: false) %>
+                                <% else %>
+                                        <%= link_to "HIde", edit_admin_advertise_path(admin_advertise, status: true), class:"ico floating", style:"margin: 3px 0px -15px 10px" %>
+                                       <%= link_to image_tag("close_eye.png", width:"40%", style:"margin-top:-3px"), edit_admin_advertise_path(admin_advertise, status: true) %>
+                                <% end %>
+                          </td>
+                          <td>
+                                  <%= link_to 'Destroy', admin_advertise, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
+                          </td>
+                    </tr>
+                    <tr>
+                          <td colspan="2">
+                                  <%= image_tag admin_advertise.image.url(:original), width:"125px", height:"125px" %>
+                          </td>
+                    </tr>
+                </table>
+          <% end %>
+          <div class="cl">&nbsp;</div>
+      <!-- Pagging -->
+        <div class="pagging">
+          <%= link_to 'New Advertise', new_admin_advertise_path, class:"tab-right-button button journal" %> 
+          <div class="left">&nbsp;Advertises Total: <b><%= @admin_advertises.count %></b> Advertises</div>
+          <div class="right">
+            <%= will_paginate @admin_advertises %>
+          </div>
+        </div>
+        <!-- End Pagging -->
+      </div>
+      <!-- Table -->
+    </div>
+    <!-- End Box Article -->
+  </div>
+  <!-- End Content -->
+  
+  <div class="cl">&nbsp;</div>      
+</div>
+<!-- Main -->
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<div id="modal_background"></div>
