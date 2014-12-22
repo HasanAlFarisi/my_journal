@@ -20,7 +20,7 @@ $(document).ready(function(){
 			data:{
 					'profile_email' : $("#submit-form").attr("profileEmail"),
 					'dashboard_comment[article_id]' : $('#dashboard_comment_article_id').val(),
-					'dashboard_comment[admin_id]' : $('#dashboard_comment_article_id').val(),
+					'dashboard_comment[admin_id]' : $('#dashboard_comment_admin_id').val(),
 					'dashboard_comment[name]' : $('#dashboard_comment_name').val(),
 					'dashboard_comment[email]' : $('#dashboard_comment_email').val(),
 					'dashboard_comment[body]' : $('#textarea-label').val(),
