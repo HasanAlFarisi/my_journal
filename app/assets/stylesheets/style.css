@@ -820,19 +820,19 @@ img {
 	
 	/* Sidebar - Ads */
 	
-	.sidebar-ads {
+	.sidebar-a {
 		float: right;
 		width: 280px;
 		background: url(/assets//sidebar_ads.gif) repeat-y;
 		margin-bottom: 10px;
 	}
 	
-	.sidebar-ads-top {
+	.sidebar-a-top {
 		width: 280px;
 		background: url(/assets//sidebar_ads_top.gif) no-repeat;
 	}
 	
-	.sidebar-ads-bottom {
+	.sidebar-a-bottom {
 		width: 270px;
 		padding: 5px;
 		background: url(/assets//sidebar_ads_bottom.gif) no-repeat left bottom;
