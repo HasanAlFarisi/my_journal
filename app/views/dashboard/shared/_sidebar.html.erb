@@ -2,7 +2,12 @@
       <div class="sidebar-a-top">
             <div class="sidebar-a-bottom">
             	     <% @admin_advertises.each do |admin_advertise| %>
-                  		<div class="sidebar-banner"><%= image_tag admin_advertise.image.url(:original), width:"125px", height:"125px" %></div>
+                  		<div class="sidebar-banner">
+                  			<%#= link_to image_tag(admin_advertise.image.url(:original), width:"125px", height:"125px"), admin_advertise.link %>
+                  			<a href="<%= admin_advertise.link %>">
+                  				<%= image_tag admin_advertise.image.url(:original), width:"125px", height:"125px" %>
+                  			</a>
+                  		</div>
                   <% end %>
               </div>
       </div>

@@ -4,10 +4,16 @@
 	overflow: hidden;
 }
 .scroller_comment{
-	width: 290px !important;
+	width: 300px !important;
 	margin-left: -10px !important;
 	height: 550px !important;
 	overflow: hidden;
+}
+.scroller_gallery{
+	width: 530px !important;
+	margin-left: -10px !important;
+	height: 550px !important;
+	overflow: hidden;	
 }
 .miniscroll-thumb{
 	background-color: #3D3B38 !important;

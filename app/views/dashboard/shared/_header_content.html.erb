@@ -5,9 +5,9 @@
         </div>
         <div id="header-menu">
           <ul>
-            <li class="current_page_item"><%= link_to "Home", root_path %></li>
-            <li class="page_item"><%= link_to "Category", root_path %></li>
-            <li class="page_item"><%= link_to "About Us", dashboard_profile_path(1) %></li>
+            <li class="page_item home"><%= link_to "Home", root_path %></li>
+            <li class="page_item gallery"><%= link_to "Gallery", dashboard_galleries_path %></li>
+            <li class="page_item about"><%= link_to "About Us", dashboard_profile_path(1) %></li>
           </ul>
         </div>
         <div id="header-search">
@@ -23,37 +23,23 @@
         <div id="header-cats">
           <ul>
             <li class="cat-item"><%= link_to "Home", root_path %></li>
-            <% @categories_list.limit(15).each do |category| %>
+            <% @categories_list.limit(10).each do |category| %>
                   <li class="cat-item"><%= link_to category.name  , dashboard_home_show_categories_path(category) %></li>
             <%end%>
+            <li class="cat-item"><%= link_to "Gallery", dashboard_galleries_path %></li>
             <li class="cat-item"><%= link_to "About Us", dashboard_profile_path(1) %></li>
           </ul>
         </div>
       </div>
-<style>
-  /*.text-right{
-    margin-top: -5px;
-    float: right;
-    margin-right: 15px;
-  }
-  .text-right input[type='text']{
-  font-size: 13px;
-  color: #fff;
-  padding: 5px;
-  background: rgb(103, 93, 82);
-  border: none;
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-top-left-radius: 5px;
-  -moz-border-bottom-left-radius: 5px;
-}
-  .text-right img{
-    width: 25px ;
-    height: 25px ;
-    margin: 6px 0px -8px -2px;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-top-right-radius: 5px;
-    -moz-border-bottom-right-radius: 5px;
-  }*/
-</style>
+<script>
+      <% if session[:current].blank? %>
+            $(".home").removeClass("page_item")
+            $(".home").addClass("current_page_item")
+      <% elsif session[:current] == "gallery" %>
+            $(".gallery").removeClass("page_item")
+            $(".gallery").addClass("current_page_item")
+      <% elsif session[:current] == "about" %>
+            $(".about").removeClass("page_item")
+            $(".about").addClass("current_page_item")
+      <% end %>
+</script>

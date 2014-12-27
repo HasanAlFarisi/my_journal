@@ -4,7 +4,8 @@ class Admin::GalleryGroupsController < Admin::BaseController
   # GET /admin/gallery_groups
   # GET /admin/gallery_groups.json
   def index
-    @admin_gallery_groups = Admin::GalleryGroup.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
+    @admin_gallery_groups = Admin::GalleryGroup.order("created_at DESC").paginate(:page => params[:page], :per_page => 12)
+    session[:urlBack] = request.original_url
   end
 
   # GET /admin/gallery_groups/1
@@ -19,6 +20,7 @@ class Admin::GalleryGroupsController < Admin::BaseController
 
   # GET /admin/gallery_groups/1/edit
   def edit
+    @admin_galleries = Admin::Gallery.where("gallery_group_id = ? ", params[:id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 12)
   end
 
   # POST /admin/gallery_groups
@@ -28,7 +30,8 @@ class Admin::GalleryGroupsController < Admin::BaseController
 
     respond_to do |format|
       if @admin_gallery_group.save
-        format.html { redirect_to @admin_gallery_group, notice: 'Gallery group was successfully created.' }
+        Admin::Gallery.save_attributes(@admin_gallery_group.id,params[:admin_gallery_group])
+        format.html { redirect_to admin_gallery_groups_path, notice: 'Gallery group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_gallery_group }
       else
         format.html { render action: 'new' }
@@ -42,7 +45,8 @@ class Admin::GalleryGroupsController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_gallery_group.update(admin_gallery_group_params)
-        format.html { redirect_to @admin_gallery_group, notice: 'Gallery group was successfully updated.' }
+        Admin::Gallery.save_attributes(@admin_gallery_group.id,params[:admin_gallery_group])
+        format.html { redirect_to admin_galleries_path(group_id: @admin_gallery_group.id), notice: 'Gallery group was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

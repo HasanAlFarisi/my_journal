@@ -1,12 +1,10 @@
 <div id="comment-list" class="mini-field">
 	<span class="time"><%= "#{comment.created_at.strftime('%d %b %Y')}"  %></span>
-	<p>
-		<label><b>Name :</b></label> 
-		<%= comment.name %>
-	</p>
-	    
-	<p>
-		<label><b>Comment :</b></label> 
-		<%= comment.body %>
-	</p>
+	<div class="clear"></div>	
+	<label><b>Name :</b></label> 
+	<span><%= comment.name %></span>
+	<div class="clear"></div>
+	<label><b>Comment :</b></label> 
+	<span><%= comment.body %></span>
+	
 </div>

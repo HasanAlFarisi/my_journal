@@ -82,6 +82,7 @@ h3 a{ text-decoration: none; }
 
 #main {float: left;}
 #content { float:left; width:740px !important; }
+#content_gallery { float:left; width:840px !important; }
 #sidebar { float:right; width:225px; }
 
 
@@ -138,7 +139,9 @@ a.edit { background-image:url(/assets///edit.gif); margin-left:14px;}
 .form h3{font-weight: bold; font-size: 14px;}
 .form ol li{font-size: 12px; text-align: left;padding: 3px; color: #ba4c32;}
 
+.size-0 {width: 100px; margin-right: -35px;}
 .size0 { width:708px; }
+.size-1 {width: 10px !important}
 .size1 { width:710px; }
 .size2 { width:80px; }
 .size3 { width:120px; }
@@ -215,6 +218,7 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .floating{float: left;margin-right: 5px;}
 .img_profile{width:250px; height:250px; margin-bottom: 5px;}
 .left-photo{height:250px; width: 260px; float: left;}
+.left-photo-gallery{width: 530px; float: left; /*padding-top: 18%;*/}
 .notice{margin-bottom: 10px !important;}
 .comment {}
 .comment th{background:#ba4c32; color: #fff}
@@ -278,3 +282,12 @@ select {-moz-border-radius:5px; -webkit-border-radius:5px; display:block; displa
 .padding_down{padding-top: 10px !important;}
 .journal_search{float: left !important;padding: 0px 0px 1px 0px !important;margin-left: 3px;color: #999 !important;}
 .disable{background-color: #cecece}
+.message_gallery{width: 320px; padding: 5px;}
+.message_gallery h3{ font: bold 14px Arial !important; color: #ba4c32; border-bottom: dashed 1px #ba4c32}
+.message_gallery label{font: bold 12px Arial !important;}
+.message_gallery span{font: normal 12px Arial !important; color: #ba4c32; padding: 2px;}
+.message_gallery nav{border-bottom: dashed 1px #ba4c32}
+.ico-gallery-one {float: right; margin-right: 30px;}
+.ico-gallery {float: right; margin-right: 5px;}
+.content_gallery_blank{background-color: #ccc; padding-top: 5px; padding-bottom: 5px;}
+.close_button{float: right !important; margin-bottom: -33px; margin-right: -10px}

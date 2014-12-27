@@ -24,7 +24,9 @@
 	  	<% admin_comment.reply_contacts.each do |reply| %>
 	      		<div id="reply-view" class="left">
 	          		<span style="font-size:9px">Reply from</span> 
-	          		<%= "#{admin.name} #{admin.last_name}" %>:<br>
+	          		<% unless admin.blank? %>
+	          			<%= "#{admin.name} #{admin.last_name}" %>:<br>
+	          		<% end %>
 	          		<div class='up'><%= reply.body %></div>
 	      		</div>
 	      		<div class="clear border-bottom"></div>

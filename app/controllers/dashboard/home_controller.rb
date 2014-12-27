@@ -1,5 +1,5 @@
 class Dashboard::HomeController < ApplicationController
-	before_filter :prepare_select, :prepare_article_default
+	before_filter :prepare_select, :prepare_article_default, :prepare_session
 
   def index
       @articles = @articles_default
@@ -57,5 +57,9 @@ class Dashboard::HomeController < ApplicationController
 
   def prepare_article_default
     @articles_default = Article.order("created_at DESC").paginate(:page => params[:page], :per_page => 5  )
+  end
+
+  def prepare_session
+      session[:current] = nil
   end
 end

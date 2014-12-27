@@ -1078,6 +1078,10 @@ img {
   	margin-right: 20px;
   	margin-bottom: 10px;
   }
+  .post_content_gallery{
+  	padding-right: 20px;
+  	padding-bottom: 20px;
+  }
   #content{
   	width: 435px;
   	background-color: #fff !important;
@@ -1112,4 +1116,26 @@ img {
 	margin-left:60px;
 	color: #2771a5;
 	border-bottom: 1px dashed #000;
+}
+.floatings{
+	float: left;
+	margin-right: 5px;
+}
+.tables table td:hover{
+	background-color: #226198;
+}
+.tables table th{
+	background-color: #7e9bb8;
+	padding: 5px;
+}
+.left-photo-gallery{
+	width: 530px; 
+	float: left; 
+	padding-top: 18%;
+}
+.close_button{
+	float: right !important; 
+	margin-bottom: -33px; 
+	margin-right: -10px;
+	z-index:100;
 }

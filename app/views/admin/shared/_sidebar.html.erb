@@ -6,6 +6,26 @@
 <%= render "admin/shared/sidebar_status_journal" %>
 <!-- End Project Sidebar -->
 
+
+<div class="box">
+  <div class="box-head">
+    <h2>Article Categories</h2>
+  </div>
+  <!-- End Box Head-->
+  <div class="box-content">
+    <ul class="list">
+      <% @categories_list.each do |category| %>
+        <li>
+          <%= link_to "#{category.name}", admin_category_path(category) %>
+        </li>
+      <%end%>
+      <% unless  @categories_list.present? %>
+          <li>No Categories yet</li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
 <div class="box">  
   <div class="box-head">
     <h2>Management</h2>
@@ -33,25 +53,6 @@
       <% end %>
     </div>
     <!-- End Sort -->  
-  </div>
-</div>
-
-<div class="box">
-  <div class="box-head">
-    <h2>Article Categories</h2>
-  </div>
-  <!-- End Box Head-->
-  <div class="box-content">
-    <ul class="list">
-      <% @categories_list.each do |category| %>
-        <li>
-          <%= link_to "#{category.name}", admin_category_path(category) %>
-        </li>
-      <%end%>
-      <% unless  @categories_list.present? %>
-          <li>No Categories yet</li>
-      <% end %>
-    </ul>
   </div>
 </div>
 

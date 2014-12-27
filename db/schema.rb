@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212035732) do
+ActiveRecord::Schema.define(version: 20141225114325) do
+
+  create_table "admin_advertises", force: true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "link"
+    t.string   "key",                default: "lock"
+  end
 
   create_table "admin_categories", force: true do |t|
     t.string   "name"
@@ -57,6 +69,7 @@ ActiveRecord::Schema.define(version: 20141212035732) do
 
   create_table "admin_galleries", force: true do |t|
     t.string   "title"
+    t.text     "content"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -65,6 +78,22 @@ ActiveRecord::Schema.define(version: 20141212035732) do
     t.datetime "updated_at"
     t.integer  "group_id"
     t.integer  "gallery_group_id"
+  end
+
+  create_table "admin_gallery_comment_replies", force: true do |t|
+    t.integer  "gallery_comment_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "admin_gallery_comments", force: true do |t|
+    t.integer  "gallery_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "admin_gallery_groups", force: true do |t|

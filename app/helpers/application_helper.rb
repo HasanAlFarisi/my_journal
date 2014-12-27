@@ -29,6 +29,10 @@ module ApplicationHelper
 		return Admin::Journal.find(journal_id)
 	end
 
+	def find_reply_gallery(gallery)
+		return Admin::GalleryCommentReply.where("gallery_comment_id = ?", gallery.id)
+	end
+
 	def find_status(status_id)
 		if status_id == 1
 			generated(1)

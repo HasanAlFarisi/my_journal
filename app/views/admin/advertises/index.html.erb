@@ -33,16 +33,24 @@
                                        <%= link_to image_tag("open_eye.png", width:"35%", style:"margin-top:-3px"), edit_admin_advertise_path(admin_advertise, status: false) %>
                                 <% else %>
                                         <%= link_to "HIde", edit_admin_advertise_path(admin_advertise, status: true), class:"ico floating", style:"margin: 3px 0px -15px 10px" %>
-                                       <%= link_to image_tag("close_eye.png", width:"40%", style:"margin-top:-3px"), edit_admin_advertise_path(admin_advertise, status: true) %>
+                                       <%= link_to image_tag("close_eye.png", width:"35%", style:"margin-top:2px"), edit_admin_advertise_path(admin_advertise, status: true) %>
                                 <% end %>
                           </td>
-                          <td>
+                          <td width="50px">
                                   <%= link_to 'Destroy', admin_advertise, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
                           </td>
                     </tr>
                     <tr>
                           <td colspan="2">
                                   <%= image_tag admin_advertise.image.url(:original), width:"125px", height:"125px" %>
+                          </td>
+                    </tr>
+                    <tr>
+                          <td colspan="2">
+                                  <span class="linked_<%= admin_advertise.id %>">
+                                        <%= admin_advertise.link.blank? ? "example.com" : truncate(admin_advertise.link, length: 13) %>
+                                        <%= link_to image_tag(admin_advertise.key == "lock" ? "lock.png" : "open.png", width:"10%", style:"float:right"), edit_lock_admin_advertises_path(id: admin_advertise.id, key: admin_advertise.key == "lock" ? "open" : "lock"), remote: true %>
+                                  </span>
                           </td>
                     </tr>
                 </table>

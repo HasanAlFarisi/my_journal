@@ -1,25 +1,94 @@
-<%= form_for(@admin_gallery_group) do |f| %>
-  <% if @admin_gallery_group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@admin_gallery_group.errors.count, "error") %> prohibited this admin_gallery_group from being saved:</h2>
+<style type="text/css">
+  .count{
+    position: absolute;
+    color: red;
+    font-weight: bold;
+  }
+</style>
 
-      <ul>
-      <% @admin_gallery_group.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div id="main">
+      <div class="cl">&nbsp;</div>
+      <div id="content">
+        <!-- Box -->
+             <div class="box">
+                <!-- Box Head -->
+                    <div class="box-head">
+                      <h2>Galleries</h2>
+                    </div>
+                    <!-- End Box Head -->
+                    <div class="form">
+                          <%= form_for(@admin_gallery_group, :html => {:multipart => true}) do |f| %>
+                                  <% if @admin_gallery_group.errors.any? %>
+                                        <%= render partial: "shared/validate_error", locals: { object: @admin_gallery_group}%>
+                                  <% end %>
+                                  <p>
+                                        <%= f.label :name, "Gallery Name" %><span>(Required Field)</span>
+                                        <%= f.text_field :name, class:"field size1" %>
+                                  </p>
+                                  <p>
+                                      <%#= f.fields_for :galleries do |g| %>
+                                            <!--<%= label_tag :photo, "Photo", style:"margin-bottom:0px;" %>
+                                            <span class="foto_prev"></span>
+                                            <%= file_field_tag :photo, class:"field size4 input-file", id: "fileField", :onchange => "readURLGallery(this);", name:"admin_gallery_group[galleries_attributes][0][photo]"  %>
+                                            <br>
+                                            <%= label_tag :title, "Title" %>
+                                            <%= text_field_tag :title, "", name:"admin_gallery_group[galleries_attributes][0][title]", class:"field size4" %>
+                                            <br>
+                                            <%= label_tag :content %>
+                                            <%= text_area_tag :content,"",id:"", name:"admin_gallery_group[galleries_attributes][0][content]", class:"field size1", style:"height:60px" %>
+                                            <div class="cl">&nbsp;</div>-->
+                                            <div class="sub-screen-shoot" dataId="1"><!-- add images place --></div>
+                                            <div class="add add_photo_gallery button" type="submit">+| Photo</div>
+                                      <%# end %>
+                                  </p>
+                                  <div class="cl">&nbsp;</div>
+                                  <div class="table" style="margin-top:-20px">
+                                  <% unless @admin_galleries.blank? %>
+                                          <% @admin_galleries.each do |image| %>
+                                                 <table style="padding:10px" class="floating">
+                                                        <tr>
+                                                              <td width="15px">
+                                                                     <span class="count"><%= image.gallery_comments.count %></span>
+                                                                     <%= link_to image_tag("comment.png", width:"150%", style:"margin-top:3px"), admin_gallery_path(image), remote: true %>
+                                                               </td>
+                                                               <td>
+                                                                    <%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>     
+                                                               </td>
+                                                        </tr>
+                                                        <tr>
+                                                              <td colspan="2">
+                                                                     <%= link_to image_tag(image.photo.url(:original),width:"125px"), admin_gallery_path(image), remote: true %>
+                                                              </td>
+                                                        </tr>
+                                                  </table>
+                                          <% end %>
+                                      </div>
+                                      <br>
+                                      <div class="cl">&nbsp;</div>
+                                      <div class="pagging">
+                                        <div class="left">Photos Total: <b><%= @admin_galleries.count %></b> Photos</div>
+                                        <div class="right">
+                                          <%= will_paginate @admin_galleries %>
+                                        </div>
+                                      <% end %>
+                                      </div>
+                                  <div class="cl">&nbsp;</div>                                 
+                                  <div class="buttons">
+                                        <%= link_to "Back", session[:urlBack], class:"button-back" %>
+                                        <%= f.submit "Save Galleries", class:"button" %>
+                                  </div>
+                          <% end %>
+                    </div>
+             </div>
+      </div>
+      <div class="cl">&nbsp;</div>
+</div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :sub_name %><br>
-    <%= f.text_field :sub_name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<!-- Sidebar -->
+<div id="sidebar">
+      <%= render :partial => "admin/shared/sidebar" %>
+</div>
+<!-- Sidebar -->
+<div id="modal_background"></div>
+<div id="show_gallery"></div>
+<%= javascript_include_tag "admin/journal" %>

@@ -33,6 +33,16 @@ class Admin::AdvertisesController < Admin::BaseController
     end
   end
 
+  def edit_lock
+      @admin_advertise = Admin::Advertise.find(params[:id])
+      @admin_advertise.update(key: params[:key])
+  end
+
+  def edit_lock_open
+      @admin_advertise = Admin::Advertise.find(params[:id])
+      @admin_advertise.update(link: "http://#{params[:link]}",key: params[:key])
+  end
+
   # POST /admin/advertises
   # POST /admin/advertises.json
   def create
@@ -82,6 +92,6 @@ class Admin::AdvertisesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_advertise_params
-      params.require(:admin_advertise).permit(:image, :status)
+      params.require(:admin_advertise).permit(:image, :status, :link)
     end
 end

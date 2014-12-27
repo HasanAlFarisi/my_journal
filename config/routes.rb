@@ -21,6 +21,10 @@ MyJournal::Application.routes.draw do
       resources :profiles, only: [:show] do
          get :show_admin
       end
+      resources :galleries do
+          get :show_photo
+          post :comment
+      end
   end
 
   namespace :admin do
@@ -42,12 +46,24 @@ MyJournal::Application.routes.draw do
       end
     end
 
-    resources :advertises
+    resources :advertises do
+      collection do
+         get :edit_lock
+         post :edit_lock_open
+       end
+    end
+
     resources :complete_profiles
     resources :profiles
     resources :helps
     resources :gallery_groups
-    resources :galleries
+
+    resources :galleries do
+        collection do
+            post :create_reply
+        end
+    end
+
     resources :journals do
         collection do
             post :selected_members

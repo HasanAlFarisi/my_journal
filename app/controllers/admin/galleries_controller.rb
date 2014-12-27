@@ -4,7 +4,8 @@ class Admin::GalleriesController < Admin::BaseController
   # GET /admin/galleries
   # GET /admin/galleries.json
   def index
-    @admin_galleries = Admin::Gallery.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
+    @group = Admin::GalleryGroup.find(params[:group_id])
+    @admin_galleries = Admin::Gallery.where("gallery_group_id = ? ", params[:group_id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /admin/galleries/1
@@ -15,6 +16,7 @@ class Admin::GalleriesController < Admin::BaseController
   # GET /admin/galleries/new
   def new
     @admin_gallery = Admin::Gallery.new
+    @group = Admin::GalleryGroup.find(params[:id])
   end
 
   # GET /admin/galleries/1/edit
@@ -28,13 +30,22 @@ class Admin::GalleriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_gallery.save
-        format.html { redirect_to @admin_gallery, notice: 'Gallery was successfully created.' }
+        Admin::Gallery.save_attributes(params[:admin_gallery][:gallery_group_id],params)
+        unless params[:admin_gallery_group].blank?
+            Admin::Gallery.save_attributes(params[:admin_gallery][:gallery_group_id],params[:admin_gallery_group])
+        end
+        format.html { redirect_to admin_galleries_path(group_id: params[:admin_gallery][:gallery_group_id]), notice: 'Gallery was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_gallery }
       else
         format.html { render action: 'new' }
         format.json { render json: @admin_gallery.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def create_reply
+    @create_reply = Admin::GalleryCommentReply.create(gallery_comment_id: params[:id], content:params[:content])
+    @create_reply.save
   end
 
   # PATCH/PUT /admin/galleries/1
@@ -56,7 +67,7 @@ class Admin::GalleriesController < Admin::BaseController
   def destroy
     @admin_gallery.destroy
     respond_to do |format|
-      format.html { redirect_to admin_galleries_url }
+      format.html { redirect_to admin_galleries_path(group_id: params[:group_id]) }
       format.json { head :no_content }
     end
   end
@@ -69,6 +80,6 @@ class Admin::GalleriesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_gallery_params
-      params.require(:admin_gallery).permit(:title, :photo)
+      params.require(:admin_gallery).permit(:title, :photo, :content, :gallery_group_id)
     end
 end

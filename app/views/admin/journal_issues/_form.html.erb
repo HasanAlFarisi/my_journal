@@ -89,7 +89,7 @@
 	                                  </div>
 	                                  <br>
                                         <div class="foto_prev"></div>
-                                        <%= file_field_tag :image, class:"field size4 input-file", id: "fileField", :onchange => "readURLJournal(this);", name:"admin_journal_issue[journal_issue_images_attributes][0][image]" %>
+                                        <%= file_field_tag :image, class:"field size4 input-file", id: "fileField", :onchange => "readURLGallery(this);", name:"admin_journal_issue[journal_issue_images_attributes][0][image]" %>
                                         <br>
                                         <div class="sub-images" dataId="1"><!-- add images place --></div>
                                         <div class="add add_images button" type="submit">+| Images</div>
@@ -138,5 +138,6 @@
 </div>
 <!-- Sidebar -->
 <%= javascript_include_tag "admin/journal" %>
+<%= javascript_include_tag "admin/append_gallery" %>
 <div id="modal_background"></div>
 <div id="image-popups"></div>

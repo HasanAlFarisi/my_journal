@@ -27,7 +27,7 @@
                                 <p>
                                       <%= label_tag :document, "Screen Shoot" %>
                                       <div class="foto_prev"></div>
-                                      <%= file_field_tag :document, class:"field size4 input-file", id: "fileField", :onchange => "readURLJournal(this);", name:"admin_help[help_files_attributes][0][document]"  %>
+                                      <%= file_field_tag :document, class:"field size4 input-file", id: "fileField", :onchange => "readURLGallery(this);", name:"admin_help[help_files_attributes][0][document]"  %>
                                       <br>
                                       <div class="sub-screen-shoot" dataId="1"><!-- add images place --></div>
                                       <div class="add add_screen_shoot button" type="submit">+| Screen Shoot</div>
@@ -48,3 +48,4 @@
 </div>
 <!-- Sidebar -->
 <%= javascript_include_tag "admin/journal" %>
+<%= javascript_include_tag "admin/append_gallery" %>

@@ -24,15 +24,11 @@
             </ul>
           </div>
           <div class="sidebar-box">
-            <h3>Blog Roll</h3>
+            <h3>Galleries</h3>
             <ul>
-              <li><a href="#">Development Blog</a></li>
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Plugins</a></li>
-              <li><a href="#">Suggest Ideas</a></li>
-              <li><a href="#">Support Forum</a></li>
-              <li><a href="#">Themes</a></li>
-              <li><a href="#">WordPress Planet</a></li>
+              <% @galleries.each do |gallery| %>
+                  <li><%= link_to gallery.name, dashboard_gallery_path(gallery) %></li>
+              <% end %>
             </ul>
           </div>
         </div>

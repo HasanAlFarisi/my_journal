@@ -1,25 +1,51 @@
-<%= form_for(@admin_gallery) do |f| %>
-  <% if @admin_gallery.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@admin_gallery.errors.count, "error") %> prohibited this admin_gallery from being saved:</h2>
-
-      <ul>
-      <% @admin_gallery.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :photo %><br>
-    <%= f.text_field :photo %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<div id="modal_profile_edit" class="styled form positions" style="background: none !important;">
+      <div class="cl">&nbsp;</div>
+      <div id="content">
+             <div class="box">
+                <!-- Box Head -->
+                    <div class="box-head">
+                      <h2>Add Photo</h2>
+                    </div>
+                    <%= form_for(@admin_gallery) do |f| %>
+                          <div class="form">
+                                 <p>
+                                      <%= f.hidden_field :gallery_group_id, value:@group.id %>
+                                      <%= f.label :photo, "Photo", style:"margin-bottom:0px;" %>
+                                      <span class="foto_prev"></span>
+                                      <%= f.file_field :photo, class:"field size4 input-file", id: "fileField", :onchange => "readURLGallery(this);"  %>
+                                 </p>
+                                 <p>
+                                      <%= f.label :title %><span>(Required Field)</span>
+                                      <%= f.text_field :title, class:"field size0" %>
+                                 </p>
+                                 <p>
+                                       <%= f.label :content %>
+                                       <%= f.text_area :content, class:"field size1", style:"height:60px" %>
+                                 </p>
+                                 <p>
+                                        <div class="cl">&nbsp;</div>
+                                        <div class="sub-screen-shoot" dataId="1"><!-- add images place --></div>
+                                        <div class="add add_photo_gallery button" type="submit">+| Photo</div>
+                                 </p>
+                                 <div class="buttons">
+                                        <%= link_to "Back", "javascript:void(0)", class:"button-back close-modal-profile" %>
+                                        <%= f.submit "Save Photo", class:"button" %>
+                                  </div>
+                          </div>
+                    <% end %>
+             </div>
+       </div>
+</div>
+<%= javascript_include_tag "admin/journal" %>
+<%= javascript_include_tag "admin/append_gallery" %>
+<script>
+  $(document).ready(function() {
+        $("#modal_profile_edit").fadeIn();
+    })
+  $( '.close-modal-profile' ).click(function( ev ) {  
+        $( '#modal_profile_edit, #modal_background' ).fadeOut();  ev.preventDefault();
+  } );
+  $("#modal_background").click(function(ev){
+          $( '#modal_profile_edit, #modal_background' ).fadeOut();  ev.preventDefault();   
+  })
+</script>

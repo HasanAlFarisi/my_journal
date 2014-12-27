@@ -9,53 +9,57 @@
     <div class="box">
       <!-- Box Head -->
       <div class="box-head">
-        <h2 class="left">Current Groups</h2>
+        <h2 class="left">Current Galleries</h2>
 
-        <%= render partial:'admin/shared/search', locals:{status: nil} %>
+        <%#= render partial:'admin/shared/search', locals:{status: nil} %>
 
       </div>                               
       <!-- End Box Head --> 
 
       <!-- Table -->
       <div class="table">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-striped">
-          <tr>
-            <th width="13"><input type="checkbox" class="check-all" name="check-all" /></th>
-            <th>Group Name</th>
-            <th>Photo</th>
-            <th width="100px">Description</th>
-            <th width="10px">Comment</th>
-            <th colspan="2" class="ac">Content Control</th>
-          </tr>
+        
           <% unless @admin_gallery_groups.present? %>
-            <tr class="odd">
-              <td colspan="7">
-                <center>No data yet</center>
-              </td>
-            </tr>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-striped">
+                  <tr><td><center>No Galleries yet</center></td></tr>
+            </table>
           <%end%>
 
-      <%#= form_tag destroy_all_admin_articles_path do %>          
           <% @admin_gallery_groups.each do |admin_gallery_group| %>
-          <tr>
-            <td><input type="checkbox" class="check-self" name="selected[]" id="<%= "selected-#{article.id}" %>" value="<%= article.id %>" /></td>
+             <table style="padding:10px" class="floating">
+                    <tr>
+                          <td width="50px">
+                                  <%= link_to 'Edit', edit_admin_gallery_group_path(admin_gallery_group), class:"ico edit"%>
+                          </td>
+                          <td width="50px">
+                                  <%= link_to 'Destroy', admin_gallery_group, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
+                          </td>
+                    </tr>
+                    <tr>
+                          <td colspan="2">
+                                  <%= link_to image_tag("folder.png", width:"125px", height:"125px"), admin_galleries_path(group_id: admin_gallery_group.id) %>
+                          </td>
+                    </tr>
+                    <tr>
+                          <td colspan="2">
+                                  <b><center><%= link_to truncate(admin_gallery_group.name, length: 15), admin_galleries_path(group_id: admin_gallery_group.id) %></center></b>
+                          </td>
+                    </tr>
+             </table>
+          <!-- <tr>
             <td><%= link_to admin_gallery_group.name, admin_gallery_group %></td>
             <td><%#= truncate(strip_tags(article.body), :length => 30) %></td>
             <td><%=raw admin_gallery_group.sub_name %></td>
             <td><center><%#= counting_comment(article) %></center></td>
             <td  width="5px"><%= link_to 'Edit', edit_admin_gallery_group_path(admin_gallery_group), class:"ico edit" %></td>
             <td  width="5px"><%= link_to 'Destroy', admin_gallery_group, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %></td>
-          </tr>
-          <%end%>
-        </table>
-        
-        
+          </tr> -->
+          <%end%>      
+        <div class="cl">&nbsp;</div>
         <!-- Pagging -->
         <div class="pagging">
-          <%= submit_tag "Delete Selected", class:"tab-right-button button floating" %></p>
-      <%# end %>
-
-          <div class="left">Groups Total: <b><%= @admin_gallery_groups.count %></b> Groups</div>
+          <%= link_to 'New Galleries', new_admin_gallery_group_path, class:"tab-right-button button journal" %> 
+          <div class="left">Galleries Total: <b><%= @admin_gallery_groups.count %></b> Galleries</div>
           <div class="right">
             <%= will_paginate @admin_gallery_groups %>
           </div>
@@ -77,7 +81,3 @@
   <%= render :partial => "admin/shared/sidebar" %>
 </div>
 <!-- Sidebar -->
-
-<script>
-
-</script>

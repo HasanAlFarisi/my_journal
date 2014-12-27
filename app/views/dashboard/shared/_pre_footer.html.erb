@@ -16,7 +16,7 @@
                 <h3>About Our blog</h3>
                 <div class="textwidget">
                       <%= image_tag Admin::CompanyProfile.last.photo.url(:original),width:"130", height:"115" %>
-                      <%= Admin::CompanyProfile.last.motto %>
+                      <%= raw Admin::CompanyProfile.last.vission %>
                 </div>
               </div>
               <div class="top-panel-box">

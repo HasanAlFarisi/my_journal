@@ -1,5 +1,5 @@
 class Dashboard::ProfilesController < ApplicationController
-	before_filter :prepare_select
+	before_filter :prepare_select, :prepare_session
 	before_action :admin, only: [:show_admin]
 	
 	def show
@@ -20,6 +20,10 @@ class Dashboard::ProfilesController < ApplicationController
 
 	def prepare_select
 	    	@profile = [["Annonymous","1.gif"], ["General","2.gif"],["Private","3.gif"],["Geust","4.gif"]].unshift(["Select",nil])
+	end
+
+	def prepare_session
+		session[:current] = "about"
 	end
 
 	private

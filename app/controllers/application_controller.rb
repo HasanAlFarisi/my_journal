@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_filter :prepare_category, :recent_post, :prepare_project, :prepare_advertise
+  before_filter :prepare_category, :recent_post, :prepare_project, :prepare_advertise, :prepare_galleries 
 
   def prepare_category
     @categories_list = Admin::Category.all
@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
   def recent_post
     @recent_posts = Article.order('created_at DESC LIMIT 4')
     @recent_comments =Dashboard::Comment.order('created_at DESC LIMIT 4')
+  end
+
+  def prepare_galleries
+      @galleries = Admin::GalleryGroup.order("created_at DESC LIMIT 10")
   end
 
   def convert_to_arr_for_query(ids_param)
