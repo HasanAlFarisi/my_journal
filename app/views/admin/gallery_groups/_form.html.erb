@@ -52,7 +52,7 @@
                                                                      <%= link_to image_tag("comment.png", width:"150%", style:"margin-top:3px"), admin_gallery_path(image), remote: true %>
                                                                </td>
                                                                <td>
-                                                                    <%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>     
+                                                                    <%= link_to 'Destroy', admin_gallery_path(image, group_id: @admin_gallery_group.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>     
                                                                </td>
                                                         </tr>
                                                         <tr>

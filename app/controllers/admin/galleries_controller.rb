@@ -4,6 +4,7 @@ class Admin::GalleriesController < Admin::BaseController
   # GET /admin/galleries
   # GET /admin/galleries.json
   def index
+
     @group = Admin::GalleryGroup.find(params[:group_id])
     @admin_galleries = Admin::Gallery.where("gallery_group_id = ? ", params[:group_id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 12)
   end
@@ -66,6 +67,7 @@ class Admin::GalleriesController < Admin::BaseController
   # DELETE /admin/galleries/1.json
   def destroy
     @admin_gallery.destroy
+    debugger
     respond_to do |format|
       format.html { redirect_to admin_galleries_path(group_id: params[:group_id]) }
       format.json { head :no_content }
