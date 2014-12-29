@@ -4,9 +4,9 @@
              <p>
              	<div class="tables">
              		<% @galleries.each do |gallery| %>
-             			<table style="padding:10px" class="floatings" border="0" cellspacing="0" cellpadding="5" style="float:left !important">
+             			<table style="padding:10px" class="floatings" border="0" cellspacing="0" cellpadding="0">
 			                    <tr>
-			                          <th><%= link_to gallery.name, dashboard_gallery_path(gallery) %></th>
+			                          <th><%= link_to truncate(gallery.name, length: 15), dashboard_gallery_path(gallery) %></th>
 			                    </tr>
 			                    <tr>
 			                    	<td>

@@ -5,7 +5,7 @@
 <div class="post-entry">
 	<div class="tables">
 		<% @gallery_photos.each do |image| %>
-			<table syle="padding:10px" class="post_content_gallery floatings" border="0" cellspacing="0" cellpadding="0">
+			<table syle="padding:10px" class="post_content_gallery floatings" border="0" cellspacing="0" cellpadding="5" style="float:left !important">
 				<tr>
 					<td>
 						<%= link_to image_tag(image.photo.url(:original),width:"170px", style:"margin-bottom:-5px"), dashboard_gallery_show_photo_path(image), remote: true %>
