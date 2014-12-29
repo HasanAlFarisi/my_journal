@@ -1,0 +1,4 @@
+<%= form_tag edit_lock_open_admin_advertises_path(id: @admin_advertise.id, key:"lock"), remote: true do %>
+<%= text_field_tag :link,@admin_advertise.link.sub(/^https?\:\/\//, ''), placeholder: "example.com", class:"field size-0" %>
+<%= image_submit_tag("open.png", width:"10%", style:"float:right") %>
+<% end %>

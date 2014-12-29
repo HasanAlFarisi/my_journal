@@ -1,0 +1,96 @@
+<div id="modal_gallery" class="styled">
+	<div id="top_modal"></div>
+	<!-- The class for main profile -->
+	<div class="scroller scroller_gallery floating" style="float:left">
+	    	<div id="content_gallery">
+	      <!-- Box -->
+	        <!-- Form -->		          
+	              <div class="left-photo-gallery">
+		             <center>
+	                    	<%= image_tag @admin_gallery.photo.url(:original),class:"", height:"50%", width:"80%" %>
+	                    </center>
+	              </div>    
+	            <!-- End Form -->
+	      <!-- End Box -->
+	    	</div>
+	</div>
+	<!-- The class for comment profile -->
+	<%= image_tag "close.gif", class:"close close-modal-gallery close_button" %>
+	<div class="scroller_comment">
+		<div class="formProfile" style="<%= 'height:550px !important' if @admin_gallery.gallery_comments.count == 0 %>">
+			<div class="message_gallery">
+				<% unless @admin_gallery.title.blank? %>
+					<h3><%= @admin_gallery.title %></h3>
+					<label style="font-weight:normal !important"><%= @admin_gallery.content %></label>
+					<br><br>
+				<%end%>
+				<h3>Comment(s)</h3>
+				<% unless @admin_gallery %>
+					<div class="content_gallery_blank">
+						No Comment yet
+					</div>
+				<% end %>
+				<% @admin_gallery.gallery_comments.each do |comment| %>
+					<div class="content_gallery">
+						<span class="cl">&nbsp;</span>
+						<span style="font-size:10px !important">
+							<%= comment.created_at.strftime('%d-%b-%Y') %>
+							<%= link_to 'Destroy', "javascript:void(0)", method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del ico-gallery-one" %>
+							<%= link_to 'Reply', "javascript:void(0)", class:"ico edit ico-gallery", onclick:"reply(#{comment.id})" %>
+						</span>
+						<span class="cl">&nbsp;</span>
+						<label>Name : </label> <span><%= comment.name %></span>
+						<span class="cl">&nbsp;</span>
+						<label>E-mail : </label> <span><%= comment.email %></span>
+						<span class="cl">&nbsp;</span>
+						<label>Comment : </label> <span><%= comment.body %></span>
+						<span class="cl">&nbsp;</span>
+							<% find_reply_gallery(comment).each do |reply| %>
+								<div class="content_gallery_blank" style="400px;">
+									<span style="font-size:10px !important">Reply from: <i>Admin</i></span>
+									<span class="cl">&nbsp;</span>
+									<%= reply.content %>
+								</div>
+							<% end %>
+							<span class="show_comment_gallery_<%= comment.id %>"></span>
+							<div style="10px;">
+								<span class="content_gallery_blank_<%= comment.id %> undisplay">
+									<%= form_tag create_reply_admin_galleries_path(id: comment.id), remote: true do %>
+										<%= text_field_tag :content, "",class:"field", style:"width:250px !important" %>
+										&nbsp;
+										<%= image_submit_tag("edit.gif", width:"6%") %>
+									<% end %>
+								</span>
+								<span class="cl">&nbsp;</span>
+							</div>
+						<nav></nav>
+						<span class="cl">&nbsp;</span>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= javascript_include_tag "scroller" %>
+<style type="text/css">
+	.undisplay{display: none;}
+	.display{display: block;}
+</style>
+
+<script>
+	$(document).ready(function(){
+		$("#modal_gallery").fadeIn();
+		$( '.close-modal-gallery' ).click(function( ev ) {  $( '#modal_gallery, #modal_background' ).fadeOut();  ev.preventDefault();} );
+		$("#modal_background").click(function(ev){ $( '#modal_gallery, #modal_background' ).fadeOut();  ev.preventDefault(); })
+	})
+	function reply(id){
+		if($('.content_gallery_blank_'+id+'').hasClass("display")){
+			$('.content_gallery_blank_'+id+'').removeClass("display")
+			$('.content_gallery_blank_'+id+'').addClass("undisplay")
+		}else{
+			$('.content_gallery_blank_'+id+'').removeClass("undisplay")
+			$('.content_gallery_blank_'+id+'').addClass("display")
+		}
+	}
+</script>

@@ -1,0 +1,25 @@
+<div class="post-title">
+       <h2>Our Gallery</h2>
+       <div class="post-entry">
+             <p>
+             	<div class="tables">
+             		<% @galleries.each do |gallery| %>
+             			<table style="padding:10px" class="floatings" border="0" cellspacing="0" cellpadding="0">
+			                    <tr>
+			                          <th><%= link_to gallery.name, dashboard_gallery_path(gallery) %></th>
+			                    </tr>
+			                    <tr>
+			                    	<td>
+			                    		<%= link_to image_tag("folder.png", width:"150px", height:"150px", style:"margin-bottom:-5px"), dashboard_gallery_path(gallery) %>
+			                    	</td>
+			                    </tr>
+			             </table>
+             		<% end %>
+             		<div class="clear"></div>
+                    </div>
+             </p>
+             <div class="pagging" id="pagging-left">
+                    <%= will_paginate @galleries %>
+            </div>
+       </div>
+</div>

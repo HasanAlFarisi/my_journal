@@ -1,0 +1,50 @@
+<div id="modal_profile" class="styled">
+	<!-- The class for main profile -->
+	<div class="scroller floating" style="float:left">
+		<div class="formProfile">
+		    	<div id="content" style="height:540px;">
+		      <!-- Box -->
+		      		<!-- Form -->
+		          	<div class="left-photo">
+			             <center>
+		                    	<%= image_tag @gallery_photo.photo.url(:original),class:"", height:"50%", width:"80%" %>
+		                    </center>
+	              	</div>    
+		          <!-- End Form -->
+		      <!-- End Box -->
+		      </div>
+		</div>
+		<div class="buttons">
+			<a class="close-modal-profile close button floating" href="javascript:void(0)">Back</a>
+		</div>
+	</div>
+	<!-- The class for comment profile -->
+	<div class="scroller_comment">
+		<div class="formProfile">
+			<div class="message">
+				<div id="comment-field">
+					<h1><%= @gallery_photo.title %></h1>
+					<%= @gallery_photo.content %>
+					<p style="margin-top:-20px">&nbsp;</p>
+				<div id="comment-field">
+					<%= render partial: "dashboard/galleries/index_comments" %>
+				<div id="comment-place"><!-- Comment place  --></div>
+				<%= render 'dashboard/shared/ajax_loader' %>
+				Tell something about this Photo
+				<div id="comment-field" >
+					<%= render 'dashboard/galleries/form' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= javascript_include_tag "scroller" %>
+<%= javascript_include_tag "dashboard/form_validates_gallery" %>
+
+<script>
+	$(document).ready(function(){
+		$("#modal_profile").fadeIn();
+		$( '.close-modal-profile' ).click(function( ev ) {  $( '#modal_profile, #modal_background' ).fadeOut();  ev.preventDefault();} );
+	})
+</script>

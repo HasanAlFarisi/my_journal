@@ -1,0 +1,1 @@
+$(".linked_<%= @admin_advertise.id %>").html('<%= j(render partial: "admin/advertises/edit_lock_open") %>')

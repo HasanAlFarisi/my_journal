@@ -1,0 +1,29 @@
+<style type="text/css">
+	.up{
+		margin-top: -3px !important;
+	}	
+	.left{
+		margin-left: 0px !important;
+	}
+</style>
+
+<% @comments.each do |admin_comment| %>
+	<div id="comment-list" class="mini-field">
+		<span class="time"><%= "#{admin_comment.created_at.strftime('%d %b %Y')}"  %></span>
+			<div class="clear border-bottom"></div>
+			<label><b>Name :</b></label> 
+			<span><%= admin_comment.name %></span>
+			<div class="clear border-bottom"></div>
+			<label><b>Comment :</b></label> 
+			<span><%= admin_comment.body %></span>
+	</div>
+	<span class="clear"></span>
+  	<% find_reply_gallery(admin_comment).each do |reply| %>
+      		<div id="reply-view" class="left">
+          		<span style="font-size:9px">Reply from</span> 
+          		<b>Admin</b>
+          		<div class='up'><%= reply.content %></div>
+      		</div>
+      		<div class="clear border-bottom"></div>
+  	<% end %>	
+<% end %>

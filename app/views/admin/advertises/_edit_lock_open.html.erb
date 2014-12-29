@@ -1,0 +1,2 @@
+<%= @admin_advertise.link.blank? ? "example.com" : truncate(@admin_advertise.link, length: 14) %>
+<%= link_to image_tag("lock.png", width:"10%", style:"float:right"), edit_lock_admin_advertises_path(id: @admin_advertise.id, key: "open"), remote: true %>

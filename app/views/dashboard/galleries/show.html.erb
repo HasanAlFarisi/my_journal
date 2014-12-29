@@ -1,0 +1,26 @@
+<div class="post-title">
+	<h2><%= link_to @gallery.name %></h2>
+</div>
+<br>
+<div class="post-entry">
+	<div class="tables">
+		<% @gallery_photos.each do |image| %>
+			<table syle="padding:10px" class="post_content_gallery floatings" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<%= link_to image_tag(image.photo.url(:original),width:"170px", style:"margin-bottom:-5px"), dashboard_gallery_show_photo_path(image), remote: true %>
+					</td>
+				</tr>
+			</table>
+		<% end %>
+	</div>
+	<div id="modal_background"></div>
+	<div id="show_modal_gallery"><!-- Place for modal gallery --></div>
+	<div class="clear"></div>
+	<div class="link_button">
+        <%= link_to "Back ...", session[:url_back_dashboard], class:"floatings" %>
+      </div>
+	<div class="pagging" id="pagging-left">
+		<%= will_paginate @gallery_photos %>
+	</div>
+</div>

@@ -1,0 +1,1 @@
+$(".show_comment_gallery_<%= @create_reply.gallery_comment_id %>").append("<%= j(render partial: "admin/galleries/show_reply") %>")
