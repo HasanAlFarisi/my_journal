@@ -14,23 +14,46 @@
     <% end %>
     </p>
     <p>
-      Below is Journal Details: <br /><br />
-      Journal Project : <b><%= @journal.title %></b><br><br>
-      Journal Assign : <b><%= "#{find_profile(@journal_issue.asignee).name} #{find_profile(@journal_issue.asignee).last_name}" %></b><br><br>
-      Journal Status : <%= generated_status(@journal_issue.status_id).html_safe %><br><br>
-      Journal Progress : <%= @journal_issue.progress.blank? ? 0 : @journal_issue.progress %>%<br><br>
-      Journal Priority : <b><%= find_priority(@journal_issue.priority) %></b><br><br>
-      This journal is starting at <b><%= @journal_issue.start.strftime('%d-%b-%Y') %></b> and will be end at <b><%= @journal_issue.end.strftime('%d-%b-%Y') %></b>
-    </p>
-    <p>
-      <b>Content :</b>
-      <%= raw @journal_issue.content %>
-    </p>
-    <p>
-      For more Detail about this Journal, you can click this 
-      <%= link_to "Link", admin_journal_issue_path(id: @journal_issue.id,id_journal: @journal.id) %>
-    </p>
-    <p>Thank you,</p>
-    <p><%= @company %> System</p>
+      Below is Journal Details:
+      <table border="0">
+        <tr>
+              <th>Journal Project |</th>
+              <th>Journal Assign |</th>
+              <th>Journal Progress |</th>
+              <th>Journal Priority</th>
+        </tr>
+        <tr>
+              <td>
+                      <%= @journal.title %>
+              </td>
+              <td>
+                      <%= "#{find_profile(@journal_issue.asignee).name} #{find_profile(@journal_issue.asignee).last_name}" %>
+              </td>
+              <td>
+                      <%= @journal_issue.progress.blank? ? 0 : @journal_issue.progress %>%
+              </td>
+              <td>
+                      <%= find_priority(@journal_issue.priority) %>
+              </td>
+        </tr>
+        <tr>
+              <td colspan="4">
+                    Start <b><%= @journal_issue.start.strftime('%d-%b-%Y') %></b> End <b><%= @journal_issue.end.strftime('%d-%b-%Y') %></b>
+              </td>
+        </tr>
+        <tr>
+              <td>
+                    <%= raw @journal_issue.content %>
+              </td>
+        </tr>
+        <tr>
+              <td colspan="4">
+                  For more Detail about this Journal, you can click this 
+                  <a href="https://journalkreativ.herokuapp.com/admin/journal_issues/<%= @journal_issue.id %>?id_journal=<%= @journal.id %>">Link</a>
+              </td>
+        </tr>
+      </table>
+    <p>Thank you,
+    <%= @company %> System</p>
   </body>
 </html>

@@ -10,8 +10,8 @@
     <p>
       Below is Project Details: <br /><br />
       Project Name : <b><%= @journal.title %></b><br>
-      Project Manager : <b><%= @journal.project_manajer %>a</b><br>
-      This project is starting at <b><%= @journal.start.strftime('%d-%b-%Y') %></b> and will be end at <b><%= @journal.end.strftime('%d-%b-%Y') %></b>
+      Project Manager : <b><%= @journal.project_manajer %></b><br>
+      Start <b><%= @journal.start.strftime('%d-%b-%Y') %></b> End <b><%= @journal.end.strftime('%d-%b-%Y') %></b>
     </p>
     <p>
       For more Information, you can login to <a href="https://journalkreativ.herokuapp.com/admin/login">My Journal</a> Website

@@ -146,14 +146,14 @@ class Admin::JournalIssue < ActiveRecord::Base
 				unless assign[1][:id].present?
 					save_issue = Admin::JournalIssueAsignee.create({journal_issue_id: id, admin_id: assign[1][:admin_id]})
 					save_issue.save
-					AdminMailer.mail_journal_issue(id,assign[1][:admin_id],"plus").deliver
+					AdminMailer.delay(:queue => 'notification_create_journal_issue', :priority => 1).mail_journal_issue(id,assign[1][:admin_id],"plus")
 				else
 					begin
 					save_issue = Admin::JournalIssueAsignee.find(assign[1][:id])
 					rescue;end
 					unless save_issue.blank?
 						save_issue.update({admin_id: assign[1][:admin_id]})
-						AdminMailer.mail_journal_issue(id,assign[1][:admin_id],"plus").deliver
+						AdminMailer.delay(:queue => 'notification_create_journal_issue', :priority => 1).mail_journal_issue(id,assign[1][:admin_id],"plus")
 					end
 				end
 			end

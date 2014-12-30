@@ -8,6 +8,7 @@ gem 'devise'
 
 gem 'will_paginate', '~> 3.0'
 gem 'paperclip', '~> 3.0'
+gem 'aws-sdk'
 gem 'ckeditor_rails'
 gem 'mini_magick'
 # Use SCSS for stylesheets
@@ -33,6 +34,9 @@ gem 'jbuilder', '~> 1.2'
 
 # For the sent message
 gem 'mailcatcher'
+
+# delay jobs
+gem 'delayed_job_active_record'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -64,7 +64,7 @@ class Admin::JournalIssuesController < Admin::BaseController
     respond_to do |format|
       if @admin_journal_issue.save
         #this method for sending message to admin about Journal issue who assign
-        AdminMailer.mail_journal_issue(@admin_journal_issue.id,@admin_journal_issue.asignee,"main").deliver
+        AdminMailer.delay(:queue => 'notification_create_journal_issue', :priority => 1).mail_journal_issue(@admin_journal_issue.id,@admin_journal_issue.asignee,"main")
         Admin::JournalIssue.save_attributes(@admin_journal_issue.id,params)
         format.html { redirect_to @admin_journal_issue, notice: 'Journal issue was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_journal_issue }
@@ -82,7 +82,7 @@ class Admin::JournalIssuesController < Admin::BaseController
       if @admin_journal_issue.update(admin_journal_issue_params)
         Admin::JournalIssue.save_attributes(@admin_journal_issue.id,params)
         #this method for sending message to admin about Journal issue who assign
-        AdminMailer.mail_journal_issue(@admin_journal_issue.id,@admin_journal_issue.asignee,"main").deliver
+        AdminMailer.delay(:queue => 'notification_create_journal_issue', :priority => 1).mail_journal_issue(@admin_journal_issue.id,@admin_journal_issue.asignee,"main")
         unless params[:selected].blank?
               id_params = params[:selected]      
               id = convert_to_arr_for_query(id_params)

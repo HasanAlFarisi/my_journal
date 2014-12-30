@@ -6,11 +6,11 @@ class Admin::ContactsController < ApplicationController
 		@admin_contact = Admin::Contact.new(admin_contact_params)
 
 		if @admin_contact.save
-			AdminMailer.mail_notice(params[:profile_email],params[:dashboard_comment][:name],params[:dashboard_comment][:email],params[:dashboard_comment][:body]).deliver
-			respond_to do |format|
+			AdminMailer.delay(:queue => 'notification_to_admin', :priority => 2).mail_notice(params[:profile_email],params[:dashboard_comment][:name],params[:dashboard_comment][:email],params[:dashboard_comment][:body])
+			#respond_to do |format|
 				@comment = Admin::Contact.last
-				format.js
-			end
+			#	format.js
+			#end
 		end
 	end
 
@@ -21,7 +21,7 @@ class Admin::ContactsController < ApplicationController
 			#mailer for All Admins
 			admins = Admin.all
 			admins.each do |admin|
-				AdminMailer.notification_for_all_admins(params[:dashboard_comment],admin).deliver
+				AdminMailer.delay(:queue => 'notification_for_all_admin', :priority => 2).notification_for_all_admins(params[:dashboard_comment],admin)
 			end
 
 			respond_to do |format|

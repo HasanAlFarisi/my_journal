@@ -16,36 +16,36 @@ class Admin::Journal < ActiveRecord::Base
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JornalTeamDesigner.create({journal_id: id, admin_id: journal[1][:admin_id]})
 						 #this method for sending message to admin about project who assign
-          					AdminMailer.mail_journal("Project Designer",journal[1][:admin_id],id).deliver	
+          					AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Designer",journal[1][:admin_id],id)
 					end
 				else
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JornalTeamDesigner.find(journal[1][:id]).update({admin_id: journal[1][:admin_id]})
-						AdminMailer.mail_journal("Project Designer",journal[1][:admin_id],id).deliver	
+						AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Designer",journal[1][:admin_id],id)
 					end
 				end
 			elsif type == 'develop'
 				unless journal[1][:id].present?
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JournalTeamDeveloper.create({journal_id: id, admin_id: journal[1][:admin_id]})
-						AdminMailer.mail_journal("Project Developer",journal[1][:admin_id],id).deliver	
+						AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Developer",journal[1][:admin_id],id)	
 					end
 				else
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JournalTeamDeveloper.find(journal[1][:id]).update({admin_id: journal[1][:admin_id]})
-						AdminMailer.mail_journal("Project Developer",journal[1][:admin_id],id).deliver
+						AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Developer",journal[1][:admin_id],id)
 					end
 				end
 			else
 				unless journal[1][:id].present?
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JournalTeamCheck.create({journal_id: id, admin_id: journal[1][:admin_id]})
-						AdminMailer.mail_journal("Project Quality Check",journal[1][:admin_id],id).deliver	
+						AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Quality Check",journal[1][:admin_id],id)
 					end
 				else
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JournalTeamCheck.find(journal[1][:id]).update({admin_id: journal[1][:admin_id]})
-						AdminMailer.mail_journal("Project Quality Check",journal[1][:admin_id],id).deliver
+						AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Quality Check",journal[1][:admin_id],id)
 					end
 				end
 			end	
