@@ -7,6 +7,10 @@ class Admin::JournalsController < Admin::BaseController
   # GET /admin/journals
   # GET /admin/journals.json
   def index
+    Admin.Journal.all.destroy
+    Admin.JournalTeamDeveloper.all.destroy
+    Admin.JournalTeamCheck.all.destroy
+    Admin.JournalTeamDesigner.all.desrtroy
     @admin_journals = Admin::Journal.order("admin_journals.created_at DESC").paginate(:page => params[:page], :per_page => 6).is_allowed(current_admin.id,nil)
     ids = []
     @admin_journals.each do |journal|
