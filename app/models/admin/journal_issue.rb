@@ -71,7 +71,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 		join_table = self.global_joins()
 		conditions = self.conditions_where(current_admin,"search",type)
 		
-		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issue_asignees.journal_issue_id")
+		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issue_asignees.journal_issue_id, admin_journal_issues.id")
 	end
 
 	def self.global_joins()
