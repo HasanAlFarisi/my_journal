@@ -19,6 +19,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 			JOIN admin_journal_issue_asignees on admin_journal_issue_asignees.journal_issue_id = admin_journal_issues.id
 			JOIN admin_journals on admin_journals.id = admin_journal_issues.journal_id
 			"
+		global_group = self.global_group()
 		condition = []
 		condition << "admin_journal_issues.status_id IS NOT NULL"
 		condition << "no IS NOT NULL" 
@@ -30,7 +31,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id})"
 		end
 		conditions = condition.join(" AND ")
-		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issue_asignees.journal_issue_id")
+		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("{{global_group}}".gsub("{{global_group}}",global_group))#group("admin_journal_issue_asignees.journal_issue_id")
 	end
 
 	def self.data_existed_count(current_admin,type)
@@ -69,9 +70,10 @@ class Admin::JournalIssue < ActiveRecord::Base
 
 	def self.data_existed_index(current_admin,type)
 		join_table = self.global_joins()
+		global_group = self.global_group()
 		conditions = self.conditions_where(current_admin,"search",type)
 		
-		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issue_asignees.journal_issue_id")
+		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("{{global_group}}".gsub("{{global_group}}",global_group))
 	end
 
 	def self.global_joins()
@@ -80,6 +82,13 @@ class Admin::JournalIssue < ActiveRecord::Base
 			LEFT JOIN admin_journals on admin_journals.id = admin_journal_issues.journal_id
 			"
 		return join
+	end
+
+	def self.global_group()
+		group = "
+			admin_journal_issue_asignees.journal_issue_id, admin_journal_issues.id
+		"
+		return group
 	end
 
 	def self.conditions_where(current_admin,journal_id,type)
@@ -133,7 +142,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 		conditions << "admin_journal_team_developers.journal_id = #{id}"
 		conditions << "admin_journal_team_checks.journal_id = #{id}"
 		condition = conditions.join(" AND ")
-		select_all = Admin::Journal.select("{{select}}".gsub("{{select}}",select)).where("{{condition}}".gsub("{{condition}}",condition)).joins("{{joins}}".gsub("{{joins}}",join_table)).group("admin_profiles.admin_id")
+		select_all = Admin::Journal.select("{{select}}".gsub("{{select}}",select)).where("{{condition}}".gsub("{{condition}}",condition)).joins("{{joins}}".gsub("{{joins}}",join_table)).group("admin_profiles.admin_id, admin_profiles.name, admin_profiles.last_name, admin_profiles.admin_id")
 	end
 
 	def self.assign_notice(id)
