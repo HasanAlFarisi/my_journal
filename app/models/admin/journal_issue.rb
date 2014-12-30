@@ -49,7 +49,7 @@ class Admin::JournalIssue < ActiveRecord::Base
 			condition << "(asignee = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})"
 		end
 		conditions = condition.join(" AND ")
-		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s))
+		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("admin_journal_issues.id")
 	end
 
 	def self.get_data_status(current_admin,id)
