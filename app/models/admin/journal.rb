@@ -93,7 +93,7 @@ class Admin::Journal < ActiveRecord::Base
   			status_condition = "admin_journals.status_id = #{status_id} AND"  			
   			select_all = self.joins("{{join_table}}".gsub("{{join_table}}", join_table)).where("#{status_condition} ({{conditions}})".gsub("{{conditions}}", conditions)).group("admin_journals.id")
   		else
-  			select_all = self.joins("{{join_table}}".gsub("{{join_table}}", join_table)).where("{{conditions}}".gsub("{{conditions}}", conditions)).group("admin_journals.id")
+  			select_all = self.joins("{{join_table}}".gsub("{{join_table}}", join_table)).where("{{conditions}}".gsub("{{conditions}}", conditions)).group("admin_journals.id, admin_journal_issues.id")
   		end
   		
 
