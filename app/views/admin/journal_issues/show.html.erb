@@ -69,16 +69,14 @@
                           </div>
                           <div class="cl">&nbsp;</div>
                           <br>
-                          <div class="buttons" style="text-align:left">
-                                <%= label_tag :image, "Attach Images" %>
-                                <% unless @admin_journal_issue.journal_issue_images.blank? %>
-                                      <% @admin_journal_issue.journal_issue_images.each do |image| %>
-                                             <%= link_to image_tag(image.image.url(:original), class:"img_profile_issue", style:"position: relative;width:25%;height:25%"), show_task_image_admin_journal_issues_path(id: image.id), remote: true %> 
-                                      <% end %>
-                                <% else %>
-                                        <p>No Attach Images Yet</p>
-                                <% end %>
-                          </div>
+                          <% unless @admin_journal_issue.journal_issue_images.blank? %>
+                            <div class="buttons" style="text-align:left">
+                                  <%= label_tag :image, "Attach Images" %>
+                                  <% @admin_journal_issue.journal_issue_images.each do |image| %>
+                                         <%= link_to image_tag(image.image.url(:original), class:"img_profile_issue", style:"position: relative;width:25%;height:25%"), show_task_image_admin_journal_issues_path(id: image.id), remote: true %> 
+                                  <% end %>
+                            </div>
+                          <% end %>
                           <div class="cl">&nbsp;</div>
                           <div class="buttons" style="text-align:left; <%= 'display:none' if @admin_journal_issue.journal_issue_files.blank? %>">
                                 <%= label_tag :image, "Attach Files" %>
