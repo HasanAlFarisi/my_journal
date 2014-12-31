@@ -7,7 +7,7 @@
   </head>
   <body class="journal_issue">
     <%#= generated_status(@journal_issue.status_id).html_safe %>
-    <h1><%= find_type(@journal_issue.type_id).html_safe %> <%= link_to "##{@journal_issue.no}" " #{@journal_issue.title}",  admin_journal_issue_path(id: @journal_issue.id,id_journal: @journal.id) %></h1>
+    <h1><%= find_type(@journal_issue.type_id).html_safe %> <a href="https://journalkreativ.herokuapp.com/admin/journal_issues/<%= @journal_issue.id %>?id_journal=<%= @journal.id %>"><%= "##{@journal_issue.no}" " #{@journal_issue.title}" %></a></h1>
     <p>Hi <%= "#{@admin.name} #{@admin.last_name}" %>, you have one Journal 
     <% if @type == "plus" %>
         As Project Quality Check
@@ -17,7 +17,7 @@
       Below is Journal Details:
       <table border="0">
         <tr>
-              <th>Journal Project |</th>
+              <th width="110px">Journal Project |</th>
               <th>Journal Assign |</th>
               <th>Journal Progress |</th>
               <th>Journal Priority</th>
