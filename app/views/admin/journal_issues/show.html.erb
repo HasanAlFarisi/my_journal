@@ -67,9 +67,9 @@
                           <div class="contents">
                                 <%= raw @admin_journal_issue.content %>
                           </div>
-                          <div class="cl">&nbsp;</div>
-                          <br>
                           <% unless @admin_journal_issue.journal_issue_images.blank? %>
+                            <div class="cl">&nbsp;</div>
+                            <br>
                             <div class="buttons" style="text-align:left">
                                   <%= label_tag :image, "Attach Images" %>
                                   <% @admin_journal_issue.journal_issue_images.each do |image| %>
