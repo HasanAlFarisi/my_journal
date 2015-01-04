@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: sampulkreativ
+  api_key: '536811485467523'
+  api_secret: zzCOVS7rOrPbBgSyYeBZi_vkOMA
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: sampulkreativ
+  api_key: '536811485467523'
+  api_secret: zzCOVS7rOrPbBgSyYeBZi_vkOMA
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: sampulkreativ
+  api_key: '536811485467523'
+  api_secret: zzCOVS7rOrPbBgSyYeBZi_vkOMA
+  enhance_image_tag: true
+  static_image_support: false
