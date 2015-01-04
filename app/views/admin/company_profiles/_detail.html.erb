@@ -11,7 +11,7 @@
 
         <!-- Form -->
         <div class="foto_prev">
-              <%= image_tag admin_company_profile.photo.url(:original),class:"img-data company-logo",  id:"logo-align" %> 
+              <%= cl_image_tag "company/#{admin_company_profile.id}",class:"img-data company-logo", id:"logo-align" %>
               <br>
         </div>
 

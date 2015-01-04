@@ -14,7 +14,7 @@
         </div>
         <div class="post-entry">
             <p>
-                  <%= image_tag @company_profile.photo.url(:original), style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"272" %>
+                  <%= cl_image_tag "company/#{@company_profile.id}", style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"272" %>
                     <div id="company_profile">
                           <p>
                                   <b>Company Name:</b> 

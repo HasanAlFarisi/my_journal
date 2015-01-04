@@ -29,7 +29,9 @@ class Admin::ArticlesController < Admin::BaseController
 
     respond_to do |format|
       if @article.save
-        
+        unless params[:article][:photo].blank?
+          preloaded = Cloudinary::Uploader.upload(params[:article][:photo], :use_filename => true, :public_id => "articles/#{@article.id}")
+        end
         sub_category = Article.find(@article.id)
         sub_category.update_attributes(sub_category_id: params[:sub_category])
 
@@ -57,7 +59,10 @@ class Admin::ArticlesController < Admin::BaseController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        
+        unless params[:article][:photo].blank?
+          loaded = Cloudinary::Uploader.destroy('article.jpg', :public_id => 'articles/#{@article.id}', :invalidate => true)
+          preloaded = Cloudinary::Uploader.upload(params[:article][:photo], :use_filename => true, :public_id => "articles/#{@article.id}")
+        end
         @article.update_attributes(sub_category_id: params[:sub_category])
 
         format.html { redirect_to admin_articles_url, notice: 'Article was successfully updated.' }
@@ -73,8 +78,8 @@ class Admin::ArticlesController < Admin::BaseController
   # DELETE /articles/1.json
   def destroy
     comment = Dashboard::Comment.delete_all "article_id = #{@article.id}"
+    loaded = Cloudinary::Uploader.destroy("articles/#{@article.id}", :public_id => "articles/#{@article.id}", :invalidate => true)
     @article.destroy
-
     respond_to do |format|
       format.html { redirect_to admin_articles_url }
       format.json { head :no_content }

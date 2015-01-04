@@ -173,8 +173,11 @@ class Admin::JournalIssue < ActiveRecord::Base
 				unless file[1][:id].present?
 					save_issue = Admin::JournalIssueFile.create({journal_issue_id: id, document: file[1][:file]})
 					save_issue.save
+					#preloaded = Cloudinary::Uploader.upload(file[1][:file], :use_filename => true, :public_id => "journal_issue/files/#{save_issue.id}")
 				else
 					save_issue = Admin::JournalIssueFile.find(file[1][:id]).update({document: file[1][:file]})
+					#loaded = Cloudinary::Uploader.destroy("journal_issue/files/#{file[1][:id]}", :public_id => "journal_issue/files/#{file[1][:id]}", :invalidate => true)
+					#preloaded = Cloudinary::Uploader.upload(file[1][:file], :use_filename => true, :public_id => "journal_issue/files/#{file[1][:id]}")
 				end
 			end
 		end
@@ -184,8 +187,11 @@ class Admin::JournalIssue < ActiveRecord::Base
 				unless image[1][:id].present?
 					save_issue = Admin::JournalIssueImage.create({journal_issue_id: id, image: image[1][:image]})
 					save_issue.save
+					preloaded = Cloudinary::Uploader.upload(image[1][:image], :use_filename => true, :public_id => "journal_issue/images/#{save_issue.id}")
 				else
 					save_issue = Admin::JournalIssueImage.find(image[1][:id]).update({image: image[1][:image]})
+					 loaded = Cloudinary::Uploader.destroy("journal_issue/images/#{image[1][:id]}", :public_id => "journal_issue/files/#{image[1][:id]}", :invalidate => true)
+					preloaded = Cloudinary::Uploader.upload(image[1][:image], :use_filename => true, :public_id => "journal_issue/images/#{image[1][:id]}")
 				end
 			end
 		end

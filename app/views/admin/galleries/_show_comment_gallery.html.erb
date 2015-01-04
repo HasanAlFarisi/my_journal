@@ -7,7 +7,7 @@
 	        <!-- Form -->		          
 	              <div class="left-photo-gallery">
 		             <center>
-	                    	<%= image_tag @admin_gallery.photo.url(:original),class:"", height:"50%", width:"80%" %>
+	                    	<%= cl_image_tag "galleries/#{@admin_gallery.id}",class:"", height:"50%", width:"80%" %>
 	                    </center>
 	              </div>    
 	            <!-- End Form -->

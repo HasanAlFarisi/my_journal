@@ -37,7 +37,7 @@
                           Task Starting at <b><%= link_to @admin_journal_issue.start.strftime('%d-%b-%Y'), "javascript:void(0)" %></b> and will be Ending at <b><%= link_to @admin_journal_issue.end.strftime('%d-%b-%Y'), "javascript:void(0)" %></b>
                           <div class="cl">&nbsp;</div>
                           <div class="down-subtitle">&nbsp;</div>  
-                          <%= image_tag find_profile(@admin_journal.admin_id).avatar.url(:original),class:"img-icon floating" %> 
+                          <%= cl_image_tag "profiles/#{@admin_journal.admin_id}",class:"img-icon floating" %> 
                           <p>
                                 <%= label_tag :no, "Project Assign to", class:" form_right floating" %>
                                 <b><%= link_to "#{find_profile(@admin_journal_issue.asignee).name} #{find_profile(@admin_journal_issue.asignee).last_name}", "javascript:void(0)" %></b>
@@ -73,7 +73,7 @@
                             <div class="buttons" style="text-align:left">
                                   <%= label_tag :image, "Attach Images" %>
                                   <% @admin_journal_issue.journal_issue_images.each do |image| %>
-                                         <%= link_to image_tag(image.image.url(:original), class:"img_profile_issue", style:"position: relative;width:25%;height:25%"), show_task_image_admin_journal_issues_path(id: image.id), remote: true %> 
+                                         <%= link_to cl_image_tag("journal_issue/images/#{image.id}", class:"img_profile_issue", style:"position: relative;width:25%;height:25%"), show_task_image_admin_journal_issues_path(id: image.id), remote: true %> 
                                   <% end %>
                             </div>
                           <% end %>

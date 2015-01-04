@@ -51,6 +51,9 @@ class Admin::AdvertisesController < Admin::BaseController
     respond_to do |format|
       @admin_advertise.on_status_true = true if params[:admin_advertise][:status] == "true"
       if @admin_advertise.save
+        unless params[:admin_advertise][:image].blank?
+          preloaded = Cloudinary::Uploader.upload(params[:admin_advertise][:image], :use_filename => true, :public_id => "advertises/#{@admin_advertise.id}")
+        end
         format.html { redirect_to admin_advertises_path, notice: 'Advertise was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_advertise }
       else
@@ -77,6 +80,7 @@ class Admin::AdvertisesController < Admin::BaseController
   # DELETE /admin/advertises/1
   # DELETE /admin/advertises/1.json
   def destroy
+    loaded = Cloudinary::Uploader.destroy("advertises/#{@admin_advertise.id}", :public_id => "advertises/#{@admin_advertise.id}", :invalidate => true)
     @admin_advertise.destroy
     respond_to do |format|
       format.html { redirect_to admin_advertises_url }

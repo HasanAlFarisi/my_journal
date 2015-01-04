@@ -45,6 +45,10 @@ class Admin::ProfilesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_profile.save
+        unless params[:admin_profile][:avatar].blank?
+          preloaded = Cloudinary::Uploader.upload(params[:admin_profile][:avatar], :use_filename => true, :public_id => "profiles/#{@admin_profile.id}")
+        end
+
         unless params[:admin_profile][:profile_skills_attributes].blank?
             params[:admin_profile][:profile_skills_attributes].each do |skill|
                 admin_skill = Admin::ProfileSkill.create({profile_id: @admin_profile.id, name: skill[1][:name], skill: skill[1][:skill]})
@@ -74,6 +78,10 @@ class Admin::ProfilesController < Admin::BaseController
     @not_current = 'no'
     respond_to do |format|
       if @admin_profile.update(admin_profile_params)
+        unless params[:admin_profile][:avatar].blank?
+          loaded = Cloudinary::Uploader.destroy("company/#{@admin_profile.id}", :public_id => "profiles/#{@admin_profile.id}", :invalidate => true)
+          preloaded = Cloudinary::Uploader.upload(params[:admin_profile][:avatar], :use_filename => true, :public_id => "profiles/#{@admin_profile.id}")
+        end
 
         unless params[:admin_profile][:profile_skills_attributes].blank?
             params[:admin_profile][:profile_skills_attributes].each do |skill|

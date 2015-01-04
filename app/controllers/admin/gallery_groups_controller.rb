@@ -58,6 +58,9 @@ class Admin::GalleryGroupsController < Admin::BaseController
   # DELETE /admin/gallery_groups/1
   # DELETE /admin/gallery_groups/1.json
   def destroy
+    @admin_gallery_group.galleries.each do |admin_gallery|
+      loaded = Cloudinary::Uploader.destroy("galleries/#{admin_gallery.id}", :public_id => "galleries/#{admin_gallery.id}", :invalidate => true)
+    end
     @admin_gallery_group.destroy
     respond_to do |format|
       format.html { redirect_to admin_gallery_groups_url }

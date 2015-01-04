@@ -39,6 +39,9 @@ class Admin::CompanyProfilesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_company_profile.save
+        unless params[:admin_company_profile][:photo].blank?
+          preloaded = Cloudinary::Uploader.upload(params[:admin_company_profile][:photo], :use_filename => true, :public_id => "company/#{@admin_company_profile.id}")
+        end
         format.html { redirect_to admin_root_url, notice: 'Company profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_company_profile }
       else
@@ -53,6 +56,10 @@ class Admin::CompanyProfilesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_company_profile.update(admin_company_profile_params)
+        unless params[:admin_company_profile][:photo].blank?
+          loaded = Cloudinary::Uploader.destroy("company/#{@admin_company_profile.id}", :public_id => "company/#{@admin_company_profile.id}", :invalidate => true)
+          preloaded = Cloudinary::Uploader.upload(params[:admin_company_profile][:photo], :use_filename => true, :public_id => "company/#{@admin_company_profile.id}")
+        end
         format.html { redirect_to admin_root_url, notice: 'Company profile was successfully updated.' }
         format.json { head :no_content }
       else

@@ -38,7 +38,8 @@
                                                         </tr>
                                                         <tr>
                                                               <td colspan="2">
-                                                                     <%= link_to image_tag(image.photo.url(:original),width:"125px"), admin_gallery_path(image), remote: true %>
+                                                                     <%#= link_to image_tag(image.photo.url(:original),width:"125px"), admin_gallery_path(image), remote: true %>
+                                                                     <%= link_to cl_image_tag("galleries/#{image.id}",width:"125px"), admin_gallery_path(image), remote: true %>
                                                               </td>
                                                         </tr>
                                                   </table>

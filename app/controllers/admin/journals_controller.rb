@@ -141,6 +141,11 @@ class Admin::JournalsController < Admin::BaseController
     Admin::JornalTeamDesigner.delete_all "Journal_id = #{@admin_journal.id}"
     Admin::JournalTeamDeveloper.delete_all "Journal_id = #{@admin_journal.id}"
     Admin::JournalTeamCheck.delete_all "Journal_id = #{@admin_journal.id}"
+    @admin_journal.journal_issues.each do |issue|
+      issue.journal_issue_images.each do |image|
+        loaded = Cloudinary::Uploader.destroy("journal_issue/images/#{image.id}", :public_id => "journal_issue/files/#{image.id}", :invalidate => true)
+      end
+    end
     @admin_journal.destroy
     respond_to do |format|
       format.html { redirect_to admin_journals_path }

@@ -8,7 +8,7 @@
 			<table syle="padding:10px" class="post_content_gallery floatings" border="0" cellspacing="0" cellpadding="5" style="float:left !important">
 				<tr>
 					<td>
-						<%= link_to image_tag(image.photo.url(:original),width:"170px", style:"margin-bottom:-5px"), dashboard_gallery_show_photo_path(image), remote: true %>
+						<%= link_to cl_image_tag("galleries/#{image.id}",width:"170px", style:"margin-bottom:-5px"), dashboard_gallery_show_photo_path(image), remote: true %>
 					</td>
 				</tr>
 			</table>

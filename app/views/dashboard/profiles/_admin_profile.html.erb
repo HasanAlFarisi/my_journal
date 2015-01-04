@@ -10,7 +10,7 @@
           
           <div class="post_content">
             <a href="#">
-            <%= image_tag admin_profile.avatar.url(:original), width:"210px", class:"floating" %>
+            <%= cl_image_tag "profiles/#{admin_profile.id}", width:"210px", class:"floating" %>
             </a>
             <p>My Name: <b><%= admin_profile.name %></b></p>
             <p>My Last Name: <b><%= admin_profile.last_name %></b></p>

@@ -31,6 +31,10 @@ class Admin::GalleriesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_gallery.save
+        unless params[:admin_gallery][:photo].blank?
+          preloaded = Cloudinary::Uploader.upload(params[:admin_gallery][:photo], :use_filename => true, :public_id => "galleries/#{@admin_gallery.id}")
+        end
+
         Admin::Gallery.save_attributes(params[:admin_gallery][:gallery_group_id],params)
         unless params[:admin_gallery_group].blank?
             Admin::Gallery.save_attributes(params[:admin_gallery][:gallery_group_id],params[:admin_gallery_group])
@@ -54,6 +58,10 @@ class Admin::GalleriesController < Admin::BaseController
   def update
     respond_to do |format|
       if @admin_gallery.update(admin_gallery_params)
+        unless params[:admin_gallery][:photo].blank?
+          loaded = Cloudinary::Uploader.destroy("galleries/#{@admin_gallery.id}", :public_id => "galleries/#{@admin_gallery.id}", :invalidate => true)
+          preloaded = Cloudinary::Uploader.upload(params[:admin_gallery][:photo], :use_filename => true, :public_id => "galleries/#{@admin_gallery.id}")
+        end
         format.html { redirect_to @admin_gallery, notice: 'Gallery was successfully updated.' }
         format.json { head :no_content }
       else
@@ -66,8 +74,8 @@ class Admin::GalleriesController < Admin::BaseController
   # DELETE /admin/galleries/1
   # DELETE /admin/galleries/1.json
   def destroy
+    loaded = Cloudinary::Uploader.destroy("galleries/#{@admin_gallery.id}", :public_id => "galleries/#{@admin_gallery.id}", :invalidate => true)
     @admin_gallery.destroy
-    debugger
     respond_to do |format|
       format.html { redirect_to admin_galleries_path(group_id: params[:group_id]) }
       format.json { head :no_content }

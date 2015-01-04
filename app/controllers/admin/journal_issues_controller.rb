@@ -105,6 +105,9 @@ class Admin::JournalIssuesController < Admin::BaseController
   # DELETE /admin/journal_issues/1
   # DELETE /admin/journal_issues/1.json
   def destroy
+    @admin_journal_issue.journal_issue_images.each do |image|
+      loaded = Cloudinary::Uploader.destroy("journal_issue/images/#{image.id}", :public_id => "journal_issue/files/#{image.id}", :invalidate => true)
+    end
     @admin_journal_issue.destroy
     respond_to do |format|
       format.html { redirect_to admin_journals_url }

@@ -48,6 +48,9 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+# Use cloydinary for upload file
+gem 'carrierwave'
+gem 'cloudinary'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -57,7 +60,7 @@ end
 
 group :production do
   gem 'pg'
-  gem 'rails_12factor'
+  #gem 'rails_12factor'
 end
 
 group :development do
