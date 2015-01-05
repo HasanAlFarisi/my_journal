@@ -11,7 +11,7 @@
 
         <!-- Form -->
         <div class="foto_prev">
-              <%= cl_image_tag "company/#{admin_company_profile.id}",class:"img-data company-logo", id:"logo-align" %>
+              <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("company", current_admin.id)}/company/#{admin_company_profile.id}",class:"img-data company-logo", id:"logo-align" %>
               <br>
         </div>
 

@@ -18,7 +18,7 @@
             <%= label_tag :photo, "Article Photo" %>
             <div class="foto_prev">
               <%#= image_tag @article.photo.url(:original),class:"img-data" %> 
-              <%= cl_image_tag "articles/#{@article.id}",class:"img-data" %> 
+              <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", @article.id)}/articles/#{@article.id}",class:"img-data" %> 
             </div>
           </p>
 

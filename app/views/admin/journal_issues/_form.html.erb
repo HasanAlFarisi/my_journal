@@ -83,7 +83,7 @@
 	                                                   	<input type="checkbox" class="check-self" name="selected[]" id="<%= "selected-#{image.id}" %>" value="<%= image.id %>" />Delete
 	                                              </span>
 	                                              <span class="multiple-borders">
-	                                                    <%= link_to image_tag(image.image.url(:original), class:"img_profile_issue", style:"width:25%;height:25%"),"javascript:void(0)"%> 
+	                                                    <%= link_to cl_image_tag("journal_issue/images/#{image.id}", class:"img_profile_issue", style:"width:25%;height:25%"),"javascript:void(0)"%> 
 	                                             </span>
 	                                        <% end %>
 	                                  </div>

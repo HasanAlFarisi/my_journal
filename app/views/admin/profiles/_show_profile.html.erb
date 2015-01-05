@@ -13,7 +13,7 @@
                       <div class="left-photo">
                           <div class="foto_prev_profile">
                             <%#= image_tag admin_profile.avatar.url(:original),class:"img_profile floating img_prev_profile" %> 
-                            <%= cl_image_tag "profiles/#{admin_profile.id}",class:"img_profile floating img_prev_profile" %>
+                            <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", admin_profile.id)}/profiles/#{admin_profile.id}",class:"img_profile floating img_prev_profile" %>
                           </div>
                       </div>    
 

@@ -28,7 +28,7 @@
             </div>
             <div class="post-entry">
               <p>
-                    <%= cl_image_tag "articles/#{article.id}", style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"172" %>
+                    <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"172" %>
                     <div class="ellipsis"><%=raw article.body %></div>
               </p>
               <p> <%= link_to "Continue reading ...", dashboard_home_path(article),  class:"more-link" %></p>

@@ -13,7 +13,7 @@
 		              <div class="left-photo">
 		                  <div class="foto_prev_profile">
 		                    <center>
-		                    	<%= cl_image_tag "profiles/#{admin.id}",class:"img_profile", width:"220px" %>
+		                    	<%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", admin.id)}/profiles/#{admin.id}",class:"img_profile", width:"220px" %>
 		                    	<h4><%= "#{admin.name} #{admin.last_name}" %></h4>
 		                    </center>
 		                  </div>

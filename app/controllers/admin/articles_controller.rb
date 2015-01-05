@@ -31,6 +31,7 @@ class Admin::ArticlesController < Admin::BaseController
       if @article.save
         unless params[:article][:photo].blank?
           preloaded = Cloudinary::Uploader.upload(params[:article][:photo], :use_filename => true, :public_id => "articles/#{@article.id}")
+          rand = RandCloud.generated_rand("articles",@article.id,"/v2#{Random.rand(11)}")
         end
         sub_category = Article.find(@article.id)
         sub_category.update_attributes(sub_category_id: params[:sub_category])
@@ -62,6 +63,7 @@ class Admin::ArticlesController < Admin::BaseController
         unless params[:article][:photo].blank?
           loaded = Cloudinary::Uploader.destroy('article.jpg', :public_id => 'articles/#{@article.id}', :invalidate => true)
           preloaded = Cloudinary::Uploader.upload(params[:article][:photo], :use_filename => true, :public_id => "articles/#{@article.id}")
+          rand = RandCloud.generated_rand("articles",@article.id,"/v2#{Random.rand(11)}")
         end
         @article.update_attributes(sub_category_id: params[:sub_category])
 

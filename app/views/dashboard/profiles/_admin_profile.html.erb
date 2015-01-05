@@ -10,7 +10,7 @@
           
           <div class="post_content">
             <a href="#">
-            <%= cl_image_tag "profiles/#{admin_profile.id}", width:"210px", class:"floating" %>
+            <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", admin_profile.id)}/profiles/#{admin_profile.id}", width:"210px", class:"floating" %>
             </a>
             <p>My Name: <b><%= admin_profile.name %></b></p>
             <p>My Last Name: <b><%= admin_profile.last_name %></b></p>

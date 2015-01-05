@@ -173,11 +173,11 @@ class Admin::JournalIssue < ActiveRecord::Base
 				unless file[1][:id].present?
 					save_issue = Admin::JournalIssueFile.create({journal_issue_id: id, document: file[1][:file]})
 					save_issue.save
-					#preloaded = Cloudinary::Uploader.upload(file[1][:file], :use_filename => true, :public_id => "journal_issue/files/#{save_issue.id}")
+					preloaded = Cloudinary::Uploader.upload(file[1][:file], :public_id => "journal_issue/files/#{save_issue.id}_#{save_issue.document_file_name}",:resource_type => :auto)
 				else
 					save_issue = Admin::JournalIssueFile.find(file[1][:id]).update({document: file[1][:file]})
-					#loaded = Cloudinary::Uploader.destroy("journal_issue/files/#{file[1][:id]}", :public_id => "journal_issue/files/#{file[1][:id]}", :invalidate => true)
-					#preloaded = Cloudinary::Uploader.upload(file[1][:file], :use_filename => true, :public_id => "journal_issue/files/#{file[1][:id]}")
+					loaded = Cloudinary::Uploader.destroy("journal_issue/files/#{save_issue.id}_#{save_issue.document_file_name}", :public_id => "journal_issue/files/#{save_issue.id}_#{save_issue.document_file_name}", :invalidate => true)
+					preloaded = Cloudinary::Uploader.upload(file[1][:file], :public_id => "journal_issue/files/#{save_issue.id}_#{save_issue.document_file_name}",:resource_type => :auto)
 				end
 			end
 		end

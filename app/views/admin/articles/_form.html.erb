@@ -26,7 +26,7 @@
             <%= f.label :photo, "Article Photo" %>
             <%= f.file_field :photo, class:"field size4 input-file", id: "fileField", :onchange => "readURL(this);" %>
             <div class="foto_prev">
-              <%= cl_image_tag "articles/#{@article.id}",class:"img-data" %> 
+              <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", @article.id)}/articles/#{@article.id}",class:"img-data" %> 
             </div>
           </p>
           <p>

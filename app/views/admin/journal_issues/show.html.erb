@@ -82,7 +82,7 @@
                                 <%= label_tag :image, "Attach Files" %>
                                 <% unless @admin_journal_issue.journal_issue_files.blank? %>
                                       <% @admin_journal_issue.journal_issue_files.each do |file| %>
-                                             <%= link_to generated_file_type(file).html_safe, file.document.url, :target => "_blank" %>
+                                             <%= link_to generated_file_type(file).html_safe, cloudinary_url("http://res.cloudinary.com/sampulkreativ/raw/upload/v1/journal_issue/files/#{file.id}_#{file.document_file_name}", :resource_type => :raw), :target => "_blank" %>
                                       <% end %>
                                 <% end %>
                           </div>

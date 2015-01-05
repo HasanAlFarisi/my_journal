@@ -81,6 +81,7 @@ class Admin::ProfilesController < Admin::BaseController
         unless params[:admin_profile][:avatar].blank?
           loaded = Cloudinary::Uploader.destroy("company/#{@admin_profile.id}", :public_id => "profiles/#{@admin_profile.id}", :invalidate => true)
           preloaded = Cloudinary::Uploader.upload(params[:admin_profile][:avatar], :use_filename => true, :public_id => "profiles/#{@admin_profile.id}")
+          rand = RandCloud.generated_rand("profile",@admin_profile.id,"/v2#{Random.rand(11)}")
         end
 
         unless params[:admin_profile][:profile_skills_attributes].blank?

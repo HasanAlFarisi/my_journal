@@ -44,9 +44,7 @@ class Admin::JournalIssuesController < Admin::BaseController
     @action = 'edit'
   end
 
-  def edit_status
-    
-  end
+  def edit_status;end
 
   def add_row_watchers
       @index = Admin::Journal.generated_number(current_admin.id)
@@ -86,11 +84,19 @@ class Admin::JournalIssuesController < Admin::BaseController
         unless params[:selected].blank?
               id_params = params[:selected]      
               id = convert_to_arr_for_query(id_params)
+              @selected_images = Admin::JournalIssueImage.where("id in #{id}")
+              @selected_images.each do |image|
+                loaded = Cloudinary::Uploader.destroy("journal_issue/images/#{image.id}", :public_id => "journal_issue/files/#{image.id}", :invalidate => true)
+              end
               Admin::JournalIssueImage.delete_all "id in #{id}"
          end
          unless params[:selected_files].blank?
               id_params = params[:selected_files]      
               id = convert_to_arr_for_query(id_params)
+              @selected_files = Admin::JournalIssueFile.where("id in #{id}")
+              @selected_files.each do |file|
+                loaded = Cloudinary::Uploader.destroy("journal_issue/files/#{file.id}_#{file.document_file_name}", :invalidate => true, :resource_type => :auto)
+              end
               Admin::JournalIssueFile.delete_all "id in #{id}"
          end
         format.html { redirect_to admin_journal_issue_path(id_journal: @admin_journal_issue.journal_id), notice: 'Journal issue was successfully updated.' }
@@ -101,6 +107,13 @@ class Admin::JournalIssuesController < Admin::BaseController
       end
     end
   end
+  
+  def destroy_add_rows
+    Admin::JournalIssueAsignee.delete_all "journal_issue_id = #{params[:id]} AND admin_id = #{params[:admin_id]}"
+    respond_to do |format|
+        format.json { head :no_content }
+    end
+  end
 
   # DELETE /admin/journal_issues/1
   # DELETE /admin/journal_issues/1.json
@@ -108,17 +121,13 @@ class Admin::JournalIssuesController < Admin::BaseController
     @admin_journal_issue.journal_issue_images.each do |image|
       loaded = Cloudinary::Uploader.destroy("journal_issue/images/#{image.id}", :public_id => "journal_issue/files/#{image.id}", :invalidate => true)
     end
+    @admin_journal_issue.journal_issue_files.each do |file|
+      loaded = Cloudinary::Uploader.destroy("journal_issue/files/#{file.id}_#{file.document_file_name}", :public_id => "journal_issue/files/#{file.id}_#{file.document_file_name}", :invalidate => true)
+    end
     @admin_journal_issue.destroy
     respond_to do |format|
       format.html { redirect_to admin_journals_url }
       format.json { head :no_content }
-    end
-  end
-
-  def destroy_add_rows
-    Admin::JournalIssueAsignee.delete_all "journal_issue_id = #{params[:id]} AND admin_id = #{params[:admin_id]}"
-    respond_to do |format|
-        format.json { head :no_content }
     end
   end
 

@@ -59,6 +59,7 @@ class Admin::CompanyProfilesController < Admin::BaseController
         unless params[:admin_company_profile][:photo].blank?
           loaded = Cloudinary::Uploader.destroy("company/#{@admin_company_profile.id}", :public_id => "company/#{@admin_company_profile.id}", :invalidate => true)
           preloaded = Cloudinary::Uploader.upload(params[:admin_company_profile][:photo], :use_filename => true, :public_id => "company/#{@admin_company_profile.id}")
+          rand = RandCloud.generated_rand("company",@admin_company_profile.id,"/v2#{Random.rand(11)}")
         end
         format.html { redirect_to admin_root_url, notice: 'Company profile was successfully updated.' }
         format.json { head :no_content }

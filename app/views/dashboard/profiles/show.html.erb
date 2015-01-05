@@ -14,7 +14,7 @@
         </div>
         <div class="post-entry">
             <p>
-                  <%= cl_image_tag "company/#{@company_profile.id}", style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"272" %>
+                  <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("company", @company_profile.id)}/company/#{@company_profile.id}", style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"272" %>
                     <div id="company_profile">
                           <p>
                                   <b>Company Name:</b> 
