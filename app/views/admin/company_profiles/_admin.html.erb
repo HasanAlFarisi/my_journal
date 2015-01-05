@@ -29,7 +29,7 @@
           <span class="floating" id="thumb">
           <div class="foto_prev">
                 <%#= link_to image_tag(admin.avatar.url(:original),class:"admin-avatar thumb"), admin_profile_path(admin, not_current: 'yes'), remote: true %> 
-                <%= link_to cl_image_tag("profiles/#{admin.id}", :crop => :fill,class:"admin-avatar thumb"), admin_profile_path(admin,not_current: 'yes'), remote: true %>
+                <%= link_to cl_image_tag("profiles/#{admin.id}",class:"admin-avatar thumb"), admin_profile_path(admin,not_current: 'yes'), remote: true %>
           </div>
 
           <div class="form">
