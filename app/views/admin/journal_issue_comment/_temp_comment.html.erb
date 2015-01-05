@@ -1,5 +1,5 @@
 <div class="cl">&nbsp;</div>
-<%= image_tag find_profile(@admin_journal_issue_comment.admin_id).avatar.url(:original),class:"img-icon floating" %> 
+<%= cl_image_tag "profiles/#{@admin_journal_issue_comment.admin_id}",class:"img-icon floating" %> 
 <p>
     <b><%= link_to "#{find_profile(@admin_journal_issue_comment.admin_id).name} #{find_profile(@admin_journal_issue_comment.admin_id).last_name}", "javascript:void(0)" %></b> <span class="font-less">on <%= @admin_journal_issue_comment.created_at.strftime('%d-%b-%Y') %></span>
     <div class="up">

@@ -39,9 +39,9 @@
                    		<%= label_tag :project_manajer, "Project Manajer", class:"floating form_right" %>
                    		<span class='right-data'>
                                 <% if current_admin.id == @admin_journal.admin_id %>
-                                      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(@admin_journal.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                                      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'no'), remote: true, title:"#{cl_image_tag "profiles/"@admin_journal.admin_id,class:"admin-avatar thumb")}", class:"masterTooltip" %>
                                 <% else %>
-                   			      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(@admin_journal.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                   			      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'yes'), remote: true, title:"#{cl_image_tag "profiles/"@admin_journal.admin_id,class:"admin-avatar thumb")}", class:"masterTooltip" %>
                                 <% end %>
                    		</span>
                    		<br><br>
@@ -49,9 +49,9 @@
            			<% @admin_journal.jornal_team_designers.each do |journal_team| %>
                          		<span class='right-data'>
                          			<% if current_admin.id == journal_team.admin_id %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{cl_image_tag "profiles/"journal_team.admin_id,class:"admin-avatar thumb")}", class:"masterTooltip" %>
                          			<% else %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{cl_image_tag "profiles/"journal_team.admin_id,class:"admin-avatar thumb")}", class:"masterTooltip" %>
                          			<% end %>
                          		</span>
                          		<br><br>
@@ -71,9 +71,9 @@
            			<% @admin_journal.journal_team_checks.each do |journal_team| %>
                          		<span class='right-data'>
                          			<% if current_admin.id == journal_team.admin_id %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true, title:"#{cl_image_tag "profiles/"journal_team.admin_id,class:"admin-avatar thumb")}", class:"masterTooltip" %>
                          			<% else %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{image_tag(find_profile(journal_team.admin_id).avatar.url(:original),class:"admin-avatar thumb")}", class:"masterTooltip" %>
+                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true, title:"#{cl_image_tag "profiles/"journal_team.admin_id,class:"admin-avatar thumb")}", class:"masterTooltip" %>
                          			<% end %>
                          		</span>
                          		<br><br>
