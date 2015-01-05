@@ -15,7 +15,7 @@
               <div class="top-panel-about">
                 <h3>About Our blog</h3>
                 <div class="textwidget">
-                      <%= image_tag Admin::CompanyProfile.last.photo.url(:original),width:"130", height:"115" %>
+                      <%= cl_image_tag "company/#{Admin::CompanyProfile.last.id}",width:"130", height:"115" %>
                       <%= raw Admin::CompanyProfile.last.vission %>
                 </div>
               </div>
