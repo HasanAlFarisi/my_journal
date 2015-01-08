@@ -24,14 +24,18 @@
       			<b><%= @admin_journal.title %>	</b> Project is Starting at <b><%= @admin_journal.start.strftime('%d-%b-%Y') %></b> and will be Ending at <b><%= @admin_journal.end.strftime('%d-%b-%Y') %></b>
       			<div class="right">
       				<span class="calendar">
-      					<% if truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i == 0 %>
+                          <% unless  estimated_time(@admin_journal.start,@admin_journal.end) == 'waiting' %>
+      					<% if truncate(estimated_time(@admin_journal.start,@admin_journal.end).to_s, length: 1).to_i == 0 %>
 	                                <%= link_to "Now is Deadline", "javascript:void(0)" %>
-	                          <% elsif truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i < 0 %>
+	                          <% elsif truncate(estimated_time(@admin_journal.start,@admin_journal.end).to_s, length: 1).to_i < 0 %>
 	                                <%= link_to "Out of Deadline", "javascript:void(0)" %>
 	                          <% else %>
-      						<%= link_to "#{truncate(estimated_time(@admin_journal.end).to_s, length: 1).to_i}", "javascript:void(0)" %>
+      						<%= link_to "#{truncate(estimated_time(@admin_journal.start,@admin_journal.end).to_s, length: 1).to_i}", "javascript:void(0)" %>
       						Day left
       					<% end %>
+                          <% else %>
+                                <b>Waiting</b>
+                          <% end %>
       				</span>
       			</div>
       			<div class="down-select-two">&nbsp;</div>  

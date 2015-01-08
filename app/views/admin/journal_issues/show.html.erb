@@ -9,14 +9,18 @@
                                   <b><%= @admin_journal.title %></b> Issue
                           </h2>
                           <div class="right-down">
-                              <% if truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i == 0 %>
+                          <% unless  estimated_time(@admin_journal_issue.start,@admin_journal_issue.end) == 'waiting' %>
+                              <% if truncate(estimated_time(@admin_journal_issue.start,@admin_journal_issue.end).to_s, length: 1).to_i == 0 %>
                                       <b>Now is Deadline</b>
-                              <% elsif truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i < 0 %>
+                              <% elsif truncate(estimated_time(@admin_journal_issue.start,@admin_journal_issue.end).to_s, length: 1).to_i < 0 %>
                                       <b>Out of Deadline</b>
                               <% else %>
-                                      <b><%= truncate(estimated_time(@admin_journal_issue.end).to_s, length: 1).to_i %>
+                                      <b><%= truncate(estimated_time(@admin_journal_issue.start,@admin_journal_issue.end).to_s, length: 1).to_i %>
                                       Day left</b>
                               <% end %>
+                          <% else %>
+                                      <b>Waiting</b>
+                          <% end %>
                           </div>
                     </div>
             <!-- End Box Head -->

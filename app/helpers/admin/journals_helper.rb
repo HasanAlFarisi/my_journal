@@ -1,6 +1,11 @@
 module Admin::JournalsHelper
-	def estimated_time(end_time)
-		return end_time - Date.today
+	def estimated_time(start_time, end_time)
+		if Date.today >= start_time
+			time = end_time - Date.today
+		else
+			time = "waiting"
+		end
+		return time
 	end
 
 	def estimated_time_progress(start_time,end_time)

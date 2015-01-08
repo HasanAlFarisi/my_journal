@@ -46,13 +46,17 @@
             </td>
             <td><center><b><%= admin_journal.journal_issues.data_existed_count(current_admin,"home").count %></b></center></td>
             <td> <center><b>
-                          <% if truncate(estimated_time(admin_journal.end).to_s, length: 1).to_i == 0 %>
+                    <% unless  estimated_time(admin_journal.start,admin_journal.end) == 'waiting' %>
+                          <% if truncate(estimated_time(admin_journal.start,admin_journal.end).to_s, length: 1).to_i == 0 %>
                                 <%= link_to "Now is Deadline", admin_journal_path(admin_journal), remote: true, title:"<b>Start</b><br>#{ admin_journal.start.strftime('%d/%b/%Y')} <br><br> <b>End</b><br> #{admin_journal.end.strftime('%d/%b/%Y')}", class:"masterTooltip" %>
-                          <% elsif truncate(estimated_time(admin_journal.end).to_s, length: 1).to_i < 0 %>
+                          <% elsif truncate(estimated_time(admin_journal.start,admin_journal.end).to_s, length: 1).to_i < 0 %>
                                 <%= link_to "Out of Deadline", admin_journal_path(admin_journal), remote: true, title:"<b>Start</b><br>#{ admin_journal.start.strftime('%d/%b/%Y')} <br><br> <b>End</b><br> #{admin_journal.end.strftime('%d/%b/%Y')}", class:"masterTooltip" %>
                           <% else %>
-                                <%= link_to "#{truncate(estimated_time(admin_journal.end).to_s, length: 1).to_i} day left", admin_journal_path(admin_journal), remote: true, title:"<b>Start</b><br>#{ admin_journal.start.strftime('%d/%b/%Y')} <br><br> <b>End</b><br> #{admin_journal.end.strftime('%d/%b/%Y')}", class:"masterTooltip" %>
+                                <%= link_to "#{truncate(estimated_time(admin_journal.start,admin_journal.end).to_s, length: 1).to_i} day left", admin_journal_path(admin_journal), remote: true, title:"<b>Start</b><br>#{ admin_journal.start.strftime('%d/%b/%Y')} <br><br> <b>End</b><br> #{admin_journal.end.strftime('%d/%b/%Y')}", class:"masterTooltip" %>
                           <% end %>
+                    <% else %>
+                          <%= link_to "Waiting", admin_journal_path(admin_journal), remote: true, title:"<b>Start</b><br>#{ admin_journal.start.strftime('%d/%b/%Y')} <br><br> <b>End</b><br> #{admin_journal.end.strftime('%d/%b/%Y')}", class:"masterTooltip" %>
+                    <% end %>
                       </b></center></td>          
             <% if admin_journal.admin_id == current_admin.id %>
                   <td  width="5px">
