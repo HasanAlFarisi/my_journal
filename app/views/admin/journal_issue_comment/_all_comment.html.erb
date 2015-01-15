@@ -15,7 +15,10 @@
             <% end %>
             <ol>
             <% comment.journal_issue_comment_files.each do |file| %>
-                <li class="font-less"><%= link_to file.comment_document_file_name, file.comment_document.url, :target => "_blank" %></li>
+                <li class="font-less">
+                  <%#= link_to file.comment_document_file_name, file.comment_document.url, :target => "_blank" %>
+                  <%= link_to  file.comment_document_file_name, cloudinary_url("http://res.cloudinary.com/sampulkreativ/raw/upload/v1/journal_issue/files/#{file.id}_#{file.comment_document_file_name}", :resource_type => :raw), :target => "_blank" %>
+                </li>
             <% end %>
             </ol>
       </p>

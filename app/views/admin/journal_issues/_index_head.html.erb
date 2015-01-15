@@ -33,11 +33,11 @@
               </td>
             </tr>
           <%end%>
-          <% @journal_issues =  admin_journal.journal_issues.order("created_at DESC").data_existed(current_admin,"home").paginate(:page => params[:page], :per_page => 20) %>
+          <% @journal_issues =  admin_journal.journal_issues.order("created_at DESC").data_existed(current_admin,"home").paginate(:page => params[:page], :per_page => 10) %>
           <% @journal_issues.each do |admin_journal_issue| %>
                 <%= render :partial => "admin/journal_issues/index_body", locals: {admin_journal_issue: admin_journal_issue, admin_id: admin_journal.admin_id} %>
       	   <% end %>
-          <% if @pagging_status.blank? && admin_journal.journal_issues.data_existed_count(current_admin,"home").count > 20 %>
+          <% if @pagging_status.blank? && admin_journal.journal_issues.data_existed_count(current_admin,"home").count > 10 %>
                   <tr>
                       <td colspan="7">
                           <center><%= link_to "Show All Data", admin_journal_issues_path(journal_id: admin_journal.id) %></center>
