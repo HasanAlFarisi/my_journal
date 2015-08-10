@@ -9,7 +9,7 @@ gem 'devise'
 gem 'will_paginate', '~> 3.0'
 gem 'paperclip', '~> 3.0'
 gem 'aws-sdk'
-#gem 'ckeditor_rails'
+gem 'ckeditor_rails'
 gem 'mini_magick'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
