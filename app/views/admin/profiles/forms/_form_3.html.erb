@@ -1,0 +1,8 @@
+<%= form_for(@admin_profile, remote: true) do |f| %>
+	<%= hidden_field_tag :tab, "3" %>
+	<%= f.fields_for :profile_hobbies do |ph| %>
+	    	<%= render "admin/profiles/profile_hobby", :f => ph %>
+	<% end %>
+	<div class="sub-hobby"><!-- add hobby place --></div>
+<% end %>
+<a href="javascript:void(0)" class="add btn btn-warning subs" onclick="add_field_hobbies('1')"><i class="fa fa-plus"></i> Hobby</a>

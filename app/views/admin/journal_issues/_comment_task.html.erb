@@ -1,45 +1,39 @@
-<div id="main" style="show_task">
-      <div class="cl">&nbsp;</div>
-      <div id="content">
-            <!-- Box -->
-            <div class="box">
-            <!-- Box Head -->
-                    <div class="box-head">
-                          <h2>Add Comment</h2>
-                    </div>
-                    <div class="form">
-                          <%= form_for(@admin_journal_issue_comment, url: admin_journal_issue_comment_index_path, :html => {:multipart => true, remote: true}) do |f| %>
-                                <div class="form">
-                                      <%= f.hidden_field :journal_issue_id, value: @admin_journal_issue.id %>
-                                      <%= f.hidden_field :admin_id, value: current_admin.id %>
-                                      <p>
-                                              <%= f.label :content, "Comment", class:" form_right" %>
-                                              <%= f.text_area :content, class:"textarea size7 height6 field" %>
-                                      </p>
-                                      <p>
-                                              <%= f.label :comment_document, "Attach Files", class:" form_right" %>
-                                              <%= file_field_tag :comment_document, class:"field size4 input-file", id: "fileField", name:"admin_journal_issue_comment[journal_issue_comment_files_attributes][0][comment_document]" %>
-                                              <br>
-                                              <div id="sub-comment-file" dataId="1"><!-- add images place --></div>
-                                              <div class="add button" type="submit" id="add_comment_file">+| Files</div>
-                                      </p>
+<div class="panel panel-<%= @estimate == 'Out of Deadline' ? 'danger' : 'primary' %>">
+      <div class="panel-heading">
+            <i class="fa fa-bookmark fa-fw"></i>Add Comment
+      </div>
 
-                                </div>
-                                <div class="buttons">
-                                        <%= link_to "Back", admin_journals_path, class:"button floating" %>
-                                        <%= f.submit "Comment",  class:"button ajax", data: { :disable_with => "Please wait..." } %>
-                                 </div>
+      <div class="panel-body">
+            <div class="row">
+                   <div class="col-lg-12">
+                          <%= form_for(@admin_journal_issue_comment, url: admin_journal_issue_comment_index_path, :html => {:multipart => true, remote: true}) do |f| %>
+                                <%= f.hidden_field :journal_issue_id, value: @admin_journal_issue.id %>
+                                <%= f.hidden_field :admin_id, value: current_admin.id %>
+                                <p>
+                                        <%= f.label :content, "Comment", class:" form_right" %>
+                                        <%= f.text_area :content, class:"form-control" %>
+                                </p>
+                                <p>
+                                        <%= f.label :comment_document, "Attach Files", class:" form_right" %>
+                                        <%= file_field_tag :comment_document, id: "fileField", name:"admin_journal_issue_comment[journal_issue_comment_files_attributes][0][comment_document]" %>                                       
+                                        <div id="sub-comment-file" dataId="1"></div>
+                                        <button class="add sub-comment" onclick="add_attach_comment('1'); return false;">       
+                                          <i class="fa fa-plus"></i> File
+                                        </button>
+                                </p>
+                                <hr>
+                                <button class="ajax btn btn-success"><i class="fa  fa-pencil fa-1x"></i>Comment</button>
                           <% end %>
-                    </div>
+                </div>
             </div>
       </div>
 </div>
 <script>
-    var ids = $("#sub-comment-file").attr("dataId")
-    $("#add_comment_file").click(function(){
-        ids = ids + 1;
-        $("#sub-comment-file").append("<span class='parents'><input class='floating field size4 input-file' id='fileField' name='admin_journal_issue_comment[journal_issue_comment_files_attributes]["+ids+"][comment_document]' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
-    })
+      function add_attach_comment(a){
+        ids = a + 1;
+        $("#sub-comment-file").append("<span class='parents'><input class='floating field size4 input-file' id='fileField' name='admin_journal_issue_comment[journal_issue_comment_files_attributes]["+ids+"][comment_document]' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><span class='clearfix'></span><br></span>")
+        $(".sub-comment").attr("onclick", "add_attach_comment("+ids+"); return false;");
+    }
     $(".ajax").click(function(){
         $("#ajax_loader").fadeIn();
     })

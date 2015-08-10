@@ -1,59 +1,63 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-<title><%= @status.blank? ? "My Journal" : @article.title %></title>
-  
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag    "modal", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag    "jqueryindex", media: "all", "data-turbolinks-track" => true %>
-  <!--[if IE]><%= stylesheet_link_tag    "style_ie", media: "all", "data-turbolinks-track" => true %><![endif]-->
-  <!--[if lt IE 7]><%= stylesheet_link_tag    "style_ie6", media: "all", "data-turbolinks-track" => true %><![endif]-->
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div id="page">
-      <div id="page-top">
-            <div id="page-bottom">
-                    <%= render 'dashboard/shared/header_content' %>
-<!-- <div id="templatemo_content_wrapper">
-	<div id="templatemo_content">
-    <div id="templatemo_main_content_top"></div>
+	<head>
+		<title><%= @status.blank? ? "My Journal" : @article.title %></title>
+		<!--[if IE]><%= stylesheet_link_tag    "style_ie", media: "all", "data-turbolinks-track" => true %><![endif]-->
+		<!--[if lt IE 7]><%= stylesheet_link_tag    "style_ie6", media: "all", "data-turbolinks-track" => true %><![endif]-->
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	</head>
+	<body>
+		<!-- HEADER -->
+			<%= render 'dashboard/shared/header_content' %>
+		<!-- END HEADER -->
 
-    <div id="templatemo_main_coontent"> -->
-      <div id="main">
-            <div class="featured-post">
-              <%= yield %>
-              <% unless @articles.blank? %>
-                <div id="pagging-left" class="pagging">
-                    <%= will_paginate @articles %> 
-                </div>
-              <% end %>
-            </div>
-            <%= render 'dashboard/shared/sidebar' %>
-	      <%= render 'dashboard/shared/sidebar_menu' %>
-             <br>
-            <%= render 'dashboard/shared/pre_footer' %>
-      </div>
-        <!-- <div class="cleaner"></div>  -->
-      <!-- </div> --> <!-- end of main content in Sidebar -->
-      <!-- <div id="templatemo_main_content_bottom"></div>  
-      <div class="post_content">
-        <div class="link_button">
-          <div id="pagging-left"> -->
-              
-          <!-- </div>
-        </div>
-      </div>
-    </div>  
-  </div> 
-</div> -->
-<%= render 'dashboard/shared/footer' %>
-             </div>
-       </div>
-</div>
-</body>
+		<!-- COMPANY NAME -->
+	          	<div class="header_background clearfix">
+				<div class="container paddingdown5x ">
+					<div class="row row-offcanvas row-offcanvas-left">
+						<div class="col-xs-12 col-sm-3 side pull-left sidebar-offcanvas" id="sidebar" role="navigation">
+							SampulKreativ Blogroll
+							<nav class="clearfix"></nav>
+							<span>We have all for creative feature</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- END COMPANY NAME -->
+
+		<!-- MAIN CONTENT -->
+			<div class="container clearfix">
+				<div class="row">
+					<div id="index-place-for-articles">
+						<%= yield %>
+					</div>
+					<%= render 'dashboard/shared/sidebar' %>
+					<%= render 'dashboard/shared/quote' %>
+				</div>
+			</div>
+		<!-- END MAIN CONTENT -->
+		<nav class="clearfix down2x"></nav>
+		<!-- FOOTER SECTION -->
+			<footer>
+				<div class="container clearfix">
+					<div class="row">
+						<%= render 'dashboard/shared/footer' %>
+					</div>
+				</div>
+			</footer>
+		<!-- END FOOTER SECTION -->
+
+		<!-- END FOOTER -->
+			<%= render "dashboard/shared/end_footer" %>
+		<!-- END END FOOTER -->
+
+		<!-- MODAL -->
+			<%= render 'dashboard/shared/modal' %>
+		<!-- END MODAL -->
+
+		<!-- PROGRESSBAR -->
+			<%= render 'dashboard/shared/loading' %>
+		<!-- END PROGRESSBAR -->
+	</body>
 </html>
-<%= javascript_include_tag "ckeditor/truncate", "data-turbolinks-track" => true %>
-<%= javascript_include_tag "jquerycssmenu", "data-turbolinks-track" => true %>

@@ -1,57 +1,75 @@
-<div id="index-place">
-            <div class="post-title">
-                    <h2><%= link_to @article.title, dashboard_home_path(@article) %></h2>
-                    <div class="post-title-info">
-                          <div class="post-date">Dated: <%= "#{@article.created_at.strftime('%d %B %Y')} " %>
-                          
-                                Category
-                                <% if @article.category_id.present? %>
-                                    <b><%= link_to find_category(@article.category_id), dashboard_home_show_categories_path(@article.category_id) %></b>
-                                <% else %>
-                                    <b><%= link_to find_category(@article.category_id), "javascript:void(0)" %></b>
-                                <% end %>
-
-                                <% if @article.sub_category_id.present? %>
-                                    <b><%= link_to find_sub_category(@article.sub_category_id), dashboard_home_show_sub_categories_path(@article.sub_category_id) %></b>
-                                <% else %>
-                                    <b><%= link_to find_sub_category(@article.sub_category_id), "javascript:void(0)" %></b>
-                                <% end %>
-                          </div>  
-                          <div class="post-comments">
-                                <b><%= counting_comment(@article) %></b> Comment
-                                <div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com/dashboard/home/<%=@article.id%>" data-layout="button_count"></div>
-                          </div>
-                    </div>
-            </div>
-                  <div class="post-entry">
-                    <p>
-                          <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", @article.id)}/articles/#{@article.id}", style:"margin-left: 5px; margin-right: 5px;",alt:"",align:"left", width:"300" %>
-                          <div><%=raw @article.body %></div>
-                    </p>
-              </div>
-      <div class="clear"></div>
-      <br>
-      <div class="post-category">&nbsp;</div>
-      <div id="comment-field">
-        <p>Comment(s)</p>
-        <%= render :partial => "dashboard/comments/index", locals: {dashboard_comments: @article_comments} %>
-        <div id="comment-place"><!-- Comment place from render partial --></div>
-        <%= render 'dashboard/shared/ajax_loader' %>
-        <%= render partial: 'dashboard/comments/form', locals: {status: 'contact_for_comment'} %>
-      </div>
-      <div class="link_button">
-        <%= link_to "Back ...", session[:url_back_dashboard] %>
-      </div>
-<!--           </div> 
-        </div>
-      </div>
-    </div> -->
+<div class="col-xs-12 col-sm-8 side pull-left sidebar">
+	<section class="down2x">
+		<article>
+			<header>
+				<span class="header_article col-xs-1-5">
+					<nav><%= "#{@article.created_at.strftime('%d')} " %></nav>
+					<center><%= "#{@article.created_at.strftime('%B')} " %></center>
+					<center><%= "#{@article.created_at.strftime('%Y')} " %></center>
+				</span>
+				<span class="col-xs-2 pull-right">
+					<div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com/dashboard/home/<%=@article.id%>" data-layout="button_count"></div>
+				</span>
+				<div class="title">
+					<b><a href="javascipt:void(0)"><%= link_to @article.title, dashboard_home_path(@article) %></a></b>
+					<nav>Written: 
+						<span>
+							<%= link_to "#{find_admin(@article.admin_id).profile.name} #{find_admin(@article.admin_id).profile.last_name}", "#" %>
+						</span>
+						Category:
+						<span>
+							<% if @article.category_id.present? %>
+		                                    <%= link_to find_category(@article.category_id), dashboard_home_show_categories_path(@article.category_id) %>
+		                                <% else %>
+		                                    <%= link_to find_category(@article.category_id), "javascript:void(0)" %>
+		                                <% end %>
+		                                <% if @article.sub_category_id.present? %>
+		                                    <%= link_to find_sub_category(@article.sub_category_id), dashboard_home_show_sub_categories_path(@article.sub_category_id) %>
+		                                <% else %>
+		                                    <%= link_to find_sub_category(@article.sub_category_id), "javascript:void(0)" %>
+		                                <% end %>
+						</span>
+					</nav>
+				</div>
+			</header>
+			
+			<p class="offcanvas">
+				<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", @article.id)}/articles/#{@article.id}",alt:"",align:"left", width:"749", class:"image_noBorder"), dashboard_home_path(@article) %>
+			</p>
+			<nav class="clearfix"></nav>
+			<p>
+				<%= @article.body.html_safe %>
+				<%= link_to "BACK", session[:url_back_dashboard],  class:"btn btn-warning pull-right", style:"margin-right:10px;" %>
+			</p>
+			<nav class="clearfix"></nav>
+			<footer>
+				<div class="related">
+					<!-- SEE ALSO ARTICLE PLACE -->
+						<%= render 'dashboard/home/similiar' %>
+					<!-- END SEE ALSO ARTICLE PLACE -->
+				</div>
+				<nav class="clearfix"></nav>
+				<div class="comments">
+					<h3 id="comment_count"><%= @article_comments.count %> Comment(s)</h3>
+					<div id="comment-place"><!-- Comment place from render partial --></div>
+					<%= render 'dashboard/shared/ajax_loader' %>
+					<%= render :partial => "dashboard/comments/index", locals: {dashboard_comments: @article_comments} %>
+				</div>	
+				<br>
+				<div class="comments_form">
+				      	<%= render partial: 'dashboard/comments/form', locals: {status: 'contact_for_comment'} %>
+				</div>			
+			</footer>
+			<nav class="clearfix"></nav>
+		</article>
+	</section>
 </div>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/id_ID/sdk.js#xfbml=1&appId=304923376368561&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+</script>

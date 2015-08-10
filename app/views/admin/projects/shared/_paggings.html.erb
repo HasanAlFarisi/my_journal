@@ -1,0 +1,11 @@
+<div class="left">Show: <b class="shows"><%= @admin_journals_status.blank? ? 0 : @admin_journals_status.count %></b> data From: <b class="froms"><%= @admin_journals_status_all.blank? ? 0 : @admin_journals_status_all.count %></b> data
+  <span class="pull-right">
+        <span class="paginate">
+        	<% if @notpagging.blank? %>
+          		<%= will_paginate @admin_journals %>
+          	<% end %>
+          &nbsp;
+        </span>
+        <a role="button" id="new_journal" href="/admin/journal_issues/create_project?notices='yes'" class="btn btn-primary"><span class="fa  fa-pencil-square fa-1x"></span>New Project</a>
+  </span>
+</div>

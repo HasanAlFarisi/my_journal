@@ -1,12 +1,32 @@
-<%= render partial: 'admin/journals/index', locals:{type:"index"} %>
-<!-- Sidebar -->
-<div id="sidebar">
-  <%= render :partial => "admin/shared/sidebar" %>
-</div>
-<!-- Sidebar -->
-<%= render partial: 'admin/company_profiles/admin', locals:{admins: @admins, current_admin: @current_admin} %>
-<%= render partial: 'admin/company_profiles/detail', locals:{admin_company_profile: @admin_company_profiles} %>
+<!-- <div id="show_profile_place"> --><!--The place for show profile--><!-- </div> -->
+<!-- <div id="modal_background"> --><!--The place for show background black--><!-- </div> -->
+<!-- <div id="show_modal_comment"> --><!--The place for show comment--><!-- </div> -->
+    
+<!--quick info section -->
+<%= render "admin/company_profiles/quick_info" %>
+<!--end quick info section -->
 
-<div id="show_profile_place"><!--The place for show profile--></div>
-<div id="modal_background"><!--The place for show background black--></div>
-<div id="show_modal_comment"><!--The place for show comment--></div>
+<div class="row">
+<div class="col-lg-12">
+    <!--Simple table example -->
+    <%= render partial: 'admin/journals/index', locals:{type:"index", admin_journal: @admin_journals} %>
+    <!--End simple table example -->
+</div>
+<div class="col-lg-8">
+    <!--Simple table Messages example -->
+    <%= render partial: 'admin/messages/dashboard_messages' %>
+    <!--End simple table Messages example -->
+
+    <!--Company Members -->
+    <%= render partial: 'admin/company_profiles/admin', locals:{admins: @admins, current_admin: @current_admin} %>
+    <!--End Company Members -->
+
+    <!--Company Profile -->
+    <%= render partial: 'admin/company_profiles/detail', locals:{admin_company_profile: @admin_company_profiles} %>
+</div>
+
+<div class="col-lg-4">
+  <!-- Navbar Dashboard -->
+    <%= render partial: 'admin/shared/navbar_dashboard' %>
+  <!-- End Navbar Dashboard -->
+</div>

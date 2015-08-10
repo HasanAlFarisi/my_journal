@@ -1,47 +1,48 @@
-<div id="main">
-  <div class="cl">&nbsp;</div>
-  <div id="content">
-    <!-- Box -->
-    <div class="box">
-      <!-- Box Head -->
-      <div class="box-head">
-        <h2>Current Admin</h2>
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <i class="fa fa-user fa-fw"></i>SampulKreativ Members
+          <div class="pull-right">
+              <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                      Actions
+                      <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                      <li><a href="#">Action</a>
+                      </li>
+                      <li><a href="#">Another action</a>
+                      </li>
+                      <li><a href="#">Something else here</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
       </div>
-      <!-- End Box Head -->     
+      
+      <div class="panel-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="table-responsive member">
+                    <div class="col-lg-2 down">
+                        <%= raw generated_link_to(image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{current_admin.id}", class:"admin-avatar"),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{current_admin.id},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
 
-      <!-- Current Admin -->      
-        <span class="floating">
-            <div class="foto_prev">
-                  <%#= link_to cl_image_tag("profiles/#{current_admin.id}",:overwrite => false, class:"admin-avatar"), admin_profile_path(current_admin.id, not_current: 'no'), remote: true %>
-                  <%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{current_admin.id}", class:"admin-avatar"), admin_profile_path(current_admin.id, not_current: 'no'), remote: true %>
-            </div>
-
-            <div class="form">
-              <p id="avatar">
-                  <span><%= current_admin.name%></span>
-              </p>
-            </div>
-        </span>
-        <!-- End Current Admin -->      
-
-      <% admins.each do |admin| %>
-          <!-- Form -->
-          <span class="floating" id="thumb">
-          <div class="foto_prev">
-                <%#= link_to image_tag(admin.avatar.url(:original),class:"admin-avatar thumb"), admin_profile_path(admin, not_current: 'yes'), remote: true %> 
-                <%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{admin.id}",class:"admin-avatar thumb",:overwrite => false), admin_profile_path(admin,not_current: 'yes'), remote: true %>
+                        <span class="user-circle-online btn btn-success btn-circle online"></span>
+                        <span class="left clearfix"></span>
+                        <center class="admin_name"><%= current_admin.name %></center>
+                    </div>
+                    <% admins.each do |admin| %>
+                      <div class="col-lg-2 down">
+                            <%= raw generated_link_to(image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", admin.id)}/profiles/#{admin.id}",class:"admin-avatar thumb",:overwrite => false),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{admin.id},'yes')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                            <span class="user-circle-online btn btn-success btn-circle online"></span>
+                            <span class="left clearfix"></span>
+                            <center><%= admin.name %></center>
+                      </div>
+                    <% end %>
+                  </div>
+              </div>
           </div>
-
-          <div class="form">
-            <p id="avatar" class="name-thumb">
-                <span><%= admin.name%></span>
-            </p>
-          </div>
-          </span>
-      <% end %>
-      <p style="height:340px;"></p>
-        <!-- End Form -->
-    </div>
-    <!-- End Box -->
+      </div>
   </div>
-</div>

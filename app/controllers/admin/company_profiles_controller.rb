@@ -1,5 +1,6 @@
 class Admin::CompanyProfilesController < Admin::BaseController
   before_action :set_admin_company_profile, only: [:show, :edit, :update, :destroy]
+  before_filter :setup_page
   
   # GET /admin/company_profiles
   # GET /admin/company_profiles.json
@@ -8,13 +9,24 @@ class Admin::CompanyProfilesController < Admin::BaseController
     @current_admin = current_admin.profile
     @admin_company_profiles = Admin::CompanyProfile.last
     @admin_journals = Admin::Journal.order("created_at DESC")
+    admin_journals = Admin::Journal.order("created_at DESC").is_allowed(current_admin.id,nil)
     ids = []
     @admin_journals.each do |journal|
             ids << journal.id
     end
     id = convert_to_arr_for_query(ids)
     @admin_journals_status = Admin::JournalIssue.find_index_count(id == ")" ? "(0)" : id,current_admin.id,'index')
-    
+    ids_all = []
+    admin_journals.each do |journal|
+        ids_all << journal.id
+    end
+    ids_all = convert_to_arr_for_query(ids_all)
+    @admin_journals_status_all = Admin::JournalIssue.find_index_count(ids_all == ")" ? "(0)" : ids_all ,current_admin.id,'index')
+    @messages = Admin::Contact.where("admin_id = ?", current_admin.id).order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
+
+    @admin_journals_status_count = Admin::Journal.where("id IN #{ids_all == ")" ? "(0)" : ids_all} AND status_id = 6").count
+
+    @articles_count = Article.all.count
     session[:urlBack] = request.original_url
   end
 
@@ -78,6 +90,11 @@ class Admin::CompanyProfilesController < Admin::BaseController
       format.html { redirect_to admin_company_profiles_url }
       format.json { head :no_content }
     end
+  end
+
+  def setup_page
+    @dashboard = "selected"
+    @page = "Dashboard"
   end
 
   private

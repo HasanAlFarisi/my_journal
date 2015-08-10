@@ -1,13 +1,5 @@
-<!-- <span class="icon_img_prev">
-	<%# for i = 0, i >2, i++ %>
-		<%#= image_tag @admin_skills[skill].icon.url(:original), class:"floating img-icon icon_prev" %>
-	<%# end %>
-</span> -->
-<%= f.text_field :name, class:"field size6 floating"  %>
-<%= f.text_field :skill, class:"field size2 floating"  %>
+<%= f.text_field :name, class:"form-control floating", style:"width:40% !important; margin:0px 5px 5px 0px"  %>
+<%= f.text_field :skill, class:"form-control floating", style:"width:40% !important;"  %>
 <div style='margin-top:-7px' class="">%
   <input type="checkbox" name="selected[]" id="<%= "selected-#{f.object.id}" %>" value="<%= f.object.id %>" class="check-self"><span style="color:red">Delete</span>
   </div>
-<!-- <br> -->
-<%#= f.file_field :icon, class:"field size6 input-file file", id: "fileField", :onchange => "readIconURL(this);", style:"margin-left:75px" %>
-<!-- <br> -->

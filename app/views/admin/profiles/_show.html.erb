@@ -1,0 +1,42 @@
+<%= form_for(@admin_profile, remote: true, :html => {:multipart => true}) do |f| %>
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title profile-header" id="myModalLabel">
+                          <i class="fa fa-user fa-fw"></i><%= "#{@admin_profile.name}"" #{@admin_profile.last_name}" %>
+                  </h4>
+              </div>
+              <div class="modal-body">
+                 <div class="row">
+                        <div class="col-lg-3">
+                                 <span class="foto_prev_profile admin-avatar-append">
+                                       <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", @admin_profile.id)}/profiles/#{@admin_profile.id}", class:"admin-avatar img_prev_profile" %>
+                                 </span>
+                                 <div class="fileUpload btn btn-danger hide">
+                                      <span>Upload</span>
+                                      <%= f.file_field :avatar, class:"upload", id: "fileField", :onchange => "readURLProfile(this);", style:"border:none;" %>
+                                </div>
+                        </div>
+                        <%= render partial:"admin/profiles/detail", locals:{admin_profile: @admin_profile} %>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                    <% unless @not_current == 'yes' %>     
+                          <span class="button_save hide">
+                              <button class="btn btn-success" id="submit-form-profile"><i class="fa  fa-pencil fa-1x"></i>Save</button>
+                          </span>
+                          <span class="button_edit">
+                                <%= link_to "<i class='fa  fa-pencil fa-1x'></i> Edit".html_safe, "javascript:void(0)", onclick:"edit_form(#{@admin_profile.id})" , class:"edited btn btn-primary ", style:"padding: 9px 10px;", role: "button" %>
+                          </span>
+                    <% end %>
+                    &nbsp;
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+<% end %>
+
+<%= javascript_include_tag 'dashboard/form_validates' %>
+<%= javascript_include_tag 'profile_edit' %>
+<%= javascript_include_tag 'ckeditor/foto-append' %>

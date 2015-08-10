@@ -1,22 +1,14 @@
-<div class="cl">&nbsp;</div>
 <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", @admin_journal_issue_comment.admin_id)}/profiles/#{@admin_journal_issue_comment.admin_id}",class:"img-icon floating" %> 
-<p>
-    <b><%= link_to "#{find_profile(@admin_journal_issue_comment.admin_id).name} #{find_profile(@admin_journal_issue_comment.admin_id).last_name}", "javascript:void(0)" %></b> <span class="font-less">on <%= @admin_journal_issue_comment.created_at.strftime('%d-%b-%Y') %></span>
-    <div class="up">
-    <%= @admin_journal_issue_comment.content %>
-    </div >
-</p>
-<p class="up-less font-less">
-      FIle Attached: 
-      <% if @admin_journal_issue_comment.journal_issue_comment_files.blank? %>
-        Not yet
-      <% end %>
-      <ol>
+    <b>&nbsp;<%= link_to "#{find_profile(@admin_journal_issue_comment.admin_id).name} #{find_profile(@admin_journal_issue_comment.admin_id).last_name}", "javascript:void(0)" %></b> <span class="font-less">on <%= @admin_journal_issue_comment.created_at.strftime('%d-%b-%Y') %></span>
+    <div>
+          &nbsp;<%= @admin_journal_issue_comment.content %>
+    </div>
+<div class="font-less">
+      <ol class="ol-none">
       <% @admin_journal_issue_comment.journal_issue_comment_files.each do |file| %>
           <li class="font-less"><%= link_to file.comment_document_file_name, file.comment_document.url, :target => "_blank" %></li>
       <% end %>
       </ol>
-</p>
-<hr>
-<div class="cl">&nbsp;</div>
-<br>
+</div>
+      <span class="clearfix"></span>
+<hr class="hr_none">

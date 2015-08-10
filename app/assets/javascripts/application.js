@@ -12,10 +12,10 @@
 //
 //= require jquery-1.9.1.min
 //= require jquery-ui-1.10.3.custom.min
-//= require bootstrap.min
-//= require miniscroll
+//= require global
+//= require progress
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require ckeditor-jquery
 //= require_tree ./ckeditor
+//= require bootstrap

@@ -1,132 +1,145 @@
-<style type="text/css">
-  #up{
-    margin-top: -28px !important;
-  }
-  .right-img{
-    margin-top:-30px; padding-right:20px !important;'
-  }
-</style>
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <i class="fa fa-edit fa-fw"></i>Project Form
+      </div>
 
-<div id="modal_profile_edit" class="styled form positions" style="background: none !important;">
-      <div class="cl">&nbsp;</div>
-      <div id="content">
-             <div class="box">
-                <!-- Box Head -->
-                    <div class="box-head">
-                      <h2>Project</h2>
-                    </div>
-                    <%= form_for(@admin_journal) do |f| %>
-                          <div class="form">
-                                <div class="notif-error"></div>
-                                 <p>
-                                        <%= f.label :title, "Project Name" %><span>(Required Field)</span>
-                                        <%= f.text_field :title, class:"field size0" %>
-                                 </p>
-                                
-                                 <p>
-                                      <%= f.label :status_id, "Status Task" %>
-                                      <%= f.select :status_id, options_for_select(@status,@statused) %>
-                                </p>
+      <div class="panel-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <%= form_for(@admin_journal) do |f| %>
+                          <% if @admin_journal.errors.any? %>
+                                  <%= render partial: "shared/validate_error", locals: { object: @admin_journal}%>
+                          <% end %>
+                          <p>
+                                <%= f.label :title, "Project Name" %><span style="color:red">*</span>
+                                <%= f.text_field :title, class:"form-control" %>
+                          </p>
 
-                                <div class="inside">
-                                        <%= label_tag :title, "Project Team" %>
-                                </div>
-                                <div class="form_team">
-                                    <%= f.label :project_manajer, "Project Manajer", class:"floating form_right" %>
-                                    <% if @action == 'new' %>
-                                            <%= f.text_field :project_manajer, value: find_name(current_admin.id), :disabled=>"disabled", class:"field size1 floating field-dis" %>
-                                            <%= f.hidden_field :project_manajer, value: find_name(current_admin.id), class:"field size1 floating field-dis" %>
-                                            <%= f.hidden_field :admin_id, value: current_admin.id, class:"field size1 floating field-dis" %>
-                                    <% else %>
-                                             <%= f.text_field :project_manajer, :disabled=>"disabled", class:"field size1 floating field-dis" %> 
-                                    <% end %>
-                                    <div class="cl">&nbsp;</div>
-                                    <br>
-                                    <%= f.label :admin_id, "Project Designer", class:"floating form_right" %>
-                                        <% if @action == 'new' %>
-                                              <%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[jornal_team_designers_attributes][0][admin_id]", class:"floating down-select", id:"admin-designer" %>
-                                        <% end %>
-                                    <%= f.fields_for :jornal_team_designers do |f| %>
+                          <p class="form-group form_costum">
+                                <%= f.label :status_id, "Status Task" %>
+                                <span class="select_costum_3">
+                                       <%= f.select :status_id, options_for_select(@status,@statused) %>
+                                </span>
+                          </p>
+
+                          <p>
+                                <%= f.label :project_manajer, "Project Manajer", class:"form_right" %>
+                                <% if @action == 'new' %>
+                                      <%= f.text_field :project_manajer, value: find_name(current_admin.id), :disabled=>"disabled", class:"form-control", style:"width:50% !important" %>
+                                      <%= f.hidden_field :project_manajer, value: find_name(current_admin.id), class:"field size1 field-dis" %>
+                                      <%= f.hidden_field :admin_id, value: current_admin.id, class:"field size1 field-dis" %>
+                                <% else %>
+                                         <%= f.text_field :project_manajer, :disabled=>"disabled", class:"form-control", style:"width:50% !important" %> 
+                                <% end %>
+                          </p>
+                          
+                          <p class="form-group form_costum">
+                                <%= f.label :admin_id, "Project Designer", class:"" %>
+                                <% if @action == 'new' %>
+                                       <span class="select_costum_3">
+                                              <%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[jornal_team_designers_attributes][0][admin_id]", class:"", id:"admin-designer" %>
+                                      </span>
+                                <% end %>
+                                 <%= f.fields_for :jornal_team_designers do |f| %>
                                        <span class="remove-designers">
-                                          <%= f.select :admin_id, options_for_select(@admins, @selected_designer[f.index][:admin_id]), class:"floating" %>
+                                          <span class="select_costum_3">
+                                                  <%= f.select :admin_id, options_for_select(@admins, @selected_designer[f.index][:admin_id]), class:"floating" %>
+                                          </span>
                                           <% if f.index > 0 %>
                                               <%= link_to image_tag("x-icon.png",class:"right-img"), destroy_add_rows_admin_journals_path({id: @selected_designer[f.index][:journal_id],admin_id: @selected_designer[f.index][:admin_id],type: "designers"}), method: :delete , remote: true, class:"add-designer", onclick:"javascript:$(this).parent().remove()"%>
                                           <% end %>
-                                          <div class="down-select-two">&nbsp;</div>  
+                                       </span>
+                                <% end %>
+                                <nav>
+                                      <span class="sub-designers" dataId="1"><!-- add designer place --></span>
+                                       <%= link_to "Add", add_row_designers_admin_journals_path, remote: true, class:"add btn btn-warning sub-screen fa fa-plus", style:"padding: 9px" %>
+                                </nav>
+                          </p>
+
+                          <p class="form-group form_costum">
+                                 <%= f.label :title, "Project Developer", class:"" %>
+                                 <% if @action == 'new' %>
+                                       <span class="select_costum_3">
+                                              <span class="select_costum_3">
+                                                    <%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[journal_team_developers_attributes][0][admin_id]", class:"",id:"admin-developer" %>
+                                              </span>
+                                       </span>
+                                  <% end %>
+                                  <%= f.fields_for :journal_team_developers do |f| %>
+                                       <span class="remove-developers">
+                                              <span class="select_costum_3">
+                                                    <%= f.select :admin_id, options_for_select(@admins, @selected_developer[f.index][:admin_id]), class:"floating" %>
+                                              </span>
+                                              <% if f.index > 0 %>
+                                                <%= link_to image_tag("x-icon.png",class:"right-img"), destroy_add_rows_admin_journals_path({id: @selected_developer[f.index][:journal_id],admin_id: @selected_developer[f.index][:admin_id],type: "developers"}), method: :delete, remote: true, class:"add-designer", onclick:"javascript:$(this).parent().remove()"%>
+                                              <% end %> 
                                        </span>
                                     <% end %>
-                                    <span class="sub-designers" dataId="1"><!-- add designer place --></span>
-                                    <%= link_to image_tag("add.png"), add_row_designers_admin_journals_path, remote: true, class:"add-designer" %>
-                                    <div class="cl">&nbsp;</div>
-                                    <br>
-                                    <%= f.label :title, "Project Developer", class:"floating form_right" %>
-                                      <% if @action == 'new' %>
-                                          <%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[journal_team_developers_attributes][0][admin_id]", class:"floating down-select",id:"admin-developer" %>
-                                      <% end %>
-                                    <%= f.fields_for :journal_team_developers do |f| %>
-                                    <span class="remove-developers">
-                                      <%= f.select :admin_id, options_for_select(@admins, @selected_developer[f.index][:admin_id]), class:"floating" %>
-                                      <% if f.index > 0 %>
-                                        <%= link_to image_tag("x-icon.png",class:"right-img"), destroy_add_rows_admin_journals_path({id: @selected_developer[f.index][:journal_id],admin_id: @selected_developer[f.index][:admin_id],type: "developers"}), method: :delete, remote: true, class:"add-designer", onclick:"javascript:$(this).parent().remove()"%>
-                                      <% end %> 
-                                      <div class="down-select-two">&nbsp;</div>
-                                    </span>
-                                    <% end %>
-                                    <span class="sub-developers" dataId="1"><!-- add developers place --></span>
-                                   <%= link_to image_tag("add.png"), add_row_developers_admin_journals_path, remote: true %>
-                                   <div class="cl">&nbsp;</div>
-                                   <br>
-                                   <%= f.label :title, "Project Quality Check", class:"floating form_right" %>
-                                      <% if @action == 'new' %>
-                                          <%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[journal_team_checks_attributes][0][admin_id]", class:"floating down-select",id:"admin-check" %>
-                                      <% end %>
-                                   <%= f.fields_for :journal_team_checks do |f| %>
-                                    <span class="remove-checks">
-                                      <%= f.select :admin_id, options_for_select(@admins, @selected_check[f.index][:admin_id]), class:"floating" %>
-                                      <% if f.index > 0 %>
-                                        <%= link_to image_tag("x-icon.png",class:"right-img"), destroy_add_rows_admin_journals_path({id: @selected_check[f.index][:journal_id],admin_id: @selected_check[f.index][:admin_id],type: "checks"}), method: :delete, remote: true, class:"add-designer", onclick:"javascript:$(this).parent().remove()"%>
-                                      <% end %> 
-                                      <div class="down-select-two">&nbsp;</div>
-                                   </span>
-                                    <% end %>
-                                   <span class="sub-checks" dataId="1"><!-- add checks place --></span>
-                                   <%= link_to image_tag("add.png"), add_row_checks_admin_journals_path, remote: true %>
-                                   <div class="cl">&nbsp;</div>
-                                </div>
-                                <br />
-                                <span class="floating" >
-                                      <%= f.label :start, "Project Start", class:"floating" %><span>(Required Field)</span>
-                                      <div class="cl">&nbsp;</div>
-                                      <%= f.date_select :start %>
+                                  <nav>
+                                      <span class="sub-developers" dataId="1"><!-- add developers place --></span>
+                                      <%= link_to "Add", add_row_developers_admin_journals_path, remote: true, class:"add btn btn-warning sub-screen fa fa-plus", style:"padding: 9px" %>
+                                  </nav>
+                          </p>
+
+                          <p class="form-group form_costum">
+                                <%= f.label :title, "Project Quality Check", class:"" %>
+                                <% if @action == 'new' %>
+                                       <span class="select_costum_3">
+                                              <%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[journal_team_checks_attributes][0][admin_id]", class:"",id:"admin-check" %>
+                                       </span>
+                                <% end %>
+                                <%= f.fields_for :journal_team_checks do |f| %>
+                                       <span class="remove-checks">
+                                              <span class="select_costum_3">
+                                                    <%= f.select :admin_id, options_for_select(@admins, @selected_check[f.index][:admin_id]), class:"floating" %>
+                                              </span>
+                                              <% if f.index > 0 %>
+                                                    <%= link_to image_tag("x-icon.png",class:"right-img"), destroy_add_rows_admin_journals_path({id: @selected_check[f.index][:journal_id],admin_id: @selected_check[f.index][:admin_id],type: "checks"}), method: :delete, remote: true, class:"add-designer", onclick:"javascript:$(this).parent().remove()"%>
+                                              <% end %> 
+                                       </span>
+                                <% end %>
+                          </p>
+
+                         <div class="form-group form_costum">
+                                <%= f.label :start, "Project Estimate Time", class:"" %>
+                                <span class="clearfix"></span>
+                                <span class="select_costum_4">
+                                      <%= f.date_select :start, class:"form-control floating" %>
                                 </span>
-                                <div id="right_content">
-                                      <%= f.label :end, "Project End", class:"floating" %><span>(Required Field)</span>
-                                      <div class="cl">&nbsp;</div>
-                                      <div id="up">
-                                          <%= f.date_select :end %>
-                                      </div>
-                                </div>  
-                                <br>
-                                <div class="buttons">
-                                       <%= link_to "Cancel", "javascript:void(0)", class:"close-modal-profile close button floating" %>
-                                       <%= f.submit "Create", class:"button", id:"button-create" %>
-                                       <div class="cl">&nbsp;</div>
-                                 </div>
-                           </div>
-                    <% end %>
-             </div>
+
+                                <%= f.label :end, raw("-&nbsp;"), class:"floating" %>
+                                <span class="select_costum_4">
+                                <%= f.date_select :end, class:"form-control" %>
+                                </span>
+                          </div>
+                          <br><br>
+                          <nav class="clearfix"></nav>
+                          <%= f.label :description, "Project Description" %>
+                          <%= f.text_area :description, class:"form-control ckeditor",rows: 15 %>
+
+                          <br>
+                          <p class="modal-footer" style="margin-bottom:-10px">
+                                <button class="btn btn-success floating"><i class="fa  fa-pencil fa-1x"></i>Save</button>
+                                <%= link_to "Cancel", session[:urlBack], class:"btn btn-default", style:"padding:9px" %>
+                          </p>
+                  <% end %>
+              </div>
+          </div>
       </div>
-      <div class="cl">&nbsp;</div>
 </div>
-<%= javascript_include_tag "admin/journal" %>
+
 <script>
-  $(document).ready(function() {
-        $("#modal_profile_edit").show();
-    })
-  $( '.close-modal-profile' ).click(function( ev ) {  
-        $( '#modal_profile_edit, #modal_background' ).fadeOut();  ev.preventDefault();
-  } );
-  $("#modal_background").click(function(ev){
-          $( '#modal_profile_edit, #modal_background' ).fadeOut();  ev.preventDefault();   
-  })
+    $('.ckeditor').ckeditor({
+    toolbar: [
+    { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+    { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
+    { name: 'insert', items : [ 'Image','Table','HorizontalRule','Smiley','SpecialChar'
+             ,'Iframe' ] }, 
+    { name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat','Underline' ] },
+    { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+    { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+    { name: 'tools', items : [ 'Maximize','-','About' ] },
+    { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+    ]
+  });
 </script>

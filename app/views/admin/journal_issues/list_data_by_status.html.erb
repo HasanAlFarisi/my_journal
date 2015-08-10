@@ -1,77 +1,86 @@
-<%= stylesheet_link_tag "progress", :media => "all" %>
-<!-- Main -->
-<% unless @admin_journals_status.blank? %>
-      <%= render partial: "admin/journal_issues/list_data_project" %>
-<% end %>
+<%= javascript_include_tag "admin/tooltip" %>
+<%= render "admin/journals/filter" %>
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <i class="fa fa-bar-chart-o fa-fw"></i><span class="assign">All Journal(s)</span>
+      </div>
 
-<!-- Sidebar -->
-<div id="sidebar">
-  <%= render :partial => "admin/shared/sidebar" %>
-</div>
-<!-- Sidebar -->
+      <div class="panel-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-hover table-striped">
+                          <thead>
+                              <tr>
+                                  <th>Number</th>
+                                  <th width="120px">Project</th>
+                                  <th width="120px">Status</th>
+                                  <th>Priority</th>
+                                  <th>Progress</th>
+                                  <th width="380px">Title</th>
+                                  <th colspan="2"><center>Action</center></th>
+                              </tr>
+                          </thead>
+                              <tbody class="get_index">
+                                    <tr class="ajaxs hide">
+                                            <td colspan="7"><center><%= render 'dashboard/shared/ajax_loader' %></center></td>
+                                    </tr>
+                                    <%#= render "admin/journals/get_index" %>
+                                    <% if @admin_journal_issues.blank? %>
+                                            <tr>
+                                                <td colspan="7"><center>No data yet</center></td>
+                                            </tr>
+                                          <% end %>
+                                          <% @admin_journal_issues.each_with_index do |admin_journal_issue,n| %>
+                                              <tr class="<%= generated_priority(admin_journal_issue.priority) %>">
+                                                    <td width="43">
+                                                          <%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign to   </b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}<br><b>From</b><br>#{find_profile(admin_journal_issue.from).name} #{find_profile(admin_journal_issue.from).last_name}", class:"masterTooltip" %>
+                                                    </td>
+                                                    <td>
+                                                          <%#= link_to find_journal_in_issue(admin_journal_issue.journal_id).title, admin_journal_issues_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %>
+                                                          <a href="/admin/journal_issues/<%= admin_journal_issue.id %>?id_journal=<%= admin_journal_issue.journal_id %>">
+                                                                <%= find_journal_in_issue(admin_journal_issue.journal_id).title %>
+                                                          </a>
+                                                    </td>
+                                                    <td width="53"><%= generated_status(admin_journal_issue.status_id).html_safe %></td>
+                                                    <td width="43"><%= find_priority(admin_journal_issue.priority).html_safe %></td>
+                                                    <td>
+                                                      <div class="progress progress-striped active">
+                                                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= admin_journal_issue.progress %>%"> 
+                                                                <%= admin_journal_issue.progress %>%
+                                                              </div>
+                                                           </div>
+                                                    </td>
+                                                    <td width="353"><%= link_to truncate(strip_tags(admin_journal_issue.title), length: 35), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %></td>
+                                                    <% if find_journal_in_issue(admin_journal_issue.journal_id).admin_id == session[:session_admin] %>
+                                                          <td width="5px"><%= link_to 'Edit', edit_admin_journal_issue_path(admin_journal_issue, id_journal: admin_journal_issue.journal_id), class:"ico edit fa  fa-pencil" %></td>
+                                                          <td width="5px"><%= link_to 'Destroy', admin_journal_issue, method: :delete, data: { confirm: 'Are you sure?' }, class:"ico edit fa  fa-trash-o" %></td>
+                                                        <% else %>
+                                                          <td colspan="2"><center>Not Allowed</center></td>
+                                                    <% end %> 
+                                              </tr>
+                                          <% end %>
+                              </tbody>
+                      </table>
+                      <div class="left">Show: <b class="shows"><%= @admin_journals_status.blank? ? 0 : @admin_journals_status.count %></b> data From: <b class="froms"><%= @admin_journals_status_all.blank? ? 0 : @admin_journals_status_all.count %></b> data
+                        <span class="pull-right">
+                              <span class="paginate">
+                                <%= will_paginate @admin_journal_issues %>
+                                &nbsp;
+                              </span>
+                              <% if @admin_journals.blank? %>
+                                    <a role="button" id="new_journal" href="/admin/journal_issues/create_project" class="btn btn-primary"><span class="fa  fa-pencil-square fa-1x"></span>New Journal</a>
+                              <% else %>
+                                    <a role="button" onclick="new_journals(<%= session[:session_admin] %>)" id="new_journal" href="#new_journal" data-url="new_journal" data-toggle="modal" class="btn btn-primary"><span class="fa  fa-pencil-square fa-1x"></span>New Journal</a>
+                              <% end %>
+                        </span>
+                      </div>
+                  </div>
 
-<div id="main">
-  <div class="cl">&nbsp;</div>
-  
-  <!-- Content -->
-  <div id="content">
-    
-    <!-- Box Article -->
-    <div class="box">
-      <!-- Box Head -->
-      <div class="box-head">
-        <h2 class="left">Journals <%= generated_status(params[:journal_issue_id].to_i).html_safe %></h2>
-        <%= render partial:'admin/shared/search', locals:{status: "journal"} %>
-      </div>                               
-      <!-- End Box Head --> 
+              </div>
 
-       <!-- Table -->
-      <div class="table">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-striped">
-          <tr>
-            <th width="43">Number</th>
-            <th width="133">Project</th>
-            <th width="123">Status</th>
-            <th width="43">Priority</th>
-            <th width="43">Progress</th>
-            <th width="13">Title</th>
-          </tr>
-          <% if @admin_journal_issues.blank? %>
-            <tr>
-                <td colspan="6"><center>No Data Yet</center></td>
-            </tr>
-          <% end %>
-          <% @admin_journal_issues.each_with_index do |admin_journal_issue,n| %>
-              <tr class="<%= generated_priority(admin_journal_issue.priority) %>">
-                    <td width="43">
-                          <%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %>
-                    </td>
-                    <td>
-                          <%= link_to find_journal_in_issue(admin_journal_issue.journal_id).title, admin_journal_issues_path(journal_id: admin_journal_issue.journal_id) %>
-                    </td>
-                    <td width="53"><%= generated_status(admin_journal_issue.status_id).html_safe %></td>
-                    <td width="43"><%= find_priority(admin_journal_issue.priority).html_safe %></td>
-                    <td>
-                      <div id="progres_bar">
-                                <div class="progress" style="margin-bottom:0px; display:block !important">
-                                   <div class="progress-bar" style="width:<%= admin_journal_issue.progress %>%;">
-                                        <%= admin_journal_issue.progress %>%
-                                    </div>
-                             </div>
-                           </div>
-                    </td>
-                    <td width="353"><%= link_to truncate(strip_tags(admin_journal_issue.title), length: 35), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id),  title:"<b>Assign</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}", class:"masterTooltip" %></td> 
-              </tr>
-          <% end %>
-      </table>
-          <div class="pagging">
-            <%#= link_to 'New Project', new_admin_journal_path, remote: true, class:"tab-right-button button floating journal" %>
-            <div class="left">Journals Total: <b><%= @admin_journal_issues.count %></b> Journals</div>
-            <div class="right" style="margin-right:20px !important;">
-                <%= will_paginate @admin_journal_issues %>
-            </div>
           </div>
-    </div>
+          <!-- /.row -->
+      </div>
+      <!-- /.panel-body -->
   </div>
-</div>
-</div>

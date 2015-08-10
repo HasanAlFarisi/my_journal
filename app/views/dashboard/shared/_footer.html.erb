@@ -1,4 +1,62 @@
-<div id="footer"> {<%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %>} Copyrights 2014 - All Rights reserved!<br />
+<!-- <div id="footer"> {<%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %>} Copyrights 2014 - All Rights reserved!<br />
         Designed by <a href="javascript:void(0)">Hasan Al Farisi</a> for <%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %><br />
         Valid XHTML and CSS 
-      </div>
+      </div> -->
+
+<div class="col-xs-12 col-sm-3">
+	<section class="down2x">
+		<article>
+			<b>Recent Posts</b>
+			<% @recent_posts.each do |article| %>
+                    	<nav class="clearfix down2x"></nav>
+                              	<%= image_tag "share.jpg", title:"Pin", class:"col-sm-2",style:"padding-left:0px" %>
+                              	<content>
+						<%= link_to truncate(strip_tags(article.title), :length => 50), dashboard_home_path(article), style:"margin-top:-10px" %>
+						<nav><%= article.created_at.strftime("%d - %B - %Y") %></nav>
+					</content>
+					<hr>
+              	<% end %>
+		</article>
+	</section>
+</div>
+<div class="col-xs-12 col-sm-3">
+	<section class="down2x">
+		<article>
+			<b>Tags</b>
+			<nav class="clearfix down2x"></nav>
+			<a href="javascript:void(0)"><nav class="category"><span>GALLERY</span></nav></a>
+			<a href="javascript:void(0)"><nav class="category"><span>LINKS</span></nav></a>
+			<a href="javascript:void(0)"><nav class="category"><span>QOUTE</span></nav></a>
+			<a href="javascript:void(0)"><nav class="category"><span>VIDEOS</span></nav></a>
+		</article>
+	</section>
+</div>
+<div class="col-xs-12 col-sm-3">
+	<section class="down2x">
+		<article>
+			<b>Subscribe</b>
+			<%= form_tag dashboard_home_subscribe_path(home_id: 0), remote: true do %>
+				<nav class="clearfix down2x"></nav>
+				<input type="text" placeholder="Your Email Address" class="subscribe" name="email">
+				<nav class="clearfix down1x"></nav>
+				<button class="btn btn-warning" id="subscribe_btn">Subscribe Now</button>
+			<% end %>
+		</article>
+	</section>
+</div>
+<div class="col-xs-12 col-sm-3">
+	<section class="down2x">
+		<article>
+			<b>Categories</b>
+			<nav class="clearfix down2x"></nav>
+			<ul>
+				<% @categories_list.each do |category| %>
+					<li>
+						<%= link_to category.name, dashboard_home_show_categories_path(category) %>
+						<hr>
+					</li>
+				<% end %>
+			</ul>
+		</article>
+	</section>
+</div>

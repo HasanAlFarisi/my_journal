@@ -1,4 +1,6 @@
-<p>
-  	<%= label_tag :sub_category, "Sub Category" %>
-  	<%= select_tag :sub_category, options_for_select(@sub_category_select, @sub_category_selected), class:"field size3" %>
+<p class="form-group form_costum">
+	<%= label_tag :sub_category, "Sub Category" %>
+	<span class="select_costum_3">
+		<%= select_tag :sub_category, options_for_select(@sub_category_select,@sub_category_selected), class:"field size3" %>
+	</span>
 </p>

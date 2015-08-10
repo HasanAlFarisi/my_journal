@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag "mailer_notification", :media => "all" %>
+  </head>
+  <body>
+    <h1>Notification comment Article '<%= @article.title %>'</h1>
+    <p>Hi <%= "#{@admin.name} #{@admin.last_name}" %>, your Article has comment by <b><%= @biodata.name %></b></p>
+    <p>
+      Below is Comment Details: <br /><br />
+      Comment's Name : <b><%= @biodata.name %></b><br>
+      Comment's Email : <b><%= @biodata.email %></b><br>
+      Comment's Content : <%= @biodata.body %>
+    </p>
+    <p>
+      For more Information, you can login to <a href="https://journalkreativ.herokuapp.com/admin/login">My Journal</a> Website
+    </p>
+    <p>Thank you,</p>
+    <p><%= @company %> System</p>
+  </body>
+</html>

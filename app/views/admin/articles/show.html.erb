@@ -1,82 +1,69 @@
-<div id="main">
-  <div class="cl">&nbsp;</div>
-  <div id="content">
-    <!-- Box -->
-    <div class="box">
-      <!-- Box Head -->
-      <div class="box-head">
-        <h2><%= @article.title %></h2>
+</style>
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <i class="fa fa-files-o fa-fw"></i><spans class="assign"><%= @article.title %></spans>
+          <span class="pull-right"><i class="font_1">Posted by:</i>
+          	<%= "#{@article.admin.profile.name} #{@article.admin.profile.last_name}" %>
+          	<i class="font_1">on:</i>
+          	<%= @article.created_at.strftime("%d-%B-%Y") %>
+          </span>
       </div>
-      <!-- End Box Head -->
-        <!-- Form -->
-        <div class="form">
-          <p>
-            <%= label_tag :title, "Article Title" %>
-            <%= @article.title %>
-          </p> 
-          <p>
-            <%= label_tag :photo, "Article Photo" %>
-            <div class="foto_prev">
-              <%#= image_tag @article.photo.url(:original),class:"img-data" %> 
-              <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", @article.id)}/articles/#{@article.id}",class:"img-data" %> 
-            </div>
-          </p>
 
-          <p>
-            <%= label_tag :category, "Article Category" %>
-            <%= "#{find_category(@article.category_id)} , #{find_sub_category(@article.sub_category_id)}" %>
-          </p> 
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-12">
+				Category :<b><%= "#{find_category(@article.category_id)}, #{find_sub_category(@article.sub_category_id)}" %></b>
+				<div class="foto_prev img-article">
+			              <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", @article.id)}/articles/#{@article.id}",class:"img-data" %> 
+			              <%= raw @article.body %>
+			      	</div>
+			      	<hr>
 
-          <p>
-            <%= label_tag :body, "Content" %>
-            <%= raw @article.body %>
-          </p>
+			      	<% unless find_article_comment(@article).blank? %>
+				      	<h2>
+				      		<span id="comment_count"><%= find_article_comment(@article).count %></span>
+				      		 <%= label_tag :comment, "Comment", style:"font-size:17px" %>
+				      	</h2>
 
-          	<% unless find_article_comment(@article).blank? %>
-	          <p>
-	            <%= label_tag :comment, "Comment" %>
-	            <table width="100%" class="table comment table-striped">
-	            	<tr>
-		            <th>No</th>
-		            <th>From</th>
-		            <th>E-mail</th>
-		            <th>Content</th>
-		            <th colspan="2"><center>Action</center></th>
-		      </tr>
-		            <% find_article_comment(@article).each_with_index do |comment, no| %>
-		            	<tr>
-		            		<td width="10px"><%= no + 1 %>.</td>
-		              	<td><%= link_to "#{comment.name}", dashboard_comment_path(comment), remote: true %></td>
-		              	<td><%= comment.email %></td>
-		              	<td><%= truncate(comment.body, :length => 50) %></td>
-		              	<td  width="5px"><%= link_to 'Reply', dashboard_comment_path(comment,reply: "true"), remote: true, class:"ico edit" %></td>
-		              	<td  width="5px"><%= link_to 'Destroy', dashboard_comment_path(comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
-		             </tr>
-		            <% end %>
-	            </table>
-	          </p> 
-		<% end %> 
-        </div>
-        <!-- End Form -->
-        
-        <!-- Form Buttons -->
-        <div class="buttons">
-          <%= link_to "Back", session[:urlBack], class:"button-back" %>
-          <%= link_to "Edit Article", edit_admin_article_path(@article), class:"button" %>
-        </div>
-        <!-- End Form Buttons -->
-    </div>
-    <!-- End Box -->
-  </div>
-  <div class="cl">&nbsp;</div>
-  <!-- Modal show comment -->
-  <div id="show_modal_comment"></div>
-  <div id="modal_background"></div>
-  <!-- End Modal show comment -->
+				      	<% find_article_comment(@article).each do |comment| %>
+					      	<div class="comment_box">
+					      		<%=  image_tag  comment.profile %>
+					      		<nav>
+					      			<%= link_to "#{comment.name}", dashboard_comment_path(comment), remote: true %>
+					      			<i><%= comment.email %></i>
+					      		</nav>
+					      		<span>on : <%= comment.created_at.strftime("%d - %B - %Y") %> said:</span>
+					      		<nav class="clearfix"></nav>
+					      		<span class="justify"><%= comment.body %></span>
+					      		<nav class="clearfix"></nav>
+					      		<nav class="pull-right">
+					      			<%= link_to '<span class="fa fa-pencil"></span>Reply'.html_safe, dashboard_comment_path(comment,reply: "true"), remote: true, class:"reply_button_#{comment.id}" %> |
+					      			<%= link_to '<span class="fa fa-trash-o"></span>Destroy'.html_safe, dashboard_comment_path(id:comment.id, article_id: @article.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+					      		</nav>
+					      		<nav class="clearfix"></nav>
+					      		<%= render partial: "admin/articles/shared/reply_comments", locals:{reply_comments: comment.reply_comments} %>
+					      		<div id="reply-comment-place-<%= comment.id %>"></div>
+							<div id="new-reply-comment-place-<%= comment.id %>"></div>
+					      	</div>
+					      	<br>
+					<% end %>
+				<% end %>
+
+				<%= render 'dashboard/shared/ajax_loader' %>
+				<div id="new-comment-place"><!-- Comment place from render partial --></div>
+        			
+			      	<h2>
+			      		<label style="font-size:20px">Leave a Comment</label>
+			      	</h2>
+				<%= render 'admin/articles/shared/form_comment' %>
+			</div>
+		</div>
+		<nav class="clearfix"></nav>
+		<div class="modal-footer" style="margin-bottom:-10px">
+			<%= link_to '<i class="ico edit fa  fa-pencil"></i>Edit'.html_safe, edit_admin_article_path(@article), class:"btn btn-success", style:"float:left" %>
+                  	<%= link_to "Back", session[:urlBack], class:"btn btn-default", style:"padding:9px" %>
+            	</div>
+	</div>
 </div>
 
-<!-- Sidebar -->
-<div id="sidebar">
-  <%= render :partial => "admin/shared/sidebar" %>
-</div>
-<!-- Sidebar -->
+<%= javascript_include_tag "dashboard/form_validates" %>

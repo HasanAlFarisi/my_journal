@@ -1,0 +1,12 @@
+<% reply_comments.each do |comment| %>
+	<div class="sub_comment_box hidden_<%="#{comment.id}"%>">
+  		<%=  image_tag  "1.gif" %>
+    		<nav><%= link_to "#{comment.admin.profile.name}", "#" %> <i><%= comment.admin.email%></i></nav>
+    		<span>on : <%= comment.created_at.strftime("%d - %B - %Y") %> said:</span>
+    		<nav class="clearfix"></nav>
+    		<%= comment.body %>
+    		<nav class="clearfix"></nav>
+    		<%= link_to '<span class="fa fa-trash-o"></span>Destroy'.html_safe, dashboard_comment_destroy_reply_path(comment), method: :delete, remote: true, onclick:"javascript:$(this).parent().remove();", class:"pull-right" %>
+    		<nav class="clearfix"></nav>
+    	</div>
+<% end %>

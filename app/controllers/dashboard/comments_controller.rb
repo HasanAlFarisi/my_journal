@@ -1,6 +1,6 @@
 class Dashboard::CommentsController < ApplicationController
   before_action :set_dashboard_comment, only: [:show, :edit, :update, :destroy]
-
+  skip_before_filter :verify_authenticity_token, :only => [:create]
   # GET /dashboard/comments
   # GET /dashboard/comments.json
   def index
@@ -31,6 +31,8 @@ class Dashboard::CommentsController < ApplicationController
 
     respond_to do |format|
       if @dashboard_comment.save
+        AdminMailer.delay(:queue => 'notification_to_admin_for_article_comment', :priority => 2).notification_to_admin_for_article_comment(@dashboard_comment.id)
+
         flash[:nostice] = 'Comment was successfully created.'
         format.html { redirect_to @dashboard_comment }
         format.json { render action: 'show', status: :created, location: @dashboard_comment }
@@ -43,11 +45,11 @@ class Dashboard::CommentsController < ApplicationController
   end
 
   def create_reply_comment
-    reply_comment = Dashboard::ReplyComment.create(body: params[:body_reply], comment_id: params[:comment_id])
+    reply_comment = Dashboard::ReplyComment.create(body: params[:body], comment_id: params[:comment_id], admin_id: params[:admin_id])
     reply_comment.save
 
     respond_to do |format|
-      format.js { @reply_comments =  Dashboard::ReplyComment.where("comment_id = ?", reply_comment.comment_id).last }
+      format.js { @reply_comment =  Dashboard::ReplyComment.where("comment_id = ?", reply_comment.comment_id).last }
     end
   end
 
@@ -70,10 +72,16 @@ class Dashboard::CommentsController < ApplicationController
   def destroy
     @dashboard_comment.destroy
     reply_comment = Dashboard::ReplyComment.find_by_comment_id(params[:id])
-    reply_comment.destroy
+    unless reply_comment.blank?
+      reply_comment.destroy
+    end
 
     respond_to do |format|
-      format.html { redirect_to dashboard_comments_url }
+      unless params[:article_id].blank?
+        format.html { redirect_to admin_article_path(params[:article_id]) }
+      else
+        format.html { redirect_to dashboard_comments_url }
+      end
       format.json { head :no_content }
       format.js
       flash[:notice] = 'Comment was successfully deleted.'

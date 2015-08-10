@@ -1,0 +1,33 @@
+<% a =  @admin_journals_status.blank? ? @admin_journals_status_filter.blank? ? 0 : @admin_journals_status_filter.count : @admin_journals_status.count %>
+<% if a == 0 %>
+        <tr class="body_index"><td colspan="8"><center>No data yet</center></td></tr>
+<% end %>
+<% @admin_journals.each do |journal| %>
+    <% admin_journal = params[:filter].blank? ? journal.journal_issues.order('admin_journal_issues.created_at DESC').data_existed_index(find_admin(session[:session_admin]),'main') : journal.journal_issues.order('admin_journal_issues.created_at DESC').data_existed_index_filter(find_admin(session[:session_admin]),nil,params) %>
+    <% admin_journal.each_with_index do |admin_journal_issue,n| %>
+            <tr class="<%= generated_priority(admin_journal_issue.priority) %> body_index">
+                  <td width="43">
+                        <%= link_to "##{admin_journal_issue.no}", admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id), title:"<b>Assign to</b><br>#{find_profile(admin_journal_issue.asignee).name} #{find_profile(admin_journal_issue.asignee).last_name}<br><b>From</b><br>#{find_profile(admin_journal_issue.from).name} #{find_profile(admin_journal_issue.from).last_name}", class:"masterTooltip" %>
+                  </td>
+                  <td>
+                            <%= link_to journal.title, admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %>
+                  </td>
+                  <td width="53"><%= generated_status(admin_journal_issue.status_id).html_safe %></td>
+                  <td width="43"><%= find_priority(admin_journal_issue.priority).html_safe %></td>
+                  <td>
+                      <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= admin_journal_issue.progress %>%">
+                                   <%= admin_journal_issue.progress.blank? ? 0 : admin_journal_issue.progress %>%
+                             </div>
+                      </div>
+                  </td>
+                  <td width="353"><%= link_to truncate(strip_tags(admin_journal_issue.title), length: 100), admin_journal_issue_path(id: admin_journal_issue.id,id_journal: admin_journal_issue.journal_id) %></td> 
+                  <% if journal.admin_id == session[:session_admin] %>
+                      <td width="5px"><%= link_to 'Edit', edit_admin_journal_issue_path(admin_journal_issue, id_journal: admin_journal_issue.journal_id), class:"ico edit fa  fa-pencil" %></td>
+                      <td width="5px"><%= link_to 'Destroy', admin_journal_issue, method: :delete, data: { confirm: 'Are you sure?' }, class:"ico edit fa  fa-trash-o" %></td>
+                    <% else %>
+                      <td colspan="2"><center>Not Allowed</center></td>
+                  <% end %>
+            </tr>
+    <% end %>
+<% end %>

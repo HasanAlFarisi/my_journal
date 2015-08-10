@@ -27,7 +27,7 @@
                   </tr>
             <% @admin_journals_status.each_with_index do |admin_journal,n| %>
                 <tr>
-                  <td><%= n + 1 %>.</td>
+                  <td><%= n + 1 + @admin_journals_status.offset_value %>.</td>
                   <td><%= link_to admin_journal.title, admin_journal_path(admin_journal) %></td>
                   <td><%= generated_status(admin_journal.status_id).html_safe %></td>
                   <td>

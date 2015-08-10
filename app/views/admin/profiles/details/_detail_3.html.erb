@@ -1,0 +1,5 @@
+<ol class="hobby">
+      <% @admin_profile.profile_hobbies.each do |hobby| %>
+            <li><%= hobby.name %></li>
+      <% end %>
+</ol>

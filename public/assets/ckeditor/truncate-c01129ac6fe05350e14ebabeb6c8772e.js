@@ -1,1 +1,0 @@
-$(document).ready(function(){$(".ellipsis").truncate({width:"auto",token:"&hellip;",side:"right",addclass:!1,addtitle:!0}),$(".ellipsisTwo").truncate({width:"auto",token:"&hellip;",side:"right",addclass:!1,addtitle:!0})});

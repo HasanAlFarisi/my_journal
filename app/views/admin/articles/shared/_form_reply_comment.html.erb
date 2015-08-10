@@ -1,0 +1,30 @@
+<%= form_tag dashboard_comment_create_reply_comment_path(comment_id: params[:id]), class:"sub_comment_for_remove_#{params[:id]}", remote: true do %>
+	<div class="sub_comment_box">
+		<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove();$(".reply_button_<%= params[:id] %>").show();' class="pull-right">X</a>
+
+	    	<div class="field">
+			<%= hidden_field_tag :comment_id,"", value: params[:id] %>
+			<%= hidden_field_tag :admin_id,"", value: current_admin.id %>
+		</div>
+		<p>
+			<%= text_field_tag :name,"", value: current_admin.profile.name, class:"form-control size-2", placeholder:"Name", readonly: true %>
+			<div id="error_name" class="error"></div>
+		</p>
+		<p>
+			<%= text_field_tag :email,"", value: current_admin.email ,class:"form-control size-2", placeholder:"Email", readonly: true %>
+		</p>
+		<p class="form-group form_costum">
+			<span class="select_costum_3">
+				<%= hidden_field_tag :profile, "", value:"2.gif" %>
+			</span>
+		</p>
+		<div class="field">
+			<%= text_area_tag :body,"", class:"form-control", rows: "5",id:"textarea-label" %>
+		<div id="error_body" class="error"></div>
+
+		<br>
+		<div class="post_content">
+			<%= submit_tag "Post Comment", class:"btn btn-info" %>
+		</div>
+    	</div>
+<% end %>

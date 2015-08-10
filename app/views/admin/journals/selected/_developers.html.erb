@@ -1,4 +1,8 @@
-<span class="add-developers">
-	<%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[journal_team_developers_attributes][#{@index}][admin_id]", class:"floating down-select admin-developer" %>
-	<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='margin-top:-30px; padding-right:20px !important;' /></a>
-</span>
+<p class="form-group form_costum">
+	<span class="select_costum_3">
+		<%= select_tag :admin_id, options_for_select(@admins), name:"admin_journal[journal_team_developers_attributes][#{@index}][admin_id]", class:"floating down-select admin-developer", style:"margin-bottom:10px;"%>
+	</span>
+	<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='padding-
+		right:20px !important;' /></a>
+</p>
+<span class="clearfix"></span>

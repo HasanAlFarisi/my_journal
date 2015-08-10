@@ -1,6 +1,6 @@
 class Admin::HelpsController < Admin::BaseController
   before_action :set_admin_help, only: [:show, :edit, :update, :destroy]
-
+  before_filter :setup_page
   # GET /admin/helps
   # GET /admin/helps.json
   def index
@@ -59,6 +59,10 @@ class Admin::HelpsController < Admin::BaseController
       format.html { redirect_to admin_helps_url }
       format.json { head :no_content }
     end
+  end
+
+  def setup_page
+    @page = "Help Super Admin!"
   end
 
   private

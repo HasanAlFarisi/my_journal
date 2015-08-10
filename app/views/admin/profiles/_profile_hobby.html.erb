@@ -1,2 +1,3 @@
-<%= f.text_field :name, class:"field size4"  %>
-<br>
+<%= f.text_field :name, class:"form-control floating", style:'width:85% !important; margin-bottom:7px;'  %>
+<input type="checkbox" name="selected[]" id="<%= "selected-#{f.object.id}" %>" value="<%= f.object.id %>" class="check-self"><span style="color:red">Delete</span>
+<span class="clearfix"></span>

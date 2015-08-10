@@ -2,7 +2,7 @@ class Admin::ProfilesController < Admin::BaseController
   before_action :set_admin_profile, only: [:show, :edit, :update, :destroy]
   skip_before_filter :check_complete_data
   skip_before_filter :verify_authenticity_token, :only => [:update]
-  layout "complete", only: [:edit, :update]
+  #layout "complete", :only => [:edit, :update]
 
   # GET /admin/profiles
   # GET /admin/profiles.json
@@ -14,9 +14,10 @@ class Admin::ProfilesController < Admin::BaseController
   # GET /admin/profiles/1.json
   def show
     @not_current = params[:not_current]
+
     respond_to do |format|
-      format.html
-      format.js 
+      format.html {render :partial => "admin/profiles/show"}
+      #format.js 
     end
   end
 
@@ -36,6 +37,9 @@ class Admin::ProfilesController < Admin::BaseController
   # GET /admin/profiles/1/edit
   def edit
     @admin_skills = Admin::ProfileSkill.find_all_by_profile_id(params[:id])
+    respond_to do |format|
+      format.html {render :partial => "admin/profiles/forms/form_#{params[:tab]}"}
+    end
   end
 
   # POST /admin/profiles
@@ -75,9 +79,14 @@ class Admin::ProfilesController < Admin::BaseController
   # PATCH/PUT /admin/profiles/1
   # PATCH/PUT /admin/profiles/1.json
   def update
+    unless session[:session_admin].present?
+      session[:session_admin] = current_admin.id
+    end
     @not_current = 'no'
+    @tab = params[:tab]
     respond_to do |format|
       if @admin_profile.update(admin_profile_params)
+        Admin.find(current_admin.id).update_attributes(email: params[:admin_profile][:e_mail])
         unless params[:admin_profile][:avatar].blank?
           loaded = Cloudinary::Uploader.destroy("company/#{@admin_profile.id}", :public_id => "profiles/#{@admin_profile.id}", :invalidate => true)
           preloaded = Cloudinary::Uploader.upload(params[:admin_profile][:avatar], :use_filename => true, :public_id => "profiles/#{@admin_profile.id}")
@@ -107,14 +116,19 @@ class Admin::ProfilesController < Admin::BaseController
                 admin_hobby = Admin::ProfileHobby.create({profile_id: @admin_profile.id, name: hobby[1][:name]})
                 admin_hobby.save
               else
-                admin_hobby = Admin::ProfileHobby.find(hobby[1][:id]).update({name: hobby[1][:name]})
+                    unless params[:selected].blank?           
+                          ids_param = params[:selected]
+                          ids = convert_to_arr_for_query(ids_param)
+                          Admin::ProfileHobby.delete_all "id in #{ids}"
+                    else
+                          admin_hobby = Admin::ProfileHobby.find(hobby[1][:id]).update({name: hobby[1][:name]})
+                    end
               end
             end
         end
-
-        format.html { redirect_to admin_root_path, notice: 'Profile was successfully updated.' }
-        format.json { head :no_content }
-        format.js { @admin_profile }
+        format.html { redirect_to admin_root_path, notice: 'Photo Profile was successfully updated.'}
+        format.json { head :no_content}
+        format.js
       else
         format.html { render action: 'edit' }
         format.json { render json: @admin_profile.errors, status: :unprocessable_entity }

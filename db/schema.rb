@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230025131) do
+ActiveRecord::Schema.define(version: 20150529075148) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admin_advertises", force: true do |t|
     t.string   "image_file_name"
@@ -69,7 +72,6 @@ ActiveRecord::Schema.define(version: 20141230025131) do
 
   create_table "admin_galleries", force: true do |t|
     t.string   "title"
-    t.text     "content"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -78,6 +80,7 @@ ActiveRecord::Schema.define(version: 20141230025131) do
     t.datetime "updated_at"
     t.integer  "group_id"
     t.integer  "gallery_group_id"
+    t.text     "content"
   end
 
   create_table "admin_gallery_comment_replies", force: true do |t|
@@ -136,13 +139,13 @@ ActiveRecord::Schema.define(version: 20141230025131) do
   end
 
   create_table "admin_journal_issue_comment_files", force: true do |t|
-    t.integer  "journal_issue_comment_id"
     t.string   "comment_document_file_name"
     t.string   "comment_document_content_type"
     t.integer  "comment_document_file_size"
     t.datetime "comment_document_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "journal_issue_comment_id"
   end
 
   create_table "admin_journal_issue_comments", force: true do |t|
@@ -176,17 +179,19 @@ ActiveRecord::Schema.define(version: 20141230025131) do
   create_table "admin_journal_issues", force: true do |t|
     t.integer  "journal_id"
     t.integer  "status_id"
-    t.string   "no",         limit: 10
-    t.integer  "type_id"
-    t.integer  "priority"
-    t.string   "progress"
-    t.text     "content"
-    t.integer  "asignee"
+    t.string   "no"
     t.string   "title"
     t.date     "start"
     t.date     "end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "type_id"
+    t.integer  "priority"
+    t.text     "content"
+    t.integer  "asignee"
+    t.boolean  "notif_status", default: false
+    t.integer  "progress"
+    t.integer  "from"
   end
 
   create_table "admin_journal_team_checks", force: true do |t|
@@ -205,13 +210,14 @@ ActiveRecord::Schema.define(version: 20141230025131) do
 
   create_table "admin_journals", force: true do |t|
     t.string   "title"
-    t.integer  "status_id"
-    t.string   "project_manajer"
     t.date     "start"
     t.date     "end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "project_manajer"
     t.integer  "admin_id"
+    t.integer  "status_id"
+    t.text     "description"
   end
 
   create_table "admin_profile_hobbies", force: true do |t|
@@ -234,7 +240,6 @@ ActiveRecord::Schema.define(version: 20141230025131) do
   end
 
   create_table "admin_profiles", force: true do |t|
-    t.integer  "admin_id"
     t.string   "name"
     t.string   "last_name"
     t.string   "facebook"
@@ -249,6 +254,7 @@ ActiveRecord::Schema.define(version: 20141230025131) do
     t.text     "describe_me"
     t.string   "skype"
     t.date     "birthday"
+    t.integer  "admin_id"
   end
 
   create_table "admin_reply_contact_companies", force: true do |t|
@@ -296,7 +302,7 @@ ActiveRecord::Schema.define(version: 20141230025131) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
-    t.time     "updated_at"
+    t.datetime "updated_at"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
@@ -313,6 +319,11 @@ ActiveRecord::Schema.define(version: 20141230025131) do
     t.datetime "photo_updated_at"
     t.integer  "category_id"
     t.integer  "sub_category_id"
+    t.boolean  "is_read",            default: true
+    t.boolean  "is_edit",            default: true
+    t.boolean  "is_delete",          default: true
+    t.integer  "admin_id"
+    t.integer  "count_view"
   end
 
   create_table "dashboard_comments", force: true do |t|
@@ -330,6 +341,7 @@ ActiveRecord::Schema.define(version: 20141230025131) do
     t.integer  "comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "admin_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -347,6 +359,14 @@ ActiveRecord::Schema.define(version: 20141230025131) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "rand_clouds", force: true do |t|
+    t.string   "types"
+    t.integer  "type_id"
+    t.string   "rand"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "temps", force: true do |t|
     t.integer  "source_id"

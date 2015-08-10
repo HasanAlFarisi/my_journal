@@ -1,0 +1,8 @@
+<div class="left">Show: <b class="shows"><%= @articles.blank? ? 0 : @articles.per_page > @articles.count ? @articles.count : @articles.per_page %></b> data From: <b class="froms"><%= @articles_all.blank? ? 0 : @articles_all.count %></b> data
+	<span class="pull-right">
+		<span class="paginate">
+			<%= will_paginate @articles %>&nbsp;
+		</span>
+		<%= link_to '<span class="fa  fa-pencil-square fa-1x"></span>New Article'.html_safe, new_admin_article_path, class:"btn btn-primary" %> 
+	</span>
+</div>

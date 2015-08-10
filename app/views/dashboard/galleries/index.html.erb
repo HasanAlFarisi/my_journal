@@ -1,4 +1,4 @@
-<div class="post-title">
+<!-- <div class="post-title">
        <h2>Our Gallery</h2>
        <div class="post-entry">
              <p>
@@ -22,4 +22,30 @@
                     <%= will_paginate @galleries %>
             </div>
        </div>
+</div> -->
+
+<% if @galleries.blank? %>
+	<!-- <div class="col-xs-12 col-sm-8 side pull-left sidebar">
+		<section class="down2x">
+			<article>
+				<h2 id="box_no_post">Sorry but galleries is empty!</h2>
+				<%= link_to "BACK", session[:url_back_dashboard],  class:"btn btn-warning pull-right", style:"margin-right:10px;" %>
+				<nav class="clearfix"></nav>
+			</article>
+		</section>
+		<nav class="clearfix"></nav>
+	</div> -->
+<% end %>
+
+<div class="col-xs-12 col-sm-8 side pull-left sidebar">
+	<section class="down2x">
+		<article>
+			<div id="index_place">
+				<center><%= image_tag 'ajax-loader.gif' %></center>
+			</div>
+		</article>
+		<nav class="clearfix"></nav>
+	</section>
 </div>
+
+<%= javascript_include_tag 'galleries' %>

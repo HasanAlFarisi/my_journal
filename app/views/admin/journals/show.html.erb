@@ -1,111 +1,79 @@
-
-<%#= link_to 'Back', admin_journals_path %>
-
-<!-- Main -->
-<div id="main">
-  	<div class="cl">&nbsp;</div>
-  
-	<!-- Content -->
-	<div id="content">
-    
-    	<!-- Box Article -->
-    	<div class="box">
-	      <!-- Box Head -->
-	      <div class="box-head">
-	        	<h2 class="left"><b><%= @admin_journal.title %></b></h2>
-	        	<div class="right">
-	        		<% if @admin_journal.admin_id == current_admin.id %>
-	        			<%= link_to 'Edit', edit_admin_journal_path(@admin_journal), remote: true, class:"ico edit"%> | 
-					<%= link_to 'Destroy', admin_journal_path(@admin_journal), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
-	        		<% end %>
-	        	</div>
-	      </div>                 
-      		<div class="form">
-      			<b><%= @admin_journal.title %>	</b> Project is Starting at <b><%= @admin_journal.start.strftime('%d-%b-%Y') %></b> and will be Ending at <b><%= @admin_journal.end.strftime('%d-%b-%Y') %></b>
-      			<div class="right">
-      				<span class="calendar">
-                          <% unless  estimated_time(@admin_journal.start,@admin_journal.end) == 'waiting' %>
-      					<% if truncate(estimated_time(@admin_journal.start,@admin_journal.end).to_s, length: 1).to_i == 0 %>
-	                                <%= link_to "Now is Deadline", "javascript:void(0)" %>
-	                          <% elsif truncate(estimated_time(@admin_journal.start,@admin_journal.end).to_s, length: 1).to_i < 0 %>
-	                                <%= link_to "Out of Deadline", "javascript:void(0)" %>
-	                          <% else %>
-      						<%= link_to "#{truncate(estimated_time(@admin_journal.start,@admin_journal.end).to_s, length: 1).to_i}", "javascript:void(0)" %>
-      						Day left
-      					<% end %>
-                          <% else %>
-                                <b>Waiting</b>
-                          <% end %>
-      				</span>
-      			</div>
-      			<div class="down-select-two">&nbsp;</div>  
-                   	<p class="project-team-details">
-                   		<%= label_tag :project_manajer, "Project Manajer", class:"floating form_right" %>
-                   		<span class='right-data'>
-                                <% if current_admin.id == @admin_journal.admin_id %>
-                                      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'no'), remote: true %>
-                                <% else %>
-                   			      <%= link_to @admin_journal.project_manajer, admin_profile_path(@admin_journal.admin_id, not_current: 'yes'), remote: true %>
-                                <% end %>
-                   		</span>
-                   		<br><br>
-                   		<%= label_tag :project_designers, "Project Designers", class:"floating form_right" %>
-           			<% @admin_journal.jornal_team_designers.each do |journal_team| %>
-                         		<span class='right-data'>
-                         			<% if current_admin.id == journal_team.admin_id %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true %>
-                         			<% else %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true %>
-                         			<% end %>
-                         		</span>
-                         		<br><br>
-                         	<% end %>
-                   		<%= label_tag :project_developers, "Project Developers", class:"floating form_right" %>
-           			<% @admin_journal.journal_team_developers.each do |journal_team| %>
-                         		<span class='right-data'>
-                                      <% if current_admin.id == journal_team.admin_id %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true %>
-                         			<% else %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true %>
-                         			<% end %>
-                         		</span>
-                         		<br><br>
-                         	<% end %>
-                         	<%= label_tag :project_checks, "Project Quality Checks", class:"floating form_right" %>
-           			<% @admin_journal.journal_team_checks.each do |journal_team| %>
-                         		<span class='right-data'>
-                         			<% if current_admin.id == journal_team.admin_id %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'no'), remote: true %>
-                         			<% else %>
-                         				<%= link_to find_name(journal_team.admin_id), admin_profile_path(journal_team.admin_id, not_current: 'yes'), remote: true %>
-                         			<% end %>
-                         		</span>
-                         		<br><br>
-                         	<% end %>
-                   	</p>
-                    <div class="buttons">
-                          <%= link_to "Back", admin_journals_path, class:"button floating" %>
-                          <br>
-                   </div>
+<div class="panel panel-<%= @estimate == 'Out of Deadline' ? 'danger' : 'primary' %>">
+      <div class="panel-heading">
+          <i class="fa fa-bookmark fa-fw"></i><%= @admin_journal.title %>
+             <div class="pull-right">
+                   <%= @estimate.html_safe %>
              </div>
       </div>
-   </div>
- </div>
-</div>     
 
-<!-- Sidebar -->
-<div id="sidebar">
-  <%= render :partial => "admin/shared/sidebar" %>
+      <div class="panel-body">
+             <div class="row">
+                    <div class="col-lg-12">
+                          <div class="pull-right">
+                                 <% if @admin_journal.admin_id == current_admin.id %>
+                                        <%= link_to raw('<i class="ico edit fa  fa-pencil"></i>Edit'), edit_admin_journal_path(@admin_journal), class:"ico edit"%> | 
+                                 <%= link_to raw('<i class="ico edit fa  fa-trash-o"></i>Destroy'), admin_journal_path(@admin_journal), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
+                                 <% end %>
+                           </div>
+                          Start <b><%= @admin_journal.start.strftime('%d-%b-%Y') %></b> - End <b><%= @admin_journal.end.strftime('%d-%b-%Y') %></b>
+                          <p class="project-team-details">
+                                <%= label_tag :project_manajer, "Project Manajer", class:"floating form_right" %>
+                                <span class='right-data'>
+                                       <% if current_admin.id == @admin_journal.admin_id %>
+                                            <%= raw generated_link_to(@admin_journal.project_manajer,"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{current_admin.id},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                       <% else %>
+                                              <%= raw generated_link_to(@admin_journal.project_manajer,"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{@admin_journal.admin_id},'yes')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                       <% end %>
+                                </span>
+                                <br><br>
+                                <%= label_tag :project_designers, "Project Designers", class:"floating form_right" %>
+                                <% @admin_journal.jornal_team_designers.each do |journal_team| %>
+                                       <span class='right-data'>
+                                              <% if current_admin.id == journal_team.admin_id %>
+                                                    <%= raw generated_link_to(find_name(journal_team.admin_id),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{journal_team.admin_id},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                              <% else %>
+                                                    <%= raw generated_link_to(find_name(journal_team.admin_id),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{journal_team.admin_id},'yes')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                              <% end %>
+                                       </span>
+                                <% end %>
+                                <br><br>
+                                <%= label_tag :project_developers, "Project Developers", class:"floating form_right" %>
+                                <% @admin_journal.journal_team_developers.each do |journal_team| %>
+                                       <span class='right-data'>
+                                             <% if current_admin.id == journal_team.admin_id %>
+                                                    <%= raw generated_link_to(find_name(journal_team.admin_id),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{journal_team.admin_id},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                              <% else %>
+                                                    <%= raw generated_link_to(find_name(journal_team.admin_id),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{journal_team.admin_id},'yes')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                              <% end %>
+                                      </span>
+                                <% end %>
+                                <br><br>
+                                <%= label_tag :project_checks, "Project Quality Checks", class:"floating form_right" %>
+                                <% @admin_journal.journal_team_checks.each do |journal_team| %>
+                                       <span class='right-data'>
+                                              <% if current_admin.id == journal_team.admin_id %>
+                                                    <%= raw generated_link_to(find_name(journal_team.admin_id),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{journal_team.admin_id},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                              <% else %>
+                                                    <%= raw generated_link_to(find_name(journal_team.admin_id),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{journal_team.admin_id},'yes')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                                              <% end %>
+                                       </span>
+                                <% end %>
+                          </p>
+                          <br><br>
+                          <nav class="clearfix"></nav>
+                          <%= label_tag :description, "Project Description" %>
+                          <div class="justify"><%= raw @admin_journal.description %></div>
+                          <nav class="clear"></nav>
+                          <br><br>
+                          <span class="pull-right">
+                                <%= link_to "Back", session[:urlBack], class:"btn btn-default", style:"padding:9px" %>
+                          <span>
+                    </div>
+             </div>
+      </div>
 </div>
-<!-- Sidebar -->
 
-<%= render :partial => "admin/journal_issues/index_head", locals: {admin_journal: @admin_journal} %>
-
-<!-- Modal Place -->
-<div id="modal_background"></div>
-<div class="show_modal_add_journal"></div>
-<div id="show_profile_place"><!--The place for show profile--></div>
-<!-- End Modal Place -->
+<%= render 'admin/journal_issues/index_head' %>
 
 <script>
 $(document).ready(function() {

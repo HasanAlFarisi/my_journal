@@ -1,45 +1,30 @@
-<div id="header">
-        <div id="header-info">
-          <h1><%= link_to Admin::CompanyProfile.last.name, dashboard_profile_path(1) %></h1>
-          <div class="description"><%=  Admin::CompanyProfile.last.motto %></div>
-        </div>
-        <div id="header-menu">
-          <ul>
-            <li class="page_item home"><%= link_to "Home", root_path %></li>
-            <li class="page_item gallery"><%= link_to "Gallery", dashboard_galleries_path %></li>
-            <li class="page_item about"><%= link_to "About Us", dashboard_profile_path(1) %></li>
-          </ul>
-        </div>
-        <div id="header-search">
-          
-          <%= form_tag dashboard_home_search_articles_path(home_id: 1), :method => :get, id: "searchform" do %>
-            <input type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" name="name" id="s" />
-            <input type="submit" id="searchsubmit" value="" />
-          <%end%>
-        </div>
-        <div id="header-date">Date: <%= Time.now.strftime('%d %B %Y') %></div>
-        <div id="header-rss"><a href="#">Subscribe to RSS</a></div>
-        <div id="header-comments"><a href="#">Subscribe to Comments</a></div>
-        <div id="header-cats">
-          <ul>
-            <li class="cat-item"><%= link_to "Home", root_path %></li>
-            <% @categories_list.limit(10).each do |category| %>
-                  <li class="cat-item"><%= link_to category.name  , dashboard_home_show_categories_path(category) %></li>
-            <%end%>
-            <li class="cat-item"><%= link_to "Gallery", dashboard_galleries_path %></li>
-            <li class="cat-item"><%= link_to "About Us", dashboard_profile_path(1) %></li>
-          </ul>
-        </div>
-      </div>
-<script>
-      <% if session[:current].blank? %>
-            $(".home").removeClass("page_item")
-            $(".home").addClass("current_page_item")
-      <% elsif session[:current] == "gallery" %>
-            $(".gallery").removeClass("page_item")
-            $(".gallery").addClass("current_page_item")
-      <% elsif session[:current] == "about" %>
-            $(".about").removeClass("page_item")
-            $(".about").addClass("current_page_item")
-      <% end %>
-</script>
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="/" class="navbar-brand">SampulKreativ</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="/" class="<%= params[:controller] == 'dashboard/home' ? 'active' : '' %>">
+						<b><span class="glyphicon glyphicon-home"></span> Home</b>
+					</a>
+				</li>
+				<li>
+					<a href="/dashboard/galleries" class="<%= params[:controller] == 'dashboard/galleries' ? 'active' : '' %>">
+						<b><span class="glyphicon glyphicon-stats"></span> Gallery</b>
+					</a>
+				</li>
+				<li>
+					<a href="/admin/login"><b><span class="glyphicon glyphicon-log-in"></span> Sign In</b></a> 
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

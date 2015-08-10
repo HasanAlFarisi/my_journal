@@ -1,8 +1,8 @@
 MyJournal::Application.routes.draw do
   devise_for :admins, :path => "admin",
-    :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret' },
+    :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'forgot_password' },
     :controllers => { :sessions => "admin/sessions",
-                                 :registrations => "admin/registrations",
+                                 :registrations => "admin/registrations"
                                  #:omniauth_callbacks => "admin/omniauth_callbacks"
                               }
 
@@ -12,7 +12,8 @@ MyJournal::Application.routes.draw do
   	resources :home do
         get :show_categories
         get :show_sub_categories
-        get :search_articles
+        post :search_articles
+        post :subscribe
       end
       resources :comments do
         post :create_reply_comment
@@ -33,10 +34,11 @@ MyJournal::Application.routes.draw do
 
     resources :articles do
       collection do
-        get :article_search
+        post :article_search
         post :destroy_all
         post :auto_search
         post :auto_search_sidebar
+        post :filter
       end
     end
 
@@ -68,10 +70,13 @@ MyJournal::Application.routes.draw do
         collection do
             post :selected_members
             post :selected_checks
+            post :filter
+            post :get_assign
             get :project_search
             get :add_row_designers
             get :add_row_developers
             get :add_row_checks
+            get :new_blank_project
             delete :destroy_add_rows 
         end
     end
@@ -82,6 +87,9 @@ MyJournal::Application.routes.draw do
             get :add_row_watchers
             get :show_task_image
             get :show_task_image
+            get :select_project
+            get :create_project
+            get :edit_status
             delete :destroy_add_rows 
         end
     end
@@ -102,5 +110,12 @@ MyJournal::Application.routes.draw do
       end
       delete :destroy_reply
     end
+
+    resources :projects do
+      collection do
+        post :filter
+      end
+    end
+    #match '/admin/journal_issues', :controller => 'journals', :action => 'index',via: :GET
   end
 end

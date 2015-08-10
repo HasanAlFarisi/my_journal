@@ -1,79 +1,44 @@
-<!-- Main -->
-<div id="main">
-  <div class="cl">&nbsp;</div>
-  
-  <!-- Content -->
-  <div id="content">
-    
-    <!-- Box Article -->
-    <div class="box">
-      <!-- Box Head -->
-      <div class="box-head">
-        <h2 class="left">Current Category</h2>
-
-        <%= render partial:'admin/shared/search', locals:{status: nil} %>
-
-      </div>                               
-      <!-- End Box Head --> 
-
-      <!-- Table -->
-      <div class="table">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-striped">
-          <tr>
-            <th width="13"><input type="checkbox" class="check-all" name="check-all" /></th>
-            <th width="230">Name</th>
-            <th>Sub Category</th>
-            <th colspan="2" class="ac">Content Control</th>
-          </tr>
-          <% unless @admin_categories.present? %>
-            <tr class="odd">
-              <td colspan="7">
-                <center>No data yet</center>
-              </td>
-            </tr>
-          <%end%>
-  <%= form_tag destroy_all_admin_categories_path do %>
-    <% @admin_categories.each do |admin_category| %>
-      <tr>
-        <td>
-          <input type="checkbox" class="check-self" name="selected[]" id="<%= "selected-#{admin_category.id}" %>" value="<%= admin_category.id %>" />
-        </td>
-        <td><%= link_to admin_category.name, admin_category %></td>
-        <td>
-          <% admin_category.sub_categories.each do |category| %>
-              <%= "#{category.name}," %>
-          <%end%>
-        </td>
-        <td  width="5px"><%= link_to 'Edit', edit_admin_category_path(admin_category), class:"ico edit" %></td>
-        <td  width="5px"><%= link_to 'Destroy', admin_category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %></td>
-      </tr>
-    <% end %>
-</table>
- <!-- Pagging -->
-        <div class="pagging">
-    <%= submit_tag "Delete Selected", class:"tab-right-button button floating" %></p>
-    <%= link_to 'New Category', new_admin_category_path, class:"tab-right-button button journal" %> 
-  <% end %>
-  
-          <div class="left">Category Total: <b><%= @admin_categories.count %></b> category</div>
-          <div class="right">
-            <%= will_paginate @admin_categories %>
-          </div>
-        </div>
-        <!-- End Pagging -->
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <i class="fa fa-paperclip fa-fw"></i><spans class="assign">Categories</spans>
       </div>
-      <!-- Table -->
-    </div>
-    <!-- End Box Article -->
-  </div>
-  <!-- End Content -->
-  
-  <div class="cl">&nbsp;</div>      
-</div>
-<!-- Main -->
 
-<!-- Sidebar -->
-<div id="sidebar">
-  <%= render :partial => "admin/shared/sidebar" %>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped">
+						<thead>
+							<tr>
+								<th width="13">No</th>
+								<th width="500px">Category Name</th>
+						            	<th width="500px">Sub Category</th>
+						            	<th colspan="2"><center>Action</center></th>
+							</tr>
+						</thead>
+						<tbody class="get_index">
+							<tr class="ajaxs hide">
+								<td colspan="6">
+									<center><%= render 'dashboard/shared/ajax_loader' %></center>
+								</td>
+							</tr>
+								<%= render "admin/categories/shared/index" %>
+						</tbody>
+					</table>
+
+					<span class="paginations">
+						<div class="left">Show: <b class="shows"><%= @admin_categories.blank? ? 0 : @admin_categories.per_page > @admin_categories.count ? @admin_categories.count : @admin_categories.per_page %></b> data From: <b class="froms"><%= @admin_categories_all.blank? ? 0 : @admin_categories_all.count %></b> data
+							<span class="pull-right">
+								<span class="paginate">
+									<%= will_paginate @admin_categories %>&nbsp;
+								</span>
+								<%= link_to '<span class="fa  fa-pencil-square fa-1x"></span>New Category'.html_safe, new_admin_category_path, class:"btn btn-primary" %> 
+							</span>
+						</div>
+					</span>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- Sidebar -->

@@ -9,7 +9,6 @@ module Admin::JournalsHelper
 	end
 
 	def estimated_time_progress(start_time,end_time)
-		
 	end
 
 	def estimated_asignee(journal_id)

@@ -3,7 +3,11 @@ class Dashboard::GalleriesController < ApplicationController
 
 	def index
 		session[:url_back_dashboard] = request.original_url
-		@galleries = Admin::GalleryGroup.order("created_at DESC").paginate(:page => params[:page], :per_page => 16)
+		@galleries = Admin::Gallery.order("created_at DESC").paginate(:page => params[:page], :per_page => 16)
+		respond_to do |format|
+			format.html
+			format.js
+		end
 	end
 
 	def show

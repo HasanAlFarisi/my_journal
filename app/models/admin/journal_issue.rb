@@ -76,6 +76,18 @@ class Admin::JournalIssue < ActiveRecord::Base
 		self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("{{global_group}}".gsub("{{global_group}}",global_group))
 	end
 
+	def self.data_existed_index_filter(current_admin,ids,params)
+		join_table = self.global_joins()
+		global_group = self.global_group()
+		conditions = self.conditions_where_filter(current_admin,ids,params)
+
+		unless ids.blank?
+			self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s))
+		else
+			self.joins("{{joins}}".gsub("{{joins}}",join_table)).where("{{conditions}}".gsub("{{conditions}}",conditions.to_s)).group("{{global_group}}".gsub("{{global_group}}",global_group))
+		end
+	end
+
 	def self.global_joins()
 		join ="
 			LEFT JOIN admin_journal_issue_asignees on admin_journal_issue_asignees.journal_issue_id = admin_journal_issues.id
@@ -97,20 +109,58 @@ class Admin::JournalIssue < ActiveRecord::Base
 		condition << "no IS NOT NULL" 
 		condition << "admin_journal_issues.title IS NOT NULL"
 		if type == "main"
-			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id})"
+			condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id} OR admin_journal_issues.from = #{current_admin.id})"
 			unless journal_id == "search"
 				condition << "admin_journal_issues.status_id != 5"	
 			end
 		elsif type == "index"
 			condition << "admin_journal_issues.status_id != 5"
 			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})"	
+		elsif type == "notif"
+			condition << "admin_journal_issues.status_id != 5"
+			condition << "(asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id})"	
+			condition << "admin_journal_issues.notif_status = false"
 		else
-			condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id})"
+			condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id} OR admin_journal_issues.from = #{current_admin.id})"
 			condition << "admin_journal_issues.status_id = #{type}"
 		end
 		
 		if journal_id.present? && journal_id != "search"
 			condition << "admin_journal_issues.journal_id = #{journal_id}"
+		end
+		conditions = condition.join(" AND ")
+		return conditions
+	end
+
+	def self.conditions_where_filter(current_admin, ids, params)
+		condition = []
+		condition << "admin_journal_issues.status_id IS NOT NULL"
+		condition << "no IS NOT NULL" 
+		condition << "admin_journal_issues.title IS NOT NULL"
+		condition << "(admin_journal_issues.asignee = #{current_admin.id} OR admin_journal_issue_asignees.admin_id = #{current_admin.id} OR admin_journals.admin_id = #{current_admin.id} OR admin_journal_issues.from = #{current_admin.id})"
+		unless params[:no].blank?
+			condition << "admin_journal_issues.no = '#{params[:no]}'"
+		end
+		unless params[:project].blank?
+			condition << "admin_journal_issues.journal_id = #{params[:project]}"
+		end
+		unless params[:status].blank?
+			condition << "admin_journal_issues.status_id = #{params[:status]}"
+		end
+		unless params[:priority].blank?
+			condition << "admin_journal_issues.priority = #{params[:priority]}"
+		end
+		unless params[:progress_start].blank? || params[:progress_end].blank?
+			condition << "admin_journal_issues.progress BETWEEN #{params[:progress_start].to_i} AND #{params[:progress_end].to_i}"
+		end
+		unless params[:title].blank?
+			condition << "(LOWER(admin_journal_issues.title) LIKE '%#{params[:title]}%')"
+		end
+		unless params[:assign].blank?
+			condition << "(admin_journal_issues.asignee = #{params[:assign]})"
+		end
+		unless ids.blank?
+			condition << "admin_journals.id IN #{ids}"
 		end
 		conditions = condition.join(" AND ")
 		return conditions
@@ -146,8 +196,25 @@ class Admin::JournalIssue < ActiveRecord::Base
 	end
 
 	def self.assign_notice(id)
-		select_all = Admin::JournalIssue.where("asignee = #{id} AND status_id != 5")
+		admin_journals = Admin::Journal.order("admin_journals.created_at DESC").is_allowed(id,nil)
+		 ids_all = []
+		 admin_journals.each do |journal|
+		 	ids_all << journal.id
+		 end
+		 convert_all = convert_to_arr_for_query(ids_all)
+		 present = Admin::JournalIssue.find_index_count(convert_all == ")" ? "(0)" : convert_all,id,'main')
+		 admin_journals_status = present
+		 return admin_journals_status
 	end
+
+	def self.convert_to_arr_for_query(ids_param)
+		key_string = "("
+		ids_param.each do |x|
+			key_string << "#{x},"
+		end
+		key_string[key_string.length-1] = ")"
+		key_string
+	  end
 
 	def self.save_attributes(id,params)
 		unless params[:admin_journal_issue][:journal_issue_asignees_attributes].blank?
@@ -203,10 +270,26 @@ class Admin::JournalIssue < ActiveRecord::Base
 		condition << "admin_journal_issues.journal_id IN #{ids}"
 		if type == "search"
 			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journals.admin_id = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
+		elsif type == "main"
+			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin} OR admin_journal_issues.from = #{current_admin} OR admin_journals.admin_id = #{current_admin})"
 		else
 			condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
 			condition << "admin_journal_issues.status_id != 5"
 		end
+		conditions = condition.join(" AND ")
+
+		journal_issue = self.joins("{{join_table}}".gsub("{{join_table}}",join_table)).where("{{conditions}}".gsub("{{conditions}}", conditions))
+
+		return journal_issue
+	end
+
+	def self.find_index_count_notif(ids,current_admin,type)
+		join_table = self.global_joins()
+		condition = []
+		condition << "admin_journal_issues.journal_id IN #{ids}"
+		condition << "(admin_journal_issues.asignee = #{current_admin} OR admin_journal_issue_asignees.admin_id = #{current_admin})"
+		condition << "admin_journal_issues.status_id != 5"
+		condition << "admin_journal_issues.notif_status = false"
 		conditions = condition.join(" AND ")
 
 		journal_issue = self.joins("{{join_table}}".gsub("{{join_table}}",join_table)).where("{{conditions}}".gsub("{{conditions}}", conditions))

@@ -1,0 +1,12 @@
+<%= form_for(@admin_profile, remote: true) do |f| %>
+	<%= hidden_field_tag :tab, "1" %>
+	<h5 class="floating">Full Name : &nbsp;</h5>
+		<%= f.text_field :name, class:"form-control floating", style:"width:40% !important; margin-bottom:5px"  %>
+		<%= f.text_field :last_name, class:"form-control", style:"width:40% !important"  %>
+	<span class="clearfix"></span>
+	<h5 class="floating">Facebook : &nbsp;</h5>
+		<%= f.text_field :facebook, class:"form-control", style:"width:80% !important; margin-bottom:5px"  %>
+	<span class="clearfix"></span>
+	<h5 class="floating">Email : &nbsp;</h5>
+		<%= f.text_field :e_mail, class:"form-control", style:"width:87% !important;" %>
+<% end %>

@@ -1,16 +1,19 @@
 class Admin::CategoriesController < Admin::BaseController
   before_action :set_admin_sub_category, :set_admin_category, only: [:show, :edit, :update, :destroy]
-  
+  before_filter :setup_page
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @admin_categories = Admin::Category.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
+    @admin_categories = Admin::Category.order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
+    @admin_categories_all = Admin::Category.all
+    session[:urlBack] = request.original_url
+    @page_breadcump = " > Index"
   end
 
   # GET /admin/categories/1
   # GET /admin/categories/1.json
   def show
-    @articles_category = Article.where("category_id = #{params[:id]}").paginate(:page => params[:page], :per_page => 15)
+    @articles_category = Article.where("category_id = #{params[:id]}").paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /admin/categories/new
@@ -36,7 +39,7 @@ class Admin::CategoriesController < Admin::BaseController
           end
         end
 
-        format.html { redirect_to @admin_category, notice: 'Category was successfully created.' }
+        format.html { redirect_to admin_categories_path, notice: 'Category was successfully created.' }
         format.json { render action: 'show', status: :created, location: @admin_category }
       else
         format.html { render action: 'new' }
@@ -66,7 +69,7 @@ class Admin::CategoriesController < Admin::BaseController
           end
         end
 
-        format.html { redirect_to @admin_category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to admin_categories_path, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -116,6 +119,11 @@ class Admin::CategoriesController < Admin::BaseController
         format.json { head :no_content }
       end
     end
+  end
+
+  def setup_page
+      @articles_page = "selected active"
+      @page = "Categories"
   end
 
   private

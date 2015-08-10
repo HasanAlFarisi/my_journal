@@ -1,5 +1,5 @@
 /* Progress bar */
-  .progress-bar {
+  .progress-bar-costume {
       float: left;
       width: 0;
       height: 100%;
@@ -16,7 +16,7 @@
       -webkit-border-radius: 3px;
       -moz-border-radius: 3px;
   }
-  .progress {
+  .progress-costume {
 	  height: 20px;
 	  margin-bottom: 20px;
 	  overflow: hidden;

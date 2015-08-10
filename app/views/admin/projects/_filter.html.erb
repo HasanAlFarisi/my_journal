@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+	<div class="panel-heading filter">
+		<%= form_tag filter_admin_projects_path(), remote: true do %>
+			<%= hidden_field_tag :filter, "present" %>
+
+		       <%= label_tag :title, "Title : ", class:"floating", style:"margin:7px 5px 0px 0px;" %>
+		       <%= text_field_tag :title, "", placeholder:"Title", class:"form-control floating", style:"width:69%; margin-right:10px" %>
+
+		       <%= label_tag :status, "Status : ", class:"floating", style:"margin:7px 5px 0px 0px;" %>
+		       <%= select_tag :status, options_for_select([['Select',nil],['In Progress',6],['Close',5]]), class:"form-control floating", style:"width:18%; margin-right:10px" %>
+
+		       <%#= label_tag :assign, "Assign with : ", class:"floating", style:"margin:7px 5px 0px 0px;" %>
+		       <%#= select_tag :sub_category, options_for_select(@assign), class:"form-control", style:"width:18%;" %>
+		       <span class="clearfix"></span>
+		       <br>
+		       <%= label_tag :create_start, "Created At : ", class:"floating", style:"margin:7px 5px 0px 0px;" %>
+		       <%= text_field_tag :create_start, "", placeholder:"28/04/2015", class:"form-control floating", style:"width:10%; margin-right:10px" %>
+
+		       <%= label_tag :create_end, "To ", class:"floating", style:"margin:7px 5px 0px 0px;" %>
+		       <%= text_field_tag :create_end, "", placeholder:"28/04/2015", class:"form-control floating", style:"width:10%; margin-right:10px" %>
+
+		       <%#= label_tag :sort_by, "Sort By :", class:"floating", style:"margin:7px 5px 0px 0px;" %>
+		       <%#= select_tag :sort_by, options_for_select(@sort), class:"form-control floating", style:"width:18%; margin-right:10px" %>
+
+			<button class="btn btn-primary ajax">Filter</button>
+	       <% end %>
+	</div>
+</div>
+
+<%= javascript_include_tag 'filter' %>

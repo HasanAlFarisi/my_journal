@@ -7,10 +7,10 @@ $(document).ready(function() {
         $(".field-dis-blank").attr("style","border:none !important;margin-top:-5px !important")
         if($("#admin_journal_issue_status_id").val() == "11" || $("#admin_journal_issue_status_id").val() == "6"){
                 $(".type").hide()
-                $(".progress").fadeIn()
+                //$(".progress").fadeIn()
         }else{
                 $(".type").fadeIn()
-                $(".progress").hide()
+                //$(".progress").hide()
         }
 });
 
@@ -73,21 +73,32 @@ $(".edit-close").click(function(){
     $(".section").fadeOut();
 })
 
+function add_screen_shoot(ids){
+    ids = ids + "111";
+    $(".sub-screen-shoot").append("<span class='parent'><div id='foto_prev_"+ids+"'></div><br><input id='uploadFile_"+ids+"' class='form-control floating' style='width:60% !important;' disabled='disabled' placeholder='Choose File'><div class='fileUpload btn btn-danger floating' style='margin: 0px 0px -5px 5px'><span>Upload</span><input id='uploadBtn_"+ids+"' class='upload' type='file' onchange='readURLGalleryAppend(this,"+ids+");' name='admin_help[help_files_attributes]["+ids+"][document]'></div><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><span class='clearfix'></span><br></span>")
+    $(".sub-screen").attr("onclick", "add_screen_shoot("+ids+")");
+    $(".sub-screen-shoot").attr("dataId", ids)
+}
+
 function remove_style_error (classes) {
     $(classes).attr("style","background-color:#fff")
 }
 
 var ids = $(".sub-images").attr("dataId");
 var id = $(".sub-screen-shoot").attr("dataId");
-$(".add_images").click(function(){
-    ids = ids + 1;
-    $(".sub-images").append("<span class='parent'><div id='foto_prev_"+ids+"'></div><input class='field size4 input-file floating' id='fileField' name='admin_journal_issue[journal_issue_images_attributes]["+ids+"][image]' onchange='readURLGalleryAppend(this,"+ids+");' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
-})
+//$(".add_images").click(function(){
+function add_images(ids){
+    ids = ids + '1111';
+    $(".sub-images").append("<span class='parent'><div id='foto_prev_"+ids+"'></div><input class='field size4 input-file floating' id='fileField' name='admin_journal_issue[journal_issue_images_attributes]["+ids+"][image]' onchange='readURLGalleryAppend(this,"+ids+");' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><span class='clearfix'></span><br></span>")
+    $(".subImages").attr("onclick", "add_images("+ids+"); return false;");
+}//)
 
-$(".add_files").click(function(){
-    ids = ids + 1;
-    $(".sub-files").append("<span class='parent'><input class='field size4 input-file floating' id='fileField' name='admin_journal_issue[journal_issue_files_attributes]["+ids+"][file]' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
-})
+//$(".add_files").click(function(){
+function add_files(ids){
+    ids = ids + '1111';
+    $(".sub-files").append("<span class='parent'><input class='field size4 input-file floating' id='fileField' name='admin_journal_issue[journal_issue_files_attributes]["+ids+"][file]' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><span class='clearfix'></span><br></span>")
+    $(".subFiles").attr("onclick", "add_files("+ids+"); return false;");
+}//)
 
 $(".add_screen_shoot").click(function(){
     id = id + 1;
@@ -125,7 +136,7 @@ function readURLGalleryAppend(input, id) {
     var reader = new FileReader();
     reader.onload = function(e){
      $(".img_prev_"+id).remove();
-      $("#foto_prev_"+id).append('<img class="img_prev_'+id+'" src="'+e.target.result+'" width="75%"/>');
+      $("#foto_prev_"+id).append('<img class="img_prev_'+id+'" src="'+e.target.result+'" width="500px"/>');
     };
     reader.readAsDataURL(input.files[0])
   }

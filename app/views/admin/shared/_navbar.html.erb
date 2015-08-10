@@ -1,0 +1,110 @@
+<!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <!-- user image section-->
+                        <div class="user-section">
+                            <div class="user-section-inner">
+                                <%= raw generated_link_to( image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", session[:session_admin])}/profiles/#{session[:session_admin]}", class:"admin-avatar", style:"margin-top:-5px;"),"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{session[:session_admin]},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}})%>
+                            </div>
+                            <div class="user-info">
+                                <div class="admin_full_name" style="width: 150px"><%= raw generated_link_to("#{find_profile(session[:session_admin]).name} <b>#{find_profile(session[:session_admin]).last_name}</b>".html_safe,"#view_profile",{:id=>"view_profiles",:role=>"button", :onclick => "view_profile(#{session[:session_admin]},'no')", :data => {:toggle=>"modal", :url=>"view_profiles"}}) %>
+                                </div>
+                                <div class="user-text-online">
+                                    <span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Online
+                                </div>
+                            </div>
+                        </div>
+                        <!--end user image section-->
+                    </li>
+                    <li class="sidebar-search">
+                        <!-- search section-->
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!--end search section-->
+                    </li>
+                    <li class="<%= @dashboard %>">
+                        <a href="/admin"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                    </li>
+                    <li class="<%= @journals %>">
+                        <a href="#"><i class="fa fa-table fa-fw"></i>Journals<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/admin/journals">
+                                        <span class="label label-all">
+                                            <%= Admin::JournalIssue.assign_notice(current_admin.id).count %>
+                                        </span>
+                                        &nbsp;Index
+                                </a>
+                            </li>
+                            <% @journal_statuses.each do |status| %>
+                                <%= generated_status_navbar(status.id).html_safe %>
+                            <% end %>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                    <li class="<%= @projects %>">
+                                <a href="/admin/projects"><i class="fa fa-bookmark fa-fw"></i>Projects</a>
+                     <li>
+                        <a href="/admin/messages"><i class="fa fa-envelope fa-fw"></i>Emails<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/admin/journals">
+                                    <span class="label label-danger">
+                                      <%= count_message(current_admin) %>
+                                    </span>&nbsp;
+                                    Inbox</a>
+                            </li>
+                            <li>
+                                <a href="/admin/journals">
+                                    <span class="label label-success">
+                                      <%= count_message(current_admin) %>
+                                    </span>&nbsp;
+                                    Outbox
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/journals">
+                                    <span class="label label-all">
+                                        <%= count_message(current_admin) %>
+                                    </span>&nbsp;
+                                    Deleted
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/galleries"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+                    </li>
+                    <li class="<%= @articles_page %>">
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Articles<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/admin/articles">Index</a>
+                            </li>
+                            <li>
+                                <a href="/admin/categories">Categories</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/galleries"><i class="fa fa-edit fa-fw"></i>Galleries</a>
+                    </li>
+                    <li>
+                        <a href="/admin/advertises"><i class="fa fa-rss fa-fw"></i>Advertises</a>
+                    </li>
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->

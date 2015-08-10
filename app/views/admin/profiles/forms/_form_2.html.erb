@@ -1,0 +1,10 @@
+<%= form_for(@admin_profile, remote: true) do |f| %>
+	<%= hidden_field_tag :tab, "2" %>
+	<%= f.fields_for :profile_skills do |ps| %>
+          <div style='margin-bottom:25px'>
+            <%= render "admin/profiles/profile_skill", :f => ps %>
+          </div>
+        <% end %>
+        <div class="sub-skill" dataId="1"><!-- add skill place --></div>
+<% end %>
+<a href="javascript:void(0)" class="add btn btn-warning sub" onclick="add_field('1')"><i class="fa fa-plus"></i> Skills</a>

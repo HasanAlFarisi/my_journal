@@ -4,7 +4,7 @@ function readURL(input) {
     reader.onload = function (e) {
       $('.img_prev').remove();
       $('.img-data').hide();
-      $('.foto_prev').append('<img class="img_prev img-data company-logo" src="'+e.target.result+'" style="width:420px; height:200px;"/>');
+      $('.foto_prev').append('<img class="img_prev img-data company-logo border" src="'+e.target.result+'" style="width:600px; height:350px;"/>');
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -15,7 +15,7 @@ function readURLProfile(input) {
     var reader = new FileReader();
     reader.onload = function (e) {
       $('.img_prev_profile').remove();
-      $('.foto_prev_profile').append('<img class="img_profile floating img_prev_profile" src="'+e.target.result+'" />');
+      $('.foto_prev_profile').append('<img class="floating admin-avatar" src="'+e.target.result+'" />');
     };
     reader.readAsDataURL(input.files[0]);
   }

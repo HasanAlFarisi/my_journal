@@ -1,0 +1,29 @@
+<% unless @admin_categories.present? %>
+	<tr class="odd">
+		<td colspan="4">
+			<center>No data yet</center>
+		</td>
+	</tr>
+<% end %>
+
+<% @admin_categories.each_with_index do |admin_category, n| %>
+	<% n = n + 1 + @admin_categories .offset_value %>
+	<tr>
+		<td>
+			<%= n %>.
+		</td>
+		<td><%= admin_category.name %></td>
+		<td>
+			<% admin_category.sub_categories.each do |category| %>
+				<%= "#{category.name}" %>
+				<br>
+			<%end%>
+		</td>
+		<td  width="60px">
+			<%= link_to '<i class="ico edit fa  fa-pencil"></i>Edit'.html_safe, edit_admin_category_path(admin_category) %>
+		</td>
+		<td  width="90px">
+			<%= link_to '<i class="ico edit fa  fa-trash-o"></i>Destroy'.html_safe, admin_category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "ico del" %>
+		</td>
+	</tr>
+<% end %>

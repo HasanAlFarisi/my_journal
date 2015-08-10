@@ -1,0 +1,11 @@
+<% @admin_profile.profile_skills.order("name ASC").each do |skill| %>
+      <p>
+          <strong><%= skill.name %></strong>
+          <span class="pull-right text-muted"><%= skill.skill.blank? ? 0 : skill.skill %>%</span>
+      </p>
+      
+      <div class="progress progress-costume progress-striped active">
+            <div class="progress-bar progress-bar-costume" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= skill.skill %>%">
+            </div>
+      </div>
+<% end %>

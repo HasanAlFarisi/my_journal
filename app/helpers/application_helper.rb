@@ -14,6 +14,10 @@ module ApplicationHelper
 		Admin::Profile.find_by_admin_id(admin_id)
 	end
 
+	def find_admin(admin_id)
+		Admin.find(admin_id)
+	end
+
 	def find_type(type_id)
 		Admin::TypeJournal.find(type_id).name
 	end
@@ -49,34 +53,38 @@ module ApplicationHelper
 		end				
 	end
 
-	def generated_status(status_id)
-		if status_id == 1
-			generated_image(1)
-		elsif status_id == 2
-			generated_image(2)
-		elsif status_id == 3
-			generated_image(3)
-		elsif status_id == 4
-			generated_image(4)
-		elsif status_id == 5	
-			generated_image(5)
-		elsif status_id == 6 || status_id == 11
-			generated_image(6)
-		end				
-	end
+	#def generated_status(status_id)
+	#	if status_id == 1
+	#		generated_image(1)
+	#	elsif status_id == 2
+	#		generated_image(2)
+	#	elsif status_id == 3
+	#		generated_image(3)
+	#	elsif status_id == 4
+	#		generated_image(4)
+	#	elsif status_id == 5	
+	#		generated_image(5)
+	#	elsif status_id == 6 || status_id == 11
+	#		generated_image(6)
+	#	end				
+	#end
 
 	def generated_count_per_status(id)
 		Admin::JournalIssue.status_count(current_admin,id)
 	end
 
-	def generated_image(id)
-		status = Admin::StatusJournal.find(id)
-		image = ""
-		image += "<a href = /admin/journal_issues/#{id}/list_data_by_status>"
-		image += "<span class='notif_#{id}'>#{status.name}</span>"
-		image += "</a>"
-		return image
-	end
+	#def generated_image(id)
+	#	status = Admin::StatusJournal.find(id)
+	#	count = Admin::JournalIssue.status_count(current_admin,id)
+	#	image = ""
+	#	image += "<li>"
+	#	image += "<a href = /admin/journal_issues/#{id}/list_data_by_status>"
+	#	image += "<span class='notif_#{id}' style='#{@select}'>#{status.name}</span>"
+	#	image += "&nbsp;<b class='label label-#{id}'>#{count}</b>"
+	#	image += "</a>"
+	#	image += "</li>"
+	#	return image
+	#end
 
 	def generated(id)
 		id = id -1
@@ -88,12 +96,15 @@ module ApplicationHelper
 
 	def generated_file_type(file)
 		images = ""
+		images += "<span class='floating add-margin-right'>"
 		if !['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png', 'image/bmp', 'application/x-rar'].include?(file.document_content_type)
 			images += "<img class='image_name' src='/assets///image_unknow.png'>"
 		else
 			images += "<img class='image_name' src='/assets///image_#{File.extname(file.document_file_name)}.png'>"
 		end
+		images += "<span class='clearfix'></span>"
 		images += "<span class='file_name'>#{truncate(file.document_file_name.sub('/', ''), :length => 15)}</span>"
+		images += "</span>"
 		return images
 	end
 
@@ -106,5 +117,11 @@ module ApplicationHelper
 			status = "Normal"
 		end	
 		return status
+	end
+
+	def generated_link_to(name_link,path_link,options=nil,attribute = nil)  
+	    	link=""
+	    	link = link_to(raw(name_link), "#{path_link}",options).html_safe
+	    	return link
 	end
 end

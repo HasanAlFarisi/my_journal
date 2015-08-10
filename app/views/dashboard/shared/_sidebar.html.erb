@@ -1,18 +1,155 @@
-<div class="sidebar-a">
-      <div class="sidebar-a-top">
-            <div class="sidebar-a-bottom">
-            	     <% @admin_advertises.each do |admin_advertise| %>
-                  		<div class="sidebar-banner">
-                  			<%#= link_to image_tag(admin_advertise.image.url(:original), width:"125px", height:"125px"), admin_advertise.link %>
-                  			<a href="<%= admin_advertise.link %>">
-                  				<%= image_tag admin_advertise.image.url(:original), width:"125px", height:"125px" %>
-                  			</a>
-                  		</div>
-                  <% end %>
-              </div>
-      </div>
-      
-  
-
-
-  
+<!-- MAIN RIGHT SIDEBAR -->
+	<div class="col-sm-4 side pull-right sidebar down2x">
+		<section class="sidebarside">
+			<%= form_tag dashboard_home_search_articles_path(home_id: 0), remote: true, id: "search_dashboard" do %>
+				<article><%= text_field_tag :title, "", placeholder:"Search Article Here" %></article>
+			<% end %>
+		</section>
+		<br>
+		<nav class="clearfix"></nav>
+		<section class="sidebarside tabs">
+			<article class="tabs_article active" id="tab1_acticle">
+				<ul class="tab-links">
+					<li>
+						<a href="#tab1">Popular Post</a>
+					</li>
+				</ul>
+			</article>
+			<article class="tabs_article" id="tab2_acticle">
+				<ul class="tab-links">
+					<li>
+						<a href="#tab2">Recent Post</a>
+					</li>
+				</ul>
+			</article>
+			<div class="tab-content">
+				<div id="tab1" class="tab active">
+					<article>
+					<br><br><br>
+					<% @popular_posts.each do |article| %>
+						<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", width:"300%"), dashboard_home_path(article), class:"col-sm-2",style:"padding-left:0px" %>
+						<content style="padding-left:70px">
+							<b><%= link_to article.title, dashboard_home_path(article) %></b>
+							<nav style="padding-left:120px"><%= "#{article.created_at.strftime('%d - %B - %y')} " %></nav>
+						</content>
+						<br>
+					<% end %>
+					</article>
+				</div>
+				<div id="tab2" class="tab">
+					<article>
+					<br><br><br>
+					<% @recent_posts.each do |article| %>
+						<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", width:"300%"), dashboard_home_path(article), class:"col-sm-2",style:"padding-left:0px" %>
+						<content style="padding-left:70px">
+							<b><%= link_to article.title, dashboard_home_path(article) %></b>
+							<nav style="padding-left:120px"><%= "#{article.created_at.strftime('%d - %B - %y')} " %></nav>
+						</content>
+						<br>
+					<% end %>
+					</article>
+				</div>
+			</div>
+		</section>
+		<br>
+		<nav class="clearfix"></nav>
+		<section class="sidebarside down2x">
+			<article>
+				<nav><b>Social Media</b></nav>
+				<a href="javascript:void(0)">
+					<nav class="socmed_1 down1x"></nav><div class="link down1x">Sampulkreativ Facebook Fans Page</div>
+				</a>
+				<nav class="clearfix"></nav>
+				<a href="javascript:void(0)">
+					<nav class="socmed_2"></nav><div class="link">Sampulkreativ Twitter Fans Page</div>
+				</a>
+				<nav class="clearfix"></nav>
+				<a href="javascript:void(0)">
+					<nav class="socmed_3"></nav><div class="link">Sampulkreativ Google+ Fans Page</div>
+				</a>
+				<nav class="clearfix"></nav>
+			</article>
+		</section>
+		<nav class="clearfix"></nav>
+		<section class="sidebarside down2x">
+			<article>
+				<nav><b>Category</b></nav>
+				<div class="panel-group down1x" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<% @categories_list.each do |category| %>
+							<div class="panel-heading" role="tab" id="heading<%= category.id %>">
+							  	<h4 class="panel-title">
+							    		<a data-toggle="collapse" data-parent="#accordion" href=".collapse<%= category.id %>" aria-expanded="true" aria-controls="collapse<%= category.id %>" class="collap">
+							      			<%= category.name %>
+							    		</a>
+							  	</h4>
+							</div>
+							<div id="" class="panel-collapse collapse collapse<%= category.id %>" role="tabpanel" aria-labelledby="heading<%= category.id %>">
+								<% category.sub_categories.each do |sub_category| %>
+									<div class="panel-body list-group">
+									 	<%= link_to sub_category.name, dashboard_home_show_sub_categories_path(sub_category) %>
+									</div>
+								<% end %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+				<nav class="clearfix"></nav>
+			</article>
+		</section>
+		<br>
+		<nav class="clearfix"></nav>
+		<section class="sidebarside">
+			<article>
+				<nav><b>Sampulkreativ Journal</b></nav>
+				<table class="down1x table-striped">
+					<tr>
+						<th colspan="7">
+							<%= "#{@date.strftime('%B')} #{@date.year}" %>
+						</th>
+					</tr>
+					<%= calendar @date do |date| %>
+						<%= date.day %>
+						<%# if @events_by_date[date] %>
+							<!-- <ul> -->
+								<%# @events_by_date[date].each do |event| %>
+									<!-- <li><%#= link_to event.name, event %></li> -->
+								<%# end %>
+							<!-- </ul> -->
+						<%# end %>
+					<% end %>
+				</table>
+				<nav class="down1x agenda">
+					<a href="#" data-toggle="modal" data-target="#myModal"><b>24 May 2015</b></a>
+					&nbsp;<i>Sampulkreativ Launching</i>
+				</nav>
+			</article>
+		</section>
+		<br>
+		<nav class="clearfix"></nav>
+		<section class="sidebarside">
+			<article>
+				<nav><b>Tags</b></nav>
+				<a href="javascript:void(0)"><nav class="category"><span>GALLERY</span></nav></a>
+				<a href="javascript:void(0)"><nav class="category"><span>LINKS</span></nav></a>
+				<a href="javascript:void(0)"><nav class="category"><span>QOUTE</span></nav></a>
+				<a href="javascript:void(0)"><nav class="category"><span>VIDEOS</span></nav></a>
+				<nav class="clearfix"></nav>
+			</article>
+		</section>
+		<nav class="clearfix"></nav>
+	</div>			
+<!-- END MAIN RIGHT SIDEBAR -->
+<script>
+	jQuery(document).ready(function() {
+	    jQuery('.tabs .tab-links a').on('click', function(e)  {
+	        var currentAttrValue = jQuery(this).attr('href');
+	 
+	        // Show/Hide Tabs
+	        jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+	 
+	        jQuery(currentAttrValue+"_acticle").addClass('active').siblings().removeClass('active');
+	        e.preventDefault();
+	    });
+	});
+</script>

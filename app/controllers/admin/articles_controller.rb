@@ -1,18 +1,25 @@
 class Admin::ArticlesController < Admin::BaseController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :prepare_select
-
+  before_filter :setup_page
+  skip_before_filter :verify_authenticity_token, :only => [:auto_search]
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
-
+    @articles = Article.order("created_at DESC").paginate(:page => params[:page], :per_page => 6)
+    @articles_all = Article.all
     session[:urlBack] = request.original_url
+    @page_breadcump = " > Index"
   end
     
   # GET /articles/1
   # GET /articles/1.json
-  def show;end
+  def show
+      if !@article.is_read && @article.admin_id != current_admin.id
+        redirect_to admin_articles_url, alert: "You have not permission for access."
+      end
+    @page_breadcump = " > #{@article.title}"
+  end
 
   # GET /articles/new
   def new
@@ -20,13 +27,17 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   # GET /articles/1/edit
-  def edit;end
+  def edit
+    if !@article.is_edit && @article.admin_id != current_admin.id
+      redirect_to admin_articles_url, alert: 'You have not permission for access.'
+    end
+  end
 
   # POST /articles
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-
+    @article.admin_id = current_admin.id
     respond_to do |format|
       if @article.save
         unless params[:article][:photo].blank?
@@ -46,12 +57,11 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def article_search
-    @result = Article.search_by_params(params).paginate(:page => params[:page], :per_page => 15)
-
-    session[:urlBack] = request.original_url
-
+    articles = Article.search_by_params(params)
+    @articles = articles.paginate(:page => params[:page], :per_page => 20)
+    @articles_all = articles
     respond_to do |format|
-      format.html
+      format.js
     end
   end
 
@@ -79,12 +89,16 @@ class Admin::ArticlesController < Admin::BaseController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    comment = Dashboard::Comment.delete_all "article_id = #{@article.id}"
-    loaded = Cloudinary::Uploader.destroy("articles/#{@article.id}", :public_id => "articles/#{@article.id}", :invalidate => true)
-    @article.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_articles_url }
-      format.json { head :no_content }
+    if !@article.is_delete && @article.admin_id != current_admin.id
+      redirect_to admin_articles_url, alert: 'You have not permission for access.'
+    else
+      comment = Dashboard::Comment.delete_all "article_id = #{@article.id}"
+      loaded = Cloudinary::Uploader.destroy("articles/#{@article.id}", :public_id => "articles/#{@article.id}", :invalidate => true)
+      @article.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_articles_url }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -124,21 +138,28 @@ class Admin::ArticlesController < Admin::BaseController
     end
     render layout: false
   end
-
+  
   def prepare_select
     @category = Admin::Category.all.map{|x| [x.name, x.id]}.unshift(['Select',nil])
     @sub_category_select = [['Select', nil]]
+    @sort = [['Select', nil],['Top View', 1], ['Top Comment', 2]]
+    @profile = [["Annonymous","1.gif"], ["General","2.gif"],["Private","3.gif"],["Geust","4.gif"]].unshift(['-- Select Profile --', nil])
+  end
+
+  def setup_page
+      @articles_page = "selected active"
+      @page = "Articles"
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      @article = Article.find(params[:id])     
       @selected = @article.category_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :body, :photo, :category_id)
+      params.require(:article).permit(:title, :body, :photo, :category_id, :is_read, :is_edit, :is_delete, :admin_id)
     end
 end

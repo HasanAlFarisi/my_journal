@@ -27,7 +27,7 @@
       <label name ="password">Reenter Password:</label>
       <%= f.password_field :password_confirmation %>
     </div>
-      <p class="error"><%= devise_error_messages! %></p>
+      <p class="error" style="font-size:12px"><%= devise_error_messages! %></p>
       <%= f.submit "Sign up", class:"login login-submit" %>
       <div class="login-help">
         <%= link_to "Sign in", new_admin_session_path, :class => 'navbar-link'  %> | <%= link_to "Back to Home", root_path %>

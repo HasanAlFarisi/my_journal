@@ -50,4 +50,13 @@ class AdminMailer < ActionMailer::Base
 
     mail(to: "hasan.farisi47@gmail.com", subject: "#{@company} Notification")
   end
+
+  def notification_to_admin_for_article_comment(dasboard_comment_id)
+    @article = Article.find(Dashboard::Comment.find(dasboard_comment_id).article_id)
+    @biodata = Dashboard::Comment.find(dasboard_comment_id)
+    @admin = find_profile(@article.admin_id)
+    @company = Admin::CompanyProfile.last.name
+
+    mail(to: find_profile(@article.admin_id).e_mail, subject: "Comment for article '#{@article.title}'")
+  end
 end

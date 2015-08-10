@@ -9,6 +9,12 @@ class Admin::Journal < ActiveRecord::Base
 	accepts_nested_attributes_for :journal_team_checks
 	accepts_nested_attributes_for :journal_issues
 
+	validates :title, :presence => {:message => "can not be blank"}
+	validates :status_id, :presence => {:message => "can not be blank"}
+	validates :project_manajer, :presence => {:message => "can not be blank"}
+	validates :start, :presence => {:message => "can not be blank"}
+	validates :end, :presence => {:message => "can not be blank"}
+
 	def self.save_attributes(id,journals,type)
 		journals.each do |journal|
 			if type == 'design'
@@ -16,7 +22,7 @@ class Admin::Journal < ActiveRecord::Base
 					unless journal[1][:admin_id].blank?
 						save_journal = Admin::JornalTeamDesigner.create({journal_id: id, admin_id: journal[1][:admin_id]})
 						 #this method for sending message to admin about project who assign
-          					AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Designer",journal[1][:admin_id],id)
+          					AdminMailer.delay(:queue => 'notification_create_journal', :priority => 1).mail_journal("Project Designer",journal[1][:admin_id],id)						
 					end
 				else
 					unless journal[1][:admin_id].blank?
@@ -104,12 +110,25 @@ class Admin::Journal < ActiveRecord::Base
   		join_table = global_join
   		conditions = global_conditions(id)
   		filter_condition = []
-  		if params[:title].present?
-  			filter_condition << "AND admin_journals.title LIKE '%#{params[:title]}%'"
+  		unless params[:title].blank?
+  			filter_condition << "AND LOWER(admin_journals.title) LIKE '%#{params[:title]}%'"
   		end
+
+  		unless params[:status].blank?
+  			filter_condition << "AND admin_journals.status_id = #{params[:status]}"
+  		end
+
+  		unless params[:create_start].blank?
+  			filter_condition << "AND DATE(admin_journals.created_at) BETWEEN #{params[:create_start].blank? ? Date.today : params[:create_start]} AND #{params[:create_end].blank? ? Date.today : params[:create_end]}"	
+  		end
+
   		filter_conditions = filter_condition.join(" AND ")
 
   		select_all = self.joins("{{join_table}}".gsub("{{join_table}}", join_table)).where("({{conditions}}) {{filter}}".gsub("{{conditions}}", conditions).gsub("{{filter}}", filter_conditions)).group("admin_journals.id")
   		return select_all
+  	end
+
+  	def self.find_filter(current_admin,id, params)
+  		Admin::JournalIssue.data_existed_index_filter(current_admin,id,params)
   	end
 end

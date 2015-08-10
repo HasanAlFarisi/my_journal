@@ -1,17 +1,17 @@
-<div id="main">
+<!-- <div id="main">
   <div class="cl">&nbsp;</div>
-  <div id="content">
+  <div id="content"> -->
     <!-- Box -->
-    <div class="box">
+<!--     <div class="box"> -->
       <!-- Box Head -->
-      <div class="box-head">
+<!--       <div class="box-head">
         <h2>Company Profile</h2>
-      </div>
+      </div> -->
       <!-- End Box Head -->      
 
         <!-- Form -->
-        <div class="foto_prev">
-              <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("company", current_admin.id)}/company/#{admin_company_profile.id}",class:"img-data company-logo", id:"logo-align" %>
+<!--         <div class="foto_prev">
+              
               <br>
         </div>
 
@@ -48,10 +48,10 @@
             </p>  
           </div>
         </div>
-        <br><br><br>
+        <br><br><br> -->
         <!-- End Form -->
 
-        <span class="clear"></span>
+ <!--        <span class="clear"></span>
         <% unless find_company_comment(admin_company_profile.id).blank? %>
             <p>
              &nbsp;<b><%= label_tag :comment, "Comment" %></b>
@@ -77,16 +77,42 @@
                 <% end %>
               </table>
             </p> 
-        <% end %>
+        <% end %> -->
 
         <!-- Form Buttons -->
-        <div class="buttons">
+        <!-- <div class="buttons"> -->
           <%#= link_to "Back", session[:urlBack], class:"button-back" %>
-          <%= link_to "Edit",edit_admin_company_profile_path(admin_company_profile), class:"button" %>
-        </div>
+          <%#= link_to "Edit",edit_admin_company_profile_path(admin_company_profile), class:"button" %>
+        <!-- </div> -->
         <!-- End Form Buttons -->
-    </div>
+    <!-- </div> -->
     <!-- End Box -->
-  </div>
+  <!-- </div>
   <div class="cl">&nbsp;</div>
-</div>
+</div> -->
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <i class="fa fa-files-o fa-fw"></i><%= admin_company_profile.name %>
+      </div>
+
+      <div class="panel-body">
+          <div class="row">
+              <div class="col-lg-12 company_profile">
+                <%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("company", current_admin.id)}/company/#{admin_company_profile.id}",class:"img-data company-logo", id:"logo-align" %>
+                <p><b><%= admin_company_profile.name %></b></p>
+                <span>
+                    <%=raw admin_company_profile.vission %>
+                </span>
+                <span>
+                  <%=raw admin_company_profile.mission %>
+                </span>
+              </div>
+          </div>
+          <!-- /.row -->
+          <a href="/admin/company_profiles/<%= admin_company_profile.id %>/edit" class="btn btn-primary righting"><span class="fa  fa-pencil fa-1x">Edit</span></a>
+      </div>
+      <!-- /.panel-body -->
+  </div>
+  <!--End simple table Messages example -->

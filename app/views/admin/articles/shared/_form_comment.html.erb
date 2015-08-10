@@ -1,0 +1,25 @@
+<%= form_for(:dashboard_comment, url: dashboard_comments_path, remote: true) do |f| %>
+	<div class="field">
+		<%= f.hidden_field :article_id, value: @article.id %>
+	</div>
+	<p>
+		<%= f.text_field :name, class:"form-control size-1", placeholder:"Name" %>
+		<div id="error_name" class="error"></div>
+	</p>
+	<p>
+		<%= f.text_field :email, class:"form-control size-1", placeholder:"Email" %>
+	</p>
+	<p class="form-group form_costum">
+		<span class="select_costum_3">
+			<%= f.select :profile, options_for_select(@profile) %>
+		</span>
+	</p>
+	<div class="field">
+		<%= f.text_area :body, class:"form-control", rows: "5", style:"width:50%",id:"textarea-label" %>
+	<div id="error_body" class="error"></div>
+
+	<br>
+	<div class="post_content">
+		<%= link_to "Post Comment", "javascript:void(0)", id:"submit-form", dataId:"contact_for_comment", class:"btn btn-info" %>
+	</div>
+<% end %>

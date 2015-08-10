@@ -1,0 +1,14 @@
+//JournalIS.resetWait();
+//$('#myModal').modal('show');
+$('.modal-title').text("Notification");
+$('#ajax_loader_big').hide();
+$('.modal-save').hide();
+<% if @error == false %>
+	$('.modal-body').removeClass("not_fine");
+	$('.modal-body').addClass("not_ok");
+	$('.modal-body').html("<p><%= j(image_tag 'msg-ok.gif', width: '5%') %> Congratulation Your Subscribe is successfully</p>")
+<% else %>
+	$('.modal-body').removeClass("not_ok");
+	$('.modal-body').addClass("not_fine");
+	$('.modal-body').html("<p><%= j(image_tag 'msg-error.gif', width: '5%') %> Please Insert your Email address</p>")
+<% end %>

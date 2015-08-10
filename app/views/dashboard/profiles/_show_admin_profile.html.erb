@@ -13,14 +13,15 @@
 		              <div class="left-photo">
 		                  <div class="foto_prev_profile">
 		                    <center>
-		                    	<%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", admin.id)}/profiles/#{admin.id}",class:"img_profile", width:"220px" %>
-		                    	<h4><%= "#{admin.name} #{admin.last_name}" %></h4>
+		                    	
+		                    	<%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", @admin_profile.id)}/profiles/#{@admin_profile.id}",class:"img_profile", width:"220px" %>
+		                    	<h4><%= "#{@admin_profile.name} #{@admin_profile.last_name}" %></h4>
 		                    </center>
 		                  </div>
 		              </div>    
 		             <br>
 		            <div id="form_edit">
-		                <%= render partial:"admin/profiles/detail", locals:{admin_profile: admin, not_current: 'yes'} %>
+		                <%= render partial:"admin/profiles/detail", locals:{admin_profile: @admin_profile, not_current: 'yes'} %>
 		            </div>
 		          <!-- End Form -->
 		      
@@ -33,12 +34,12 @@
 	<div class="scroller_comment">
 		<div class="formProfile">
 			<div class="message">
-				<%= render partial: "dashboard/profiles/index_comment", locals: {admin_comments: admin_comments, admin: admin} %>
+				<%= render partial: "dashboard/profiles/index_comment", locals: {admin_comments: @admin_comments, admin: @admin_profile} %>
 				<div id="comment-place-admin"><!-- Comment place from render partial admin --></div>
 				<%= render 'dashboard/shared/ajax_loader' %>
-				Send Message for <b><%= "#{admin.name} #{admin.last_name}" %></b>
+				Send Message for <b><%= "#{@admin_profile.name} #{@admin_profile.last_name}" %></b>
 				<div id="comment-field" >
-					<%= render partial: 'dashboard/profiles/form', locals:{admin: admin} %>
+					<%= render partial: 'dashboard/profiles/form', locals:{admin: @admin_profile} %>
 				</div>
 			</div>
 		</div>

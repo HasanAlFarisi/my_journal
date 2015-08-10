@@ -11,10 +11,11 @@ class Dashboard::ProfilesController < ApplicationController
 
 	def show_admin
 		@admin_comments = Admin::Contact.find_all_by_admin_id(params[:profile_id])
-
+		
 		respond_to do |format|
 			format.js
-			format.html {render :partial => "dashboard/profiles/show_admin_profile", locals: {admin: @admin, admin_comments: @admin_comments}, :status => 200}
+
+			format.html {render :partial => "dashboard/profiles/show_admin_profile"}
 		end
 	end
 
@@ -28,6 +29,6 @@ class Dashboard::ProfilesController < ApplicationController
 
 	private
 	def admin
-		@admin = Admin::Profile.find(params[:profile_id])
+		@admin_profile = Admin::Profile.find(params[:profile_id])
 	end
 end

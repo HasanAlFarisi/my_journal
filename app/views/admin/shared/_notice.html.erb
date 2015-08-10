@@ -1,9 +1,27 @@
 <% if flash[:notice] %>
-	<span class="close-notice msg msg-ok" id="notice"><p><%= flash[:notice] %><a href="#" class="close"></a></p><br></span>
+	<div class="row" id="notice">
+	    	<!-- Welcome -->
+	    		<div class="col-lg-12">
+	        		<div class="alert alert-info">
+	        			<%= flash[:notice].html_safe %>
+	            			<a href="javascript:void(0)" class="pull-right close-notice"><b>X</b></a>
+	        		</div>
+	    		</div>
+	    	<!--end  Welcome -->
+	</div>
 <% end %>
 
 <% if flash[:alert] %>
-	<span class="close-error msg msg-error" id="alert"><p><%= flash[:alert] %><a href="#" class="close"></a></p><br></span>
+	<div class="row" id="alert">
+	    	<!-- Welcome -->
+	    		<div class="col-lg-12">
+	        		<div class="alert alert-danger">
+	        			<%= flash[:alert] %>
+	            			<a href="javascript:void(0)" class="pull-right close-alert"><b>X</b></a>
+	        		</div>
+	    		</div>
+	    	<!--end  Welcome -->
+	</div>
 <% end %>
 
 <script>

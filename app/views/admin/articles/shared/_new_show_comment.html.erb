@@ -1,0 +1,19 @@
+<div class="comment_box">
+	<%=  image_tag  dashboard_comment.profile %>
+	<nav>
+		<%= link_to "#{dashboard_comment.name}", dashboard_comment_path(dashboard_comment), remote: true %>
+		<i><%= dashboard_comment.email %></i>
+	</nav>
+	<span>on : <%= dashboard_comment.created_at.strftime("%d - %B - %Y") %> said:</span>
+	<nav class="clearfix"></nav>
+	<span class="justify"><%= dashboard_comment.body %></span>
+	<nav class="clearfix"></nav>
+	<nav class="pull-right">
+		<%= link_to '<span class="fa fa-pencil"></span>Reply'.html_safe, dashboard_comment_path(dashboard_comment,reply: "true"), remote: true %> |
+		<%= link_to '<span class="fa fa-trash-o"></span>Destroy'.html_safe, dashboard_comment_path(article_id: params[:dashboard_comment][:article_id], id:dashboard_comment.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+	</nav>
+	<nav class="clearfix"></nav>
+	<div id="reply-comment-place-<%= dashboard_comment.id %>"></div>
+	<div id="new-reply-comment-place-<%= dashboard_comment.id %>"></div>
+</div>
+<br>

@@ -13,6 +13,7 @@ gem 'ckeditor_rails'
 gem 'mini_magick'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem "font-awesome-rails"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -57,6 +58,8 @@ gem 'cloudinary'
 
 # Use debugger
  gem 'debugger', group: [:development, :test]
+ gem 'better_errors'
+ gem 'binding_of_caller'
 
 group :production do
   gem 'pg'
@@ -64,5 +67,5 @@ group :production do
 end
 
 group :development do
-  gem 'mysql2'
+  #gem 'mysql2'
 end
