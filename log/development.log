@@ -1572,3 +1572,472 @@ Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-08-21 14:59:31 +
 
 
 Started GET "/assets/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-08-21 14:59:31 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2015-08-21 15:59:47 +0700
+Processing by Dashboard::HomeController#index as HTML
+  [1m[36mAdmin::Category Load (1.0ms)[0m  [1mSELECT "admin_categories".* FROM "admin_categories"[0m
+  [1m[35mAdmin::Journal Load (0.7ms)[0m  SELECT "admin_journals".* FROM "admin_journals" ORDER BY created_at DESC
+  [1m[36mArticle Load (0.8ms)[0m  [1mSELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 6 OFFSET 0[0m
+  [1m[35mAdmin Load (0.6ms)[0m  SELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mAdmin::Profile Load (0.6ms)[0m  [1mSELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1[0m  [["admin_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1[0m  [["admin_id", 1]]
+  [1m[35mAdmin::Category Load (0.6ms)[0m  SELECT "admin_categories".* FROM "admin_categories" WHERE "admin_categories"."id" = 1 LIMIT 1
+  [1m[36mAdmin::SubCategory Load (0.6ms)[0m  [1mSELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."id" = 1 LIMIT 1[0m
+  [1m[35mRandCloud Load (0.7ms)[0m  SELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM "dashboard_comments" WHERE (article_id = 3)[0m
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "articles"
+  Rendered dashboard/home/_index.html.erb (21.4ms)
+  Rendered dashboard/home/index.html.erb within layouts/application (22.3ms)
+  Rendered dashboard/shared/_header_content.html.erb (0.3ms)
+  [1m[36mArticle Load (0.9ms)[0m  [1mSELECT "articles".* FROM "articles" ORDER BY count_view DESC LIMIT 4[0m
+  [1m[35mCACHE (0.1ms)[0m  SELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)
+  [1m[36mArticle Load (1.0ms)[0m  [1mSELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 4[0m
+  [1m[35mCACHE (0.1ms)[0m  SELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admin_categories".* FROM "admin_categories"[0m
+  [1m[35mAdmin::SubCategory Load (0.8ms)[0m  SELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1  [["category_id", 1]]
+  [1m[36mAdmin::SubCategory Load (0.6ms)[0m  [1mSELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1[0m  [["category_id", 2]]
+  Rendered dashboard/shared/_sidebar.html.erb (27.8ms)
+  Rendered dashboard/shared/_quote.html.erb (0.1ms)
+  [1m[35mAdmin::CompanyProfile Load (0.8ms)[0m  SELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1[0m
+  Rendered dashboard/shared/_footer.html.erb (6.6ms)
+  Rendered dashboard/shared/_end_footer.html.erb (0.1ms)
+  Rendered dashboard/shared/_ajax_loader_big.html.erb (0.9ms)
+  Rendered dashboard/shared/_modal.html.erb (2.0ms)
+  Rendered dashboard/shared/_loading.html.erb (0.1ms)
+Completed 200 OK in 163ms (Views: 146.1ms | ActiveRecord: 11.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:47 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/notice.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/jqueryindex.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/jquery-ui-1.10.3.custom.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/jquery-1.9.1.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/global.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/progress.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/basepath.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor-jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/config.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/foto-append.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/selected_all.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/ckeditor/truncate.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/share.jpg" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/load-big.gif" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/assets/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-08-21 15:59:48 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2015-08-21 15:59:50 +0700
+Processing by Dashboard::HomeController#index as HTML
+  [1m[35mAdmin::Category Load (0.6ms)[0m  SELECT "admin_categories".* FROM "admin_categories"
+  [1m[36mAdmin::Journal Load (0.5ms)[0m  [1mSELECT "admin_journals".* FROM "admin_journals" ORDER BY created_at DESC[0m
+  [1m[35mArticle Load (1.0ms)[0m  SELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 6 OFFSET 0
+  [1m[36mAdmin Load (0.8ms)[0m  [1mSELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mAdmin::Profile Load (0.5ms)[0m  SELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1  [["admin_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1  [["admin_id", 1]]
+  [1m[36mAdmin::Category Load (0.5ms)[0m  [1mSELECT "admin_categories".* FROM "admin_categories" WHERE "admin_categories"."id" = 1 LIMIT 1[0m
+  [1m[35mAdmin::SubCategory Load (0.4ms)[0m  SELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."id" = 1 LIMIT 1
+  [1m[36mRandCloud Load (0.5ms)[0m  [1mSELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)[0m
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "dashboard_comments" WHERE (article_id = 3)
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  Rendered dashboard/home/_index.html.erb (20.5ms)
+  Rendered dashboard/home/index.html.erb within layouts/application (21.6ms)
+  Rendered dashboard/shared/_header_content.html.erb (0.2ms)
+  [1m[35mArticle Load (0.9ms)[0m  SELECT "articles".* FROM "articles" ORDER BY count_view DESC LIMIT 4
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)[0m
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 4
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admin_categories".* FROM "admin_categories"
+  [1m[36mAdmin::SubCategory Load (0.5ms)[0m  [1mSELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1[0m  [["category_id", 1]]
+  [1m[35mAdmin::SubCategory Load (0.4ms)[0m  SELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1  [["category_id", 2]]
+  Rendered dashboard/shared/_sidebar.html.erb (15.9ms)
+  Rendered dashboard/shared/_quote.html.erb (0.1ms)
+  [1m[36mAdmin::CompanyProfile Load (0.8ms)[0m  [1mSELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1
+  Rendered dashboard/shared/_footer.html.erb (5.4ms)
+  Rendered dashboard/shared/_end_footer.html.erb (0.1ms)
+  Rendered dashboard/shared/_ajax_loader_big.html.erb (0.5ms)
+  Rendered dashboard/shared/_modal.html.erb (1.2ms)
+  Rendered dashboard/shared/_loading.html.erb (0.1ms)
+Completed 200 OK in 70ms (Views: 54.8ms | ActiveRecord: 9.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/notice.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/jqueryindex.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/jquery-1.9.1.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/jquery-ui-1.10.3.custom.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/global.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/progress.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/basepath.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor-jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/config.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/foto-append.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/selected_all.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/ckeditor/truncate.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/share.jpg" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/load-big.gif" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/assets/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-08-21 15:59:51 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+Processing by Dashboard::HomeController#index as HTML
+  [1m[36mAdmin::Category Load (0.8ms)[0m  [1mSELECT "admin_categories".* FROM "admin_categories"[0m
+  [1m[35mAdmin::Journal Load (0.7ms)[0m  SELECT "admin_journals".* FROM "admin_journals" ORDER BY created_at DESC
+  [1m[36mArticle Load (0.9ms)[0m  [1mSELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 6 OFFSET 0[0m
+  [1m[35mAdmin Load (0.6ms)[0m  SELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mAdmin::Profile Load (0.4ms)[0m  [1mSELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1[0m  [["admin_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1[0m  [["admin_id", 1]]
+  [1m[35mAdmin::Category Load (0.5ms)[0m  SELECT "admin_categories".* FROM "admin_categories" WHERE "admin_categories"."id" = 1 LIMIT 1
+  [1m[36mAdmin::SubCategory Load (0.4ms)[0m  [1mSELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."id" = 1 LIMIT 1[0m
+  [1m[35mRandCloud Load (0.5ms)[0m  SELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM "dashboard_comments" WHERE (article_id = 3)[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "articles"
+  Rendered dashboard/home/_index.html.erb (18.9ms)
+  Rendered dashboard/home/index.html.erb within layouts/application (20.1ms)
+  Rendered dashboard/shared/_header_content.html.erb (0.3ms)
+  [1m[36mArticle Load (0.8ms)[0m  [1mSELECT "articles".* FROM "articles" ORDER BY count_view DESC LIMIT 4[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)
+  [1m[36mArticle Load (0.6ms)[0m  [1mSELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 4[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admin_categories".* FROM "admin_categories"[0m
+  [1m[35mAdmin::SubCategory Load (0.5ms)[0m  SELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1  [["category_id", 1]]
+  [1m[36mAdmin::SubCategory Load (0.4ms)[0m  [1mSELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1[0m  [["category_id", 2]]
+  Rendered dashboard/shared/_sidebar.html.erb (14.9ms)
+  Rendered dashboard/shared/_quote.html.erb (0.1ms)
+  [1m[35mAdmin::CompanyProfile Load (0.7ms)[0m  SELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1[0m
+  Rendered dashboard/shared/_footer.html.erb (4.7ms)
+  Rendered dashboard/shared/_end_footer.html.erb (0.1ms)
+  Rendered dashboard/shared/_ajax_loader_big.html.erb (0.5ms)
+  Rendered dashboard/shared/_modal.html.erb (1.1ms)
+  Rendered dashboard/shared/_loading.html.erb (0.1ms)
+Completed 200 OK in 67ms (Views: 53.2ms | ActiveRecord: 9.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/notice.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/jqueryindex.css?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/jquery-1.9.1.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/jquery-ui-1.10.3.custom.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/global.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/progress.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/basepath.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor-jquery.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/config.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/foto-append.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.min.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/selected_all.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/ckeditor/truncate.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/share.jpg" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/load-big.gif" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/assets/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-08-21 15:59:55 +0700
+
+
+Started GET "/dashboard/home/3" for 127.0.0.1 at 2015-08-21 16:00:00 +0700
+Processing by Dashboard::HomeController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mAdmin::Category Load (0.7ms)[0m  SELECT "admin_categories".* FROM "admin_categories"
+  [1m[36mAdmin::Journal Load (0.5ms)[0m  [1mSELECT "admin_journals".* FROM "admin_journals" ORDER BY created_at DESC[0m
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", "3"]]
+  [1m[36mAdmin Load (0.6ms)[0m  [1mSELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mAdmin::Profile Load (0.5ms)[0m  SELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1  [["admin_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "admins".* FROM "admins" WHERE "admins"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admin_profiles".* FROM "admin_profiles" WHERE "admin_profiles"."admin_id" = $1 ORDER BY "admin_profiles"."id" ASC LIMIT 1  [["admin_id", 1]]
+  [1m[36mAdmin::Category Load (0.6ms)[0m  [1mSELECT "admin_categories".* FROM "admin_categories" WHERE "admin_categories"."id" = 1 LIMIT 1[0m
+  [1m[35mAdmin::SubCategory Load (0.5ms)[0m  SELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."id" = 1 LIMIT 1
+  [1m[36mRandCloud Load (0.4ms)[0m  [1mSELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)[0m
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles" WHERE ((category_id = 1 OR sub_category_id = 1) AND id NOT IN ('3')) ORDER BY id DESC LIMIT 4
+  Rendered dashboard/home/_similiar.html.erb (1.3ms)
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM "dashboard_comments" WHERE (article_id = '3' )[0m
+  Rendered dashboard/shared/_ajax_loader.html.erb (1.0ms)
+  [1m[35mDashboard::Comment Load (0.9ms)[0m  SELECT "dashboard_comments".* FROM "dashboard_comments" WHERE (article_id = '3' ) ORDER BY id DESC
+  [1m[36mDashboard::ReplyComment Load (0.6ms)[0m  [1mSELECT "dashboard_reply_comments".* FROM "dashboard_reply_comments" WHERE "dashboard_reply_comments"."comment_id" = $1[0m  [["comment_id", 39]]
+  [1m[35mDashboard::ReplyComment Load (0.4ms)[0m  SELECT "dashboard_reply_comments".* FROM "dashboard_reply_comments" WHERE "dashboard_reply_comments"."comment_id" = $1  [["comment_id", 38]]
+  [1m[36mDashboard::ReplyComment Load (0.5ms)[0m  [1mSELECT "dashboard_reply_comments".* FROM "dashboard_reply_comments" WHERE "dashboard_reply_comments"."comment_id" = $1[0m  [["comment_id", 34]]
+  [1m[35mDashboard::ReplyComment Load (0.6ms)[0m  SELECT "dashboard_reply_comments".* FROM "dashboard_reply_comments" WHERE "dashboard_reply_comments"."comment_id" = $1  [["comment_id", 33]]
+  [1m[36mDashboard::ReplyComment Load (0.5ms)[0m  [1mSELECT "dashboard_reply_comments".* FROM "dashboard_reply_comments" WHERE "dashboard_reply_comments"."comment_id" = $1[0m  [["comment_id", 32]]
+  Rendered dashboard/comments/_index.html.erb (15.2ms)
+  Rendered dashboard/comments/_form.html.erb (2.0ms)
+  Rendered dashboard/home/show.html.erb within layouts/application (37.5ms)
+  Rendered dashboard/shared/_header_content.html.erb (0.2ms)
+  [1m[35mArticle Load (0.8ms)[0m  SELECT "articles".* FROM "articles" ORDER BY count_view DESC LIMIT 4
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)[0m
+  [1m[35mArticle Load (0.8ms)[0m  SELECT "articles".* FROM "articles" ORDER BY created_at DESC LIMIT 4
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "rand_clouds".* FROM "rand_clouds" WHERE (types = 'articles' AND type_id = 3)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admin_categories".* FROM "admin_categories"
+  [1m[36mAdmin::SubCategory Load (0.6ms)[0m  [1mSELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1[0m  [["category_id", 1]]
+  [1m[35mAdmin::SubCategory Load (0.4ms)[0m  SELECT "admin_sub_categories".* FROM "admin_sub_categories" WHERE "admin_sub_categories"."category_id" = $1  [["category_id", 2]]
+  Rendered dashboard/shared/_sidebar.html.erb (16.1ms)
+  Rendered dashboard/shared/_quote.html.erb (0.1ms)
+  [1m[36mAdmin::CompanyProfile Load (0.8ms)[0m  [1mSELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "admin_company_profiles".* FROM "admin_company_profiles" ORDER BY "admin_company_profiles"."id" DESC LIMIT 1
+  Rendered dashboard/shared/_footer.html.erb (5.6ms)
+  Rendered dashboard/shared/_end_footer.html.erb (0.1ms)
+  Rendered dashboard/shared/_ajax_loader_big.html.erb (0.7ms)
+  Rendered dashboard/shared/_modal.html.erb (1.4ms)
+  Rendered dashboard/shared/_loading.html.erb (0.1ms)
+Completed 200 OK in 89ms (Views: 68.8ms | ActiveRecord: 12.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-08-21 16:00:00 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/notice.css?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/jqueryindex.css?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/jquery-1.9.1.min.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/jquery-ui-1.10.3.custom.min.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/global.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/progress.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/basepath.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/jquery.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor-jquery.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/config.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/foto-append.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/jquery.truncate.min.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/selected_all.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/ckeditor/truncate.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/dashboard/form_validates.js?body=1" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/share.jpg" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/load-big.gif" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
+
+
+Started GET "/assets/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-08-21 16:00:01 +0700
