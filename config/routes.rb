@@ -58,7 +58,6 @@ MyJournal::Application.routes.draw do
     resources :complete_profiles
     resources :profiles
     resources :helps
-    resources :gallery_groups
 
     resources :galleries do
         collection do

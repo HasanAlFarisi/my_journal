@@ -1,5 +1,4 @@
 class Admin::Gallery < ActiveRecord::Base
-	belongs_to :gallery_group
 	has_many :gallery_comments, :dependent => :destroy
 
 	accepts_nested_attributes_for :gallery_comments

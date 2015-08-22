@@ -28,10 +28,10 @@
 					<br><br><br>
 					<% @popular_posts.each do |article| %>
 						<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", width:"300%"), dashboard_home_path(article), class:"col-sm-2",style:"padding-left:0px" %>
-						<content style="padding-left:70px">
+						<p style="margin-left:110px">
 							<b><%= link_to article.title, dashboard_home_path(article) %></b>
-							<nav style="padding-left:120px"><%= "#{article.created_at.strftime('%d - %B - %y')} " %></nav>
-						</content>
+							<nav style="padding-left:120px"><%= "#{article.created_at.strftime('%d - %B - %Y')} " %></nav>
+						</p>
 						<br>
 					<% end %>
 					</article>
@@ -41,10 +41,10 @@
 					<br><br><br>
 					<% @recent_posts.each do |article| %>
 						<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", width:"300%"), dashboard_home_path(article), class:"col-sm-2",style:"padding-left:0px" %>
-						<content style="padding-left:70px">
+						<p style="padding-left:120px">
 							<b><%= link_to article.title, dashboard_home_path(article) %></b>
-							<nav style="padding-left:120px"><%= "#{article.created_at.strftime('%d - %B - %y')} " %></nav>
-						</content>
+							<nav style="padding-left:120px"><%= "#{article.created_at.strftime('%d - %B - %Y')} " %></nav>
+						</p>
 						<br>
 					<% end %>
 					</article>

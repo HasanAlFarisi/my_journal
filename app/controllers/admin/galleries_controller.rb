@@ -1,12 +1,13 @@
 class Admin::GalleriesController < Admin::BaseController
   before_action :set_admin_gallery, only: [:show, :edit, :update, :destroy]
-
+  before_filter :setup_page
   # GET /admin/galleries
   # GET /admin/galleries.json
   def index
-
-    @group = Admin::GalleryGroup.find(params[:group_id])
-    @admin_galleries = Admin::Gallery.where("gallery_group_id = ? ", params[:group_id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 12)
+    @galleries_all = Admin::Gallery.all
+    @galleries = Admin::Gallery.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
+    session[:urlBack] = request.original_url
+    @page_breadcump = " > Index"
   end
 
   # GET /admin/galleries/1
@@ -17,7 +18,7 @@ class Admin::GalleriesController < Admin::BaseController
   # GET /admin/galleries/new
   def new
     @admin_gallery = Admin::Gallery.new
-    @group = Admin::GalleryGroup.find(params[:id])
+    @page_breadcump = " > form"
   end
 
   # GET /admin/galleries/1/edit
@@ -86,6 +87,11 @@ class Admin::GalleriesController < Admin::BaseController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_gallery
       @admin_gallery = Admin::Gallery.find(params[:id])
+    end
+
+    def setup_page
+      @galleries_setup = "selected active"
+      @page = "Galleries"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

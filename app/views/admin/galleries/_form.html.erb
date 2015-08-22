@@ -1,51 +1,84 @@
-<div id="modal_profile_edit" class="styled form positions" style="background: none !important;">
-      <div class="cl">&nbsp;</div>
-      <div id="content">
-             <div class="box">
-                <!-- Box Head -->
-                    <div class="box-head">
-                      <h2>Add Photo</h2>
-                    </div>
-                    <%= form_for(@admin_gallery) do |f| %>
-                          <div class="form">
-                                 <p>
-                                      <%= f.hidden_field :gallery_group_id, value:@group.id %>
-                                      <%= f.label :photo, "Photo", style:"margin-bottom:0px;" %>
-                                      <span class="foto_prev"></span>
-                                      <%= f.file_field :photo, class:"field size4 input-file", id: "fileField", :onchange => "readURLGallery(this);"  %>
-                                 </p>
-                                 <p>
-                                      <%= f.label :title %><span>(Required Field)</span>
-                                      <%= f.text_field :title, class:"field size0" %>
-                                 </p>
-                                 <p>
-                                       <%= f.label :content %>
-                                       <%= f.text_area :content, class:"field size1", style:"height:60px" %>
-                                 </p>
-                                 <p>
-                                        <div class="cl">&nbsp;</div>
-                                        <div class="sub-screen-shoot" dataId="1"><!-- add images place --></div>
-                                        <div class="add add_photo_gallery button" type="submit">+| Photo</div>
-                                 </p>
-                                 <div class="buttons">
-                                        <%= link_to "Back", "javascript:void(0)", class:"button-back close-modal-profile" %>
-                                        <%= f.submit "Save Photo", class:"button" %>
-                                  </div>
-                          </div>
-                    <% end %>
-             </div>
-       </div>
-</div>
+<!-- <div id="modal_profile_edit" class="styled form positions" style="background: none !important;">
+			<div class="cl">&nbsp;</div>
+			<div id="content">
+						 <div class="box">
+								
+										<div class="box-head">
+											<h2>Add Photo</h2>
+										</div>
+										<%= form_for(@admin_gallery) do |f| %>
+													<div class="form">
+																 <p>
+																			<%= f.label :photo, "Photo", style:"margin-bottom:0px;" %>
+																			<span class="foto_prev"></span>
+																			<%= f.file_field :photo, class:"field size4 input-file", id: "fileField", :onchange => "readURLGallery(this);"  %>
+																 </p>
+																 <p>
+																			<%= f.label :title %><span>(Required Field)</span>
+																			<%= f.text_field :title, class:"field size0" %>
+																 </p>
+																 <p>
+																			 <%= f.label :content %>
+																			 <%= f.text_area :content, class:"field size1", style:"height:60px" %>
+																 </p>
+																 <p>
+																				<div class="cl">&nbsp;</div> -->
+																				<div class="sub-screen-shoot" dataId="1"><!-- add images place --></div>
+																				<!-- <div class="add add_photo_gallery button" type="submit">+| Photo</div>
+																 </p>
+																 <div class="buttons">
+																				<%= link_to "Back", "javascript:void(0)", class:"button-back close-modal-profile" %>
+																				<%= f.submit "Save Photo", class:"button" %>
+																	</div>
+													</div>
+										<% end %>
+						 </div>
+			 </div>
+</div> -->
 <%= javascript_include_tag "admin/journal" %>
 <%= javascript_include_tag "admin/append_gallery" %>
-<script>
-  $(document).ready(function() {
-        $("#modal_profile_edit").fadeIn();
-    })
-  $( '.close-modal-profile' ).click(function( ev ) {  
-        $( '#modal_profile_edit, #modal_background' ).fadeOut();  ev.preventDefault();
-  } );
-  $("#modal_background").click(function(ev){
-          $( '#modal_profile_edit, #modal_background' ).fadeOut();  ev.preventDefault();   
-  })
-</script>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+			<i class="fa fa-edit fa-fw"></i>Gallery Form
+	</div>
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-12">
+				<%= form_for(@admin_gallery) do |f| %>
+					<% if @admin_gallery.errors.any? %>
+				            	<%= render partial: "shared/validate_error", locals: { object: @admin_gallery}%>
+				      	<% end %>
+
+				      	<table class="table table-bordered table-hover table-striped">
+						<thead>
+							<tr>
+								<th width="30%">Title</th>
+								<th width="30%">Photo</th>
+								<th width="40%">Description</th>
+								<th width="2%">Delete</th>
+							</tr>
+							<tbody class="sub-category" dataId="<%#= @category_count %>">
+								<tr>
+									<td><%= f.text_field :title, class:"form-control" %></td>
+									<td><%= f.file_field :photo, class:"form-control input-file", id: "fileField", :onchange => "readURLGallery(this);", style:"padding:0px"  %></td>
+									<td>
+										<%= f.text_area :content, class:"form-control", style:"height:34px" %>
+									</td>
+									<td>
+										<a href='javascript:void(0)' class='sub'><img src='/assets/min.png' /></a>
+									</td>
+								</tr>
+							</tbody>
+						</thead>
+					</table>
+					<%= link_to "<i class='fa fa-plus'></i> Add Photo".html_safe,"javascript:void(0)",class:"btn btn-default add", style:"padding: 9px" %>
+					<span class="clearfix"></span>
+                                	<br>
+                                	<div class="modal-footer" style="margin-bottom:-10px">
+                                      <button class="btn btn-success floating"><i class="fa  fa-pencil fa-1x"></i>Save</button>
+                                      <%= link_to "Back", session[:urlBack], class:"btn btn-default", style:"padding:9px" %>
+                                	</div>
+				<% end %>
+</div>

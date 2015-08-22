@@ -17,7 +17,7 @@
 				<div class="container paddingdown5x ">
 					<div class="row row-offcanvas row-offcanvas-left">
 						<div class="col-xs-12 col-sm-3 side pull-left sidebar-offcanvas" id="sidebar" role="navigation">
-							SampulKreativ Blogroll
+							Sampulkreativ Blogroll
 							<nav class="clearfix"></nav>
 							<span>We have all for creative feature</span>
 						</div>
@@ -29,11 +29,10 @@
 		<!-- MAIN CONTENT -->
 			<div class="container clearfix">
 				<div class="row">
+					<%= render 'dashboard/shared/sidebar' %>
 					<div id="index-place-for-articles">
 						<%= yield %>
 					</div>
-					<%= render 'dashboard/shared/sidebar' %>
-					<%= render 'dashboard/shared/quote' %>
 				</div>
 			</div>
 		<!-- END MAIN CONTENT -->

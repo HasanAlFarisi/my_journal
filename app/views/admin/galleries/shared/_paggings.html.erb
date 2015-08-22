@@ -1,0 +1,9 @@
+<div class="left">Show: <b class="shows"><%= @galleries.blank? ? 0 : @galleries.count %></b> data From: <b class="froms"><%= @galleries_all.blank? ? 0 : @galleries_all.count %></b> data
+  <span class="pull-right">
+        <span class="paginate">
+          		<%= will_paginate @galleries %>
+          &nbsp;
+        </span>
+        <%= link_to '<span class="fa  fa-pencil-square fa-1x"></span> Add Photo(s)'.html_safe,new_admin_gallery_path, class:"btn btn-primary" %>
+  </span>
+</div>

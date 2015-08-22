@@ -1,0 +1,13 @@
+<% unless @galleries.present? %>
+	<tr><td colspan="7"><center>No Data Yet</center></td></tr>
+<% else %>
+	<% @galleries.each_with_index do |gallery, index| %>
+		<tr>
+			<td><%= index + 1 + @galleries.offset_value%>.</td>
+			<td><%= gallery.title %></td>
+			<td><%= truncate(gallery.content, length: 100) %></td>
+			<td></td>
+			<td><%= sum(gallery.comments) %></td>
+		</tr>
+	<% end %>
+<% end %>
