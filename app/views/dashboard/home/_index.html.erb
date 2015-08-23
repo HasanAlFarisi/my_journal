@@ -20,7 +20,7 @@
 						<center><%= "#{article.created_at.strftime('%Y')} " %></center>
 					</span>
 					<span class="col-xs-2 pull-right">
-						<div class="fb-share-button" data-href="https://journalkreativ.herokuapp.com/dashboard/home/<%=article.id%>" data-layout="button_count"></div>
+						<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/dashboard/home/<%=article.id%>" data-layout="button_count"></div>
 					</span>
 					<div class="title">
 						<b><a href="javascipt:void(0)"><%= link_to article.title, dashboard_home_path(article) %></a></b>
@@ -46,7 +46,7 @@
 				</header>
 				
 				<p class="offcanvas">
-					<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}",alt:"",align:"left", width:"749", class:"image_noBorder"), dashboard_home_path(article) %>
+					<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload/#{loaded_rand("articles", article.id)}/articles/#{article.id}",alt:"",align:"left", width:"749", class:"image_noBorder"), dashboard_home_path(article) %>
 				</p>
 				<nav class="clearfix"></nav>
 				<p>

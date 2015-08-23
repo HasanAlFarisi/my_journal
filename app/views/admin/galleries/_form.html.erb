@@ -62,7 +62,10 @@
 							<tbody class="sub-category" dataId="<%#= @category_count %>">
 								<tr>
 									<td><%= f.text_field :title, class:"form-control" %></td>
-									<td><%= f.file_field :photo, class:"form-control input-file", id: "fileField", :onchange => "readURLGallery(this);", style:"padding:0px"  %></td>
+									<td>
+										<span class="foto_prev"></span>
+										<%= f.file_field :photo, class:"form-control input-file", id: "fileField", :onchange => "readURLGallery(this);", style:"padding:0px"  %>
+									</td>
 									<td>
 										<%= f.text_area :content, class:"form-control", style:"height:34px" %>
 									</td>
@@ -81,4 +84,7 @@
                                       <%= link_to "Back", session[:urlBack], class:"btn btn-default", style:"padding:9px" %>
                                 	</div>
 				<% end %>
+			</div>
+		</div>
+	</div>
 </div>

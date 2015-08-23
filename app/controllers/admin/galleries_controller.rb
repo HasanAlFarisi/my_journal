@@ -33,7 +33,7 @@ class Admin::GalleriesController < Admin::BaseController
     respond_to do |format|
       if @admin_gallery.save
         unless params[:admin_gallery][:photo].blank?
-          preloaded = Cloudinary::Uploader.upload(params[:admin_gallery][:photo], :use_filename => true, :public_id => "galleries/#{@admin_gallery.id}")
+          preloaded = Cloudinary::Uploader.upload(params[:admin_gallery][:photo], :use_filename => true, :public_id => "galleries/#{@admin_gallery.id}", :transformation => [{:width => 650, :crop => :limit}])
         end
 
         Admin::Gallery.save_attributes(params[:admin_gallery][:gallery_group_id],params)

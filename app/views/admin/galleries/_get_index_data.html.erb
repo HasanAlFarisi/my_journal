@@ -1,13 +1,22 @@
+<style type="text/css">
+	.gallery_admin{width:48% !important; float:left; margin-right:20px}
+</style>
 <% unless @galleries.present? %>
-	<tr><td colspan="7"><center>No Data Yet</center></td></tr>
+	<center>No Data Yet</center>
 <% else %>
-	<% @galleries.each_with_index do |gallery, index| %>
-		<tr>
-			<td><%= index + 1 + @galleries.offset_value%>.</td>
-			<td><%= gallery.title %></td>
-			<td><%= truncate(gallery.content, length: 100) %></td>
-			<td></td>
-			<td><%= sum(gallery.comments) %></td>
-		</tr>
+	<% @galleries.each do |gallery| %>
+			<table class="gallery_admin table table-bordered table-hover table-striped">
+				<tr>
+					<td rowspan="3" width="160px"><%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload/w_150,c_limit/v1/galleries/#{gallery.id}.jpg" %></td>
+					<tr width="200px">
+						<td style="vertical-align: top" height="10px"><b><%= gallery.title %></b></td>
+						<td width="60px"><i class="fa fa-comment-o"></i> <b><%= gallery.gallery_comments.count %></b></td>
+						<td width="60px"><i class="fa fa-heart-o"></i></td>
+					</tr>
+					<tr>
+						<td style="vertical-align: top !important" colspan="3"><%= truncate(gallery.content) %></td>			
+					</tr>
+				</tr>
+			</table>
 	<% end %>
 <% end %>

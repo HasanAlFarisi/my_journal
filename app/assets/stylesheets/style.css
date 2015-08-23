@@ -67,7 +67,7 @@ body{
 	/*margin-top: -3px;*/
 }
 .header_background{
-	background: url(/assets//header.jpg) repeat-x;
+	background: url(/assets//header.jpg) repeat-x 0% 40%;
 	height: 195px;
 	margin-top: -10px !important;
 }
@@ -77,7 +77,7 @@ body{
 }
 .header_background span{
 	font-size: 18px;
-	color:#fff;
+	color:rgba(29, 25, 20, 1);
 }
 /*END HEADER PAGE*/
 
@@ -489,5 +489,11 @@ tr.week{background-color: #000 !important}
 }
 .col-sm-3-5{
 	width: 31.3333%;
+}
+.subtitle{
+	color: #000;
+}
+.subtitle span{
+	color: 
 }
 /*END GALLERIES SECTION*/
