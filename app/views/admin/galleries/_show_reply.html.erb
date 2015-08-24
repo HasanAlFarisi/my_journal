@@ -1,5 +1,7 @@
-<div class="content_gallery_blank" style="400px;">
-	<span style="font-size:10px !important">Reply from: <i>Admin</i></span>
-	<span class="cl">&nbsp;</span>
-	<%= @create_reply.content %>
-</div>
+<tr>
+	<td><%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", @create_reply.admin_id)}/profiles/#{@create_reply.admin_id}", class:"admin-comment" %></td>
+	<td colspan="2">
+		<p><%= @create_reply.body %></p>
+		<i class="pull-right" style="font-size:11px"><b><%= @create_reply.name.blank? ? find_profile(@create_reply.admin_id).name : @create_reply.name %></b> on <%= @create_reply.created_at.strftime("%d %M %Y - $H:%m") %></i>
+	</td>
+</tr>

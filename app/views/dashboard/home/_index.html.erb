@@ -14,14 +14,14 @@
 		<section class="down2x">
 			<article>
 					<header>
-					<span class="header_article col-xs-1-5">
-						<nav><%= "#{article.created_at.strftime('%d')} " %></nav>
-						<center><%= "#{article.created_at.strftime('%B')} " %></center>
-						<center><%= "#{article.created_at.strftime('%Y')} " %></center>
-					</span>
-					<span class="col-xs-2 pull-right">
-						<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/dashboard/home/<%=article.id%>" data-layout="button_count"></div>
-					</span>
+						<span class="header_article col-xs-1-5">
+							<nav><%= "#{article.created_at.strftime('%d')} " %></nav>
+							<center><%= "#{article.created_at.strftime('%B')} " %></center>
+							<center><%= "#{article.created_at.strftime('%Y')} " %></center>
+						</span>
+						<span class="col-xs-2 pull-right">
+							<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/dashboard/home/<%=article.id%>" data-layout="button_count"></div>
+						</span>
 					<div class="title">
 						<b><a href="javascipt:void(0)"><%= link_to article.title, dashboard_home_path(article) %></a></b>
 						<nav>Written: 

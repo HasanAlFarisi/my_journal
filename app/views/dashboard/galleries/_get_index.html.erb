@@ -1,14 +1,26 @@
+<style type="text/css">
+	.verdana{
+		font-family: Arno Pro;
+	}
+</style>
 <% if @galleries.blank? %>
 	<h2 id="box_no_post">Sorry no post yet!</h2>
 	<%= link_to "BACK", session[:url_back_dashboard],  class:"btn btn-warning pull-right", style:"margin-right:10px;" %>
 	<div class="clearfix"></div>
 <% else %>
-	<div class="galleries_img col-sm-3-5 floating">
-		<%#= link_to cl_image_tag("galleries/#{gallery.id}"), dashboard_gallery_path(gallery) %>
-		<%= link_to cl_image_tag("galleries/#{1}"), dashboard_gallery_path(1) %>
-		<div class="clearfix"></div>
-		<span class="space"><i class="glyphicon glyphicon-heart"></i> 0</span>
-		<span class="space"><i class="glyphicon glyphicon-comment"></i> 0</span>
-	</div>
-	<div class="clearfix"></div>
+	<% @galleries.each do |gallery| %>
+		<table class="galleries_img col-sm-3-5 table table-bordered table-hover table-striped" style="float:left">
+			<tr><td class="verdana"><%= gallery.title %></td></tr>
+			<tr>
+				<td><%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload/w_228,c_limit/v1/galleries/#{gallery.id}.jpg"), dashboard_gallery_path(gallery) %></td>
+			</tr>
+			<tr>
+				<td>
+					<span class="space"><i class="fa fa-heart-o"></i> 0</span>
+					<span class="space"><i class="fa fa-comment-o"></i> <%= gallery.gallery_comments.count %></span>
+				</td>
+			</tr>
+		</table>
+	<% end %>
 <% end %>
+<div class="clearfix"></div>

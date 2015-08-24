@@ -35,9 +35,6 @@
 						 </div>
 			 </div>
 </div> -->
-<%= javascript_include_tag "admin/journal" %>
-<%= javascript_include_tag "admin/append_gallery" %>
-
 <div class="panel panel-primary">
 	<div class="panel-heading">
 			<i class="fa fa-edit fa-fw"></i>Gallery Form
@@ -70,13 +67,16 @@
 										<%= f.text_area :content, class:"form-control", style:"height:34px" %>
 									</td>
 									<td>
-										<a href='javascript:void(0)' class='sub'><img src='/assets/min.png' /></a>
+										<!-- <a href='javascript:void(0)' class='sub'><img src='/assets/min.png' /></a> -->
 									</td>
 								</tr>
 							</tbody>
+							<tbody class="sub_screen_shoot">
+								
+							</tbody>
 						</thead>
 					</table>
-					<%= link_to "<i class='fa fa-plus'></i> Add Photo".html_safe,"javascript:void(0)",class:"btn btn-default add", style:"padding: 9px" %>
+					<%= link_to "<i class='fa fa-plus'></i> Add Photo".html_safe,"javascript:void(0)",class:"btn btn-default add add_photo_gallery", style:"padding: 9px" %>
 					<span class="clearfix"></span>
                                 	<br>
                                 	<div class="modal-footer" style="margin-bottom:-10px">
@@ -88,3 +88,6 @@
 		</div>
 	</div>
 </div>
+
+<%= javascript_include_tag "admin/journal" %>
+<%= javascript_include_tag "admin/append_gallery" %>

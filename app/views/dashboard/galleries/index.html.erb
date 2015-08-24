@@ -1,42 +1,3 @@
-<!-- <div class="post-title">
-       <h2>Our Gallery</h2>
-       <div class="post-entry">
-             <p>
-             	<div class="tables">
-             		<% @galleries.each do |gallery| %>
-             			<table style="padding:10px" class="floatings" border="0" cellspacing="0" cellpadding="0">
-			                    <tr>
-			                          <th><%= link_to truncate(gallery.name, length: 15), dashboard_gallery_path(gallery) %></th>
-			                    </tr>
-			                    <tr>
-			                    	<td>
-			                    		<%= link_to image_tag("folder.png", width:"150px", height:"150px", style:"margin-bottom:-5px"), dashboard_gallery_path(gallery) %>
-			                    	</td>
-			                    </tr>
-			             </table>
-             		<% end %>
-             		<div class="clear"></div>
-                    </div>
-             </p>
-             <div class="pagging" id="pagging-left">
-                    <%= will_paginate @galleries %>
-            </div>
-       </div>
-</div> -->
-
-
-	<!-- <div class="col-xs-12 col-sm-8 side pull-left sidebar">
-		<section class="down2x">
-			<article>
-				<h2 id="box_no_post">Sorry but galleries is empty!</h2>
-				<%= link_to "BACK", session[:url_back_dashboard],  class:"btn btn-warning pull-right", style:"margin-right:10px;" %>
-				<nav class="clearfix"></nav>
-			</article>
-		</section>
-		<nav class="clearfix"></nav>
-	</div> -->
-
-
 <div class="col-xs-12 col-sm-8 side pull-left sidebar">
 	<section class="down2x">
 		<article>
@@ -47,5 +8,15 @@
 		<nav class="clearfix"></nav>
 	</section>
 </div>
-
+<% if @galleries.count > 18 %>
+	<div class="col-xs-12 col-sm-8 side pull-left sidebar">
+		<section class="down2x">
+			<article>
+				<div class="pagging" id="pagging-left">
+	    				<%= will_paginate @galleries %>
+				</div>
+			</article>
+		</section>
+	</div>
+<% end %>
 <%= javascript_include_tag 'galleries' %>

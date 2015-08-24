@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822125039) do
+ActiveRecord::Schema.define(version: 20150824070025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,13 +82,6 @@ ActiveRecord::Schema.define(version: 20150822125039) do
     t.text     "content"
   end
 
-  create_table "admin_gallery_comment_replies", force: true do |t|
-    t.integer  "gallery_comment_id"
-    t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "admin_gallery_comments", force: true do |t|
     t.integer  "gallery_id"
     t.string   "name"
@@ -96,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150822125039) do
     t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "admin_id"
   end
 
   create_table "admin_help_files", force: true do |t|

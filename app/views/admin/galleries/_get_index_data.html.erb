@@ -7,16 +7,19 @@
 	<% @galleries.each do |gallery| %>
 			<table class="gallery_admin table table-bordered table-hover table-striped">
 				<tr>
-					<td rowspan="3" width="160px"><%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload/w_150,c_limit/v1/galleries/#{gallery.id}.jpg" %></td>
+					<td rowspan="3" width="160px"><%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload/w_150,c_limit/v1/galleries/#{gallery.id}.jpg"), admin_gallery_path(gallery) %></td>
 					<tr width="200px">
 						<td style="vertical-align: top" height="10px"><b><%= gallery.title %></b></td>
 						<td width="60px"><i class="fa fa-comment-o"></i> <b><%= gallery.gallery_comments.count %></b></td>
 						<td width="60px"><i class="fa fa-heart-o"></i></td>
+						<td width="30px">
+						<%= link_to '<i class="fa  fa-trash-o fa-1x"></i>'.html_safe, admin_gallery_path(gallery), method: :delete, confirm: "Are you sure?" %>
+						</td>
 					</tr>
 					<tr>
-						<td style="vertical-align: top !important" colspan="3"><%= truncate(gallery.content) %></td>			
+						<td style="vertical-align: top !important" colspan="4"><%= truncate(gallery.content, length: 100) %></td>			
 					</tr>
-				</tr>
+				</tr>				
 			</table>
 	<% end %>
 <% end %>

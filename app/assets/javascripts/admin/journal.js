@@ -105,10 +105,10 @@ $(".add_screen_shoot").click(function(){
     $(".sub-screen-shoot").append("<span class='parent'><div id='foto_prev_"+id+"'></div><input class='field size4 input-file floating' id='fileFieldAppend' name='admin_help[help_files_attributes]["+id+"][document]' onchange='readURLGalleryAppend(this,"+id+");' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><br><br><br></span>")
 })
 
-$(".add_photo_gallery").click(function(){
+$(".add_photo_gallery").click(function(){  
     id = id + 1;
-    $(".sub-screen-shoot").append("<div><span class='parent'><label for='admin_gallery_group_galleries_attributes_"+id+"_photo' style='margin-bottom:0px;'>Photo</label><div id='foto_prev_"+id+"'></div></span><input class='field size4 input-file floating' id='fileField' name='admin_gallery_group[galleries_attributes]["+id+"][photo]' onchange='readURLGalleryAppend(this,"+id+");' type='file'><a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' /></a><div class='cl'>&nbsp;</div><br><label for='admin_gallery_group_galleries_attributes_"+id+"_title'>Title</label><input class='field size4' id='admin_gallery_group_galleries_attributes_"+id+"_title' name='admin_gallery_group[galleries_attributes]["+id+"][title]' type='text'><br><label for='admin_gallery_group_galleries_attributes_"+id+"_content'>Content</label><textarea class='field size1' id='' name='admin_gallery_group[galleries_attributes]["+id+"]][content]' style='height:60px'></textarea><br><br><br></span></div>")
-})
+    $(".sub_screen_shoot").append("<tr><td><input class='form-control' id='admin_gallery_title' name='admin_gallery_attributes["+id+"][title]' type='text'></td><td><span class='foto_prev_"+id+"'></span><input class='form-control input-file' id='fileField' name='admin_gallery_attributes["+id+"][photo]' onchange='readURLGalleryAppend(this,"+id+");' style='padding:0px' type='file'></td><td><textarea class='form-control' id='admin_gallery_content' name='admin_gallery_attributes["+id+"][content]' style='height:34px'></textarea></td><td><a href='javascript:void(0)' class='sub'><img src='/assets/min.png'></a></td></tr>")
+});
 
 $("#admin_journal_issue_status_id").change(function(){
         if($(this).val() == "11" || $(this).val() == "6"){
@@ -118,6 +118,11 @@ $("#admin_journal_issue_status_id").change(function(){
                 $(".type").fadeIn()
                 $(".progress").hide()
         }
+});
+
+$('body').on("click", ".sub", function(){
+    $line = $(this).parents("tr");
+    $line.remove();
 })
 
 function readURLJournalAppend(input,id) {
@@ -136,7 +141,7 @@ function readURLGalleryAppend(input, id) {
     var reader = new FileReader();
     reader.onload = function(e){
      $(".img_prev_"+id).remove();
-      $("#foto_prev_"+id).append('<img class="img_prev_'+id+'" src="'+e.target.result+'" width="500px"/>');
+      $(".foto_prev_"+id).append('<img class="img_prev_'+id+'" src="'+e.target.result+'" width="300px"/>');
     };
     reader.readAsDataURL(input.files[0])
   }

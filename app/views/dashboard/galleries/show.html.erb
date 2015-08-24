@@ -1,26 +1,68 @@
-<div class="post-title">
-	<h2><%= link_to @gallery.name %></h2>
-</div>
-<br>
-<div class="post-entry">
-	<div class="tables">
-		<% @gallery_photos.each do |image| %>
-			<table syle="padding:10px" class="post_content_gallery floatings" border="0" cellspacing="0" cellpadding="5" style="float:left !important">
+<div class="col-xs-12 col-sm-8 side pull-left sidebar">
+	<section class="down2x">
+		<article>
+			<header>
+				<span class="header_article col-xs-1-5">
+					<nav><%= "#{@gallery_photos.created_at.strftime('%d')} " %></nav>
+					<center><%= "#{@gallery_photos.created_at.strftime('%B')} " %></center>
+					<center><%= "#{@gallery_photos.created_at.strftime('%Y')} " %></center>
+				</span>
+				<span class="col-xs-2 pull-right">
+					<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/dashboard/galleries/<%=@gallery_photos.id%>" data-layout="button_count"></div>
+				</span>
+				<div class="title">
+					<b><a href="javascipt:void(0)"><%= link_to @gallery_photos.title, dashboard_gallery_path(@gallery_photos) %></a></b>
+				</div>
+			</header>
+			<nav class="clearfix"></nav>
+			<p class="offcanvas">
+				<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload/w_749/v1/galleries/#{@gallery_photos.id}.jpg"), dashboard_gallery_path(@gallery_photos) %>
+			</p>
+			<nav class="clearfix"></nav>
+			<p>
+				<%= @gallery_photos.content %>
+			</p>
+			<hr>
+			<%= link_to "Sukai".html_safe, "javascript:void(0)" %> | 
+			<%= link_to "Komentari".html_safe, "javascript:void(0)" %>
+			<nav class="clearfix"></nav>
+			<table class="gallery_admin table table-bordered table-hover table-striped ">
 				<tr>
-					<td>
-						<%= link_to cl_image_tag("galleries/#{image.id}",width:"170px", style:"margin-bottom:-5px"), dashboard_gallery_show_photo_path(image), remote: true %>
+					<td width="60px">
+						<i class="fa fa-comment-o"></i> <b class="comment_count"><%= @gallery_photos.gallery_comments.count %></b>
+					</td>
+					<td width="60px">
+						<i class="fa fa-heart-o"></i>
+					</td>
+					<td><span class="pull-right">
+					<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/admin/galleries/<%=@gallery_photos.id%>" data-layout="button_count"></div>
+					</span></td>
+				</tr>
+				<tbody class="comment_place">
+					<% @gallery_photos.gallery_comments.each do |comment| %>
+						<tr>
+							<td><%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{current_admin.id}", class:"admin-comment" %></td>
+							<td colspan="2">
+								<p><%= comment.body %></p>
+								<i class="pull-right" style="font-size:11px"><b><%= comment.name.blank? ? find_profile(comment.admin_id).name : comment.name %></b> on <%= comment.created_at.strftime("%d/%m/%Y - %H:%m") %></i>
+							</td>
+						</tr>
+					<% end %>
+					</tr>
+				</tbody>
+				<tr>
+					<td><%= image_tag "comment.jpg", class:"admin-comment" %></td>
+					<td colspan="2">
+						<%= form_tag create_reply_admin_galleries_path, remote: true do %>
+							<%= text_area_tag :content, "", placeholder:"Your comment", cols:"70" %>
+							<%= hidden_field_tag :gallery_id, @gallery_photos.id %>
+							<%= submit_tag "comment", class:"btn btn-default pull-right", style:"padding:2px" %>
+						<% end %>
 					</td>
 				</tr>
 			</table>
-		<% end %>
-	</div>
-	<div id="modal_background"></div>
-	<div id="show_modal_gallery"><!-- Place for modal gallery --></div>
-	<div class="clear"></div>
-	<div class="link_button">
-        <%= link_to "Back ...", session[:url_back_dashboard], class:"floatings" %>
-      </div>
-	<div class="pagging" id="pagging-left">
-		<%= will_paginate @gallery_photos %>
-	</div>
+			<%= link_to "BACK", session[:url_back_dashboard],  class:"btn btn-warning pull-right", style:"margin-right:10px;" %>
+			<nav class="clearfix"></nav>
+		</article>
+	</section>
 </div>
