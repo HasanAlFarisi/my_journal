@@ -23,8 +23,8 @@
 				<%= @gallery_photos.content %>
 			</p>
 			<hr>
-			<%= link_to "Sukai".html_safe, "javascript:void(0)" %> | 
-			<%= link_to "Komentari".html_safe, "javascript:void(0)" %>
+			<%= link_to "Like".html_safe, dashboard_gallery_create_like_path(gallery_id: @gallery_photos.id, current_ip: request.remote_ip), remote: true, method: :post %> | 
+			<%= link_to "Comment".html_safe, "javascript:void(0)" %>
 			<nav class="clearfix"></nav>
 			<table class="gallery_admin table table-bordered table-hover table-striped ">
 				<tr>
@@ -32,7 +32,7 @@
 						<i class="fa fa-comment-o"></i> <b class="comment_count"><%= @gallery_photos.gallery_comments.count %></b>
 					</td>
 					<td width="60px">
-						<i class="fa fa-heart-o"></i>
+						<i class="fa fa-heart-o"><b class="like_count"><%= @gallery_photos.gallery_likes.count %></b></i>
 					</td>
 					<td><span class="pull-right">
 					<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/admin/galleries/<%=@gallery_photos.id%>" data-layout="button_count"></div>
@@ -41,23 +41,26 @@
 				<tbody class="comment_place">
 					<% @gallery_photos.gallery_comments.each do |comment| %>
 						<tr>
-							<td><%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{current_admin.id}", class:"admin-comment" %></td>
+							<td>
+								<% if comment.admin_id.blank? %>
+									<%= image_tag("comment.jpg", class:"admin-comment") %>
+								<% else %>
+									<%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", comment.admin_id)}/profiles/#{comment.admin_id}", class:"admin-comment" %>
+								<% end %>
+							</td>
 							<td colspan="2">
 								<p><%= comment.body %></p>
 								<i class="pull-right" style="font-size:11px"><b><%= comment.name.blank? ? find_profile(comment.admin_id).name : comment.name %></b> on <%= comment.created_at.strftime("%d/%m/%Y - %H:%m") %></i>
 							</td>
 						</tr>
 					<% end %>
-					</tr>
 				</tbody>
 				<tr>
 					<td><%= image_tag "comment.jpg", class:"admin-comment" %></td>
 					<td colspan="2">
-						<%= form_tag create_reply_admin_galleries_path, remote: true do %>
-							<%= text_area_tag :content, "", placeholder:"Your comment", cols:"70" %>
-							<%= hidden_field_tag :gallery_id, @gallery_photos.id %>
-							<%= submit_tag "comment", class:"btn btn-default pull-right", style:"padding:2px" %>
-						<% end %>
+						<%= text_area_tag :content, "", placeholder:"Your comment", cols:"68" %>
+						<%= hidden_field_tag :gallery_id, @gallery_photos.id %>
+						<%= submit_tag "comment", class:"btn btn-default pull-right comment_modal", style:"padding:2px","data-toggle"=>"modal", "data-target"=>"#myModal"%>
 					</td>
 				</tr>
 			</table>
@@ -66,3 +69,11 @@
 		</article>
 	</section>
 </div>
+
+<script>
+$(".comment_modal").click(function(){
+	$(".modal-title").html("Please fill this form before continuing");
+	$(".modal-body").html("<%= j(render partial:"dashboard/galleries/shared/form_gallery_comment") %>")
+});
+
+</script>

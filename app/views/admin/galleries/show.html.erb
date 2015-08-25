@@ -15,7 +15,7 @@
 						<b><%= @admin_gallery.title %></b>
 						<p><%= @admin_gallery.content %></p>
 						<hr>
-						<%= link_to "Sukai".html_safe, "javascript:void(0)" %>
+						<%= link_to "Like".html_safe, dashboard_gallery_create_like_path(gallery_id: @admin_gallery.id, current_ip: request.remote_ip), remote: true, method: :post %>
 						<span class="clearfix"></span>
 						<table class="gallery_admin table table-bordered table-hover table-striped ">
 							<tr>
@@ -23,7 +23,7 @@
 									<i class="fa fa-comment-o"></i> <b class="comment_count"><%= @admin_gallery.gallery_comments.count %></b>
 								</td>
 								<td width="60px">
-									<i class="fa fa-heart-o"></i>
+									<i class="fa fa-heart-o"> <b class="like_count"><%= @admin_gallery.gallery_likes.count %></b></i>
 								</td>
 								<td><span class="pull-right">
 								<div class="fb-share-button" data-href="https://jurnalkreativku.herokuapp.com/admin/galleries/<%=@admin_gallery.id%>" data-layout="button_count"></div>
@@ -32,7 +32,13 @@
 							<tbody class="comment_place">
 								<% @admin_gallery.gallery_comments.each do |comment| %>
 									<tr>
-										<td><%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{current_admin.id}", class:"admin-comment" %></td>
+										<td>
+											<% if comment.admin_id.blank? %>
+												<%= image_tag("comment.jpg", class:"admin-comment") %>
+											<% else %>
+												<%= image_tag "http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("profile", current_admin.id)}/profiles/#{current_admin.id}", class:"admin-comment" %>
+											<% end %>
+										</td>
 										<td colspan="2">
 											<p><%= comment.body %></p>
 											<i class="pull-right" style="font-size:11px"><b><%= comment.name.blank? ? find_profile(comment.admin_id).name : comment.name %></b> on <%= comment.created_at.strftime("%d/%m/%Y - %H:%m") %></i>

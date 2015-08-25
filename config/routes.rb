@@ -25,6 +25,8 @@ MyJournal::Application.routes.draw do
       resources :galleries do
           get :show_photo
           post :comment
+          post :create_reply
+          post :create_like
       end
   end
 

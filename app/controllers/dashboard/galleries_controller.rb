@@ -1,5 +1,6 @@
 class Dashboard::GalleriesController < ApplicationController
 	before_filter :prepare_session
+	skip_before_filter :verify_authenticity_token, :only => [:create_reply, :create_like]
 
 	def index
 		session[:url_back_dashboard] = request.original_url
@@ -26,6 +27,18 @@ class Dashboard::GalleriesController < ApplicationController
 
 	def prepare_session
 		session[:current] = "gallery"
+	end
+
+	def create_reply
+		@create_reply = Admin::GalleryComment.create(gallery_id: params[:gallery_id], body: params[:content], name: params[:name], email: params[:email])
+		@create_reply.save
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def create_like
+		@create_like = Admin::GalleryLike.create_like(params)
 	end
 
 	private

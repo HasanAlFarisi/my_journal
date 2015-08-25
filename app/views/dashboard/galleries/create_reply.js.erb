@@ -1,0 +1,3 @@
+$(".comment_count").html("<%= Admin::GalleryComment.find_all_by_gallery_id(params[:gallery_id]).count %>")
+$(".comment_place").append('<tr><td><%= image_tag "comment.jpg", class:"admin-comment" %></td><td colspan="2"><p><%= @create_reply.body %></p><i class="pull-right" style="font-size:11px"><b><%= @create_reply.name.blank? ? find_profile(@create_reply.dmin_id).name : @create_reply.name %></b> on <%= @create_reply.created_at.strftime("%d %M %Y - $H:%m") %></i></td></tr>');
+$('#myModal').modal('hide');

@@ -1,0 +1,31 @@
+<%= label_tag :name, "Your Name" %>
+<br>
+<%= text_field_tag :name, "", class:"form-control" %>
+<p id="error_name"></p>
+<br>
+<%= label_tag :email, "Your Email" %><i> email not publish</i>
+<br>
+<%= email_field_tag :email, "", class:"form-control" %>
+<p id="error_email"></p>
+
+<script>
+	$(".modal-save").click(function(){
+		($('#name').val().length == 0) ? $('#error_name').html("<i style='color: red;'>Please fill this Name field</i>") : $('#error_name i').remove();
+		($('#email').val().length == 0) ? $('#error_email').html("<i style='color: red;'>Please fill this Email field</i>") : $('#error_email i').remove();
+
+		if($("#name").val().length > 0 && $("#email").val().length > 0){
+			var controller = 
+			$.ajax({
+				type: "POST",
+				url: "/dashboard/galleries/"+$('#gallery_id').val()+"/create_reply",
+				data: {
+					"content" : $('#content').val(),
+					"gallery_id" : $('#gallery_id').val(),
+					"name" : $('#name').val(),
+					"email" : $('#email').val()
+				},
+				dataType:"script"
+			})
+		};
+	});
+</script>

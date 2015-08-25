@@ -2,7 +2,7 @@ require "delayed_job"
 
 class Admin::Gallery < ActiveRecord::Base
 	has_many :gallery_comments, :dependent => :destroy
-
+	has_many :gallery_likes, :dependent => :destroy
 	accepts_nested_attributes_for :gallery_comments
 	
 	has_attached_file :photo,

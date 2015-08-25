@@ -2,7 +2,7 @@
 	<h3>See Also this Articles</h3>
 	<% @similiar_articles.each do |article| %>
 		<div class="col-sm-3 contents">
-			<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", width:"100%"), dashboard_home_path(article) %>
+			<%= link_to image_tag("http://res.cloudinary.com/sampulkreativ/image/upload#{loaded_rand("articles", article.id)}/articles/#{article.id}", width:"100%"), dashboard_home_path(article.id) %>
 			<nav class="clearfix"></nav>
 			<center><%= link_to article.title %></center>
 		</div>

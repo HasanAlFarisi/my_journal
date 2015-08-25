@@ -11,7 +11,7 @@
 					<tr width="200px">
 						<td style="vertical-align: top" height="10px"><b><%= gallery.title %></b></td>
 						<td width="60px"><i class="fa fa-comment-o"></i> <b><%= gallery.gallery_comments.count %></b></td>
-						<td width="60px"><i class="fa fa-heart-o"></i></td>
+						<td width="60px"><i class="fa fa-heart-o"></i><b><%= gallery.gallery_likes.count %></b></td>
 						<td width="30px">
 						<%= link_to '<i class="fa  fa-trash-o fa-1x"></i>'.html_safe, admin_gallery_path(gallery), method: :delete, confirm: "Are you sure?" %>
 						</td>
