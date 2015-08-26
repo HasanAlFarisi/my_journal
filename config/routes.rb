@@ -117,6 +117,12 @@ MyJournal::Application.routes.draw do
         post :filter
       end
     end
+
+    resources :calendars, except:[:index] do 
+      collection do
+        get :add_row_watchers
+      end
+    end
     #match '/admin/journal_issues', :controller => 'journals', :action => 'index',via: :GET
   end
 end

@@ -1,0 +1,45 @@
+<%= form_for @calendar, url: params[:id].blank? ? admin_calendars_path : admin_calendar_path do |f| %>
+	<%= f.hidden_field :dates, value:params[:date_db].blank? ? f.object.dates : params[:date_db] %>
+	<%= f.label :title, "Title of Schedule" %><i>*</i>
+	<br>
+	<%= f.text_field :title, class:"form-control" %>
+	<p id="error_title"></p>
+	<%= f.label :place, "Place of Meeting" %><i>*</i>
+	<br>
+	<%= f.text_field :place, class:"form-control" %>
+	<p id="error_place"></p>
+	<%= f.label :description, "Description" %>
+	<br>
+	<%= f.text_area :description, class:"form-control" %>
+	<p id="error_description"></p>
+	<%= label_tag :friend, "Invite Friends" %>
+	<br>
+	<% if params[:id].blank? %>
+		<%= select_tag :friend, options_for_select(Admin::Profile.where("admin_id = #{current_admin.id}").map{|x| ["#{x.name} #{x.last_name}", x.id]}), class:"form-control", name:"admin_schedule[admin_schedule_members_attributes][0][admin_id]", readonly: true %>
+		<br>
+	<% end %>
+	<%= f.fields_for :schedule_members do |ps| %>
+		<%= render "admin/calendars/shared/select", :f => ps %>
+	<% end %>
+	<span class='select_place'></span>
+	<%= link_to "<i class='fa fa-plus'></i> Add friend".html_safe, "javascript:void(0)", class:"add_friend btn btn-default" %>
+	<br><br>
+	<%= label_tag :privace, "Privacy" %>
+	<br>
+	<%= f.radio_button :privacy, true %> Private
+	<%= f.radio_button :privacy, false %> Public
+<% end %>
+<script>
+	$(".add_friend").click(function(){
+		$.ajax({
+	          type: "GET",
+	          url: "/admin/calendars/add_row_watchers",
+	          dataType:"script"
+	      })
+	});
+
+	$(".modal-save").click(function(){
+		$("form#new_admin_schedule").submit();
+		$("form.edit_admin_schedule").submit();
+	})
+</script>

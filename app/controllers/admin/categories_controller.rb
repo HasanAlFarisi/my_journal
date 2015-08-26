@@ -39,7 +39,7 @@ class Admin::CategoriesController < Admin::BaseController
           end
         end
 
-        format.html { redirect_to admin_categories_path, notice: 'Category was successfully created.' }
+        format.html { redirect_to admin_categories_path }
         format.json { render action: 'show', status: :created, location: @admin_category }
       else
         format.html { render action: 'new' }

@@ -1,0 +1,1 @@
+$(".select_place").append("<%= j(render partial: "admin/calendars/shared/select_row") %>")

@@ -25,14 +25,27 @@ class Calendar < Struct.new(:view, :date, :callback)
     end
  
     def day_cell(day)
-      content_tag :td, view.capture(day, &callback), class: day_classes(day)
+      content_tag :td, view.capture(day, &callback), class: day_classes(day), data_id: day_id(day), data_date: day_complete(day)
     end
  
     def day_classes(day)
       classes = []
+      classes << "date"
       classes << "current" if day == Date.today
       classes << "not-month" if day.month != date.month
       classes.empty? ? nil : classes.join(" ")
+    end
+
+    def day_id(day)
+      data = []
+      data << day
+      data.empty? ? nil : data.join(" ")
+    end
+
+    def day_complete(day)
+      data = []
+      data << day.strftime("%d %B %Y")
+      data.empty? ? nil : data.join(" ")
     end
  
     def weeks
