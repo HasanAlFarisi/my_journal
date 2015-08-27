@@ -1,5 +1,5 @@
 class Admin::CalendarsController < Admin::BaseController
-	before_action :set_admin_calendar, only: [:edit, :update]
+	before_action :set_admin_calendar, only: [:edit, :update, :show]
 	before_filter :setup_page
 	before_filter :setup_select
 
@@ -28,8 +28,25 @@ class Admin::CalendarsController < Admin::BaseController
 
 	def update
 		@calendar.update_attributes(admin_category_params)
+		unless  params[:admin_schedule][:admin_schedule_members_attributes].blank?
+			params[:admin_schedule][:admin_schedule_members_attributes].each do |sub_schedule|
+				if sub_schedule[1][:id].present? && sub_schedule[1][:admin_id].present?
+		       		admin_sub_schedule = Admin::ScheduleMember.find(sub_schedule[1][:id]).update({admin_id: sub_schedule[1][:admin_id]})
+		       	elsif sub_schedule[1][:admin_id].present?
+		       		admin_sub_schedule = Admin::ScheduleMember.create({schedule_id: @calendar.id, admin_id: sub_schedule[1][:admin_id]})
+				            admin_sub_schedule.save
+		       	end
+		      end
+		end
 		respond_to do |format|
 			format.html { redirect_to new_admin_calendar_path(date: @calendar.dates), notice: 'Schedule was successfully created.' }
+		end
+	end
+
+	def show
+		respond_to do |format|
+			format.html{redirect_to new_admin_calendar_path(date: Date.today)}
+			format.js
 		end
 	end
 
@@ -51,7 +68,7 @@ class Admin::CalendarsController < Admin::BaseController
 
 	private
 	def admin_category_params
-	      params.require(:admin_schedule).permit(:title, :place, :description, :dates, :privacy, :admin_schedule_members_attributes)
+	      params.require(:admin_schedule).permit(:admin_id, :title, :place, :description, :dates, :privacy, :start_time, :end_time, :schedule_members_attributes)
 	end
 
 	def set_admin_calendar

@@ -48,15 +48,7 @@
 						<div class="col-md-12">
 							<table class="table table-bordered table-hover table-striped calendar">
 								<%= calendar @date do |date| %>
-									
 									<%= find_schedule(date) %>
-									<%# if @events_by_date[date] %>
-										<!-- <ul> -->
-											<%# @events_by_date[date].each do |event| %>
-												<!-- <li><%#= link_to event.name, event %></li> -->
-											<%# end %>
-										<!-- </ul> -->
-									<%# end %>
 								<% end %>
 							</table>
 						</div>
@@ -68,15 +60,15 @@
 </div>
 
 <script type="text/javascript">
-	$(".date").click(function(){
-		$.ajax({
-	          type: "GET",
-	          url: "/admin/calendars/new",
-	          data: {
-	          	"date" : $(this).attr("data_date"),
-	          	"date_db" : $(this).attr("data_id")
-	        },
-	          dataType:"script"
-	      })
-	})
+$(".date").click(function(){
+    $.ajax({
+        type: "GET",
+        url: "/admin/calendars/new",
+        data: {
+        	"date" : $(this).attr("data_date"),
+        	"date_db" : $(this).attr("data_id")
+      },
+        dataType:"script"
+    })
+})
 </script>

@@ -1,9 +1,16 @@
 <%= form_for @calendar, url: params[:id].blank? ? admin_calendars_path : admin_calendar_path do |f| %>
 	<%= f.hidden_field :dates, value:params[:date_db].blank? ? f.object.dates : params[:date_db] %>
+	<%= f.hidden_field :admin_id, value: current_admin.id %>
 	<%= f.label :title, "Title of Schedule" %><i>*</i>
 	<br>
 	<%= f.text_field :title, class:"form-control" %>
 	<p id="error_title"></p>
+	<%= f.label :start_time, "Time" %><i>*</i>
+	<br>
+		<%= f.text_field :start_time, class:"form-control floating", style:"width: 14%", placeholder:"Start" %>
+		<span class='floating'>&nbsp;until&nbsp;</span>
+		<%= f.text_field :end_time, class:"form-control", style:"width: 14%", placeholder: "End" %>
+	<p id="error_time"></p>
 	<%= f.label :place, "Place of Meeting" %><i>*</i>
 	<br>
 	<%= f.text_field :place, class:"form-control" %>
@@ -15,7 +22,8 @@
 	<%= label_tag :friend, "Invite Friends" %>
 	<br>
 	<% if params[:id].blank? %>
-		<%= select_tag :friend, options_for_select(Admin::Profile.where("admin_id = #{current_admin.id}").map{|x| ["#{x.name} #{x.last_name}", x.id]}), class:"form-control", name:"admin_schedule[admin_schedule_members_attributes][0][admin_id]", readonly: true %>
+		<%= select_tag :friend, options_for_select(Admin::Profile.where("admin_id = #{current_admin.id}").map{|x| ["#{x.name} #{x.last_name}", x.id]}), class:"form-control", name:"admin_schedule[admin_schedule_members_attributes]['0'][admin_id]", disabled: true %>
+		<%= hidden_field_tag :friend, current_admin.id ,name: "admin_schedule[admin_schedule_members_attributes]['0'][admin_id]" %>
 		<br>
 	<% end %>
 	<%= f.fields_for :schedule_members do |ps| %>

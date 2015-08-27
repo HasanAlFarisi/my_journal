@@ -1,5 +1,10 @@
 <span>
-	<%= select_tag :admin_id, options_for_select(@assign,f.present? ? f.object.admin_id : nil), class:"floating form-control", style:"width:92%", name:"admin_schedule[admin_schedule_members_attributes][#{@index}][admin_id]" %>
-	<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='margin-top:0px; padding-right:20px !important;' class="floating" id="right_more" /></a>
+	<%= select_tag :admin_id, options_for_select(@assign,f.present? ? f.object.admin_id : nil), class:"floating form-control", style:"width:92%", name:"admin_schedule[admin_schedule_members_attributes][#{@index.blank? ? f.object.id.to_s : @index}][admin_id]", disabled: f.present? ? current_admin.id == f.object.admin_id ? true : false : "" %>
+	<% if f.present? %>
+		<%= hidden_field_tag :id, f.object.id, name: "admin_schedule[admin_schedule_members_attributes][#{@index.blank? ? f.object.id.to_s : @index}][id]" %>
+		<% if current_admin.id != f.object.admin_id %>
+			<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='margin-top:0px; padding-right:20px !important;' class="floating" id="right_more" /></a>
+		<% end %>		
+	<% end %>
 	<br><br>
 </span>

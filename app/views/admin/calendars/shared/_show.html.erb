@@ -1,0 +1,47 @@
+<style type="text/css">
+	i{
+		font-size: 11px;
+		color: #fff;
+		padding: 3px;
+	}
+	.confirm{
+		background-color: #f0ad4e;
+	}
+	.join{
+		background-color: #5cb85c;
+	}
+	.n_join{
+		background-color: #d9534f;
+	}
+</style>
+
+<table class="table table-bordered table-hover table-striped">
+	<tr>
+		<td colspan="2"><%= @calendar.privacy == true ? "<b>Private Schedule</b>".html_safe : "<b>Public Schedule</b>".html_safe %></td>
+	</tr>
+	<tr>
+		<td width="30%">Title</td><td><%= @calendar.title %></p></td>
+	</tr>
+	<tr>
+		<td>Time</td><td>13:00 - 15:00 on <%= @calendar.dates.strftime("%d %B %Y") %></td>
+	</tr>
+	<tr>
+		<td>Place of Meeting</td><td><%= @calendar.place %></td>		
+	</tr>
+	<tr>
+		<td>Description</td> <td><%= @calendar.description %></td>
+	</tr>
+	<tr>
+		<td>
+			Invited
+		</td>
+		<td>
+			<% @calendar.schedule_members.each do |friend| %>
+				<p>
+					<%= "#{find_profile(friend.admin_id).name}" "#{find_profile(friend.admin_id).last_name}" %>
+					<%= friend.status.blank? ? "<i class='confirm'>Need Confirm</i>".html_safe : friend.status == true ? "<i class='join'>Join</i>".html_safe : "<i class='n_join'>Not Join</i>".html_safe %>
+				</p>
+			<% end %>
+		</td>
+	</tr>
+</table>

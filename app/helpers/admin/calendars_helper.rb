@@ -9,7 +9,7 @@ module Admin::CalendarsHelper
 			item += "#{date.day}"
 			item += "<br>"
 			schedules.each do |schedule|
-				item += "<p class='schedule'>#{link_to truncate(schedule.title, length:20), edit_admin_calendar_path(schedule.id), remote: true}</p>"
+				item += "<p class='schedule'>#{link_to truncate(schedule.title, length:20), admin_calendar_path(schedule.id), remote: true}</p>"
 			end
 			item.html_safe
 		end
