@@ -1,0 +1,27 @@
+<%= form_tag confirmation_invitation_admin_calendars_path, method: :get, id: "invitation_form" do %>
+	<table class="table table-bordered table-hover table-striped">
+		<tr>
+			<td width="33%"><center>Join</center></td>
+			<td width="33%"><center>Not Join</center></td>
+			<td width="33%"><center>Not Sure</center></td>
+		</tr>
+		<tr>
+			<td><center><%= radio_button_tag :invitation, "true", (@member.status == "true" ? true : false) %></center></td>
+			<td><center><%= radio_button_tag :invitation, "false", (@member.status == "false" ? true : false) %></center></td>
+			<td><center><%= radio_button_tag :invitation, "not_sure", (@member.status == "not_sure" || @member.status.blank? ? true : false) %></center></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<%= text_area_tag :reason, @member.reason.nil? ? "" : @member.reason, cols: 68, placeholder: "Reason" %>
+				<%= hidden_field_tag :schedule_id, params[:schedule_id] %>
+				<%= hidden_field_tag :admin_id, params[:admin_id] %>
+			</td>
+		</tr>
+	</table>
+<% end %>
+
+<script>
+	$(".modal-save").click(function(){
+		$("form#invitation_form").submit();
+	})
+</script>

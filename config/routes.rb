@@ -118,9 +118,11 @@ MyJournal::Application.routes.draw do
       end
     end
 
-    resources :calendars, except:[:index] do 
+    resources :calendars do 
       collection do
         get :add_row_watchers
+        get :confirmation_invitation
+        delete :destroy_member
       end
     end
     #match '/admin/journal_issues', :controller => 'journals', :action => 'index',via: :GET

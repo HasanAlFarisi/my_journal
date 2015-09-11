@@ -1,0 +1,1 @@
+<%= "#{find_profile(@member.admin_id).name} #{find_profile(@member.admin_id).last_name}" %> <%= @member.status == "not_sure" ? "<i class='confirm'>Need Confirm</i>".html_safe : @member.status == "true" ? "<i class='join'>Join</i>".html_safe : "<i class='n_join'>Not Join</i>".html_safe %>

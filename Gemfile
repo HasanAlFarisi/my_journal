@@ -44,6 +44,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#Date picker Gem
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.15.35'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

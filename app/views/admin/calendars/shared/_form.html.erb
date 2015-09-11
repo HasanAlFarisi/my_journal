@@ -7,9 +7,9 @@
 	<p id="error_title"></p>
 	<%= f.label :start_time, "Time" %><i>*</i>
 	<br>
-		<%= f.text_field :start_time, class:"form-control floating", style:"width: 14%", placeholder:"Start" %>
+		<%= f.text_field :start_time, class:"form-control floating", id:"timepicker1", style:"width: 16%", placeholder:"Start" %>
 		<span class='floating'>&nbsp;until&nbsp;</span>
-		<%= f.text_field :end_time, class:"form-control", style:"width: 14%", placeholder: "End" %>
+		<%= f.text_field :end_time, class:"form-control", id:"timepicker2", style:"width: 16%", placeholder: "End" %>
 	<p id="error_time"></p>
 	<%= f.label :place, "Place of Meeting" %><i>*</i>
 	<br>
@@ -30,7 +30,7 @@
 		<%= render "admin/calendars/shared/select", :f => ps %>
 	<% end %>
 	<span class='select_place'></span>
-	<%= link_to "<i class='fa fa-plus'></i> Add friend".html_safe, "javascript:void(0)", class:"add_friend btn btn-default" %>
+	<%= link_to "<b class='fa fa-plus'></b> Add friend".html_safe, "javascript:void(0)", class:"add_friend btn btn-default" %>
 	<br><br>
 	<%= label_tag :privace, "Privacy" %>
 	<br>
@@ -50,4 +50,17 @@
 		$("form#new_admin_schedule").submit();
 		$("form.edit_admin_schedule").submit();
 	})
+
+	$("#timepicker1").click(function() {
+          $("#timepicker1").datetimepicker({
+              format: 'LT'
+          });
+      });
+
+	$("#timepicker2").click(function() {
+          $("#timepicker2").datetimepicker({
+              format: 'LT'
+          });
+      });
 </script>
+<%= javascript_include_tag "bootstrap-datetimepicker" %>

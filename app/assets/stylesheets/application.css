@@ -11,7 +11,7 @@
  *= require_self
  *= require bootstrap-theme
  *= require bootstrap
- *= require style
+  *= require style
  *= require notice
  *= require jqueryindex
  */

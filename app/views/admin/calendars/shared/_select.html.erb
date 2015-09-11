@@ -3,7 +3,7 @@
 	<% if f.present? %>
 		<%= hidden_field_tag :id, f.object.id, name: "admin_schedule[admin_schedule_members_attributes][#{@index.blank? ? f.object.id.to_s : @index}][id]" %>
 		<% if current_admin.id != f.object.admin_id %>
-			<a href='javascript:void(0)' onclick='javascript:$(this).parent().remove()'><img src='/assets/min.png' style='margin-top:0px; padding-right:20px !important;' class="floating" id="right_more" /></a>
+			<%= link_to image_tag("x-icon.png"), destroy_member_admin_calendars_path(id: f.object.id), method: :delete, class:"floating", id:"right_more", onclick:'javascript:$(this).parent().remove()', remote: true %>
 		<% end %>		
 	<% end %>
 	<br><br>

@@ -1,0 +1,34 @@
+<% if @calendars.blank? %>
+	<tr>
+		<td colspan="7">
+			<center>No Data yet</center>
+		</td>
+	</tr>
+<% else %>
+	<% @calendars.each_with_index do |calendar, nomer| %>
+		<% nomer = nomer + 1 + @calendars.offset_value %>
+		<tr>
+			<td><%= "#{nomer}." %></td>
+			<td><%= link_to calendar.title, "javascript:void(0)", class:"show_calendar", dataId: calendar.id %></td>
+			<td>
+				<%= "#{calendar.dates.strftime('%d-%b-%Y')} <br>#{calendar.start_time.strftime('%H:%M') rescue '-'} until #{calendar.end_time.strftime('%H:%M') rescue '-'}".html_safe %>
+			</td>
+			<td><%= calendar.place %></td>
+			<td>
+				<% calendar.schedule_members.each do |friend| %>
+					<a href="javascript:void(0)" class="confirmation_invitation" dataSchedule="<%= calendar.id %>" dataId="<%= friend.admin_id %>">
+						<%= "#{find_profile(friend.admin_id).name}" "#{find_profile(friend.admin_id).last_name}" %>
+						<%= friend.status.blank? || friend.status == "not_sure" ? "<i class='confirm fa fa-info'></i>".html_safe : friend.status == "true" ? "<i class='join fa fa-check'></i>".html_safe : "<i class='n_join fa fa-times-circle'></i>".html_safe %>	
+					</a>
+					<br>
+				<% end %>
+			</td>
+			<% if calendar.admin_id != current_admin.id %>
+				<td colspan="2">Not Allowed</td>
+			<% else %>
+				<td><%= link_to "<b class='fa fa-pencil'></b> Edit".html_safe, "javascript:void(0)", class:"edit_calendar", dataId: calendar.id %></td>
+				<td><%= link_to "<b class='fa fa-trash-o'></b> Destroy".html_safe, admin_calendar_path(calendar), method: :delete, confirm: "Are you sure?" %></td>
+			<% end %>
+		</tr>
+	<% end %>
+<% end %>
