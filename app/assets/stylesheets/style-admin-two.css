@@ -702,4 +702,32 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndC
     text-align: justify;
 }
 .admin-comment{width: 45px;}
+a.schedule{
+    color: #a94442;
+}
+a.schedule:hover{
+    color: #6C2524;
+    text-decoration: none;
+}
+a.journals{
+    color: #3c763d;
+}
+a.journals:hover{
+    color: #1D4F1E;
+    text-decoration: none;
+}
+a.projects{
+    color: #31708f;
+}
+a.projects:hover{
+    color: #1D4F67;
+    text-decoration: none;
+}
+a.articles{
+    color: #8a6d3b;
+}
+a.articles:hover{
+    color: #513C19;
+    text-decoration: none;
+}
 /*END COSTUME STYLE*/

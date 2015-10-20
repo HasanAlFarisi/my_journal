@@ -1,0 +1,41 @@
+<style type="text/css">
+	i{
+		font-size: 11px;
+		color: #fff;
+		padding: 3px;
+		font-weight: bold;
+	}
+</style>
+
+<table class="table table-bordered table-hover table-striped">
+	<tr>
+		<td width="50%">Meeting</td><td><%= @calendar.title %></p></td>
+	</tr>
+	<tr>
+		<td>Time</td><td>13:00 - 15:00 on <%= @calendar.dates.strftime("%d %B %Y") %></td>
+	</tr>
+	<tr>
+		<td>Place of Meeting</td><td><%= @calendar.place %></td>		
+	</tr>
+	<tr>
+		<td>Description</td> <td><%= @calendar.description %></td>
+	</tr>
+	<tr>
+		<td>Category</td> <td><%= @calendar.privacy == true ? "Private Meeting" : "Public Meeting" %></td>
+	</tr>
+	<tr>
+		<td>
+			Invited
+		</td>
+		<td>
+			<ul>
+				<% @calendar.schedule_members.each do |friend| %>
+					<li>
+						<%= "#{find_profile(friend.admin_id).name}" "#{find_profile(friend.admin_id).last_name}" %>
+						<%= friend.status == "not_sure" || friend.status.blank? ? "<i class='confirm'>Need Confirm</i>".html_safe : friend.status == "true" ? "<i class='join'>Join</i>".html_safe : "<i class='n_join'>Not Join</i>".html_safe %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+</table>

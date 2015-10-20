@@ -1,8 +1,9 @@
 <style type="text/css">
-	i{
+	u{
 		font-size: 11px;
 		color: #fff;
 		padding: 3px;
+		text-decoration: none;
 	}
 	.confirm{
 		background-color: #f0ad4e;
@@ -18,6 +19,7 @@
 		text-align: center;
 	}
 </style>
+<%= render 'admin/calendars/shared/filter' %>
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<i class="fa fa-calendar fa-fw"></i><spans class="assign"> Schedules</spans>
@@ -66,7 +68,7 @@
 								<span class="paginate">
 									<%= will_paginate @calendars %>&nbsp;
 								</span>
-								<%= link_to '<span class="fa  fa-pencil-square fa-1x"></span> New Schedule(s)'.html_safe, new_admin_calendar_path, class:"btn btn-primary" %> 
+								<%= link_to '<span class="fa  fa-pencil-square fa-1x"></span> New Schedule'.html_safe, new_admin_calendar_path, class:"btn btn-primary" %> 
 							</span>
 						</div>
 					</span>

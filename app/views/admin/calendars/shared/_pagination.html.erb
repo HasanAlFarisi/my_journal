@@ -1,0 +1,8 @@
+<div class="left">Show: <b class="shows"><%= @calendars.blank? ? 0 : @calendars.per_page > @calendars_all.map{|x| x.id}.count ? @calendars_all.map{|x| x.id}.count : @calendars.per_page %></b> data From: <b class="froms"><%= @calendars_all.blank? ? 0 : @calendars_all.map{|x| x.id}.count %></b> data
+	<span class="pull-right">
+		<span class="paginate">
+			<%= will_paginate @calendars %>&nbsp;
+		</span>
+		<%= link_to '<span class="fa  fa-pencil-square fa-1x"></span> New Schedule'.html_safe, new_admin_calendar_path, class:"btn btn-primary" %> 
+	</span>
+</div>

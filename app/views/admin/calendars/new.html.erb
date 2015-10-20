@@ -62,7 +62,7 @@
 						<div class="col-md-12">
 							<table class="table table-bordered table-hover table-striped calendar">
 								<%= calendar @date do |date| %>
-									<%= find_schedule(date) %>
+									<%= find_schedule(date, current_admin) %>
 								<% end %>
 							</table>
 						</div>

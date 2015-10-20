@@ -4,7 +4,7 @@ class Admin::CalendarsController < Admin::BaseController
 	before_filter :setup_select
 
 	def index
-		get_all = Admin::Schedule.get_all(params[:filter], current_admin)
+		get_all = Admin::Schedule.get_all(params, current_admin)
 		@calendars = get_all.paginate(page: params[:page], per_page: 20)
 		@calendars_all =get_all
 		@page_breadcump = " > Index"
@@ -25,8 +25,12 @@ class Admin::CalendarsController < Admin::BaseController
 				            admin_sub_schedule = Admin::ScheduleMember.create({schedule_id: @calendar.id, admin_id: sub_schedule[1][:admin_id]})
 				            admin_sub_schedule.save
 				       end
+				       params[:admin_schedule][:admin_schedule_members_attributes].each do |sub_schedule|
+				       	AdminMailer.schedule_notification(@calendar).deliver
+				       end
 			       end
-			       format.html { redirect_to new_admin_calendar_path(date: params[:admin_schedule][:dates]), notice: 'Schedule was successfully created.' }
+			       
+			       format.html { redirect_to admin_calendars_path(date: params[:admin_schedule][:dates]), notice: 'Schedule was successfully created.' }
 			else
 				format.html { render action: 'new' }
 			end
@@ -46,7 +50,7 @@ class Admin::CalendarsController < Admin::BaseController
 		      end
 		end
 		respond_to do |format|
-			format.html { redirect_to new_admin_calendar_path(date: @calendar.dates), notice: 'Schedule was successfully created.' }
+			format.html { redirect_to admin_calendars_path(date: @calendar.dates), notice: 'Schedule was successfully created.' }
 		end
 	end
 
@@ -94,6 +98,7 @@ class Admin::CalendarsController < Admin::BaseController
 
 	def setup_select
 		@assign = Admin::Profile.all.map{|x| ["#{x.name} #{x.last_name}", x.admin_id]}.unshift(['All Member','all'])
+		@place = Admin::Schedule.get_all(nil, current_admin).map{|x| [x.place, x.place]}.uniq.unshift(['Select', nil])
 	end
 
 	private

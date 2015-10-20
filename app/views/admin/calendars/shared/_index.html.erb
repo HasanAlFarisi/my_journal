@@ -7,7 +7,7 @@
 <% else %>
 	<% @calendars.each_with_index do |calendar, nomer| %>
 		<% nomer = nomer + 1 + @calendars.offset_value %>
-		<tr>
+		<tr class="body_index">
 			<td><%= "#{nomer}." %></td>
 			<td><%= link_to calendar.title, "javascript:void(0)", class:"show_calendar", dataId: calendar.id %></td>
 			<td>
@@ -18,7 +18,7 @@
 				<% calendar.schedule_members.each do |friend| %>
 					<a href="javascript:void(0)" class="confirmation_invitation" dataSchedule="<%= calendar.id %>" dataId="<%= friend.admin_id %>">
 						<%= "#{find_profile(friend.admin_id).name}" "#{find_profile(friend.admin_id).last_name}" %>
-						<%= friend.status.blank? || friend.status == "not_sure" ? "<i class='confirm fa fa-info'></i>".html_safe : friend.status == "true" ? "<i class='join fa fa-check'></i>".html_safe : "<i class='n_join fa fa-times-circle'></i>".html_safe %>	
+						<%= friend.status.blank? || friend.status == "not_sure" ? "<u class='confirm fa fa-info'></u>".html_safe : friend.status == "true" ? "<u class='join fa fa-check'></u>".html_safe : "<u class='n_join fa fa-times-circle'></u>".html_safe %>	
 					</a>
 					<br>
 				<% end %>
